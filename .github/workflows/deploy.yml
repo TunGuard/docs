@@ -23,6 +23,8 @@ jobs:
     steps:
       - name: Checkout docs
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - name: Setup Python
         uses: actions/setup-python@v5
@@ -55,6 +57,10 @@ jobs:
           git config --global user.name "Frost-bit-star"
           git config --global user.email "morganmilstone983@gmail.com"
 
+      - name: Fetch existing documentation versions
+        run: |
+          git fetch origin gh-pages:refs/remotes/origin/gh-pages
+
       - name: Deploy Documentation
         env:
           VERSION: ${{ steps.release.outputs.version }}
@@ -66,7 +72,6 @@ jobs:
 
             mike deploy \
               --push \
-              --force \
               --update-aliases \
               "$MINOR_VERSION" latest
 
@@ -75,6 +80,5 @@ jobs:
 
             mike deploy \
               --push \
-              --force \
               "$VERSION"
           fi
