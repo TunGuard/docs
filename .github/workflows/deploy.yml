@@ -50,22 +50,17 @@ jobs:
 
           echo "version=$VERSION" >> "$GITHUB_OUTPUT"
 
-      - name: Checkout TunGuard release
-        uses: actions/checkout@v4
-        with:
-          repository: TunGuard/tanguard-binary
-          ref: ${{ steps.release.outputs.version }}
-          path: tanguard-binary
-          fetch-depth: 1
-
       - name: Setup Git User
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
-      - name: Fetch gh-pages
+      - name: Configure GitHub Pages repository
+        env:
+          DOCS_DEPLOY_TOKEN: ${{ secrets.DOCS_DEPLOY_TOKEN }}
         run: |
-          git fetch origin gh-pages --depth=1 || true
+          git remote add pages \
+            "https://x-access-token:${DOCS_DEPLOY_TOKEN}@github.com/TunGuard/tunguard.github.io.git"
 
       - name: Deploy Documentation
         env:
@@ -77,6 +72,7 @@ jobs:
             MINOR_VERSION=$(echo "$VERSION" | cut -d. -f1,2)
 
             mike deploy \
+              --remote pages \
               --push \
               --update-aliases \
               "$MINOR_VERSION" \
@@ -86,6 +82,7 @@ jobs:
             echo "Pre-release detected: $VERSION"
 
             mike deploy \
+              --remote pages \
               --push \
               --update-aliases \
               "$VERSION"
