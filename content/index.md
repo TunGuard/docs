@@ -14,7 +14,7 @@ hide:
 
 This documentation provides you not only with the basic setup and configuration of `Tunguard` but also with advanced configuration, elaborate usage scenarios, detailed examples, hints and more.
 
-[docs-tagging]: ./getting-started.md#tagging-convention
+[docs-tagging]: ./getting-started.md
 
 ## About
 
@@ -39,4 +39,4 @@ We are always happy to welcome new contributors. For guidelines and entrypoints 
 
 If you are migrating from an older version of `wg-easy`, please read the [_Migration_ chapter][docs-migration].
 
-[docs-migration]: ./advanced/migrate/from-14-to-15.md
+[docs-migration]: ./advanced/migrate/
