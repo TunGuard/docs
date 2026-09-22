@@ -55,13 +55,6 @@ jobs:
           git config --global user.name "Frost-bit-star"
           git config --global user.email "morganmilstone983@gmail.com"
 
-      - name: Configure GitHub Pages repository
-        env:
-          DOCS_DEPLOY_TOKEN: ${{ secrets.DOCS_DEPLOY_TOKEN }}
-        run: |
-          git remote add pages \
-            "https://x-access-token:${DOCS_DEPLOY_TOKEN}@github.com/TunGuard/docs.git"
-
       - name: Deploy Documentation
         env:
           VERSION: ${{ steps.release.outputs.version }}
@@ -72,18 +65,16 @@ jobs:
             MINOR_VERSION=$(echo "$VERSION" | cut -d. -f1,2)
 
             mike deploy \
-              --remote pages \
               --push \
+              --force \
               --update-aliases \
-              "$MINOR_VERSION" \
-              latest
+              "$MINOR_VERSION" latest
 
           else
             echo "Pre-release detected: $VERSION"
 
             mike deploy \
-              --remote pages \
               --push \
-              --update-aliases \
+              --force \
               "$VERSION"
           fi
