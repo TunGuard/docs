@@ -52,6 +52,14 @@ jobs:
 
           echo "version=$VERSION" >> "$GITHUB_OUTPUT"
 
+          if [[ "$VERSION" =~ ^v[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
+            MINOR_VERSION=$(echo "$VERSION" | cut -d. -f1,2)
+          else
+            MINOR_VERSION="$VERSION"
+          fi
+
+          echo "minor_version=$MINOR_VERSION" >> "$GITHUB_OUTPUT"
+
       - name: Setup Git User
         run: |
           git config --global user.name "Frost-bit-star"
@@ -67,11 +75,11 @@ jobs:
       - name: Deploy Documentation with Mike
         env:
           VERSION: ${{ steps.release.outputs.version }}
+          MINOR_VERSION: ${{ steps.release.outputs.minor_version }}
         run: |
           if [[ "$VERSION" =~ ^v[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
             echo "Stable release detected: $VERSION"
-
-            MINOR_VERSION=$(echo "$VERSION" | cut -d. -f1,2)
+            echo "Documentation directory: $MINOR_VERSION"
 
             mike deploy \
               --push \
@@ -90,13 +98,29 @@ jobs:
           git fetch origin gh-pages
           git checkout -B pages-site origin/gh-pages
 
+      - name: Verify generated documentation
+        env:
+          VERSION: ${{ steps.release.outputs.version }}
+          MINOR_VERSION: ${{ steps.release.outputs.minor_version }}
+        run: |
+          echo "gh-pages contents:"
+          ls -la
+
+          echo ""
+          echo "Version directory:"
+          ls -la "$MINOR_VERSION"
+
+          echo ""
+          echo "Index:"
+          ls -la "$MINOR_VERSION/index.html"
+
       - name: Configure GitHub Pages
         uses: actions/configure-pages@v5
 
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v4
         with:
-          path: .
+          path: ./${{ steps.release.outputs.minor_version }}
 
   deploy:
     name: Deploy GitHub Pages
