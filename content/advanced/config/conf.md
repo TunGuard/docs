@@ -309,7 +309,7 @@ curl \
   http://127.0.0.1:9000/api/peers
 ```
 
-See the [API](./api.md) documentation for authentication and available endpoints.
+See the [API](../api.md) documentation for authentication and available endpoints.
 
 ## Example Configuration
 

@@ -86,12 +86,12 @@ The documentation site automatically uses release information from the binary re
 
 Once TunGuard is installed, continue with the relevant guide:
 
-* [Dashboard](dashboard.md)
-* [Peers](peers.md)
-* [Configuration](configuration.md)
-* [SSH Gateway](ssh-gateway.md)
-* [API](api.md)
-* [Backups](backups.md)
+* [Dashboard](guides/setup.md)
+* [Peers](guides/clients.md)
+* [Configuration](advanced/config/conf.md)
+* [SSH Gateway](guides/admin.md)
+* [API](guides/api.md)
+* [Backups](guides/admin.md)
 
 !!! note "Updating TunGuard"
     To update an existing installation you can click the release button on top right to  update on the dashboard  then for latest stable release, run:

@@ -104,7 +104,7 @@ curl \
   http://127.0.0.1:9000/api/status
 ```
 
-See the [API](./api.md) documentation for available endpoints and authentication.
+See the [API](../api.md) documentation for available endpoints and authentication.
 
 ## Service Logs
 
