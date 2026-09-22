@@ -1,0 +1,92 @@
+name: Build & Deploy Docs
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: "TunGuard release version"
+        required: true
+        type: string
+
+  repository_dispatch:
+    types:
+      - release
+
+permissions:
+  contents: write
+
+jobs:
+  docs:
+    name: Build & Deploy Docs
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout docs
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.x"
+          cache: pip
+          cache-dependency-path: requirements.txt
+
+      - name: Install Dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Get release version
+        id: release
+        env:
+          EVENT_VERSION: ${{ github.event.client_payload.version }}
+          INPUT_VERSION: ${{ inputs.version }}
+        run: |
+          if [ -n "$EVENT_VERSION" ]; then
+            VERSION="$EVENT_VERSION"
+          else
+            VERSION="$INPUT_VERSION"
+          fi
+
+          echo "version=$VERSION" >> "$GITHUB_OUTPUT"
+
+      - name: Checkout TunGuard release
+        uses: actions/checkout@v4
+        with:
+          repository: TunGuard/tanguard-binary
+          ref: ${{ steps.release.outputs.version }}
+          path: tanguard-binary
+          fetch-depth: 1
+
+      - name: Setup Git User
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+      - name: Fetch gh-pages
+        run: |
+          git fetch origin gh-pages --depth=1 || true
+
+      - name: Deploy Documentation
+        env:
+          VERSION: ${{ steps.release.outputs.version }}
+        run: |
+          if [[ "$VERSION" =~ ^v[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
+            echo "Stable release detected: $VERSION"
+
+            MINOR_VERSION=$(echo "$VERSION" | cut -d. -f1,2)
+
+            mike deploy \
+              --push \
+              --update-aliases \
+              "$MINOR_VERSION" \
+              latest
+
+          else
+            echo "Pre-release detected: $VERSION"
+
+            mike deploy \
+              --push \
+              --update-aliases \
+              "$VERSION"
+          fi
