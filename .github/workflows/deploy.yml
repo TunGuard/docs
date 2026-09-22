@@ -52,15 +52,15 @@ jobs:
 
       - name: Setup Git User
         run: |
-          git config --global user.name "github-actions[bot]"
-          git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git config --global user.name "Frost-bit-star"
+          git config --global user.email "morganmilstone983@gmail.com"
 
       - name: Configure GitHub Pages repository
         env:
           DOCS_DEPLOY_TOKEN: ${{ secrets.DOCS_DEPLOY_TOKEN }}
         run: |
           git remote add pages \
-            "https://x-access-token:${DOCS_DEPLOY_TOKEN}@github.com/TunGuard/tunguard.github.io.git"
+            "https://x-access-token:${DOCS_DEPLOY_TOKEN}@github.com/TunGuard/docs.git"
 
       - name: Deploy Documentation
         env:
