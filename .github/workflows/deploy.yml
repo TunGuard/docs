@@ -57,9 +57,12 @@ jobs:
           git config --global user.name "Frost-bit-star"
           git config --global user.email "morganmilstone983@gmail.com"
 
-      - name: Fetch existing documentation versions
+      - name: Sync gh-pages
         run: |
-          git fetch origin gh-pages:refs/remotes/origin/gh-pages
+          if git ls-remote --exit-code origin refs/heads/gh-pages >/dev/null 2>&1; then
+            git fetch origin gh-pages
+            git branch -f gh-pages origin/gh-pages
+          fi
 
       - name: Deploy Documentation
         env:
