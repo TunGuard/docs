@@ -14,6 +14,8 @@ on:
 
 permissions:
   contents: write
+  pages: write
+  id-token: write
 
 jobs:
   docs:
@@ -64,7 +66,7 @@ jobs:
             git branch -f gh-pages origin/gh-pages
           fi
 
-      - name: Deploy Documentation
+      - name: Deploy Documentation with Mike
         env:
           VERSION: ${{ steps.release.outputs.version }}
         run: |
@@ -85,3 +87,22 @@ jobs:
               --push \
               "$VERSION"
           fi
+
+      - name: Checkout generated gh-pages
+        run: |
+          git fetch origin gh-pages
+          git checkout -B pages-site origin/gh-pages
+
+      - name: Configure GitHub Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload Pages Artifact
+        uses: actions/upload-pages-artifact@v4
+        with:
+          path: .
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
