@@ -55,8 +55,8 @@
         
         
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:300,300i,400,400i,500,500i,700,700i%7CJetBrains+Mono:400,400i,700,700i&amp;display=fallback">
-        <style>:root{--md-text-font:"Inter";--md-code-font:"JetBrains Mono"}</style>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=JetBrains+Mono:300,300i,400,400i,500,500i,700,700i%7CFira+Code:400,400i,700,700i&amp;display=fallback">
+        <style>:root{--md-text-font:"JetBrains Mono";--md-code-font:"Fira Code"}</style>
       
     
     
@@ -101,7 +101,9 @@
     
       
 
-<header class="md-header" data-md-component="header">
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
     <a href="../../.." title="TunGuard" class="md-header__button md-logo" aria-label="TunGuard" data-md-component="logo">
       
@@ -145,7 +147,7 @@
     
     
     
-    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="cyan"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="blue-grey" data-md-color-accent="teal"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
     
       <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_2" hidden>
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
@@ -155,7 +157,7 @@
     
     
     
-    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="cyan"  aria-label="Switch to system preference"  type="radio" name="__palette" id="__palette_2">
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="teal" data-md-color-accent="cyan"  aria-label="Switch to system preference"  type="radio" name="__palette" id="__palette_2">
     
       <label class="md-header__button md-icon" title="Switch to system preference" for="__palette_0" hidden>
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-moon" viewBox="0 0 24 24"><path d="M20.985 12.486a9 9 0 1 1-9.473-9.472c.405-.022.617.46.402.803a6 6 0 0 0 8.268 8.268c.344-.215.825-.004.803.401"/></svg>
@@ -198,14 +200,8 @@
     </div>
   </nav>
   
-</header>
     
-    <div class="md-container" data-md-component="container">
       
-      
-        
-          
-            
 <nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
   <div class="md-grid">
     <ul class="md-tabs__list">
@@ -366,7 +362,13 @@
     </ul>
   </div>
 </nav>
-          
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
         
       
       <main class="md-main" data-md-component="main">
@@ -497,6 +499,8 @@
     
       
       
+        
+      
     
     
     <li class="md-nav__item md-nav__item--nested">
@@ -573,6 +577,8 @@
     
     
       
+      
+        
       
     
     
@@ -686,6 +692,8 @@
     
       
       
+        
+      
     
     
     <li class="md-nav__item md-nav__item--nested">
@@ -770,6 +778,8 @@
     
     
       
+      
+        
       
     
     
@@ -862,6 +872,8 @@
     
     
       
+      
+        
       
     
     
@@ -1006,6 +1018,8 @@
         
       
       
+        
+      
     
     
     <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
@@ -1056,16 +1070,21 @@
     
       
       
+        
+          
+          
+        
+      
     
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
       
         
         
         <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6_1" checked>
         
           
-          <label class="md-nav__link" for="__nav_6_1" id="__nav_6_1_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_6_1" id="__nav_6_1_label" tabindex="">
             
   
   
@@ -1352,6 +1371,8 @@
     
     
       
+      
+        
       
     
     
@@ -1801,7 +1822,7 @@
 <p>TunGuard can be used as a discovery and relay point for peer-to-peer connections.</p>
 <p>The TunGuard server is used to introduce the two peers and provide a relay path when a direct connection cannot be established.</p>
 <p>Once a direct path is available, traffic can move directly between the peers.</p>
-<h2 id="how-it-works">How It Works<a class="headerlink" href="#how-it-works" title="Permanent link">&para;</a></h2>
+<h2 id="how-it-works">How It Works<a class="headerlink" href="#how-it-works" title="Permanent link">⚓</a></h2>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>Peer A
 </span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>  |
 </span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>  | 1. Connect to TunGuard
@@ -1826,7 +1847,7 @@
 </span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>  v
 </span><span id="__span-1-7"><a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>Peer B
 </span></code></pre></div>
-<h2 id="install-the-tunguard-client">Install the TunGuard Client<a class="headerlink" href="#install-the-tunguard-client" title="Permanent link">&para;</a></h2>
+<h2 id="install-the-tunguard-client">Install the TunGuard Client<a class="headerlink" href="#install-the-tunguard-client" title="Permanent link">⚓</a></h2>
 <p>Each device participating in the P2P network must have the TunGuard client installed.</p>
 <p>Get the client from the <a href="https://github.com/TunGuard/get">TunGuard/get</a> repository.</p>
 <p>The client runs on the device that will participate in the P2P connection.</p>
@@ -1834,11 +1855,11 @@
 <div class="language-text highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>Peer A → TunGuard Client
 </span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>Peer B → TunGuard Client
 </span></code></pre></div>
-<h2 id="connect-a-device">Connect a Device<a class="headerlink" href="#connect-a-device" title="Permanent link">&para;</a></h2>
+<h2 id="connect-a-device">Connect a Device<a class="headerlink" href="#connect-a-device" title="Permanent link">⚓</a></h2>
 <p>After installing the client, connect the device to your TunGuard server using the server address and the credentials or connection information provided by your TunGuard setup.</p>
 <p>The client establishes the initial connection to TunGuard.</p>
 <p>TunGuard then provides the discovery information required for the peers to find each other.</p>
-<h2 id="peer-discovery">Peer Discovery<a class="headerlink" href="#peer-discovery" title="Permanent link">&para;</a></h2>
+<h2 id="peer-discovery">Peer Discovery<a class="headerlink" href="#peer-discovery" title="Permanent link">⚓</a></h2>
 <p>When two devices need to communicate:</p>
 <ol>
 <li>Peer A connects to TunGuard.</li>
@@ -1849,14 +1870,14 @@
 <li>If the direct connection succeeds, traffic uses the P2P path.</li>
 <li>If a direct connection cannot be established, TunGuard can relay the traffic.</li>
 </ol>
-<h2 id="direct-connection">Direct Connection<a class="headerlink" href="#direct-connection" title="Permanent link">&para;</a></h2>
+<h2 id="direct-connection">Direct Connection<a class="headerlink" href="#direct-connection" title="Permanent link">⚓</a></h2>
 <p>The preferred path is:</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>Peer A &lt;====================&gt; Peer B
 </span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>             Direct
 </span></code></pre></div>
 <p>TunGuard is used for discovery and connection establishment rather than carrying the traffic when a direct path is available.</p>
 <p>This allows peers to communicate without requiring every connection to pass through the server.</p>
-<h2 id="relay">Relay<a class="headerlink" href="#relay" title="Permanent link">&para;</a></h2>
+<h2 id="relay">Relay<a class="headerlink" href="#relay" title="Permanent link">⚓</a></h2>
 <p>Some networks may prevent a direct connection because of NAT, firewalls, or other network restrictions.</p>
 <p>In that case, the connection can fall back to TunGuard:</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>Peer A
@@ -1870,7 +1891,7 @@
 </span><span id="__span-4-9"><a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a>Peer B
 </span></code></pre></div>
 <p>The relay provides a path between peers that cannot establish a direct connection.</p>
-<h2 id="server-role">Server Role<a class="headerlink" href="#server-role" title="Permanent link">&para;</a></h2>
+<h2 id="server-role">Server Role<a class="headerlink" href="#server-role" title="Permanent link">⚓</a></h2>
 <p>TunGuard can provide three functions for P2P connections:</p>
 <ul>
 <li><strong>Discovery</strong> — helps peers find each other.</li>
@@ -1878,7 +1899,7 @@
 <li><strong>Relay</strong> — provides a fallback path when direct connectivity is unavailable.</li>
 </ul>
 <p>The server does not need to remain in the traffic path when the peers have established a direct connection.</p>
-<h2 id="network-example">Network Example<a class="headerlink" href="#network-example" title="Permanent link">&para;</a></h2>
+<h2 id="network-example">Network Example<a class="headerlink" href="#network-example" title="Permanent link">⚓</a></h2>
 <p>Two devices can be located on completely different networks:</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>Office Network
 </span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>     |
@@ -1908,11 +1929,11 @@
 </span><span id="__span-6-10"><a id="__codelineno-6-10" name="__codelineno-6-10" href="#__codelineno-6-10"></a>                           Home Network
 </span></code></pre></div>
 <p>If direct connectivity is not possible, the relay path remains available through the TunGuard server.</p>
-<h2 id="security">Security<a class="headerlink" href="#security" title="Permanent link">&para;</a></h2>
+<h2 id="security">Security<a class="headerlink" href="#security" title="Permanent link">⚓</a></h2>
 <p>P2P connectivity should use encrypted connections between the participating peers.</p>
 <p>Keep the TunGuard server protected and only allow authorized clients to join the network.</p>
 <p>Do not share client credentials or connection information with unauthorized devices.</p>
-<h2 id="client-installation">Client Installation<a class="headerlink" href="#client-installation" title="Permanent link">&para;</a></h2>
+<h2 id="client-installation">Client Installation<a class="headerlink" href="#client-installation" title="Permanent link">⚓</a></h2>
 <p>The TunGuard client is distributed through the <a href="https://github.com/TunGuard/get">TunGuard/get</a> repository.</p>
 <p>Install the client on every device that needs to participate in P2P connections.</p>
 
@@ -1989,7 +2010,7 @@
       
         
         
-      <script id="__config" type="application/json">{"annotate":null,"base":"../../..","features":["navigation.instant","navigation.tabs","navigation.expand","navigation.path","navigation.top","content.action.edit","content.action.view","content.code.copy","content.code.annotate"],"redirect":null,"search":"../../../assets/javascripts/workers/search.7d14d953.min.js","tags":null,"translations":{"clipboard.copied":"Copied to clipboard","clipboard.copy":"Copy to clipboard","search.result.more.one":"1 more on this page","search.result.more.other":"# more on this page","search.result.none":"No matching documents","search.result.one":"1 matching document","search.result.other":"# matching documents","search.result.placeholder":"Type to start searching","search.result.term.missing":"Missing","select.version":"Select version"},"version":{"provider":"mike"}}</script>
+      <script id="__config" type="application/json">{"annotate":null,"base":"../../..","features":["navigation.instant","navigation.tabs","navigation.tabs.sticky","navigation.expand","navigation.path","navigation.top","navigation.sections","content.action.edit","content.action.view","content.code.copy","content.code.annotate","toc.follow"],"redirect":null,"search":"../../../assets/javascripts/workers/search.7d14d953.min.js","tags":null,"translations":{"clipboard.copied":"Copied to clipboard","clipboard.copy":"Copy to clipboard","search.result.more.one":"1 more on this page","search.result.more.other":"# more on this page","search.result.none":"No matching documents","search.result.one":"1 matching document","search.result.other":"# matching documents","search.result.placeholder":"Type to start searching","search.result.term.missing":"Missing","select.version":"Select version"},"version":{"provider":"mike"}}</script>
     
     
       <script src="../../../assets/javascripts/bundle.8dcc8e9c.min.js"></script>

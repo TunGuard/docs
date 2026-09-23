@@ -55,8 +55,8 @@
         
         
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:300,300i,400,400i,500,500i,700,700i%7CJetBrains+Mono:400,400i,700,700i&amp;display=fallback">
-        <style>:root{--md-text-font:"Inter";--md-code-font:"JetBrains Mono"}</style>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=JetBrains+Mono:300,300i,400,400i,500,500i,700,700i%7CFira+Code:400,400i,700,700i&amp;display=fallback">
+        <style>:root{--md-text-font:"JetBrains Mono";--md-code-font:"Fira Code"}</style>
       
     
     
@@ -101,7 +101,9 @@
     
       
 
-<header class="md-header" data-md-component="header">
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
     <a href="../.." title="TunGuard" class="md-header__button md-logo" aria-label="TunGuard" data-md-component="logo">
       
@@ -145,7 +147,7 @@
     
     
     
-    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="cyan"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="blue-grey" data-md-color-accent="teal"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
     
       <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_2" hidden>
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
@@ -155,7 +157,7 @@
     
     
     
-    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="cyan"  aria-label="Switch to system preference"  type="radio" name="__palette" id="__palette_2">
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="teal" data-md-color-accent="cyan"  aria-label="Switch to system preference"  type="radio" name="__palette" id="__palette_2">
     
       <label class="md-header__button md-icon" title="Switch to system preference" for="__palette_0" hidden>
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-moon" viewBox="0 0 24 24"><path d="M20.985 12.486a9 9 0 1 1-9.473-9.472c.405-.022.617.46.402.803a6 6 0 0 0 8.268 8.268c.344-.215.825-.004.803.401"/></svg>
@@ -198,14 +200,8 @@
     </div>
   </nav>
   
-</header>
     
-    <div class="md-container" data-md-component="container">
       
-      
-        
-          
-            
 <nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
   <div class="md-grid">
     <ul class="md-tabs__list">
@@ -364,7 +360,13 @@
     </ul>
   </div>
 </nav>
-          
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
         
       
       <main class="md-main" data-md-component="main">
@@ -495,6 +497,8 @@
     
       
       
+        
+      
     
     
     <li class="md-nav__item md-nav__item--nested">
@@ -571,6 +575,8 @@
     
     
       
+      
+        
       
     
     
@@ -684,6 +690,8 @@
     
       
       
+        
+      
     
     
     <li class="md-nav__item md-nav__item--nested">
@@ -768,6 +776,8 @@
     
     
       
+      
+        
       
     
     
@@ -860,6 +870,8 @@
     
     
       
+      
+        
       
     
     
@@ -999,6 +1011,8 @@
     
       
       
+        
+      
     
     
     <li class="md-nav__item md-nav__item--nested">
@@ -1048,6 +1062,8 @@
     
     
       
+      
+        
       
     
     
@@ -1199,6 +1215,8 @@
         
         
       
+      
+        
       
     
     
@@ -1830,12 +1848,12 @@
   <h1 id="__skip">CLI</h1>
 
 <p>TunGuard can be managed directly from the command line or through systemd when installed as a service.</p>
-<h2 id="install">Install<a class="headerlink" href="#install" title="Permanent link">&para;</a></h2>
+<h2 id="install">Install<a class="headerlink" href="#install" title="Permanent link">⚓</a></h2>
 <p>Install TunGuard on a Linux server with:</p>
 <div class="language-shell highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>curl<span class="w"> </span>-fsSL<span class="w"> </span>https://raw.githubusercontent.com/TunGuard/get/main/installer.sh<span class="w"> </span><span class="p">|</span><span class="w"> </span>bash
 </span></code></pre></div>
 <p>The installer installs TunGuard as a systemd service and starts it automatically.</p>
-<h2 id="service-management">Service Management<a class="headerlink" href="#service-management" title="Permanent link">&para;</a></h2>
+<h2 id="service-management">Service Management<a class="headerlink" href="#service-management" title="Permanent link">⚓</a></h2>
 <p>Check the service status:</p>
 <div class="language-shell highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>sudo<span class="w"> </span>systemctl<span class="w"> </span>status<span class="w"> </span>tanguard
 </span></code></pre></div>
@@ -1851,7 +1869,7 @@
 <p>Enable TunGuard to start automatically on boot:</p>
 <div class="language-shell highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>sudo<span class="w"> </span>systemctl<span class="w"> </span><span class="nb">enable</span><span class="w"> </span>tanguard
 </span></code></pre></div>
-<h2 id="logs">Logs<a class="headerlink" href="#logs" title="Permanent link">&para;</a></h2>
+<h2 id="logs">Logs<a class="headerlink" href="#logs" title="Permanent link">⚓</a></h2>
 <p>View the TunGuard service logs:</p>
 <div class="language-shell highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>sudo<span class="w"> </span>journalctl<span class="w"> </span>-u<span class="w"> </span>tanguard
 </span></code></pre></div>
@@ -1864,7 +1882,7 @@
 <p>Show the most recent logs:</p>
 <div class="language-shell highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>sudo<span class="w"> </span>journalctl<span class="w"> </span>-u<span class="w"> </span>tanguard<span class="w"> </span>-n<span class="w"> </span><span class="m">100</span>
 </span></code></pre></div>
-<h2 id="reset-dashboard-credentials">Reset Dashboard Credentials<a class="headerlink" href="#reset-dashboard-credentials" title="Permanent link">&para;</a></h2>
+<h2 id="reset-dashboard-credentials">Reset Dashboard Credentials<a class="headerlink" href="#reset-dashboard-credentials" title="Permanent link">⚓</a></h2>
 <p>If you forget the dashboard username or password, stop TunGuard first:</p>
 <div class="language-shell highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>sudo<span class="w"> </span>systemctl<span class="w"> </span>stop<span class="w"> </span>tanguard
 </span></code></pre></div>
@@ -1884,7 +1902,7 @@
 </span><span id="__span-14-3"><a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a>sudo<span class="w"> </span>systemctl<span class="w"> </span>start<span class="w"> </span>tanguard
 </span></code></pre></div>
 <p>This resets the stored dashboard login without removing the configured peers or other persistent TunGuard data.</p>
-<h2 id="manual-run">Manual Run<a class="headerlink" href="#manual-run" title="Permanent link">&para;</a></h2>
+<h2 id="manual-run">Manual Run<a class="headerlink" href="#manual-run" title="Permanent link">⚓</a></h2>
 <p>TunGuard can also be started directly from the command line.</p>
 <div class="language-shell highlight"><pre><span></span><code><span id="__span-15-1"><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a>sudo<span class="w"> </span>./tanguard
 </span></code></pre></div>
@@ -1898,7 +1916,7 @@
 <div class="language-shell highlight"><pre><span></span><code><span id="__span-18-1"><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a>sudo<span class="w"> </span>./tanguard<span class="w"> </span>-web<span class="w"> </span>-ssh
 </span></code></pre></div>
 <p>When using the systemd service installed by the installer, these options are configured through the service configuration rather than being required for normal operation.</p>
-<h2 id="ssh-gateway">SSH Gateway<a class="headerlink" href="#ssh-gateway" title="Permanent link">&para;</a></h2>
+<h2 id="ssh-gateway">SSH Gateway<a class="headerlink" href="#ssh-gateway" title="Permanent link">⚓</a></h2>
 <p>The optional SSH Gateway allows you to reach devices connected to TunGuard through the VPN.</p>
 <p>The default SSH Gateway port is:</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-19-1"><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a>2222
@@ -1908,18 +1926,18 @@
 </span></code></pre></div>
 <p>The SSH Gateway uses the TunGuard dashboard credentials for authentication.</p>
 <p>The jump host can be used without exposing SSH directly on the VPN device.</p>
-<h2 id="ssh-gateway-with-a-custom-port">SSH Gateway With a Custom Port<a class="headerlink" href="#ssh-gateway-with-a-custom-port" title="Permanent link">&para;</a></h2>
+<h2 id="ssh-gateway-with-a-custom-port">SSH Gateway With a Custom Port<a class="headerlink" href="#ssh-gateway-with-a-custom-port" title="Permanent link">⚓</a></h2>
 <p>If the SSH Gateway is configured to use another port, specify that port in the jump host:</p>
 <div class="language-shell highlight"><pre><span></span><code><span id="__span-21-1"><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a>ssh<span class="w"> </span>-J<span class="w"> </span>admin@YOUR_SERVER_IP:CUSTOM_PORT<span class="w"> </span>root@10.100.0.2
 </span></code></pre></div>
-<h2 id="check-the-ssh-gateway">Check the SSH Gateway<a class="headerlink" href="#check-the-ssh-gateway" title="Permanent link">&para;</a></h2>
+<h2 id="check-the-ssh-gateway">Check the SSH Gateway<a class="headerlink" href="#check-the-ssh-gateway" title="Permanent link">⚓</a></h2>
 <p>Check whether TunGuard is running:</p>
 <div class="language-shell highlight"><pre><span></span><code><span id="__span-22-1"><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a>sudo<span class="w"> </span>systemctl<span class="w"> </span>status<span class="w"> </span>tanguard
 </span></code></pre></div>
 <p>Then check that the SSH Gateway is listening on port <code>2222</code>:</p>
 <div class="language-shell highlight"><pre><span></span><code><span id="__span-23-1"><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a>sudo<span class="w"> </span>ss<span class="w"> </span>-lntp<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span><span class="m">2222</span>
 </span></code></pre></div>
-<h2 id="check-the-dashboardapi">Check the Dashboard/API<a class="headerlink" href="#check-the-dashboardapi" title="Permanent link">&para;</a></h2>
+<h2 id="check-the-dashboardapi">Check the Dashboard/API<a class="headerlink" href="#check-the-dashboardapi" title="Permanent link">⚓</a></h2>
 <p>The default dashboard and API port is:</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-24-1"><a id="__codelineno-24-1" name="__codelineno-24-1" href="#__codelineno-24-1"></a>9000
 </span></code></pre></div>
@@ -1929,24 +1947,24 @@
 <p>The health endpoint can be checked locally with:</p>
 <div class="language-shell highlight"><pre><span></span><code><span id="__span-26-1"><a id="__codelineno-26-1" name="__codelineno-26-1" href="#__codelineno-26-1"></a>curl<span class="w"> </span>http://127.0.0.1:9000/api/health
 </span></code></pre></div>
-<h2 id="check-the-wireguard-port">Check the WireGuard Port<a class="headerlink" href="#check-the-wireguard-port" title="Permanent link">&para;</a></h2>
+<h2 id="check-the-wireguard-port">Check the WireGuard Port<a class="headerlink" href="#check-the-wireguard-port" title="Permanent link">⚓</a></h2>
 <p>The default WireGuard port is:</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-27-1"><a id="__codelineno-27-1" name="__codelineno-27-1" href="#__codelineno-27-1"></a>13231/udp
 </span></code></pre></div>
 <p>Check whether TunGuard is listening:</p>
 <div class="language-shell highlight"><pre><span></span><code><span id="__span-28-1"><a id="__codelineno-28-1" name="__codelineno-28-1" href="#__codelineno-28-1"></a>sudo<span class="w"> </span>ss<span class="w"> </span>-lunp<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span><span class="m">13231</span>
 </span></code></pre></div>
-<h2 id="update-tunguard">Update TunGuard<a class="headerlink" href="#update-tunguard" title="Permanent link">&para;</a></h2>
+<h2 id="update-tunguard">Update TunGuard<a class="headerlink" href="#update-tunguard" title="Permanent link">⚓</a></h2>
 <p>Run the installer again to update an existing installation:</p>
 <div class="language-shell highlight"><pre><span></span><code><span id="__span-29-1"><a id="__codelineno-29-1" name="__codelineno-29-1" href="#__codelineno-29-1"></a>curl<span class="w"> </span>-fsSL<span class="w"> </span>https://raw.githubusercontent.com/TunGuard/get/main/installer.sh<span class="w"> </span><span class="p">|</span><span class="w"> </span>bash
 </span></code></pre></div>
 <p>The installer replaces the TunGuard binary while preserving the existing persistent data and service configuration.</p>
-<h2 id="backup">Backup<a class="headerlink" href="#backup" title="Permanent link">&para;</a></h2>
+<h2 id="backup">Backup<a class="headerlink" href="#backup" title="Permanent link">⚓</a></h2>
 <p>Create a backup of the TunGuard data directory:</p>
 <div class="language-shell highlight"><pre><span></span><code><span id="__span-30-1"><a id="__codelineno-30-1" name="__codelineno-30-1" href="#__codelineno-30-1"></a>sudo<span class="w"> </span>tar<span class="w"> </span>-czf<span class="w"> </span>~/tanguard-backup.tar.gz<span class="w"> </span>-C<span class="w"> </span>/var/lib/tanguard<span class="w"> </span>.
 </span></code></pre></div>
 <p>The persistent data contains the server key, peer configuration, dashboard credentials, API key, and other TunGuard state.</p>
-<h2 id="useful-service-commands">Useful Service Commands<a class="headerlink" href="#useful-service-commands" title="Permanent link">&para;</a></h2>
+<h2 id="useful-service-commands">Useful Service Commands<a class="headerlink" href="#useful-service-commands" title="Permanent link">⚓</a></h2>
 <p>A quick reference:</p>
 <div class="language-shell highlight"><pre><span></span><code><span id="__span-31-1"><a id="__codelineno-31-1" name="__codelineno-31-1" href="#__codelineno-31-1"></a><span class="c1"># Status</span>
 </span><span id="__span-31-2"><a id="__codelineno-31-2" name="__codelineno-31-2" href="#__codelineno-31-2"></a>sudo<span class="w"> </span>systemctl<span class="w"> </span>status<span class="w"> </span>tanguard
@@ -2043,7 +2061,7 @@
       
         
         
-      <script id="__config" type="application/json">{"annotate":null,"base":"../..","features":["navigation.instant","navigation.tabs","navigation.expand","navigation.path","navigation.top","content.action.edit","content.action.view","content.code.copy","content.code.annotate"],"redirect":null,"search":"../../assets/javascripts/workers/search.7d14d953.min.js","tags":null,"translations":{"clipboard.copied":"Copied to clipboard","clipboard.copy":"Copy to clipboard","search.result.more.one":"1 more on this page","search.result.more.other":"# more on this page","search.result.none":"No matching documents","search.result.one":"1 matching document","search.result.other":"# matching documents","search.result.placeholder":"Type to start searching","search.result.term.missing":"Missing","select.version":"Select version"},"version":{"provider":"mike"}}</script>
+      <script id="__config" type="application/json">{"annotate":null,"base":"../..","features":["navigation.instant","navigation.tabs","navigation.tabs.sticky","navigation.expand","navigation.path","navigation.top","navigation.sections","content.action.edit","content.action.view","content.code.copy","content.code.annotate","toc.follow"],"redirect":null,"search":"../../assets/javascripts/workers/search.7d14d953.min.js","tags":null,"translations":{"clipboard.copied":"Copied to clipboard","clipboard.copy":"Copy to clipboard","search.result.more.one":"1 more on this page","search.result.more.other":"# more on this page","search.result.none":"No matching documents","search.result.one":"1 matching document","search.result.other":"# matching documents","search.result.placeholder":"Type to start searching","search.result.term.missing":"Missing","select.version":"Select version"},"version":{"provider":"mike"}}</script>
     
     
       <script src="../../assets/javascripts/bundle.8dcc8e9c.min.js"></script>

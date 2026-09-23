@@ -55,8 +55,8 @@
         
         
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:300,300i,400,400i,500,500i,700,700i%7CJetBrains+Mono:400,400i,700,700i&amp;display=fallback">
-        <style>:root{--md-text-font:"Inter";--md-code-font:"JetBrains Mono"}</style>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=JetBrains+Mono:300,300i,400,400i,500,500i,700,700i%7CFira+Code:400,400i,700,700i&amp;display=fallback">
+        <style>:root{--md-text-font:"JetBrains Mono";--md-code-font:"Fira Code"}</style>
       
     
     
@@ -101,7 +101,9 @@
     
       
 
-<header class="md-header" data-md-component="header">
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
     <a href="../.." title="TunGuard" class="md-header__button md-logo" aria-label="TunGuard" data-md-component="logo">
       
@@ -145,7 +147,7 @@
     
     
     
-    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="cyan"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="blue-grey" data-md-color-accent="teal"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
     
       <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_2" hidden>
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
@@ -155,7 +157,7 @@
     
     
     
-    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="cyan"  aria-label="Switch to system preference"  type="radio" name="__palette" id="__palette_2">
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="teal" data-md-color-accent="cyan"  aria-label="Switch to system preference"  type="radio" name="__palette" id="__palette_2">
     
       <label class="md-header__button md-icon" title="Switch to system preference" for="__palette_0" hidden>
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-moon" viewBox="0 0 24 24"><path d="M20.985 12.486a9 9 0 1 1-9.473-9.472c.405-.022.617.46.402.803a6 6 0 0 0 8.268 8.268c.344-.215.825-.004.803.401"/></svg>
@@ -198,14 +200,8 @@
     </div>
   </nav>
   
-</header>
     
-    <div class="md-container" data-md-component="container">
       
-      
-        
-          
-            
 <nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
   <div class="md-grid">
     <ul class="md-tabs__list">
@@ -364,7 +360,13 @@
     </ul>
   </div>
 </nav>
-          
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
         
       
       <main class="md-main" data-md-component="main">
@@ -495,6 +497,8 @@
     
       
       
+        
+      
     
     
     <li class="md-nav__item md-nav__item--nested">
@@ -571,6 +575,8 @@
     
     
       
+      
+        
       
     
     
@@ -684,6 +690,8 @@
     
       
       
+        
+      
     
     
     <li class="md-nav__item md-nav__item--nested">
@@ -768,6 +776,8 @@
     
     
       
+      
+        
       
     
     
@@ -865,6 +875,8 @@
         
         
       
+      
+        
       
     
     
@@ -1101,6 +1113,8 @@
     
       
       
+        
+      
     
     
     <li class="md-nav__item md-nav__item--nested">
@@ -1150,6 +1164,8 @@
     
     
       
+      
+        
       
     
     
@@ -1296,6 +1312,8 @@
     
     
       
+      
+        
       
     
     
@@ -1656,7 +1674,7 @@
   <h1 id="__skip">Issues and Pull Requests</h1>
 
 <p>This project is Open Source. That means that you can contribute on enhancements, bug fixing or improving the documentation.</p>
-<h2 id="opening-an-issue">Opening an Issue<a class="headerlink" href="#opening-an-issue" title="Permanent link">&para;</a></h2>
+<h2 id="opening-an-issue">Opening an Issue<a class="headerlink" href="#opening-an-issue" title="Permanent link">⚓</a></h2>
 <div class="admonition note">
 <p class="admonition-title">Attention</p>
 <p><strong>Before opening an issue</strong>, read the <a href="https://github.com/tunguard/tunguard-binary/blob/main/README.md"><code>README</code></a> carefully, study the docs for your version (maybe <a href="https://tunguard.github.io/tunguard-binary/latest">latest</a>) and your search engine you trust. The issue tracker is not meant to be used for unrelated questions!</p>
@@ -1668,18 +1686,18 @@
 </div>
 <p>By raising issues, I agree to these terms and I understand, that the rules set for the issue tracker will help both maintainers as well as everyone to find a solution.</p>
 <p>Maintainers take the time to improve on this project and help by solving issues together. It is therefore expected from others to make an effort and <strong>comply with the rules</strong>.</p>
-<h3 id="filing-a-bug-report">Filing a Bug Report<a class="headerlink" href="#filing-a-bug-report" title="Permanent link">&para;</a></h3>
+<h3 id="filing-a-bug-report">Filing a Bug Report<a class="headerlink" href="#filing-a-bug-report" title="Permanent link">⚓</a></h3>
 <p>Thank you for participating in this project and reporting a bug. <code>wg-easy</code> is a community-driven project, and each contribution counts!</p>
 <p>Maintainers and moderators are volunteers. We greatly appreciate reports that take the time to provide detailed information via the template, enabling us to help you in the best and quickest way. Ignoring the template provided may seem easier, but discourages receiving any support.</p>
 <p>Markdown formatting can be used in almost all text fields (<em>unless stated otherwise in the description</em>).</p>
 <p>Be as precise as possible, and if in doubt, it's best to add more information that too few.</p>
 <p>When an option is marked with "not officially supported" / "unsupported", then support is dependent on availability from specific maintainers.</p>
-<h2 id="pull-requests">Pull Requests<a class="headerlink" href="#pull-requests" title="Permanent link">&para;</a></h2>
+<h2 id="pull-requests">Pull Requests<a class="headerlink" href="#pull-requests" title="Permanent link">⚓</a></h2>
 <div class="admonition question">
 <p class="admonition-title">Motivation</p>
 <p>You want to add a feature? Feel free to start creating an issue explaining what you want to do and how you're thinking doing it. Other users may have the same need and collaboration may lead to better results.</p>
 </div>
-<h3 id="submit-a-pull-request">Submit a Pull-Request<a class="headerlink" href="#submit-a-pull-request" title="Permanent link">&para;</a></h3>
+<h3 id="submit-a-pull-request">Submit a Pull-Request<a class="headerlink" href="#submit-a-pull-request" title="Permanent link">⚓</a></h3>
 <p>The development workflow is the following:</p>
 <ol>
 <li>Fork the project</li>
@@ -1762,7 +1780,7 @@
       
         
         
-      <script id="__config" type="application/json">{"annotate":null,"base":"../..","features":["navigation.instant","navigation.tabs","navigation.expand","navigation.path","navigation.top","content.action.edit","content.action.view","content.code.copy","content.code.annotate"],"redirect":null,"search":"../../assets/javascripts/workers/search.7d14d953.min.js","tags":null,"translations":{"clipboard.copied":"Copied to clipboard","clipboard.copy":"Copy to clipboard","search.result.more.one":"1 more on this page","search.result.more.other":"# more on this page","search.result.none":"No matching documents","search.result.one":"1 matching document","search.result.other":"# matching documents","search.result.placeholder":"Type to start searching","search.result.term.missing":"Missing","select.version":"Select version"},"version":{"provider":"mike"}}</script>
+      <script id="__config" type="application/json">{"annotate":null,"base":"../..","features":["navigation.instant","navigation.tabs","navigation.tabs.sticky","navigation.expand","navigation.path","navigation.top","navigation.sections","content.action.edit","content.action.view","content.code.copy","content.code.annotate","toc.follow"],"redirect":null,"search":"../../assets/javascripts/workers/search.7d14d953.min.js","tags":null,"translations":{"clipboard.copied":"Copied to clipboard","clipboard.copy":"Copy to clipboard","search.result.more.one":"1 more on this page","search.result.more.other":"# more on this page","search.result.none":"No matching documents","search.result.one":"1 matching document","search.result.other":"# matching documents","search.result.placeholder":"Type to start searching","search.result.term.missing":"Missing","select.version":"Select version"},"version":{"provider":"mike"}}</script>
     
     
       <script src="../../assets/javascripts/bundle.8dcc8e9c.min.js"></script>

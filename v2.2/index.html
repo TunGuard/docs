@@ -53,8 +53,8 @@
         
         
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:300,300i,400,400i,500,500i,700,700i%7CJetBrains+Mono:400,400i,700,700i&amp;display=fallback">
-        <style>:root{--md-text-font:"Inter";--md-code-font:"JetBrains Mono"}</style>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=JetBrains+Mono:300,300i,400,400i,500,500i,700,700i%7CFira+Code:400,400i,700,700i&amp;display=fallback">
+        <style>:root{--md-text-font:"JetBrains Mono";--md-code-font:"Fira Code"}</style>
       
     
     
@@ -99,7 +99,9 @@
     
       
 
-<header class="md-header" data-md-component="header">
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
     <a href="" title="TunGuard" class="md-header__button md-logo" aria-label="TunGuard" data-md-component="logo">
       
@@ -143,7 +145,7 @@
     
     
     
-    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="cyan"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="blue-grey" data-md-color-accent="teal"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
     
       <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_2" hidden>
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
@@ -153,7 +155,7 @@
     
     
     
-    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="cyan"  aria-label="Switch to system preference"  type="radio" name="__palette" id="__palette_2">
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="teal" data-md-color-accent="cyan"  aria-label="Switch to system preference"  type="radio" name="__palette" id="__palette_2">
     
       <label class="md-header__button md-icon" title="Switch to system preference" for="__palette_0" hidden>
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-moon" viewBox="0 0 24 24"><path d="M20.985 12.486a9 9 0 1 1-9.473-9.472c.405-.022.617.46.402.803a6 6 0 0 0 8.268 8.268c.344-.215.825-.004.803.401"/></svg>
@@ -196,14 +198,8 @@
     </div>
   </nav>
   
-</header>
     
-    <div class="md-container" data-md-component="container">
       
-      
-        
-          
-            
 <nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
   <div class="md-grid">
     <ul class="md-tabs__list">
@@ -362,7 +358,13 @@
     </ul>
   </div>
 </nav>
-          
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
         
       
       <main class="md-main" data-md-component="main">
@@ -603,6 +605,8 @@
     
       
       
+        
+      
     
     
     <li class="md-nav__item md-nav__item--nested">
@@ -679,6 +683,8 @@
     
     
       
+      
+        
       
     
     
@@ -792,6 +798,8 @@
     
       
       
+        
+      
     
     
     <li class="md-nav__item md-nav__item--nested">
@@ -876,6 +884,8 @@
     
     
       
+      
+        
       
     
     
@@ -968,6 +978,8 @@
     
     
       
+      
+        
       
     
     
@@ -1107,6 +1119,8 @@
     
       
       
+        
+      
     
     
     <li class="md-nav__item md-nav__item--nested">
@@ -1156,6 +1170,8 @@
     
     
       
+      
+        
       
     
     
@@ -1302,6 +1318,8 @@
     
     
       
+      
+        
       
     
     
@@ -1627,20 +1645,20 @@
   
 
 
-<h1 id="welcome-to-the-documentation-for-tunguard">Welcome to the Documentation for <code>Tunguard</code><a class="headerlink" href="#welcome-to-the-documentation-for-tunguard" title="Permanent link">&para;</a></h1>
+<h1 id="welcome-to-the-documentation-for-tunguard">Welcome to the Documentation for <code>Tunguard</code><a class="headerlink" href="#welcome-to-the-documentation-for-tunguard" title="Permanent link">⚓</a></h1>
 <div class="admonition info">
 <p class="admonition-title"> This Documentation is Versioned</p>
 <p><strong>Make sure</strong> to select the correct version of this documentation! It should match the version of the image you are using. The default version corresponds to <a href="./getting-started/">the most recent stable release</a>.</p>
 </div>
 <p>This documentation provides you not only with the basic setup and configuration of <code>Tunguard</code> but also with advanced configuration, elaborate usage scenarios, detailed examples, hints and more.</p>
-<h2 id="about">About<a class="headerlink" href="#about" title="Permanent link">&para;</a></h2>
+<h2 id="about">About<a class="headerlink" href="#about" title="Permanent link">⚓</a></h2>
 <p><code>Tunguard</code> is a lightweight, zero-dependency userspace networking utility designed for high-performance peer-to-peer connectivity and public endpoint exposure. Built around WireGuard's core protocols, TunGuard operates entirely in userspace—eliminating the need to install kernel drivers, run elevated system daemons, or execute system-wide VPN configurations. It allows developers and sysadmins to create secure, instant network overlays and expose internal services across NATs and firewalls seamlessly.</p>
-<h2 id="contents">Contents<a class="headerlink" href="#contents" title="Permanent link">&para;</a></h2>
-<h3 id="getting-started">Getting Started<a class="headerlink" href="#getting-started" title="Permanent link">&para;</a></h3>
+<h2 id="contents">Contents<a class="headerlink" href="#contents" title="Permanent link">⚓</a></h2>
+<h3 id="getting-started">Getting Started<a class="headerlink" href="#getting-started" title="Permanent link">⚓</a></h3>
 <p>If you're new to Tunguard, make sure to read the <a href="./getting-started/"><em>Getting Started</em> chapter</a> first. If you want to look at examples for new vps, we have an <a href="./examples/tutorials/basic-installation/"><em>Examples</em> page</a>.</p>
-<h3 id="contributing">Contributing<a class="headerlink" href="#contributing" title="Permanent link">&para;</a></h3>
+<h3 id="contributing">Contributing<a class="headerlink" href="#contributing" title="Permanent link">⚓</a></h3>
 <p>We are always happy to welcome new contributors. For guidelines and entrypoints please have a look at the <a href="./contributing/issues-and-pull-requests/">Contributing section</a>.</p>
-<h3 id="migration">Migration<a class="headerlink" href="#migration" title="Permanent link">&para;</a></h3>
+<h3 id="migration">Migration<a class="headerlink" href="#migration" title="Permanent link">⚓</a></h3>
 <p>If you are migrating from an older version of <code>wg-easy</code>, please read the <a href="./advanced/migrate/"><em>Migration</em> chapter</a>.</p>
 
   
@@ -1720,7 +1738,7 @@
       
         
         
-      <script id="__config" type="application/json">{"annotate":null,"base":".","features":["navigation.instant","navigation.tabs","navigation.expand","navigation.path","navigation.top","content.action.edit","content.action.view","content.code.copy","content.code.annotate"],"redirect":null,"search":"./assets/javascripts/workers/search.7d14d953.min.js","tags":null,"translations":{"clipboard.copied":"Copied to clipboard","clipboard.copy":"Copy to clipboard","search.result.more.one":"1 more on this page","search.result.more.other":"# more on this page","search.result.none":"No matching documents","search.result.one":"1 matching document","search.result.other":"# matching documents","search.result.placeholder":"Type to start searching","search.result.term.missing":"Missing","select.version":"Select version"},"version":{"provider":"mike"}}</script>
+      <script id="__config" type="application/json">{"annotate":null,"base":".","features":["navigation.instant","navigation.tabs","navigation.tabs.sticky","navigation.expand","navigation.path","navigation.top","navigation.sections","content.action.edit","content.action.view","content.code.copy","content.code.annotate","toc.follow"],"redirect":null,"search":"./assets/javascripts/workers/search.7d14d953.min.js","tags":null,"translations":{"clipboard.copied":"Copied to clipboard","clipboard.copy":"Copy to clipboard","search.result.more.one":"1 more on this page","search.result.more.other":"# more on this page","search.result.none":"No matching documents","search.result.one":"1 matching document","search.result.other":"# matching documents","search.result.placeholder":"Type to start searching","search.result.term.missing":"Missing","select.version":"Select version"},"version":{"provider":"mike"}}</script>
     
     
       <script src="./assets/javascripts/bundle.8dcc8e9c.min.js"></script>

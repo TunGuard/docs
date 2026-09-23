@@ -55,8 +55,8 @@
         
         
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:300,300i,400,400i,500,500i,700,700i%7CJetBrains+Mono:400,400i,700,700i&amp;display=fallback">
-        <style>:root{--md-text-font:"Inter";--md-code-font:"JetBrains Mono"}</style>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=JetBrains+Mono:300,300i,400,400i,500,500i,700,700i%7CFira+Code:400,400i,700,700i&amp;display=fallback">
+        <style>:root{--md-text-font:"JetBrains Mono";--md-code-font:"Fira Code"}</style>
       
     
     
@@ -101,7 +101,9 @@
     
       
 
-<header class="md-header" data-md-component="header">
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
     <a href="../.." title="TunGuard" class="md-header__button md-logo" aria-label="TunGuard" data-md-component="logo">
       
@@ -145,7 +147,7 @@
     
     
     
-    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="cyan"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="blue-grey" data-md-color-accent="teal"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
     
       <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_2" hidden>
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
@@ -155,7 +157,7 @@
     
     
     
-    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="cyan"  aria-label="Switch to system preference"  type="radio" name="__palette" id="__palette_2">
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="teal" data-md-color-accent="cyan"  aria-label="Switch to system preference"  type="radio" name="__palette" id="__palette_2">
     
       <label class="md-header__button md-icon" title="Switch to system preference" for="__palette_0" hidden>
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-moon" viewBox="0 0 24 24"><path d="M20.985 12.486a9 9 0 1 1-9.473-9.472c.405-.022.617.46.402.803a6 6 0 0 0 8.268 8.268c.344-.215.825-.004.803.401"/></svg>
@@ -198,14 +200,8 @@
     </div>
   </nav>
   
-</header>
     
-    <div class="md-container" data-md-component="container">
       
-      
-        
-          
-            
 <nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
   <div class="md-grid">
     <ul class="md-tabs__list">
@@ -364,7 +360,13 @@
     </ul>
   </div>
 </nav>
-          
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
         
       
       <main class="md-main" data-md-component="main">
@@ -495,6 +497,8 @@
     
       
       
+        
+      
     
     
     <li class="md-nav__item md-nav__item--nested">
@@ -571,6 +575,8 @@
     
     
       
+      
+        
       
     
     
@@ -684,6 +690,8 @@
     
       
       
+        
+      
     
     
     <li class="md-nav__item md-nav__item--nested">
@@ -768,6 +776,8 @@
     
     
       
+      
+        
       
     
     
@@ -860,6 +870,8 @@
     
     
       
+      
+        
       
     
     
@@ -999,6 +1011,8 @@
     
       
       
+        
+      
     
     
     <li class="md-nav__item md-nav__item--nested">
@@ -1048,6 +1062,8 @@
     
     
       
+      
+        
       
     
     
@@ -1199,6 +1215,8 @@
         
         
       
+      
+        
       
     
     
@@ -1719,12 +1737,12 @@
 
   <h1 id="__skip">Edit Peer</h1>
 
-<h2 id="general">General<a class="headerlink" href="#general" title="Permanent link">&para;</a></h2>
+<h2 id="general">General<a class="headerlink" href="#general" title="Permanent link">⚓</a></h2>
 <ul>
 <li><strong>Name</strong>: The name used to identify the peer.</li>
 <li><strong>Enabled</strong>: Whether the peer is allowed to connect to the VPN.</li>
 </ul>
-<h2 id="address">Address<a class="headerlink" href="#address" title="Permanent link">&para;</a></h2>
+<h2 id="address">Address<a class="headerlink" href="#address" title="Permanent link">⚓</a></h2>
 <ul>
 <li><strong>IPv4</strong>: The IPv4 address assigned to the peer.</li>
 </ul>
@@ -1740,29 +1758,29 @@
 </span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>10.100.0.3
 </span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>10.100.0.4
 </span></code></pre></div>
-<h2 id="allowed-ips">Allowed IPs<a class="headerlink" href="#allowed-ips" title="Permanent link">&para;</a></h2>
+<h2 id="allowed-ips">Allowed IPs<a class="headerlink" href="#allowed-ips" title="Permanent link">⚓</a></h2>
 <p>The networks that the peer will route through the VPN.</p>
 <p>For example:</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>0.0.0.0/0, ::/0
 </span></code></pre></div>
 <p>routes all IPv4 and IPv6 traffic through TunGuard.</p>
 <p>A more specific configuration can be used when the peer should only route selected networks.</p>
-<h2 id="dns">DNS<a class="headerlink" href="#dns" title="Permanent link">&para;</a></h2>
+<h2 id="dns">DNS<a class="headerlink" href="#dns" title="Permanent link">⚓</a></h2>
 <p>The DNS server that will be configured for the peer.</p>
 <p>For example:</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>1.1.1.1
 </span></code></pre></div>
-<h2 id="persistent-keepalive">Persistent Keepalive<a class="headerlink" href="#persistent-keepalive" title="Permanent link">&para;</a></h2>
+<h2 id="persistent-keepalive">Persistent Keepalive<a class="headerlink" href="#persistent-keepalive" title="Permanent link">⚓</a></h2>
 <p>The interval, in seconds, at which the peer sends keepalive packets to the TunGuard server.</p>
 <p>This can help maintain connections when the peer is behind NAT or a restrictive firewall.</p>
 <p>A common value is:</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>25
 </span></code></pre></div>
-<h2 id="keys">Keys<a class="headerlink" href="#keys" title="Permanent link">&para;</a></h2>
+<h2 id="keys">Keys<a class="headerlink" href="#keys" title="Permanent link">⚓</a></h2>
 <p>TunGuard uses WireGuard public and private keys for peer authentication.</p>
 <p>When creating a peer, TunGuard can generate the required keys automatically.</p>
 <p>Existing WireGuard keys can also be added when configuring an existing peer.</p>
-<h2 id="configuration">Configuration<a class="headerlink" href="#configuration" title="Permanent link">&para;</a></h2>
+<h2 id="configuration">Configuration<a class="headerlink" href="#configuration" title="Permanent link">⚓</a></h2>
 <p>TunGuard generates a standard WireGuard client configuration for each peer.</p>
 <p>A generated configuration contains:</p>
 <div class="language-ini highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="k">[Interface]</span>
@@ -1777,7 +1795,7 @@
 </span><span id="__span-6-10"><a id="__codelineno-6-10" name="__codelineno-6-10" href="#__codelineno-6-10"></a><span class="na">PersistentKeepalive</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">25</span>
 </span></code></pre></div>
 <p>The configuration can be downloaded, copied, or displayed as a QR code from the dashboard.</p>
-<h2 id="actions">Actions<a class="headerlink" href="#actions" title="Permanent link">&para;</a></h2>
+<h2 id="actions">Actions<a class="headerlink" href="#actions" title="Permanent link">⚓</a></h2>
 <ul>
 <li><strong>Save</strong>: Save changes made to the peer.</li>
 <li><strong>Revert</strong>: Discard unsaved changes.</li>
@@ -1859,7 +1877,7 @@
       
         
         
-      <script id="__config" type="application/json">{"annotate":null,"base":"../..","features":["navigation.instant","navigation.tabs","navigation.expand","navigation.path","navigation.top","content.action.edit","content.action.view","content.code.copy","content.code.annotate"],"redirect":null,"search":"../../assets/javascripts/workers/search.7d14d953.min.js","tags":null,"translations":{"clipboard.copied":"Copied to clipboard","clipboard.copy":"Copy to clipboard","search.result.more.one":"1 more on this page","search.result.more.other":"# more on this page","search.result.none":"No matching documents","search.result.one":"1 matching document","search.result.other":"# matching documents","search.result.placeholder":"Type to start searching","search.result.term.missing":"Missing","select.version":"Select version"},"version":{"provider":"mike"}}</script>
+      <script id="__config" type="application/json">{"annotate":null,"base":"../..","features":["navigation.instant","navigation.tabs","navigation.tabs.sticky","navigation.expand","navigation.path","navigation.top","navigation.sections","content.action.edit","content.action.view","content.code.copy","content.code.annotate","toc.follow"],"redirect":null,"search":"../../assets/javascripts/workers/search.7d14d953.min.js","tags":null,"translations":{"clipboard.copied":"Copied to clipboard","clipboard.copy":"Copy to clipboard","search.result.more.one":"1 more on this page","search.result.more.other":"# more on this page","search.result.none":"No matching documents","search.result.one":"1 matching document","search.result.other":"# matching documents","search.result.placeholder":"Type to start searching","search.result.term.missing":"Missing","select.version":"Select version"},"version":{"provider":"mike"}}</script>
     
     
       <script src="../../assets/javascripts/bundle.8dcc8e9c.min.js"></script>

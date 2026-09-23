@@ -53,8 +53,8 @@
         
         
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:300,300i,400,400i,500,500i,700,700i%7CJetBrains+Mono:400,400i,700,700i&amp;display=fallback">
-        <style>:root{--md-text-font:"Inter";--md-code-font:"JetBrains Mono"}</style>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=JetBrains+Mono:300,300i,400,400i,500,500i,700,700i%7CFira+Code:400,400i,700,700i&amp;display=fallback">
+        <style>:root{--md-text-font:"JetBrains Mono";--md-code-font:"Fira Code"}</style>
       
     
     
@@ -99,7 +99,9 @@
     
       
 
-<header class="md-header" data-md-component="header">
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
     <a href="../.." title="TunGuard" class="md-header__button md-logo" aria-label="TunGuard" data-md-component="logo">
       
@@ -143,7 +145,7 @@
     
     
     
-    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="cyan"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="blue-grey" data-md-color-accent="teal"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
     
       <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_2" hidden>
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
@@ -153,7 +155,7 @@
     
     
     
-    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="cyan"  aria-label="Switch to system preference"  type="radio" name="__palette" id="__palette_2">
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="teal" data-md-color-accent="cyan"  aria-label="Switch to system preference"  type="radio" name="__palette" id="__palette_2">
     
       <label class="md-header__button md-icon" title="Switch to system preference" for="__palette_0" hidden>
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-moon" viewBox="0 0 24 24"><path d="M20.985 12.486a9 9 0 1 1-9.473-9.472c.405-.022.617.46.402.803a6 6 0 0 0 8.268 8.268c.344-.215.825-.004.803.401"/></svg>
@@ -196,14 +198,8 @@
     </div>
   </nav>
   
-</header>
     
-    <div class="md-container" data-md-component="container">
       
-      
-        
-          
-            
 <nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
   <div class="md-grid">
     <ul class="md-tabs__list">
@@ -362,7 +358,13 @@
     </ul>
   </div>
 </nav>
-          
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
         
       
       <main class="md-main" data-md-component="main">
@@ -493,6 +495,8 @@
     
       
       
+        
+      
     
     
     <li class="md-nav__item md-nav__item--nested">
@@ -569,6 +573,8 @@
     
     
       
+      
+        
       
     
     
@@ -682,6 +688,8 @@
     
       
       
+        
+      
     
     
     <li class="md-nav__item md-nav__item--nested">
@@ -766,6 +774,8 @@
     
     
       
+      
+        
       
     
     
@@ -858,6 +868,8 @@
     
     
       
+      
+        
       
     
     
@@ -997,6 +1009,8 @@
     
       
       
+        
+      
     
     
     <li class="md-nav__item md-nav__item--nested">
@@ -1046,6 +1060,8 @@
     
     
       
+      
+        
       
     
     
@@ -1197,6 +1213,8 @@
         
         
       
+      
+        
       
     
     
@@ -1695,7 +1713,7 @@
 
   <h1 id="__skip">Setup</h1>
 
-<h2 id="install-tunguard">Install TunGuard<a class="headerlink" href="#install-tunguard" title="Permanent link">&para;</a></h2>
+<h2 id="install-tunguard">Install TunGuard<a class="headerlink" href="#install-tunguard" title="Permanent link">⚓</a></h2>
 <p>Install TunGuard on a fresh Linux server:</p>
 <div class="language-shell highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>curl<span class="w"> </span>-fsSL<span class="w"> </span>https://raw.githubusercontent.com/TunGuard/get/main/installer.sh<span class="w"> </span><span class="p">|</span><span class="w"> </span>bash
 </span></code></pre></div>
@@ -1703,14 +1721,14 @@
 <p>After installation, open the dashboard:</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>http://YOUR_SERVER_IP:9000
 </span></code></pre></div>
-<h2 id="first-login">First Login<a class="headerlink" href="#first-login" title="Permanent link">&para;</a></h2>
+<h2 id="first-login">First Login<a class="headerlink" href="#first-login" title="Permanent link">⚓</a></h2>
 <p>On a fresh installation, use the default credentials:</p>
 <ul>
 <li><strong>Username</strong>: <code>admin</code></li>
 <li><strong>Password</strong>: <code>tanguard</code></li>
 </ul>
 <p>You will be required to create new dashboard credentials after your first login.</p>
-<h2 id="dashboard-setup">Dashboard Setup<a class="headerlink" href="#dashboard-setup" title="Permanent link">&para;</a></h2>
+<h2 id="dashboard-setup">Dashboard Setup<a class="headerlink" href="#dashboard-setup" title="Permanent link">⚓</a></h2>
 <p>After logging in, TunGuard is ready to manage your WireGuard server.</p>
 <p>The default server configuration is:</p>
 <ul>
@@ -1719,7 +1737,7 @@
 <li><strong>WireGuard Port</strong>: <code>13231</code></li>
 <li><strong>Dashboard/API Port</strong>: <code>9000</code></li>
 </ul>
-<h2 id="create-a-peer">Create a Peer<a class="headerlink" href="#create-a-peer" title="Permanent link">&para;</a></h2>
+<h2 id="create-a-peer">Create a Peer<a class="headerlink" href="#create-a-peer" title="Permanent link">⚓</a></h2>
 <p>Open <strong>Peers</strong> and create a new peer.</p>
 <p>TunGuard generates the peer configuration automatically.</p>
 <p>A generated configuration contains:</p>
@@ -1733,18 +1751,18 @@
 <li><strong>Persistent Keepalive</strong>: Keeps the connection active when the peer is behind NAT.</li>
 </ul>
 <p>You can download the configuration, copy it, or scan its QR code using a WireGuard client.</p>
-<h2 id="peer-address">Peer Address<a class="headerlink" href="#peer-address" title="Permanent link">&para;</a></h2>
+<h2 id="peer-address">Peer Address<a class="headerlink" href="#peer-address" title="Permanent link">⚓</a></h2>
 <p>The first peer normally receives:</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>10.100.0.2/32
 </span></code></pre></div>
 <p>Additional peers receive the next available address from the configured VPN subnet.</p>
-<h2 id="connect-the-peer">Connect the Peer<a class="headerlink" href="#connect-the-peer" title="Permanent link">&para;</a></h2>
+<h2 id="connect-the-peer">Connect the Peer<a class="headerlink" href="#connect-the-peer" title="Permanent link">⚓</a></h2>
 <p>Import the generated configuration into a WireGuard client on the device you want to connect.</p>
 <p>The client connects to the TunGuard server using the configured WireGuard endpoint:</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>YOUR_SERVER_IP:13231
 </span></code></pre></div>
 <p>Once connected, the peer appears in the <strong>Peers</strong> section of the TunGuard dashboard.</p>
-<h2 id="optional-ssh-gateway">Optional SSH Gateway<a class="headerlink" href="#optional-ssh-gateway" title="Permanent link">&para;</a></h2>
+<h2 id="optional-ssh-gateway">Optional SSH Gateway<a class="headerlink" href="#optional-ssh-gateway" title="Permanent link">⚓</a></h2>
 <p>TunGuard can also provide SSH access to devices connected through the VPN.</p>
 <p>Enable the SSH Gateway with:</p>
 <div class="language-shell highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>./tanguard<span class="w"> </span>-ssh
@@ -1829,7 +1847,7 @@
       
         
         
-      <script id="__config" type="application/json">{"annotate":null,"base":"../..","features":["navigation.instant","navigation.tabs","navigation.expand","navigation.path","navigation.top","content.action.edit","content.action.view","content.code.copy","content.code.annotate"],"redirect":null,"search":"../../assets/javascripts/workers/search.7d14d953.min.js","tags":null,"translations":{"clipboard.copied":"Copied to clipboard","clipboard.copy":"Copy to clipboard","search.result.more.one":"1 more on this page","search.result.more.other":"# more on this page","search.result.none":"No matching documents","search.result.one":"1 matching document","search.result.other":"# matching documents","search.result.placeholder":"Type to start searching","search.result.term.missing":"Missing","select.version":"Select version"},"version":{"provider":"mike"}}</script>
+      <script id="__config" type="application/json">{"annotate":null,"base":"../..","features":["navigation.instant","navigation.tabs","navigation.tabs.sticky","navigation.expand","navigation.path","navigation.top","navigation.sections","content.action.edit","content.action.view","content.code.copy","content.code.annotate","toc.follow"],"redirect":null,"search":"../../assets/javascripts/workers/search.7d14d953.min.js","tags":null,"translations":{"clipboard.copied":"Copied to clipboard","clipboard.copy":"Copy to clipboard","search.result.more.one":"1 more on this page","search.result.more.other":"# more on this page","search.result.none":"No matching documents","search.result.one":"1 matching document","search.result.other":"# matching documents","search.result.placeholder":"Type to start searching","search.result.term.missing":"Missing","select.version":"Select version"},"version":{"provider":"mike"}}</script>
     
     
       <script src="../../assets/javascripts/bundle.8dcc8e9c.min.js"></script>

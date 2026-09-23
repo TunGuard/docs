@@ -55,8 +55,8 @@
         
         
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:300,300i,400,400i,500,500i,700,700i%7CJetBrains+Mono:400,400i,700,700i&amp;display=fallback">
-        <style>:root{--md-text-font:"Inter";--md-code-font:"JetBrains Mono"}</style>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=JetBrains+Mono:300,300i,400,400i,500,500i,700,700i%7CFira+Code:400,400i,700,700i&amp;display=fallback">
+        <style>:root{--md-text-font:"JetBrains Mono";--md-code-font:"Fira Code"}</style>
       
     
     
@@ -101,7 +101,9 @@
     
       
 
-<header class="md-header" data-md-component="header">
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
     <a href="../.." title="TunGuard" class="md-header__button md-logo" aria-label="TunGuard" data-md-component="logo">
       
@@ -145,7 +147,7 @@
     
     
     
-    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="cyan"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="blue-grey" data-md-color-accent="teal"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
     
       <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_2" hidden>
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
@@ -155,7 +157,7 @@
     
     
     
-    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="cyan"  aria-label="Switch to system preference"  type="radio" name="__palette" id="__palette_2">
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="teal" data-md-color-accent="cyan"  aria-label="Switch to system preference"  type="radio" name="__palette" id="__palette_2">
     
       <label class="md-header__button md-icon" title="Switch to system preference" for="__palette_0" hidden>
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-moon" viewBox="0 0 24 24"><path d="M20.985 12.486a9 9 0 1 1-9.473-9.472c.405-.022.617.46.402.803a6 6 0 0 0 8.268 8.268c.344-.215.825-.004.803.401"/></svg>
@@ -198,14 +200,8 @@
     </div>
   </nav>
   
-</header>
     
-    <div class="md-container" data-md-component="container">
       
-      
-        
-          
-            
 <nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
   <div class="md-grid">
     <ul class="md-tabs__list">
@@ -364,7 +360,13 @@
     </ul>
   </div>
 </nav>
-          
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
         
       
       <main class="md-main" data-md-component="main">
@@ -495,6 +497,8 @@
     
       
       
+        
+      
     
     
     <li class="md-nav__item md-nav__item--nested">
@@ -571,6 +575,8 @@
     
     
       
+      
+        
       
     
     
@@ -684,6 +690,8 @@
     
       
       
+        
+      
     
     
     <li class="md-nav__item md-nav__item--nested">
@@ -768,6 +776,8 @@
     
     
       
+      
+        
       
     
     
@@ -860,6 +870,8 @@
     
     
       
+      
+        
       
     
     
@@ -999,6 +1011,8 @@
     
       
       
+        
+      
     
     
     <li class="md-nav__item md-nav__item--nested">
@@ -1048,6 +1062,8 @@
     
     
       
+      
+        
       
     
     
@@ -1199,6 +1215,8 @@
         
         
       
+      
+        
       
     
     
@@ -1798,12 +1816,12 @@
   <h1 id="__skip">Admin Panel</h1>
 
 <p>The TunGuard Admin Panel provides access to server settings, authentication, API access, backups, and peer management.</p>
-<h2 id="dashboard-login">Dashboard Login<a class="headerlink" href="#dashboard-login" title="Permanent link">&para;</a></h2>
+<h2 id="dashboard-login">Dashboard Login<a class="headerlink" href="#dashboard-login" title="Permanent link">⚓</a></h2>
 <p>Change the username and password used to access the TunGuard Admin Panel.</p>
 <p>Go to:</p>
 <p><strong>Settings → Dashboard Login</strong></p>
 <p>Changes take effect immediately.</p>
-<h2 id="api-key">API Key<a class="headerlink" href="#api-key" title="Permanent link">&para;</a></h2>
+<h2 id="api-key">API Key<a class="headerlink" href="#api-key" title="Permanent link">⚓</a></h2>
 <p>TunGuard provides an API key for authenticating API requests.</p>
 <p>Go to:</p>
 <p><strong>Settings → API Key</strong></p>
@@ -1822,14 +1840,14 @@
 <div class="language-text highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>Authorization: Bearer YOUR_API_KEY
 </span></code></pre></div>
 <p>Keep your API key private. Anyone with the key can access the API according to the permissions provided by TunGuard.</p>
-<h2 id="backup-restore">Backup &amp; Restore<a class="headerlink" href="#backup-restore" title="Permanent link">&para;</a></h2>
+<h2 id="backup-restore">Backup &amp; Restore<a class="headerlink" href="#backup-restore" title="Permanent link">⚓</a></h2>
 <p>TunGuard can back up its persistent configuration so it can be restored later.</p>
 <p>Go to:</p>
 <p><strong>Settings → Backup &amp; Restore</strong></p>
-<h3 id="download-backup">Download Backup<a class="headerlink" href="#download-backup" title="Permanent link">&para;</a></h3>
+<h3 id="download-backup">Download Backup<a class="headerlink" href="#download-backup" title="Permanent link">⚓</a></h3>
 <p>Download a backup containing the persistent TunGuard state.</p>
 <p>Backups can be used to recover a server or move an existing TunGuard installation to another server.</p>
-<h3 id="restore-backup">Restore Backup<a class="headerlink" href="#restore-backup" title="Permanent link">&para;</a></h3>
+<h3 id="restore-backup">Restore Backup<a class="headerlink" href="#restore-backup" title="Permanent link">⚓</a></h3>
 <p>A backup can be imported into a new TunGuard installation.</p>
 <p>This is useful when moving from one server to another.</p>
 <p>The restored state can include:</p>
@@ -1845,7 +1863,7 @@
 <p class="admonition-title">Server Key</p>
 <p>If the restored backup contains a different WireGuard server private key, existing peers will need updated configurations.</p>
 </div>
-<h3 id="moving-tunguard-to-a-new-server">Moving TunGuard to a New Server<a class="headerlink" href="#moving-tunguard-to-a-new-server" title="Permanent link">&para;</a></h3>
+<h3 id="moving-tunguard-to-a-new-server">Moving TunGuard to a New Server<a class="headerlink" href="#moving-tunguard-to-a-new-server" title="Permanent link">⚓</a></h3>
 <p>To move TunGuard to another server:</p>
 <ol>
 <li>Download a backup from the old server.</li>
@@ -1856,7 +1874,7 @@
 <li>Update the server address in client configurations if the server's public address changed.</li>
 </ol>
 <p>The backup does not replace the TunGuard binary or systemd service configuration.</p>
-<h2 id="peer-management">Peer Management<a class="headerlink" href="#peer-management" title="Permanent link">&para;</a></h2>
+<h2 id="peer-management">Peer Management<a class="headerlink" href="#peer-management" title="Permanent link">⚓</a></h2>
 <p>Peer management is available from the <strong>Peers</strong> section.</p>
 <p>Administrators can:</p>
 <ul>
@@ -1869,12 +1887,12 @@
 <li>Remove peers</li>
 </ul>
 <p>See <a href=".././clients/">Edit Peer</a> for the available peer settings.</p>
-<h2 id="groups">Groups<a class="headerlink" href="#groups" title="Permanent link">&para;</a></h2>
+<h2 id="groups">Groups<a class="headerlink" href="#groups" title="Permanent link">⚓</a></h2>
 <p>Groups are planned for organizing peers into logical collections.</p>
 <p>Groups will allow administrators to manage peers based on their role, location, network, or other requirements.</p>
 <p>A peer will be able to move between groups without needing to recreate the peer.</p>
 <p>Group functionality is currently under development.</p>
-<h2 id="server-settings">Server Settings<a class="headerlink" href="#server-settings" title="Permanent link">&para;</a></h2>
+<h2 id="server-settings">Server Settings<a class="headerlink" href="#server-settings" title="Permanent link">⚓</a></h2>
 <p>TunGuard provides settings for configuring the WireGuard server and its network.</p>
 <p>Common settings include:</p>
 <ul>
@@ -1888,7 +1906,7 @@
 <li>SSH Gateway</li>
 </ul>
 <p>Changes to networking settings can affect connected peers. Make sure client configurations match the server configuration after making changes.</p>
-<h2 id="ssh-gateway">SSH Gateway<a class="headerlink" href="#ssh-gateway" title="Permanent link">&para;</a></h2>
+<h2 id="ssh-gateway">SSH Gateway<a class="headerlink" href="#ssh-gateway" title="Permanent link">⚓</a></h2>
 <p>The optional SSH Gateway allows administrators to reach devices connected through TunGuard.</p>
 <p>The default port is:</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>2222
@@ -1897,7 +1915,7 @@
 <div class="language-shell highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>ssh<span class="w"> </span>-J<span class="w"> </span>admin@YOUR_SERVER_IP:2222<span class="w"> </span>root@10.100.0.2
 </span></code></pre></div>
 <p>See the <a href=".././cli/">CLI</a> guide for SSH Gateway commands and configuration.</p>
-<h2 id="security">Security<a class="headerlink" href="#security" title="Permanent link">&para;</a></h2>
+<h2 id="security">Security<a class="headerlink" href="#security" title="Permanent link">⚓</a></h2>
 <p>The Admin Panel controls access to sensitive TunGuard functionality.</p>
 <p>Administrators should:</p>
 <ul>
@@ -1981,7 +1999,7 @@
       
         
         
-      <script id="__config" type="application/json">{"annotate":null,"base":"../..","features":["navigation.instant","navigation.tabs","navigation.expand","navigation.path","navigation.top","content.action.edit","content.action.view","content.code.copy","content.code.annotate"],"redirect":null,"search":"../../assets/javascripts/workers/search.7d14d953.min.js","tags":null,"translations":{"clipboard.copied":"Copied to clipboard","clipboard.copy":"Copy to clipboard","search.result.more.one":"1 more on this page","search.result.more.other":"# more on this page","search.result.none":"No matching documents","search.result.one":"1 matching document","search.result.other":"# matching documents","search.result.placeholder":"Type to start searching","search.result.term.missing":"Missing","select.version":"Select version"},"version":{"provider":"mike"}}</script>
+      <script id="__config" type="application/json">{"annotate":null,"base":"../..","features":["navigation.instant","navigation.tabs","navigation.tabs.sticky","navigation.expand","navigation.path","navigation.top","navigation.sections","content.action.edit","content.action.view","content.code.copy","content.code.annotate","toc.follow"],"redirect":null,"search":"../../assets/javascripts/workers/search.7d14d953.min.js","tags":null,"translations":{"clipboard.copied":"Copied to clipboard","clipboard.copy":"Copy to clipboard","search.result.more.one":"1 more on this page","search.result.more.other":"# more on this page","search.result.none":"No matching documents","search.result.one":"1 matching document","search.result.other":"# matching documents","search.result.placeholder":"Type to start searching","search.result.term.missing":"Missing","select.version":"Select version"},"version":{"provider":"mike"}}</script>
     
     
       <script src="../../assets/javascripts/bundle.8dcc8e9c.min.js"></script>

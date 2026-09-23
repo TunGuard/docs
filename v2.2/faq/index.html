@@ -55,8 +55,8 @@
         
         
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:300,300i,400,400i,500,500i,700,700i%7CJetBrains+Mono:400,400i,700,700i&amp;display=fallback">
-        <style>:root{--md-text-font:"Inter";--md-code-font:"JetBrains Mono"}</style>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=JetBrains+Mono:300,300i,400,400i,500,500i,700,700i%7CFira+Code:400,400i,700,700i&amp;display=fallback">
+        <style>:root{--md-text-font:"JetBrains Mono";--md-code-font:"Fira Code"}</style>
       
     
     
@@ -101,7 +101,9 @@
     
       
 
-<header class="md-header" data-md-component="header">
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
     <a href="./.." title="TunGuard" class="md-header__button md-logo" aria-label="TunGuard" data-md-component="logo">
       
@@ -145,7 +147,7 @@
     
     
     
-    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="cyan"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="blue-grey" data-md-color-accent="teal"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
     
       <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_2" hidden>
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
@@ -155,7 +157,7 @@
     
     
     
-    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="cyan"  aria-label="Switch to system preference"  type="radio" name="__palette" id="__palette_2">
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="teal" data-md-color-accent="cyan"  aria-label="Switch to system preference"  type="radio" name="__palette" id="__palette_2">
     
       <label class="md-header__button md-icon" title="Switch to system preference" for="__palette_0" hidden>
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-moon" viewBox="0 0 24 24"><path d="M20.985 12.486a9 9 0 1 1-9.473-9.472c.405-.022.617.46.402.803a6 6 0 0 0 8.268 8.268c.344-.215.825-.004.803.401"/></svg>
@@ -198,14 +200,8 @@
     </div>
   </nav>
   
-</header>
     
-    <div class="md-container" data-md-component="container">
       
-      
-        
-          
-            
 <nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
   <div class="md-grid">
     <ul class="md-tabs__list">
@@ -364,7 +360,13 @@
     </ul>
   </div>
 </nav>
-          
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
         
       
       <main class="md-main" data-md-component="main">
@@ -738,6 +740,8 @@
     
       
       
+        
+      
     
     
     <li class="md-nav__item md-nav__item--nested">
@@ -814,6 +818,8 @@
     
     
       
+      
+        
       
     
     
@@ -927,6 +933,8 @@
     
       
       
+        
+      
     
     
     <li class="md-nav__item md-nav__item--nested">
@@ -1011,6 +1019,8 @@
     
     
       
+      
+        
       
     
     
@@ -1103,6 +1113,8 @@
     
     
       
+      
+        
       
     
     
@@ -1242,6 +1254,8 @@
     
       
       
+        
+      
     
     
     <li class="md-nav__item md-nav__item--nested">
@@ -1291,6 +1305,8 @@
     
     
       
+      
+        
       
     
     
@@ -1437,6 +1453,8 @@
     
     
       
+      
+        
       
     
     
@@ -1898,9 +1916,9 @@
   <h1 id="__skip">FAQ</h1>
 
 <p>Here are some frequently asked questions and common issues about <code>TunGuard</code>. If you have a question that is not answered here, feel free to open an issue or discussion on GitHub.</p>
-<h2 id="do-i-need-to-install-wireguard">Do I need to install WireGuard?<a class="headerlink" href="#do-i-need-to-install-wireguard" title="Permanent link">&para;</a></h2>
+<h2 id="do-i-need-to-install-wireguard">Do I need to install WireGuard?<a class="headerlink" href="#do-i-need-to-install-wireguard" title="Permanent link">⚓</a></h2>
 <p>No. TunGuard runs WireGuard entirely in userspace. You do not need to install the WireGuard kernel module or run <code>apt install wireguard</code>.</p>
-<h2 id="how-do-i-install-tunguard">How do I install TunGuard?<a class="headerlink" href="#how-do-i-install-tunguard" title="Permanent link">&para;</a></h2>
+<h2 id="how-do-i-install-tunguard">How do I install TunGuard?<a class="headerlink" href="#how-do-i-install-tunguard" title="Permanent link">⚓</a></h2>
 <p>On a fresh Linux server, run:</p>
 <div class="language-shell highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>curl<span class="w"> </span>-fsSL<span class="w"> </span>https://raw.githubusercontent.com/TunGuard/get/main/installer.sh<span class="w"> </span><span class="p">|</span><span class="w"> </span>bash
 </span></code></pre></div>
@@ -1908,19 +1926,19 @@
 <p>After installation, open:</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>http://YOUR_SERVER_IP:9000
 </span></code></pre></div>
-<h2 id="what-are-the-default-dashboard-credentials">What are the default dashboard credentials?<a class="headerlink" href="#what-are-the-default-dashboard-credentials" title="Permanent link">&para;</a></h2>
+<h2 id="what-are-the-default-dashboard-credentials">What are the default dashboard credentials?<a class="headerlink" href="#what-are-the-default-dashboard-credentials" title="Permanent link">⚓</a></h2>
 <p>On a fresh installation:</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>Username: admin
 </span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>Password: tanguard
 </span></code></pre></div>
 <p>You will be required to change the credentials after the first login.</p>
-<h2 id="i-cannot-access-the-dashboard">I cannot access the dashboard<a class="headerlink" href="#i-cannot-access-the-dashboard" title="Permanent link">&para;</a></h2>
+<h2 id="i-cannot-access-the-dashboard">I cannot access the dashboard<a class="headerlink" href="#i-cannot-access-the-dashboard" title="Permanent link">⚓</a></h2>
 <p>TunGuard's dashboard and API use port <code>9000</code> by default.</p>
 <p>Make sure the port is reachable from your network and that your server or cloud provider firewall allows TCP traffic on port <code>9000</code>.</p>
 <p>You can also check the service status:</p>
 <div class="language-shell highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>sudo<span class="w"> </span>systemctl<span class="w"> </span>status<span class="w"> </span>tanguard
 </span></code></pre></div>
-<h2 id="what-ports-does-tunguard-use">What ports does TunGuard use?<a class="headerlink" href="#what-ports-does-tunguard-use" title="Permanent link">&para;</a></h2>
+<h2 id="what-ports-does-tunguard-use">What ports does TunGuard use?<a class="headerlink" href="#what-ports-does-tunguard-use" title="Permanent link">⚓</a></h2>
 <p>The default ports are:</p>
 <table>
 <thead>
@@ -1948,13 +1966,13 @@
 </tr>
 </tbody>
 </table>
-<h2 id="how-do-i-create-a-wireguard-peer">How do I create a WireGuard peer?<a class="headerlink" href="#how-do-i-create-a-wireguard-peer" title="Permanent link">&para;</a></h2>
+<h2 id="how-do-i-create-a-wireguard-peer">How do I create a WireGuard peer?<a class="headerlink" href="#how-do-i-create-a-wireguard-peer" title="Permanent link">⚓</a></h2>
 <p>Open <strong>Peers</strong> in the dashboard and create a new peer.</p>
 <p>TunGuard can generate the client configuration and QR code.</p>
 <p>The default VPN network is:</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>10.100.0.0/24
 </span></code></pre></div>
-<h2 id="my-peer-cannot-connect">My peer cannot connect<a class="headerlink" href="#my-peer-cannot-connect" title="Permanent link">&para;</a></h2>
+<h2 id="my-peer-cannot-connect">My peer cannot connect<a class="headerlink" href="#my-peer-cannot-connect" title="Permanent link">⚓</a></h2>
 <p>Check that:</p>
 <ol>
 <li>The WireGuard UDP port <code>13231</code> is reachable from the internet.</li>
@@ -1965,13 +1983,13 @@
 <p>You can check the service with:</p>
 <div class="language-shell highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>sudo<span class="w"> </span>systemctl<span class="w"> </span>status<span class="w"> </span>tanguard
 </span></code></pre></div>
-<h2 id="my-peer-connects-but-cannot-access-the-internet">My peer connects but cannot access the internet<a class="headerlink" href="#my-peer-connects-but-cannot-access-the-internet" title="Permanent link">&para;</a></h2>
+<h2 id="my-peer-connects-but-cannot-access-the-internet">My peer connects but cannot access the internet<a class="headerlink" href="#my-peer-connects-but-cannot-access-the-internet" title="Permanent link">⚓</a></h2>
 <p>Check that the server has internet connectivity and that the client's configuration routes the required traffic through TunGuard.</p>
 <p>For full-tunnel routing, the peer configuration normally contains:</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>AllowedIPs = 0.0.0.0/0, ::/0
 </span></code></pre></div>
 <p>Server-side routing and NAT must also be correctly configured for your environment.</p>
-<h2 id="i-forgot-my-dashboard-password">I forgot my dashboard password<a class="headerlink" href="#i-forgot-my-dashboard-password" title="Permanent link">&para;</a></h2>
+<h2 id="i-forgot-my-dashboard-password">I forgot my dashboard password<a class="headerlink" href="#i-forgot-my-dashboard-password" title="Permanent link">⚓</a></h2>
 <p>Reset the dashboard credentials with:</p>
 <div class="language-shell highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>sudo<span class="w"> </span>./tanguard<span class="w"> </span>--reset
 </span></code></pre></div>
@@ -1980,29 +1998,29 @@
 </span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>Password: tanguard
 </span></code></pre></div>
 <p>You can then log in and set new credentials.</p>
-<h2 id="how-do-i-change-the-dashboard-credentials">How do I change the dashboard credentials?<a class="headerlink" href="#how-do-i-change-the-dashboard-credentials" title="Permanent link">&para;</a></h2>
+<h2 id="how-do-i-change-the-dashboard-credentials">How do I change the dashboard credentials?<a class="headerlink" href="#how-do-i-change-the-dashboard-credentials" title="Permanent link">⚓</a></h2>
 <p>Open <strong>Settings → Dashboard Login</strong> in the dashboard.</p>
 <p>Changes take effect immediately.</p>
-<h2 id="how-do-i-update-tunguard">How do I update TunGuard?<a class="headerlink" href="#how-do-i-update-tunguard" title="Permanent link">&para;</a></h2>
+<h2 id="how-do-i-update-tunguard">How do I update TunGuard?<a class="headerlink" href="#how-do-i-update-tunguard" title="Permanent link">⚓</a></h2>
 <p>Run the installer again:</p>
 <div class="language-shell highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>curl<span class="w"> </span>-fsSL<span class="w"> </span>https://raw.githubusercontent.com/TunGuard/get/main/installer.sh<span class="w"> </span><span class="p">|</span><span class="w"> </span>bash
 </span></code></pre></div>
 <p>The installer updates the TunGuard binary while preserving the existing service configuration and persistent data.</p>
-<h2 id="will-updating-tunguard-delete-my-peers">Will updating TunGuard delete my peers?<a class="headerlink" href="#will-updating-tunguard-delete-my-peers" title="Permanent link">&para;</a></h2>
+<h2 id="will-updating-tunguard-delete-my-peers">Will updating TunGuard delete my peers?<a class="headerlink" href="#will-updating-tunguard-delete-my-peers" title="Permanent link">⚓</a></h2>
 <p>No. Peer data is stored in the persistent <code>DATA_DIR</code> and is preserved when updating the binary.</p>
-<h2 id="how-do-i-back-up-tunguard">How do I back up TunGuard?<a class="headerlink" href="#how-do-i-back-up-tunguard" title="Permanent link">&para;</a></h2>
+<h2 id="how-do-i-back-up-tunguard">How do I back up TunGuard?<a class="headerlink" href="#how-do-i-back-up-tunguard" title="Permanent link">⚓</a></h2>
 <p>From the dashboard, open:</p>
 <p><strong>Settings → Backup &amp; Restore → Download Backup</strong></p>
 <p>You can also create a backup from the command line:</p>
 <div class="language-shell highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>sudo<span class="w"> </span>tar<span class="w"> </span>-czf<span class="w"> </span>~/tanguard-backup.tar.gz<span class="w"> </span>-C<span class="w"> </span>/var/lib/tanguard<span class="w"> </span>.
 </span></code></pre></div>
-<h2 id="how-do-i-restore-a-backup">How do I restore a backup?<a class="headerlink" href="#how-do-i-restore-a-backup" title="Permanent link">&para;</a></h2>
+<h2 id="how-do-i-restore-a-backup">How do I restore a backup?<a class="headerlink" href="#how-do-i-restore-a-backup" title="Permanent link">⚓</a></h2>
 <p>Use <strong>Settings → Backup &amp; Restore</strong> in the dashboard and upload a TunGuard backup.</p>
 <p>The restored peer and server state is applied immediately.</p>
 <p>If the restored server private key is different, existing clients will need updated configurations.</p>
-<h2 id="does-tunguard-support-existing-wireguard-keys">Does TunGuard support existing WireGuard keys?<a class="headerlink" href="#does-tunguard-support-existing-wireguard-keys" title="Permanent link">&para;</a></h2>
+<h2 id="does-tunguard-support-existing-wireguard-keys">Does TunGuard support existing WireGuard keys?<a class="headerlink" href="#does-tunguard-support-existing-wireguard-keys" title="Permanent link">⚓</a></h2>
 <p>Yes. You can add an existing peer key through the <strong>Peers</strong> section instead of generating a new key.</p>
-<h2 id="what-is-the-ssh-gateway">What is the SSH Gateway?<a class="headerlink" href="#what-is-the-ssh-gateway" title="Permanent link">&para;</a></h2>
+<h2 id="what-is-the-ssh-gateway">What is the SSH Gateway?<a class="headerlink" href="#what-is-the-ssh-gateway" title="Permanent link">⚓</a></h2>
 <p>The optional SSH Gateway allows SSH access to WireGuard-connected devices through the TunGuard server.</p>
 <p>It uses port <code>2222</code> by default and can be enabled with:</p>
 <div class="language-shell highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>./tanguard<span class="w"> </span>-ssh
@@ -2010,7 +2028,7 @@
 <p>For example:</p>
 <div class="language-shell highlight"><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>ssh<span class="w"> </span>-J<span class="w"> </span>admin@yourserver:2222<span class="w"> </span>root@10.100.0.2
 </span></code></pre></div>
-<h2 id="how-do-i-use-the-api">How do I use the API?<a class="headerlink" href="#how-do-i-use-the-api" title="Permanent link">&para;</a></h2>
+<h2 id="how-do-i-use-the-api">How do I use the API?<a class="headerlink" href="#how-do-i-use-the-api" title="Permanent link">⚓</a></h2>
 <p>TunGuard provides an API under <code>/api/*</code>.</p>
 <p>Most API endpoints require dashboard authentication or an API key.</p>
 <p>API keys can be generated from <strong>Settings → API Key</strong> and supplied using either:</p>
@@ -2020,7 +2038,7 @@
 <div class="language-text highlight"><pre><span></span><code><span id="__span-14-1"><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>Authorization: Bearer YOUR_API_KEY
 </span></code></pre></div>
 <p>The <code>/api/health</code> endpoint does not require authentication.</p>
-<h2 id="where-can-i-report-a-bug">Where can I report a bug?<a class="headerlink" href="#where-can-i-report-a-bug" title="Permanent link">&para;</a></h2>
+<h2 id="where-can-i-report-a-bug">Where can I report a bug?<a class="headerlink" href="#where-can-i-report-a-bug" title="Permanent link">⚓</a></h2>
 <p>Open an issue in the TunGuard repository.</p>
 <p>Include:</p>
 <ul>
@@ -2107,7 +2125,7 @@
       
         
         
-      <script id="__config" type="application/json">{"annotate":null,"base":"..","features":["navigation.instant","navigation.tabs","navigation.expand","navigation.path","navigation.top","content.action.edit","content.action.view","content.code.copy","content.code.annotate"],"redirect":null,"search":"../assets/javascripts/workers/search.7d14d953.min.js","tags":null,"translations":{"clipboard.copied":"Copied to clipboard","clipboard.copy":"Copy to clipboard","search.result.more.one":"1 more on this page","search.result.more.other":"# more on this page","search.result.none":"No matching documents","search.result.one":"1 matching document","search.result.other":"# matching documents","search.result.placeholder":"Type to start searching","search.result.term.missing":"Missing","select.version":"Select version"},"version":{"provider":"mike"}}</script>
+      <script id="__config" type="application/json">{"annotate":null,"base":"..","features":["navigation.instant","navigation.tabs","navigation.tabs.sticky","navigation.expand","navigation.path","navigation.top","navigation.sections","content.action.edit","content.action.view","content.code.copy","content.code.annotate","toc.follow"],"redirect":null,"search":"../assets/javascripts/workers/search.7d14d953.min.js","tags":null,"translations":{"clipboard.copied":"Copied to clipboard","clipboard.copy":"Copy to clipboard","search.result.more.one":"1 more on this page","search.result.more.other":"# more on this page","search.result.none":"No matching documents","search.result.one":"1 matching document","search.result.other":"# matching documents","search.result.placeholder":"Type to start searching","search.result.term.missing":"Missing","select.version":"Select version"},"version":{"provider":"mike"}}</script>
     
     
       <script src="../assets/javascripts/bundle.8dcc8e9c.min.js"></script>

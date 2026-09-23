@@ -55,8 +55,8 @@
         
         
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:300,300i,400,400i,500,500i,700,700i%7CJetBrains+Mono:400,400i,700,700i&amp;display=fallback">
-        <style>:root{--md-text-font:"Inter";--md-code-font:"JetBrains Mono"}</style>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=JetBrains+Mono:300,300i,400,400i,500,500i,700,700i%7CFira+Code:400,400i,700,700i&amp;display=fallback">
+        <style>:root{--md-text-font:"JetBrains Mono";--md-code-font:"Fira Code"}</style>
       
     
     
@@ -101,7 +101,9 @@
     
       
 
-<header class="md-header" data-md-component="header">
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
     <a href="../.." title="TunGuard" class="md-header__button md-logo" aria-label="TunGuard" data-md-component="logo">
       
@@ -145,7 +147,7 @@
     
     
     
-    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="cyan"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="blue-grey" data-md-color-accent="teal"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
     
       <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_2" hidden>
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
@@ -155,7 +157,7 @@
     
     
     
-    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="cyan"  aria-label="Switch to system preference"  type="radio" name="__palette" id="__palette_2">
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="teal" data-md-color-accent="cyan"  aria-label="Switch to system preference"  type="radio" name="__palette" id="__palette_2">
     
       <label class="md-header__button md-icon" title="Switch to system preference" for="__palette_0" hidden>
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-moon" viewBox="0 0 24 24"><path d="M20.985 12.486a9 9 0 1 1-9.473-9.472c.405-.022.617.46.402.803a6 6 0 0 0 8.268 8.268c.344-.215.825-.004.803.401"/></svg>
@@ -198,14 +200,8 @@
     </div>
   </nav>
   
-</header>
     
-    <div class="md-container" data-md-component="container">
       
-      
-        
-          
-            
 <nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
   <div class="md-grid">
     <ul class="md-tabs__list">
@@ -364,7 +360,13 @@
     </ul>
   </div>
 </nav>
-          
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
         
       
       <main class="md-main" data-md-component="main">
@@ -500,6 +502,8 @@
         
       
       
+        
+      
     
     
     <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
@@ -575,9 +579,14 @@
     
       
       
+        
+          
+          
+        
+      
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
       
         
         
@@ -586,7 +595,7 @@
         <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4_2" >
         
           
-          <label class="md-nav__link" for="__nav_4_2" id="__nav_4_2_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_4_2" id="__nav_4_2_label" tabindex="">
             
   
   
@@ -687,9 +696,14 @@
     
       
       
+        
+          
+          
+        
+      
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
       
         
         
@@ -698,7 +712,7 @@
         <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4_3" >
         
           
-          <label class="md-nav__link" for="__nav_4_3" id="__nav_4_3_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_4_3" id="__nav_4_3_label" tabindex="">
             
   
   
@@ -774,16 +788,21 @@
     
       
       
+        
+          
+          
+        
+      
     
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
       
         
         
         <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_4" checked>
         
           
-          <label class="md-nav__link" for="__nav_4_4" id="__nav_4_4_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_4_4" id="__nav_4_4_label" tabindex="">
             
   
   
@@ -1034,6 +1053,8 @@
     
       
       
+        
+      
     
     
     <li class="md-nav__item md-nav__item--nested">
@@ -1172,6 +1193,8 @@
     
       
       
+        
+      
     
     
     <li class="md-nav__item md-nav__item--nested">
@@ -1221,6 +1244,8 @@
     
     
       
+      
+        
       
     
     
@@ -1367,6 +1392,8 @@
     
     
       
+      
+        
       
     
     
@@ -1820,35 +1847,35 @@
   <h1 id="__skip">Migrate</h1>
 
 <p>If you want to move an existing TunGuard installation to a new server, you can migrate the TunGuard data directory and restore it on the new server.</p>
-<h2 id="migrate-to-a-new-server">Migrate to a New Server<a class="headerlink" href="#migrate-to-a-new-server" title="Permanent link">&para;</a></h2>
+<h2 id="migrate-to-a-new-server">Migrate to a New Server<a class="headerlink" href="#migrate-to-a-new-server" title="Permanent link">⚓</a></h2>
 <p>A TunGuard backup contains the persistent state required to keep your existing server identity, peers, credentials, and configuration.</p>
-<h3 id="1-create-a-backup">1. Create a Backup<a class="headerlink" href="#1-create-a-backup" title="Permanent link">&para;</a></h3>
+<h3 id="1-create-a-backup">1. Create a Backup<a class="headerlink" href="#1-create-a-backup" title="Permanent link">⚓</a></h3>
 <p>On the existing server:</p>
 <div class="language-bash highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>sudo<span class="w"> </span>tar<span class="w"> </span>-czf<span class="w"> </span>~/tanguard-backup.tar.gz<span class="w"> </span>-C<span class="w"> </span>/var/lib/tanguard<span class="w"> </span>.
 </span></code></pre></div>
 <p>You can also create a backup from:</p>
 <p><strong>Dashboard → Settings → Backup &amp; Restore → Download Backup</strong></p>
-<h3 id="2-install-tunguard-on-the-new-server">2. Install TunGuard on the New Server<a class="headerlink" href="#2-install-tunguard-on-the-new-server" title="Permanent link">&para;</a></h3>
+<h3 id="2-install-tunguard-on-the-new-server">2. Install TunGuard on the New Server<a class="headerlink" href="#2-install-tunguard-on-the-new-server" title="Permanent link">⚓</a></h3>
 <p>Install TunGuard normally on the new server:</p>
 <div class="language-bash highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>curl<span class="w"> </span>-fsSL<span class="w"> </span>https://raw.githubusercontent.com/TunGuard/get/main/installer.sh<span class="w"> </span><span class="p">|</span><span class="w"> </span>bash
 </span></code></pre></div>
 <p>The installer creates and starts the TunGuard systemd service.</p>
-<h3 id="3-stop-tunguard">3. Stop TunGuard<a class="headerlink" href="#3-stop-tunguard" title="Permanent link">&para;</a></h3>
+<h3 id="3-stop-tunguard">3. Stop TunGuard<a class="headerlink" href="#3-stop-tunguard" title="Permanent link">⚓</a></h3>
 <p>On the new server:</p>
 <div class="language-bash highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>sudo<span class="w"> </span>systemctl<span class="w"> </span>stop<span class="w"> </span>tanguard
 </span></code></pre></div>
-<h3 id="4-restore-the-backup">4. Restore the Backup<a class="headerlink" href="#4-restore-the-backup" title="Permanent link">&para;</a></h3>
+<h3 id="4-restore-the-backup">4. Restore the Backup<a class="headerlink" href="#4-restore-the-backup" title="Permanent link">⚓</a></h3>
 <p>Copy the backup to the new server and restore it into the TunGuard data directory:</p>
 <div class="language-bash highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>sudo<span class="w"> </span>tar<span class="w"> </span>-xzf<span class="w"> </span>tanguard-backup.tar.gz<span class="w"> </span>-C<span class="w"> </span>/var/lib/tanguard
 </span></code></pre></div>
 <p>Make sure the restored files are owned by the account used to run TunGuard.</p>
-<h3 id="5-start-tunguard">5. Start TunGuard<a class="headerlink" href="#5-start-tunguard" title="Permanent link">&para;</a></h3>
+<h3 id="5-start-tunguard">5. Start TunGuard<a class="headerlink" href="#5-start-tunguard" title="Permanent link">⚓</a></h3>
 <div class="language-bash highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>sudo<span class="w"> </span>systemctl<span class="w"> </span>start<span class="w"> </span>tanguard
 </span></code></pre></div>
 <p>Check the service:</p>
 <div class="language-bash highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>sudo<span class="w"> </span>systemctl<span class="w"> </span>status<span class="w"> </span>tanguard
 </span></code></pre></div>
-<h3 id="what-is-migrated">What Is Migrated<a class="headerlink" href="#what-is-migrated" title="Permanent link">&para;</a></h3>
+<h3 id="what-is-migrated">What Is Migrated<a class="headerlink" href="#what-is-migrated" title="Permanent link">⚓</a></h3>
 <p>The backup can contain:</p>
 <ul>
 <li>Server private key</li>
@@ -1859,7 +1886,7 @@
 <li>TunGuard manifest and persistent state</li>
 </ul>
 <p>Keeping the server private key means existing peers can continue using the same server identity.</p>
-<h3 id="what-is-not-migrated">What Is Not Migrated<a class="headerlink" href="#what-is-not-migrated" title="Permanent link">&para;</a></h3>
+<h3 id="what-is-not-migrated">What Is Not Migrated<a class="headerlink" href="#what-is-not-migrated" title="Permanent link">⚓</a></h3>
 <p>A backup does not replace:</p>
 <ul>
 <li>The TunGuard binary</li>
@@ -1869,7 +1896,7 @@
 <li>Network configuration</li>
 </ul>
 <p>Configure the new server's firewall and networking separately.</p>
-<h3 id="if-the-server-address-changes">If the Server Address Changes<a class="headerlink" href="#if-the-server-address-changes" title="Permanent link">&para;</a></h3>
+<h3 id="if-the-server-address-changes">If the Server Address Changes<a class="headerlink" href="#if-the-server-address-changes" title="Permanent link">⚓</a></h3>
 <p>If clients connect using the old server IP or hostname, update their endpoint.</p>
 <p>For example:</p>
 <div class="language-ini highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="k">[Peer]</span>
@@ -1877,10 +1904,10 @@
 </span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="na">Endpoint</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">vpn.example.com:13231</span>
 </span></code></pre></div>
 <p>If the hostname remains the same and points to the new server, no client configuration change is required.</p>
-<h3 id="if-the-server-key-changes">If the Server Key Changes<a class="headerlink" href="#if-the-server-key-changes" title="Permanent link">&para;</a></h3>
+<h3 id="if-the-server-key-changes">If the Server Key Changes<a class="headerlink" href="#if-the-server-key-changes" title="Permanent link">⚓</a></h3>
 <p>If the migration does not preserve the original <code>server_private.key</code>, the server will have a different WireGuard identity.</p>
 <p>In that case, generate new client configurations and replace the configurations on connected devices.</p>
-<h2 id="moving-back">Moving Back<a class="headerlink" href="#moving-back" title="Permanent link">&para;</a></h2>
+<h2 id="moving-back">Moving Back<a class="headerlink" href="#moving-back" title="Permanent link">⚓</a></h2>
 <p>The same process can be used to move TunGuard to another server again:</p>
 <ol>
 <li>Back up the current data.</li>
@@ -1964,7 +1991,7 @@
       
         
         
-      <script id="__config" type="application/json">{"annotate":null,"base":"../..","features":["navigation.instant","navigation.tabs","navigation.expand","navigation.path","navigation.top","content.action.edit","content.action.view","content.code.copy","content.code.annotate"],"redirect":null,"search":"../../assets/javascripts/workers/search.7d14d953.min.js","tags":null,"translations":{"clipboard.copied":"Copied to clipboard","clipboard.copy":"Copy to clipboard","search.result.more.one":"1 more on this page","search.result.more.other":"# more on this page","search.result.none":"No matching documents","search.result.one":"1 matching document","search.result.other":"# matching documents","search.result.placeholder":"Type to start searching","search.result.term.missing":"Missing","select.version":"Select version"},"version":{"provider":"mike"}}</script>
+      <script id="__config" type="application/json">{"annotate":null,"base":"../..","features":["navigation.instant","navigation.tabs","navigation.tabs.sticky","navigation.expand","navigation.path","navigation.top","navigation.sections","content.action.edit","content.action.view","content.code.copy","content.code.annotate","toc.follow"],"redirect":null,"search":"../../assets/javascripts/workers/search.7d14d953.min.js","tags":null,"translations":{"clipboard.copied":"Copied to clipboard","clipboard.copy":"Copy to clipboard","search.result.more.one":"1 more on this page","search.result.more.other":"# more on this page","search.result.none":"No matching documents","search.result.one":"1 matching document","search.result.other":"# matching documents","search.result.placeholder":"Type to start searching","search.result.term.missing":"Missing","select.version":"Select version"},"version":{"provider":"mike"}}</script>
     
     
       <script src="../../assets/javascripts/bundle.8dcc8e9c.min.js"></script>

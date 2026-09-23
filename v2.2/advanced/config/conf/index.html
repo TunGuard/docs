@@ -55,8 +55,8 @@
         
         
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:300,300i,400,400i,500,500i,700,700i%7CJetBrains+Mono:400,400i,700,700i&amp;display=fallback">
-        <style>:root{--md-text-font:"Inter";--md-code-font:"JetBrains Mono"}</style>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=JetBrains+Mono:300,300i,400,400i,500,500i,700,700i%7CFira+Code:400,400i,700,700i&amp;display=fallback">
+        <style>:root{--md-text-font:"JetBrains Mono";--md-code-font:"Fira Code"}</style>
       
     
     
@@ -101,7 +101,9 @@
     
       
 
-<header class="md-header" data-md-component="header">
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
     <a href="../../.." title="TunGuard" class="md-header__button md-logo" aria-label="TunGuard" data-md-component="logo">
       
@@ -145,7 +147,7 @@
     
     
     
-    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="cyan"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="blue-grey" data-md-color-accent="teal"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
     
       <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_2" hidden>
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
@@ -155,7 +157,7 @@
     
     
     
-    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="cyan"  aria-label="Switch to system preference"  type="radio" name="__palette" id="__palette_2">
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="teal" data-md-color-accent="cyan"  aria-label="Switch to system preference"  type="radio" name="__palette" id="__palette_2">
     
       <label class="md-header__button md-icon" title="Switch to system preference" for="__palette_0" hidden>
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-moon" viewBox="0 0 24 24"><path d="M20.985 12.486a9 9 0 1 1-9.473-9.472c.405-.022.617.46.402.803a6 6 0 0 0 8.268 8.268c.344-.215.825-.004.803.401"/></svg>
@@ -198,14 +200,8 @@
     </div>
   </nav>
   
-</header>
     
-    <div class="md-container" data-md-component="container">
       
-      
-        
-          
-            
 <nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
   <div class="md-grid">
     <ul class="md-tabs__list">
@@ -364,7 +360,13 @@
     </ul>
   </div>
 </nav>
-          
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
         
       
       <main class="md-main" data-md-component="main">
@@ -500,6 +502,8 @@
         
       
       
+        
+      
     
     
     <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
@@ -577,16 +581,21 @@
     
       
       
+        
+          
+          
+        
+      
     
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
       
         
         
         <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_2" checked>
         
           
-          <label class="md-nav__link" for="__nav_4_2" id="__nav_4_2_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_4_2" id="__nav_4_2_label" tabindex="">
             
   
   
@@ -1019,9 +1028,14 @@
     
       
       
+        
+          
+          
+        
+      
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
       
         
         
@@ -1030,7 +1044,7 @@
         <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4_3" >
         
           
-          <label class="md-nav__link" for="__nav_4_3" id="__nav_4_3_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_4_3" id="__nav_4_3_label" tabindex="">
             
   
   
@@ -1104,9 +1118,14 @@
     
       
       
+        
+          
+          
+        
+      
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
       
         
         
@@ -1115,7 +1134,7 @@
         <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4_4" >
         
           
-          <label class="md-nav__link" for="__nav_4_4" id="__nav_4_4_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_4_4" id="__nav_4_4_label" tabindex="">
             
   
   
@@ -1195,6 +1214,8 @@
     
     
       
+      
+        
       
     
     
@@ -1334,6 +1355,8 @@
     
       
       
+        
+      
     
     
     <li class="md-nav__item md-nav__item--nested">
@@ -1383,6 +1406,8 @@
     
     
       
+      
+        
       
     
     
@@ -1529,6 +1554,8 @@
     
     
       
+      
+        
       
     
     
@@ -2145,7 +2172,7 @@
 
 <p>TunGuard is configured through environment variables.</p>
 <p>Most installations can use the default values. Change a setting when you need a different interface, port, network, data directory, or service configuration.</p>
-<h2 id="environment-variables">Environment Variables<a class="headerlink" href="#environment-variables" title="Permanent link">&para;</a></h2>
+<h2 id="environment-variables">Environment Variables<a class="headerlink" href="#environment-variables" title="Permanent link">⚓</a></h2>
 <table>
 <thead>
 <tr>
@@ -2232,8 +2259,8 @@
 </tr>
 </tbody>
 </table>
-<h2 id="wireguard-settings">WireGuard Settings<a class="headerlink" href="#wireguard-settings" title="Permanent link">&para;</a></h2>
-<h3 id="wg_interface"><code>WG_INTERFACE</code><a class="headerlink" href="#wg_interface" title="Permanent link">&para;</a></h3>
+<h2 id="wireguard-settings">WireGuard Settings<a class="headerlink" href="#wireguard-settings" title="Permanent link">⚓</a></h2>
+<h3 id="wg_interface"><code>WG_INTERFACE</code><a class="headerlink" href="#wg_interface" title="Permanent link">⚓</a></h3>
 <p>Controls the name of the WireGuard interface created by TunGuard.</p>
 <p>Default:</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>wg0
@@ -2241,7 +2268,7 @@
 <p>Example:</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>WG_INTERFACE=wg1
 </span></code></pre></div>
-<h3 id="wg_listen_port"><code>WG_LISTEN_PORT</code><a class="headerlink" href="#wg_listen_port" title="Permanent link">&para;</a></h3>
+<h3 id="wg_listen_port"><code>WG_LISTEN_PORT</code><a class="headerlink" href="#wg_listen_port" title="Permanent link">⚓</a></h3>
 <p>Controls the UDP port used by the WireGuard server.</p>
 <p>Default:</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>13231
@@ -2251,7 +2278,7 @@
 <div class="language-text highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>WG_LISTEN_PORT=51820
 </span></code></pre></div>
 <p>If you change this value, make sure the new UDP port is allowed through your server firewall.</p>
-<h3 id="wg_address"><code>WG_ADDRESS</code><a class="headerlink" href="#wg_address" title="Permanent link">&para;</a></h3>
+<h3 id="wg_address"><code>WG_ADDRESS</code><a class="headerlink" href="#wg_address" title="Permanent link">⚓</a></h3>
 <p>Sets the server's address on the VPN network.</p>
 <p>Default:</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>10.100.0.1/24
@@ -2260,7 +2287,7 @@
 <div class="language-text highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>WG_ADDRESS=10.50.0.1/24
 </span></code></pre></div>
 <p>The address must belong to the subnet configured with <code>WG_SUBNET</code>.</p>
-<h3 id="wg_subnet"><code>WG_SUBNET</code><a class="headerlink" href="#wg_subnet" title="Permanent link">&para;</a></h3>
+<h3 id="wg_subnet"><code>WG_SUBNET</code><a class="headerlink" href="#wg_subnet" title="Permanent link">⚓</a></h3>
 <p>Defines the VPN network used by TunGuard clients.</p>
 <p>Default:</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>10.100.0.0/24
@@ -2269,7 +2296,7 @@
 <div class="language-text highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>WG_SUBNET=10.50.0.0/24
 </span></code></pre></div>
 <p>The server address configured with <code>WG_ADDRESS</code> must belong to this subnet.</p>
-<h3 id="wg_mtu"><code>WG_MTU</code><a class="headerlink" href="#wg_mtu" title="Permanent link">&para;</a></h3>
+<h3 id="wg_mtu"><code>WG_MTU</code><a class="headerlink" href="#wg_mtu" title="Permanent link">⚓</a></h3>
 <p>Sets the WireGuard interface MTU.</p>
 <p>Default:</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>1420
@@ -2278,8 +2305,8 @@
 <div class="language-text highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>WG_MTU=1380
 </span></code></pre></div>
 <p>Only change the MTU when required by your network.</p>
-<h2 id="api-and-dashboard">API and Dashboard<a class="headerlink" href="#api-and-dashboard" title="Permanent link">&para;</a></h2>
-<h3 id="api_listen"><code>API_LISTEN</code><a class="headerlink" href="#api_listen" title="Permanent link">&para;</a></h3>
+<h2 id="api-and-dashboard">API and Dashboard<a class="headerlink" href="#api-and-dashboard" title="Permanent link">⚓</a></h2>
+<h3 id="api_listen"><code>API_LISTEN</code><a class="headerlink" href="#api_listen" title="Permanent link">⚓</a></h3>
 <p>Controls where the web dashboard and API listen.</p>
 <p>Default:</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>:9000
@@ -2288,7 +2315,7 @@
 <p>Example:</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>API_LISTEN=:8080
 </span></code></pre></div>
-<h3 id="web_enabled"><code>WEB_ENABLED</code><a class="headerlink" href="#web_enabled" title="Permanent link">&para;</a></h3>
+<h3 id="web_enabled"><code>WEB_ENABLED</code><a class="headerlink" href="#web_enabled" title="Permanent link">⚓</a></h3>
 <p>Enables the web dashboard.</p>
 <p>Default:</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>false
@@ -2297,21 +2324,21 @@
 <div class="language-sh highlight"><pre><span></span><code><span id="__span-13-1"><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>./tanguard<span class="w"> </span>-web
 </span></code></pre></div>
 <p>When using the normal installer, the installed service can be configured to enable the dashboard.</p>
-<h3 id="web_username"><code>WEB_USERNAME</code><a class="headerlink" href="#web_username" title="Permanent link">&para;</a></h3>
+<h3 id="web_username"><code>WEB_USERNAME</code><a class="headerlink" href="#web_username" title="Permanent link">⚓</a></h3>
 <p>Sets the initial dashboard username.</p>
 <p>Default:</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-14-1"><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>admin
 </span></code></pre></div>
 <p>This value is only used until the dashboard credentials are changed.</p>
-<h3 id="web_password"><code>WEB_PASSWORD</code><a class="headerlink" href="#web_password" title="Permanent link">&para;</a></h3>
+<h3 id="web_password"><code>WEB_PASSWORD</code><a class="headerlink" href="#web_password" title="Permanent link">⚓</a></h3>
 <p>Sets the initial dashboard password.</p>
 <p>Default:</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-15-1"><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a>tanguard
 </span></code></pre></div>
 <p>This value is only used until the dashboard credentials are changed.</p>
 <p>Change the default credentials before exposing the dashboard publicly.</p>
-<h2 id="data-directory">Data Directory<a class="headerlink" href="#data-directory" title="Permanent link">&para;</a></h2>
-<h3 id="data_dir"><code>DATA_DIR</code><a class="headerlink" href="#data_dir" title="Permanent link">&para;</a></h3>
+<h2 id="data-directory">Data Directory<a class="headerlink" href="#data-directory" title="Permanent link">⚓</a></h2>
+<h3 id="data_dir"><code>DATA_DIR</code><a class="headerlink" href="#data_dir" title="Permanent link">⚓</a></h3>
 <p>Controls where TunGuard stores persistent data.</p>
 <p>Default:</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-16-1"><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a>.
@@ -2329,8 +2356,8 @@
 <div class="language-text highlight"><pre><span></span><code><span id="__span-17-1"><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a>DATA_DIR=/var/lib/tanguard
 </span></code></pre></div>
 <p>When changing this value, make sure the TunGuard process has permission to access the directory.</p>
-<h2 id="network-interface">Network Interface<a class="headerlink" href="#network-interface" title="Permanent link">&para;</a></h2>
-<h3 id="external_nic"><code>EXTERNAL_NIC</code><a class="headerlink" href="#external_nic" title="Permanent link">&para;</a></h3>
+<h2 id="network-interface">Network Interface<a class="headerlink" href="#network-interface" title="Permanent link">⚓</a></h2>
+<h3 id="external_nic"><code>EXTERNAL_NIC</code><a class="headerlink" href="#external_nic" title="Permanent link">⚓</a></h3>
 <p>Specifies the external network interface used for NAT.</p>
 <p>Default:</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-18-1"><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a>auto
@@ -2340,8 +2367,8 @@
 <div class="language-text highlight"><pre><span></span><code><span id="__span-19-1"><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a>EXTERNAL_NIC=eth0
 </span></code></pre></div>
 <p>This can be useful on servers with multiple network interfaces.</p>
-<h2 id="ssh-gateway">SSH Gateway<a class="headerlink" href="#ssh-gateway" title="Permanent link">&para;</a></h2>
-<h3 id="ssh_enabled"><code>SSH_ENABLED</code><a class="headerlink" href="#ssh_enabled" title="Permanent link">&para;</a></h3>
+<h2 id="ssh-gateway">SSH Gateway<a class="headerlink" href="#ssh-gateway" title="Permanent link">⚓</a></h2>
+<h3 id="ssh_enabled"><code>SSH_ENABLED</code><a class="headerlink" href="#ssh_enabled" title="Permanent link">⚓</a></h3>
 <p>Enables the TunGuard SSH gateway.</p>
 <p>Default:</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-20-1"><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a>false
@@ -2349,7 +2376,7 @@
 <p>It can also be enabled with:</p>
 <div class="language-sh highlight"><pre><span></span><code><span id="__span-21-1"><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a>./tanguard<span class="w"> </span>-ssh
 </span></code></pre></div>
-<h3 id="ssh_listen"><code>SSH_LISTEN</code><a class="headerlink" href="#ssh_listen" title="Permanent link">&para;</a></h3>
+<h3 id="ssh_listen"><code>SSH_LISTEN</code><a class="headerlink" href="#ssh_listen" title="Permanent link">⚓</a></h3>
 <p>Controls where the SSH gateway listens.</p>
 <p>Default:</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-22-1"><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a>:2222
@@ -2358,7 +2385,7 @@
 <div class="language-text highlight"><pre><span></span><code><span id="__span-23-1"><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a>SSH_LISTEN=:2200
 </span></code></pre></div>
 <p>If you change the port, make sure the new TCP port is allowed through your firewall.</p>
-<h3 id="ssh_key_file"><code>SSH_KEY_FILE</code><a class="headerlink" href="#ssh_key_file" title="Permanent link">&para;</a></h3>
+<h3 id="ssh_key_file"><code>SSH_KEY_FILE</code><a class="headerlink" href="#ssh_key_file" title="Permanent link">⚓</a></h3>
 <p>Specifies the SSH host key file.</p>
 <p>Default:</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-24-1"><a id="__codelineno-24-1" name="__codelineno-24-1" href="#__codelineno-24-1"></a>auto
@@ -2367,8 +2394,8 @@
 <p>Example:</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-25-1"><a id="__codelineno-25-1" name="__codelineno-25-1" href="#__codelineno-25-1"></a>SSH_KEY_FILE=/var/lib/tanguard/ssh_host_key
 </span></code></pre></div>
-<h2 id="api-key">API Key<a class="headerlink" href="#api-key" title="Permanent link">&para;</a></h2>
-<h3 id="tungard_api_key"><code>TUNGARD_API_KEY</code><a class="headerlink" href="#tungard_api_key" title="Permanent link">&para;</a></h3>
+<h2 id="api-key">API Key<a class="headerlink" href="#api-key" title="Permanent link">⚓</a></h2>
+<h3 id="tungard_api_key"><code>TUNGARD_API_KEY</code><a class="headerlink" href="#tungard_api_key" title="Permanent link">⚓</a></h3>
 <p>Sets an API key that can be used by applications and scripts.</p>
 <p>Example:</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-26-1"><a id="__codelineno-26-1" name="__codelineno-26-1" href="#__codelineno-26-1"></a>TUNGARD_API_KEY=your-api-key
@@ -2380,7 +2407,7 @@
 </span><span id="__span-27-3"><a id="__codelineno-27-3" name="__codelineno-27-3" href="#__codelineno-27-3"></a><span class="w">  </span>http://127.0.0.1:9000/api/peers
 </span></code></pre></div>
 <p>See the <a href="../../api/">API</a> documentation for authentication and available endpoints.</p>
-<h2 id="example-configuration">Example Configuration<a class="headerlink" href="#example-configuration" title="Permanent link">&para;</a></h2>
+<h2 id="example-configuration">Example Configuration<a class="headerlink" href="#example-configuration" title="Permanent link">⚓</a></h2>
 <p>A typical server configuration could look like:</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-28-1"><a id="__codelineno-28-1" name="__codelineno-28-1" href="#__codelineno-28-1"></a>WG_INTERFACE=wg0
 </span><span id="__span-28-2"><a id="__codelineno-28-2" name="__codelineno-28-2" href="#__codelineno-28-2"></a>WG_LISTEN_PORT=13231
@@ -2473,7 +2500,7 @@
       
         
         
-      <script id="__config" type="application/json">{"annotate":null,"base":"../../..","features":["navigation.instant","navigation.tabs","navigation.expand","navigation.path","navigation.top","content.action.edit","content.action.view","content.code.copy","content.code.annotate"],"redirect":null,"search":"../../../assets/javascripts/workers/search.7d14d953.min.js","tags":null,"translations":{"clipboard.copied":"Copied to clipboard","clipboard.copy":"Copy to clipboard","search.result.more.one":"1 more on this page","search.result.more.other":"# more on this page","search.result.none":"No matching documents","search.result.one":"1 matching document","search.result.other":"# matching documents","search.result.placeholder":"Type to start searching","search.result.term.missing":"Missing","select.version":"Select version"},"version":{"provider":"mike"}}</script>
+      <script id="__config" type="application/json">{"annotate":null,"base":"../../..","features":["navigation.instant","navigation.tabs","navigation.tabs.sticky","navigation.expand","navigation.path","navigation.top","navigation.sections","content.action.edit","content.action.view","content.code.copy","content.code.annotate","toc.follow"],"redirect":null,"search":"../../../assets/javascripts/workers/search.7d14d953.min.js","tags":null,"translations":{"clipboard.copied":"Copied to clipboard","clipboard.copy":"Copy to clipboard","search.result.more.one":"1 more on this page","search.result.more.other":"# more on this page","search.result.none":"No matching documents","search.result.one":"1 matching document","search.result.other":"# matching documents","search.result.placeholder":"Type to start searching","search.result.term.missing":"Missing","select.version":"Select version"},"version":{"provider":"mike"}}</script>
     
     
       <script src="../../../assets/javascripts/bundle.8dcc8e9c.min.js"></script>

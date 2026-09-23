@@ -55,8 +55,8 @@
         
         
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:300,300i,400,400i,500,500i,700,700i%7CJetBrains+Mono:400,400i,700,700i&amp;display=fallback">
-        <style>:root{--md-text-font:"Inter";--md-code-font:"JetBrains Mono"}</style>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=JetBrains+Mono:300,300i,400,400i,500,500i,700,700i%7CFira+Code:400,400i,700,700i&amp;display=fallback">
+        <style>:root{--md-text-font:"JetBrains Mono";--md-code-font:"Fira Code"}</style>
       
     
     
@@ -101,7 +101,9 @@
     
       
 
-<header class="md-header" data-md-component="header">
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
     <a href="./.." title="TunGuard" class="md-header__button md-logo" aria-label="TunGuard" data-md-component="logo">
       
@@ -145,7 +147,7 @@
     
     
     
-    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="cyan"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="blue-grey" data-md-color-accent="teal"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
     
       <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_2" hidden>
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
@@ -155,7 +157,7 @@
     
     
     
-    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="cyan"  aria-label="Switch to system preference"  type="radio" name="__palette" id="__palette_2">
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="teal" data-md-color-accent="cyan"  aria-label="Switch to system preference"  type="radio" name="__palette" id="__palette_2">
     
       <label class="md-header__button md-icon" title="Switch to system preference" for="__palette_0" hidden>
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-moon" viewBox="0 0 24 24"><path d="M20.985 12.486a9 9 0 1 1-9.473-9.472c.405-.022.617.46.402.803a6 6 0 0 0 8.268 8.268c.344-.215.825-.004.803.401"/></svg>
@@ -198,14 +200,8 @@
     </div>
   </nav>
   
-</header>
     
-    <div class="md-container" data-md-component="container">
       
-      
-        
-          
-            
 <nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
   <div class="md-grid">
     <ul class="md-tabs__list">
@@ -364,7 +360,13 @@
     </ul>
   </div>
 </nav>
-          
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
         
       
       <main class="md-main" data-md-component="main">
@@ -629,6 +631,8 @@
     
       
       
+        
+      
     
     
     <li class="md-nav__item md-nav__item--nested">
@@ -705,6 +709,8 @@
     
     
       
+      
+        
       
     
     
@@ -818,6 +824,8 @@
     
       
       
+        
+      
     
     
     <li class="md-nav__item md-nav__item--nested">
@@ -902,6 +910,8 @@
     
     
       
+      
+        
       
     
     
@@ -994,6 +1004,8 @@
     
     
       
+      
+        
       
     
     
@@ -1133,6 +1145,8 @@
     
       
       
+        
+      
     
     
     <li class="md-nav__item md-nav__item--nested">
@@ -1182,6 +1196,8 @@
     
     
       
+      
+        
       
     
     
@@ -1328,6 +1344,8 @@
     
     
       
+      
+        
       
     
     
@@ -1680,7 +1698,7 @@
   <h1 id="__skip">Getting Started</h1>
 
 <p>This page explains how to get started with <code>TunGuard</code>. The recommended installation method is the official installer, which installs TunGuard and starts the service automatically.</p>
-<h2 id="preliminary-steps">Preliminary Steps<a class="headerlink" href="#preliminary-steps" title="Permanent link">&para;</a></h2>
+<h2 id="preliminary-steps">Preliminary Steps<a class="headerlink" href="#preliminary-steps" title="Permanent link">⚓</a></h2>
 <p>Before installing TunGuard, there are some requirements to be met:</p>
 <ol>
 <li>You need a Linux VPS or server that you can manage</li>
@@ -1688,7 +1706,7 @@
 <li>You need a supported architecture (<code>amd64</code> or <code>arm64</code>)</li>
 <li>You need <code>root</code> or <code>sudo</code> access</li>
 </ol>
-<h3 id="host-setup">Host Setup<a class="headerlink" href="#host-setup" title="Permanent link">&para;</a></h3>
+<h3 id="host-setup">Host Setup<a class="headerlink" href="#host-setup" title="Permanent link">⚓</a></h3>
 <p>TunGuard runs directly on the host and does not require Docker or another container runtime.</p>
 <p>The server should have:</p>
 <ul>
@@ -1708,14 +1726,14 @@
 <li><code>2222/TCP</code> — SSH Gateway, when enabled</li>
 </ul>
 </div>
-<h2 id="installing-tunguard">Installing TunGuard<a class="headerlink" href="#installing-tunguard" title="Permanent link">&para;</a></h2>
-<h3 id="official-installer">Official Installer<a class="headerlink" href="#official-installer" title="Permanent link">&para;</a></h3>
+<h2 id="installing-tunguard">Installing TunGuard<a class="headerlink" href="#installing-tunguard" title="Permanent link">⚓</a></h2>
+<h3 id="official-installer">Official Installer<a class="headerlink" href="#official-installer" title="Permanent link">⚓</a></h3>
 <p>Install the latest stable release with:</p>
 <div class="language-bash highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>curl<span class="w"> </span>-fsSL<span class="w"> </span>https://raw.githubusercontent.com/TunGuard/get/main/installer.sh<span class="w"> </span><span class="p">|</span><span class="w"> </span>bash
 </span></code></pre></div>
 <p>The installer automatically installs TunGuard and starts the service.
 There is no need to manually start the web server after installation.</p>
-<h2 id="open-the-dashboard">Open the Dashboard<a class="headerlink" href="#open-the-dashboard" title="Permanent link">&para;</a></h2>
+<h2 id="open-the-dashboard">Open the Dashboard<a class="headerlink" href="#open-the-dashboard" title="Permanent link">⚓</a></h2>
 <p>Once installation is complete, open:</p>
 <p><code>http://YOUR_SERVER_IP:9000</code></p>
 <p>For example:</p>
@@ -1728,12 +1746,12 @@ There is no need to manually start the web server after installation.</p>
 <p>!!! note "Important Security Step"
     You will be required to change the default password after your first login.</p>
 <hr />
-<h2 id="release-versions">Release Versions<a class="headerlink" href="#release-versions" title="Permanent link">&para;</a></h2>
+<h2 id="release-versions">Release Versions<a class="headerlink" href="#release-versions" title="Permanent link">⚓</a></h2>
 <p>TunGuard releases follow <a href="https://semver.org/">Semantic Versioning</a>.</p>
 <p>The official release history and release notes are maintained in the <a href="https://github.com/TunGuard/tanguard-binary">TunGuard binary repository</a>.</p>
 <p>The documentation site automatically uses release information from the binary repository, so release versions do not need to be manually added to this page.</p>
 <hr />
-<h2 id="follow-the-guides">Follow the Guides<a class="headerlink" href="#follow-the-guides" title="Permanent link">&para;</a></h2>
+<h2 id="follow-the-guides">Follow the Guides<a class="headerlink" href="#follow-the-guides" title="Permanent link">⚓</a></h2>
 <p>Once TunGuard is installed, continue with the relevant guide:</p>
 <ul>
 <li><a href="../guides/setup/">Dashboard</a></li>
@@ -1829,7 +1847,7 @@ The installer handles the update and restarts the TunGuard service.
       
         
         
-      <script id="__config" type="application/json">{"annotate":null,"base":"..","features":["navigation.instant","navigation.tabs","navigation.expand","navigation.path","navigation.top","content.action.edit","content.action.view","content.code.copy","content.code.annotate"],"redirect":null,"search":"../assets/javascripts/workers/search.7d14d953.min.js","tags":null,"translations":{"clipboard.copied":"Copied to clipboard","clipboard.copy":"Copy to clipboard","search.result.more.one":"1 more on this page","search.result.more.other":"# more on this page","search.result.none":"No matching documents","search.result.one":"1 matching document","search.result.other":"# matching documents","search.result.placeholder":"Type to start searching","search.result.term.missing":"Missing","select.version":"Select version"},"version":{"provider":"mike"}}</script>
+      <script id="__config" type="application/json">{"annotate":null,"base":"..","features":["navigation.instant","navigation.tabs","navigation.tabs.sticky","navigation.expand","navigation.path","navigation.top","navigation.sections","content.action.edit","content.action.view","content.code.copy","content.code.annotate","toc.follow"],"redirect":null,"search":"../assets/javascripts/workers/search.7d14d953.min.js","tags":null,"translations":{"clipboard.copied":"Copied to clipboard","clipboard.copy":"Copy to clipboard","search.result.more.one":"1 more on this page","search.result.more.other":"# more on this page","search.result.none":"No matching documents","search.result.one":"1 matching document","search.result.other":"# matching documents","search.result.placeholder":"Type to start searching","search.result.term.missing":"Missing","select.version":"Select version"},"version":{"provider":"mike"}}</script>
     
     
       <script src="../assets/javascripts/bundle.8dcc8e9c.min.js"></script>
