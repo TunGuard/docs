@@ -1,3 +1,4 @@
+
 [project]
 site_name = "TunGuard"
 site_description = "Advanced userspace WireGuard networking tool providing seamless P2P connections and public exposure without kernel drivers or extra installs."
@@ -15,9 +16,7 @@ repo_url = "https://github.com/TunGuard/tanguard-binary"
 repo_name = "TunGuard/tanguard-binary"
 
 edit_uri = "edit/main/docs/content"
-
 docs_dir = "content/"
-
 site_url = "https://tunguard.github.io"
 
 [project.theme]
@@ -27,17 +26,28 @@ logo = "assets/logo/logo.png"
 features = [
   "navigation.instant",
   "navigation.tabs",
+  "navigation.tabs.sticky",    # Sticks the navbar to the top for slick scrolling
   "navigation.expand",
   "navigation.path",
   "navigation.top",
+  "navigation.sections",        # Groups sidebar links cleanly instead of long flat lists
   "content.action.edit",
   "content.action.view",
   "content.code.copy",
   "content.code.annotate",
+  "toc.follow",                 # Active right-hand Table of Contents follows scrolling
 ]
+
+[project.theme.font]
+text = "JetBrains Mono"         # Swapped to a premium developer monospaced look for body text
+code = "Fira Code"              # Excellent ligature-supporting code font
 
 [project.theme.icon]
 repo = "fontawesome/brands/github"
+
+# ----------------------------------------------------
+# VISUAL PALETTE REDESIGN (Premium Deep Cyber Aesthetic)
+# ----------------------------------------------------
 
 # Palette toggle for automatic mode
 [[project.theme.palette]]
@@ -45,26 +55,30 @@ media = "(prefers-color-scheme)"
 toggle.icon = "lucide/sun-moon"
 toggle.name = "Switch to light mode"
 
-# Palette toggle for light mode
+# Palette toggle for crisp, modern light mode (Slate/Teal)
 [[project.theme.palette]]
 media = "(prefers-color-scheme: light)"
 scheme = "default"
-primary = "indigo"
-accent = "cyan"
+primary = "blue-grey"           # Dark charcoal headers instead of bright generic blue
+accent = "teal"                # Electric teal accents for status UI and links
 toggle.icon = "lucide/sun"
 toggle.name = "Switch to dark mode"
 
-# Palette toggle for dark mode
+# Palette toggle for high-end dark mode (Deep Space/Cyan)
 [[project.theme.palette]]
 media = "(prefers-color-scheme: dark)"
-scheme = "slate"
-primary = "indigo"
-accent = "cyan"
+scheme = "slate"               # Deep terminal dark background
+primary = "teal"               # High-contrast teal branding
+accent = "cyan"                # Cyberpunk network link highlights
 toggle.icon = "lucide/moon"
 toggle.name = "Switch to system preference"
 
 [project.extra.version]
 provider = "mike"
+
+# ----------------------------------------------------
+# MARKDOWN EXTENSIONS & CODE RENDERING
+# ----------------------------------------------------
 
 [project.markdown_extensions.pymdownx.blocks.admonition]
 types = ["danger", "note", "info", "question", "warning"]
@@ -72,7 +86,7 @@ types = ["danger", "note", "info", "question", "warning"]
 [project.markdown_extensions.md_in_html]
 
 [project.markdown_extensions.toc]
-permalink = true
+permalink = "⚓"                  # Replaced generic link icons with a clean anchor variant
 
 [project.markdown_extensions.pymdownx.details]
 
@@ -84,6 +98,7 @@ emoji_index = "zensical.extensions.emoji.twemoji"
 anchor_linenums = true
 line_spans = "__span"
 pygments_lang_class = true
+use_pygments = true             # Explicitly enforces syntax highlighting engine colors
 
 [project.markdown_extensions.pymdownx.inlinehilite]
 
