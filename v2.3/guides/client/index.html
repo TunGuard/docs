@@ -12,13 +12,13 @@
         <meta name="author" content="TunGuard Team">
       
       
-        <link rel="canonical" href="https://tunguard.github.io/v2.3/guides/cli/">
+        <link rel="canonical" href="https://tunguard.github.io/v2.3/guides/client/">
       
       
-        <link rel="prev" href="../api/">
+        <link rel="prev" href="../cli/">
       
       
-        <link rel="next" href="../client/">
+        <link rel="next" href="../clients/">
       
       
         
@@ -29,7 +29,7 @@
     
     
       
-        <title>CLI - TunGuard</title>
+        <title>TunGuard Client - TunGuard</title>
       
     
     
@@ -124,7 +124,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              CLI
+              TunGuard Client
             
           </span>
         </div>
@@ -1298,6 +1298,33 @@
                 
   
   
+  
+  
+    <li class="md-nav__item">
+      <a href="../cli/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  CLI
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
     
   
   
@@ -1315,7 +1342,7 @@
   <span class="md-ellipsis">
     
   
-  CLI
+  TunGuard Client
 
     
   </span>
@@ -1332,7 +1359,7 @@
   <span class="md-ellipsis">
     
   
-  CLI
+  TunGuard Client
 
     
   </span>
@@ -1367,10 +1394,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#service-management" class="md-nav__link">
+  <a href="#run-it" class="md-nav__link">
     <span class="md-ellipsis">
       <span class="md-typeset">
-        Service Management
+        Run it
       </span>
     </span>
   </a>
@@ -1378,10 +1405,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#logs" class="md-nav__link">
+  <a href="#check-that-it-is-running" class="md-nav__link">
     <span class="md-ellipsis">
       <span class="md-typeset">
-        Logs
+        Check that it is running
       </span>
     </span>
   </a>
@@ -1389,10 +1416,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#reset-dashboard-credentials" class="md-nav__link">
+  <a href="#state" class="md-nav__link">
     <span class="md-ellipsis">
       <span class="md-typeset">
-        Reset Dashboard Credentials
+        State
       </span>
     </span>
   </a>
@@ -1400,10 +1427,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#manual-run" class="md-nav__link">
+  <a href="#survives-a-reboot" class="md-nav__link">
     <span class="md-ellipsis">
       <span class="md-typeset">
-        Manual Run
+        Survives a reboot
       </span>
     </span>
   </a>
@@ -1411,10 +1438,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#ssh-gateway" class="md-nav__link">
+  <a href="#what-the-client-does" class="md-nav__link">
     <span class="md-ellipsis">
       <span class="md-typeset">
-        SSH Gateway
+        What the client does
       </span>
     </span>
   </a>
@@ -1422,10 +1449,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#ssh-gateway-with-a-custom-port" class="md-nav__link">
+  <a href="#build-from-source" class="md-nav__link">
     <span class="md-ellipsis">
       <span class="md-typeset">
-        SSH Gateway With a Custom Port
+        Build from source
       </span>
     </span>
   </a>
@@ -1433,10 +1460,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#check-the-ssh-gateway" class="md-nav__link">
+  <a href="#limitations" class="md-nav__link">
     <span class="md-ellipsis">
       <span class="md-typeset">
-        Check the SSH Gateway
+        Limitations
       </span>
     </span>
   </a>
@@ -1444,54 +1471,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#check-the-dashboardapi" class="md-nav__link">
+  <a href="#next-steps" class="md-nav__link">
     <span class="md-ellipsis">
       <span class="md-typeset">
-        Check the Dashboard/API
-      </span>
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#check-the-wireguard-port" class="md-nav__link">
-    <span class="md-ellipsis">
-      <span class="md-typeset">
-        Check the WireGuard Port
-      </span>
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#update-tunguard" class="md-nav__link">
-    <span class="md-ellipsis">
-      <span class="md-typeset">
-        Update TunGuard
-      </span>
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#backup" class="md-nav__link">
-    <span class="md-ellipsis">
-      <span class="md-typeset">
-        Backup
-      </span>
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#useful-service-commands" class="md-nav__link">
-    <span class="md-ellipsis">
-      <span class="md-typeset">
-        Useful Service Commands
+        Next steps
       </span>
     </span>
   </a>
@@ -1502,33 +1485,6 @@
   
 </nav>
       
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../client/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-  TunGuard Client
-
-    
-  </span>
-  
-  
-
-      </a>
     </li>
   
 
@@ -1643,10 +1599,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#service-management" class="md-nav__link">
+  <a href="#run-it" class="md-nav__link">
     <span class="md-ellipsis">
       <span class="md-typeset">
-        Service Management
+        Run it
       </span>
     </span>
   </a>
@@ -1654,10 +1610,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#logs" class="md-nav__link">
+  <a href="#check-that-it-is-running" class="md-nav__link">
     <span class="md-ellipsis">
       <span class="md-typeset">
-        Logs
+        Check that it is running
       </span>
     </span>
   </a>
@@ -1665,10 +1621,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#reset-dashboard-credentials" class="md-nav__link">
+  <a href="#state" class="md-nav__link">
     <span class="md-ellipsis">
       <span class="md-typeset">
-        Reset Dashboard Credentials
+        State
       </span>
     </span>
   </a>
@@ -1676,10 +1632,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#manual-run" class="md-nav__link">
+  <a href="#survives-a-reboot" class="md-nav__link">
     <span class="md-ellipsis">
       <span class="md-typeset">
-        Manual Run
+        Survives a reboot
       </span>
     </span>
   </a>
@@ -1687,10 +1643,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#ssh-gateway" class="md-nav__link">
+  <a href="#what-the-client-does" class="md-nav__link">
     <span class="md-ellipsis">
       <span class="md-typeset">
-        SSH Gateway
+        What the client does
       </span>
     </span>
   </a>
@@ -1698,10 +1654,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#ssh-gateway-with-a-custom-port" class="md-nav__link">
+  <a href="#build-from-source" class="md-nav__link">
     <span class="md-ellipsis">
       <span class="md-typeset">
-        SSH Gateway With a Custom Port
+        Build from source
       </span>
     </span>
   </a>
@@ -1709,10 +1665,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#check-the-ssh-gateway" class="md-nav__link">
+  <a href="#limitations" class="md-nav__link">
     <span class="md-ellipsis">
       <span class="md-typeset">
-        Check the SSH Gateway
+        Limitations
       </span>
     </span>
   </a>
@@ -1720,54 +1676,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#check-the-dashboardapi" class="md-nav__link">
+  <a href="#next-steps" class="md-nav__link">
     <span class="md-ellipsis">
       <span class="md-typeset">
-        Check the Dashboard/API
-      </span>
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#check-the-wireguard-port" class="md-nav__link">
-    <span class="md-ellipsis">
-      <span class="md-typeset">
-        Check the WireGuard Port
-      </span>
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#update-tunguard" class="md-nav__link">
-    <span class="md-ellipsis">
-      <span class="md-typeset">
-        Update TunGuard
-      </span>
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#backup" class="md-nav__link">
-    <span class="md-ellipsis">
-      <span class="md-typeset">
-        Backup
-      </span>
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#useful-service-commands" class="md-nav__link">
-    <span class="md-ellipsis">
-      <span class="md-typeset">
-        Useful Service Commands
+        Next steps
       </span>
     </span>
   </a>
@@ -1842,7 +1754,7 @@
                 
                   
   
-    <a href="https://github.com/TunGuard/tanguard-binary/edit/main/docs/content/guides/cli.md" title="Edit this page" class="md-content__button md-icon" rel="edit">
+    <a href="https://github.com/TunGuard/tanguard-binary/edit/main/docs/content/guides/client.md" title="Edit this page" class="md-content__button md-icon" rel="edit">
       
       <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-file-pen" viewBox="0 0 24 24"><path d="M12.659 22H18a2 2 0 0 0 2-2V8a2.4 2.4 0 0 0-.706-1.706l-3.588-3.588A2.4 2.4 0 0 0 14 2H6a2 2 0 0 0-2 2v9.34"/><path d="M14 2v5a1 1 0 0 0 1 1h5M10.378 12.622a1 1 0 0 1 3 3.003L8.36 20.637a2 2 0 0 1-.854.506l-2.867.837a.5.5 0 0 1-.62-.62l.836-2.869a2 2 0 0 1 .506-.853z"/></svg>
     </a>
@@ -1851,155 +1763,262 @@
     
       
     
-    <a href="https://github.com/TunGuard/tanguard-binary/raw/main/docs/content/guides/cli.md" title="View source of this page" class="md-content__button md-icon">
+    <a href="https://github.com/TunGuard/tanguard-binary/raw/main/docs/content/guides/client.md" title="View source of this page" class="md-content__button md-icon">
       
       <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-file-code-2" viewBox="0 0 24 24"><path d="M4 12.15V4a2 2 0 0 1 2-2h8a2.4 2.4 0 0 1 1.706.706l3.588 3.588A2.4 2.4 0 0 1 20 8v12a2 2 0 0 1-2 2h-3.35"/><path d="M14 2v5a1 1 0 0 0 1 1h5M5 16l-3 3 3 3M9 22l3-3-3-3"/></svg>
     </a>
   
 
 
-  <h1 id="__skip">CLI</h1>
+  <h1 id="__skip">TunGuard Client</h1>
 
-<p>TunGuard can be managed directly from the command line or through systemd when installed as a service.</p>
+<p>The TunGuard client is a small, fully remote-orchestated binary. It starts in the
+background, opens one <strong>outbound</strong> connection to your TunGuard server, identifies itself
+with a shared key, and then does nothing until the server sends a command.</p>
+<p>It is a <em>dumb pipe</em>: no config file to edit, no routes to configure, no service to
+manage, and no local state beyond two small files. Everything it should be doing is
+decided by the server.</p>
+<p>The client is what joins a <a href="../../examples/tutorials/p2p/">P2P mesh</a>.</p>
+<div class="admonition note">
+<p class="admonition-title">Not a VPN client</p>
+<p><code>tun</code> does not implement WireGuard, does not create a <code>tun0</code> interface, and does not
+give you a VPN. Devices on the <strong>Peers</strong> page of the dashboard join the VPN with an
+ordinary WireGuard configuration. Devices on the <strong>P2P</strong> page run <code>tun</code> and form a
+direct mesh. The two are independent.</p>
+</div>
 <h2 id="install">Install<a class="headerlink" href="#install" title="Permanent link">⚓</a></h2>
-<p>Install TunGuard on a Linux server with:</p>
-<div class="language-shell highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>curl<span class="w"> </span>-fsSL<span class="w"> </span>https://raw.githubusercontent.com/TunGuard/get/main/installer.sh<span class="w"> </span><span class="p">|</span><span class="w"> </span>bash
+<p>On Linux, macOS, Windows, and Termux, run:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>curl<span class="w"> </span>-fsSL<span class="w"> </span>https://raw.githubusercontent.com/TunGuard/get/main/client.sh<span class="w"> </span><span class="p">|</span><span class="w"> </span>bash
 </span></code></pre></div>
-<p>The installer installs TunGuard as a systemd service and starts it automatically.</p>
-<h2 id="service-management">Service Management<a class="headerlink" href="#service-management" title="Permanent link">⚓</a></h2>
-<p>Check the service status:</p>
-<div class="language-shell highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>sudo<span class="w"> </span>systemctl<span class="w"> </span>status<span class="w"> </span>tanguard
+<p>The installer detects the platform and architecture, downloads the matching binary from
+the <a href="https://github.com/TunGuard/client">TunGuard/client</a> releases, verifies its
+SHA-256 checksum, and links it as <code>tun</code>.</p>
+<table>
+<thead>
+<tr>
+<th>Platform</th>
+<th>Installs to</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Linux, macOS</td>
+<td><code>~/.local/bin/tun</code></td>
+</tr>
+<tr>
+<td>Termux / Android</td>
+<td><code>$PREFIX/bin/tun</code></td>
+</tr>
+<tr>
+<td>Generic Android (adb)</td>
+<td>you choose the path</td>
+</tr>
+</tbody>
+</table>
+<p>If the install directory is not on your <code>PATH</code>, the installer prints the line to add.
+On Termux that is usually:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="nb">export</span><span class="w"> </span><span class="nv">PATH</span><span class="o">=</span><span class="s2">"</span><span class="nv">$PREFIX</span><span class="s2">/bin:</span><span class="nv">$PATH</span><span class="s2">"</span>
 </span></code></pre></div>
-<p>Start TunGuard:</p>
-<div class="language-shell highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>sudo<span class="w"> </span>systemctl<span class="w"> </span>start<span class="w"> </span>tanguard
+<div class="admonition warning">
+<p class="admonition-title">Download location on Android</p>
+<p>Android's W^X and SELinux policies prevent a binary from being executed off the SD
+card (<code>/sdcard</code>, <code>/storage/emulated</code>). It has to live in app-private storage or
+somewhere like Termux's <code>$PREFIX/bin</code>. The installer already handles Termux; for other
+Android setups, push it yourself:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>adb<span class="w"> </span>push<span class="w"> </span>tun_android_arm64-v8a<span class="w"> </span>/data/local/tmp/tun
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>adb<span class="w"> </span>shell<span class="w"> </span>chmod<span class="w"> </span>+x<span class="w"> </span>/data/local/tmp/tun
+</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>adb<span class="w"> </span>shell<span class="w"> </span>/data/local/tmp/tun<span class="w"> </span>YOUR_SERVER_IP<span class="w"> </span>YOUR_PSK
 </span></code></pre></div>
-<p>Stop TunGuard:</p>
-<div class="language-shell highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>sudo<span class="w"> </span>systemctl<span class="w"> </span>stop<span class="w"> </span>tanguard
+</div>
+<h2 id="run-it">Run it<a class="headerlink" href="#run-it" title="Permanent link">⚓</a></h2>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>tun<span class="w"> </span>&lt;control-server-ip&gt;<span class="w"> </span>&lt;psk&gt;
 </span></code></pre></div>
-<p>Restart TunGuard:</p>
-<div class="language-shell highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>sudo<span class="w"> </span>systemctl<span class="w"> </span>restart<span class="w"> </span>tanguard
+<p>For example:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>tun<span class="w"> </span><span class="m">203</span>.0.113.10<span class="w"> </span>secretkey99
 </span></code></pre></div>
-<p>Enable TunGuard to start automatically on boot:</p>
-<div class="language-shell highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>sudo<span class="w"> </span>systemctl<span class="w"> </span><span class="nb">enable</span><span class="w"> </span>tanguard
+<p>The <code>&lt;psk&gt;</code> is the group key from the <strong>P2P → Enroll device</strong> dialog. Anyone holding it
+joins your group, so treat it as a credential.</p>
+<p>The client double-forks into the background and returns you to the shell. On Windows it
+stays in the foreground unless <code>TUN_FOREGROUND=1</code> is set, so run it from a scheduled
+task or keep the window open.</p>
+<p>Once it is running you never need to touch it again. It reconnects on its own if the
+server goes away, and it re-establishes the mesh after a reboot.</p>
+<h2 id="check-that-it-is-running">Check that it is running<a class="headerlink" href="#check-that-it-is-running" title="Permanent link">⚓</a></h2>
+<p>The client is silent by design, so verify it three ways:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="c1"># 1. the process is alive — this is the reliable health check</span>
+</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>pgrep<span class="w"> </span>-laf<span class="w"> </span>tun
+</span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="c1"># or</span>
+</span><span id="__span-5-4"><a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>ps<span class="w"> </span>-ef<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span><span class="o">[</span>t<span class="o">]</span>un
+</span><span id="__span-5-5"><a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a>
+</span><span id="__span-5-6"><a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a><span class="c1"># 2. the control connection to your server:7000 is established</span>
+</span><span id="__span-5-7"><a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a>ss<span class="w"> </span>-tnp<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>tun<span class="w">        </span><span class="c1"># Linux</span>
+</span><span id="__span-5-8"><a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a>netstat<span class="w"> </span>-tnp<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>tun<span class="w">   </span><span class="c1"># macOS</span>
+</span><span id="__span-5-9"><a id="__codelineno-5-9" name="__codelineno-5-9" href="#__codelineno-5-9"></a>
+</span><span id="__span-5-10"><a id="__codelineno-5-10" name="__codelineno-5-10" href="#__codelineno-5-10"></a><span class="c1"># 3. it is connected to the dashboard — check the P2P page on the server</span>
 </span></code></pre></div>
-<h2 id="logs">Logs<a class="headerlink" href="#logs" title="Permanent link">⚓</a></h2>
-<p>View the TunGuard service logs:</p>
-<div class="language-shell highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>sudo<span class="w"> </span>journalctl<span class="w"> </span>-u<span class="w"> </span>tanguard
+<p>The <code>ESTABLISHED</code> socket is the confirmation that the client is currently talking to
+the server. Note that the process stays alive even when the control link is down — it
+reconnects every ~2s, and every ~5s while the server is unreachable — so <code>pgrep</code> is the
+check that actually tells you something.</p>
+<p>To stop it:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>pkill<span class="w"> </span>-x<span class="w"> </span>tun<span class="w">        </span><span class="c1"># by exact process name</span>
 </span></code></pre></div>
-<p>Follow the logs in real time:</p>
-<div class="language-shell highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>sudo<span class="w"> </span>journalctl<span class="w"> </span>-u<span class="w"> </span>tanguard<span class="w"> </span>-f
+<div class="admonition note">
+<p class="admonition-title">The process name is the binary name</p>
+<p>If you renamed the binary, use the new name in <code>pgrep</code> and <code>pkill</code>.</p>
+</div>
+<h2 id="state">State<a class="headerlink" href="#state" title="Permanent link">⚓</a></h2>
+<p>The client keeps everything it needs in one directory, <code>~/.tun</code> by default:</p>
+<div class="language-ini highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="c1"># connection  (mode 0600 — holds the shared secret)</span>
+</span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="na">server</span><span class="o">=</span><span class="s">203.0.113.10</span>
+</span><span id="__span-7-3"><a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="na">psk</span><span class="o">=</span><span class="s">secretkey99</span>
+</span><span id="__span-7-4"><a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a>
+</span><span id="__span-7-5"><a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a><span class="c1"># device_id  (8 hex chars — this node's identity in the mesh)</span>
+</span><span id="__span-7-6"><a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a><span class="na">6bb8a291</span>
 </span></code></pre></div>
-<p>Show logs from the current boot:</p>
-<div class="language-shell highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>sudo<span class="w"> </span>journalctl<span class="w"> </span>-u<span class="w"> </span>tanguard<span class="w"> </span>-b
+<p><code>device_id</code> is generated once and is what lets a reconnecting device reclaim its record
+instead of appearing as a stranger. <strong>Do not delete this directory</strong> — if you do, the
+node re-registers under a new identity and the server keeps the old record as a ghost
+until you remove it.</p>
+<p>Run the client with no arguments to reuse the saved server and key:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>tun
 </span></code></pre></div>
-<p>Show the most recent logs:</p>
-<div class="language-shell highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>sudo<span class="w"> </span>journalctl<span class="w"> </span>-u<span class="w"> </span>tanguard<span class="w"> </span>-n<span class="w"> </span><span class="m">100</span>
+<p>To put the directory somewhere else — useful on a read-only install path — either set
+the environment variable or pass a third argument:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="nv">TUN_STATE_DIR</span><span class="o">=</span>/var/lib/tun<span class="w"> </span>tun
+</span><span id="__span-9-2"><a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>tun<span class="w"> </span><span class="m">203</span>.0.113.10<span class="w"> </span>secretkey99<span class="w"> </span>/var/lib/tun
 </span></code></pre></div>
-<h2 id="reset-dashboard-credentials">Reset Dashboard Credentials<a class="headerlink" href="#reset-dashboard-credentials" title="Permanent link">⚓</a></h2>
-<p>If you forget the dashboard username or password, stop TunGuard first:</p>
-<div class="language-shell highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>sudo<span class="w"> </span>systemctl<span class="w"> </span>stop<span class="w"> </span>tanguard
+<p>Missing directories, including nested ones, are created. Re-running <code>tun &lt;ip&gt; &lt;psk&gt;</code>
+re-points the client at a new server and rewrites both the state files and the boot
+hook.</p>
+<h2 id="survives-a-reboot">Survives a reboot<a class="headerlink" href="#survives-a-reboot" title="Permanent link">⚓</a></h2>
+<p>On its first successful run as <code>root</code> (or an elevated shell on Windows), the client
+installs a boot hook for the platform it is on. Each one is best-effort and silently
+skipped when it does not apply:</p>
+<table>
+<thead>
+<tr>
+<th>Platform</th>
+<th>Boot hook</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Linux</td>
+<td><code>/etc/systemd/system/tun.service</code>, enabled with <code>systemctl</code></td>
+</tr>
+<tr>
+<td>Windows</td>
+<td><code>HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Run\tun</code></td>
+</tr>
+<tr>
+<td>Android</td>
+<td><code>/data/adb/service.d/tun.sh</code>, which Magisk runs as root at boot</td>
+</tr>
+</tbody>
+</table>
+<p>The hook records the absolute path of the binary <em>and</em> the state directory, because it
+re-runs the client with no arguments and could not otherwise find a non-default state
+directory.</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="c1"># check what got installed</span>
+</span><span id="__span-10-2"><a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>systemctl<span class="w"> </span>status<span class="w"> </span>tun<span class="w">     </span><span class="c1"># Linux</span>
+</span><span id="__span-10-3"><a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a>ls<span class="w"> </span>-l<span class="w"> </span>/data/adb/service.d/tun.sh<span class="w">   </span><span class="c1"># Android</span>
 </span></code></pre></div>
-<p>Run the reset command:</p>
-<div class="language-shell highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>sudo<span class="w"> </span>./tanguard<span class="w"> </span>--reset
+<p>Because boot hooks supervise the process directly, the client skips its double-fork
+when <code>TUN_FOREGROUND=1</code> is set. That is what the systemd unit uses; a manual
+<code>tun &lt;ip&gt; &lt;psk&gt;</code> still backgrounds as before.</p>
+<h2 id="what-the-client-does">What the client does<a class="headerlink" href="#what-the-client-does" title="Permanent link">⚓</a></h2>
+<p>The client only relays sockets. It never changes routing, never opens a tunnel device,
+and never writes a config.</p>
+<table>
+<thead>
+<tr>
+<th>Session</th>
+<th>What the operator sees</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Control link</td>
+<td>One outbound TCP connection to <code>server:7000</code></td>
+</tr>
+<tr>
+<td>P2P hub</td>
+<td>One UDP socket registered with <code>server:7001</code></td>
+</tr>
+<tr>
+<td>P2P peer</td>
+<td>One UDP socket per peer, with constant keepalive traffic</td>
+</tr>
+<tr>
+<td>FRP</td>
+<td>A local listener whose connections are forwarded to the server</td>
+</tr>
+<tr>
+<td>TRP</td>
+<td>A TCP pair the server asks the client to pump</td>
+</tr>
+<tr>
+<td>After reset</td>
+<td>Every listener and socket is gone; the node is idle</td>
+</tr>
+</tbody>
+</table>
+<p>Toggling is seamless. A new command replaces the previous session for that type, and a
+reset always stops everything.</p>
+<div class="admonition note">
+<p class="admonition-title">The protocol</p>
+<p>The wire format — command bytes, the 17-byte frame layout, and the status report the
+client sends upward every five seconds — is documented in
+<a href="../../examples/tutorials/p2p/#how-it-works-on-the-wire">P2P Mesh</a>.</p>
+</div>
+<h2 id="build-from-source">Build from source<a class="headerlink" href="#build-from-source" title="Permanent link">⚓</a></h2>
+<p>The client is a single C file with no dependencies beyond libc.</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/TunGuard/client.git
+</span><span id="__span-11-2"><a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a><span class="nb">cd</span><span class="w"> </span>client
+</span><span id="__span-11-3"><a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a>make<span class="w">          </span><span class="c1"># builds ./tun for your host</span>
 </span></code></pre></div>
-<p>The reset restores:</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>Username: admin
-</span><span id="__span-12-2"><a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a>Password: tanguard
+<p>Per-platform targets:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>make<span class="w"> </span>linux<span class="w">      </span><span class="c1"># static musl builds for x86_64 and arm64</span>
+</span><span id="__span-12-2"><a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a>make<span class="w"> </span>macos<span class="w">      </span><span class="c1"># x86_64 and arm64</span>
+</span><span id="__span-12-3"><a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a>make<span class="w"> </span>windows<span class="w">    </span><span class="c1"># MinGW-w64, x86_64 and i686</span>
+</span><span id="__span-12-4"><a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a>make<span class="w"> </span>android<span class="w">    </span><span class="c1"># NDK, arm64-v8a / armeabi-v7a / x86_64</span>
+</span><span id="__span-12-5"><a id="__codelineno-12-5" name="__codelineno-12-5" href="#__codelineno-12-5"></a>make<span class="w"> </span>release<span class="w">    </span><span class="c1"># everything</span>
 </span></code></pre></div>
-<p>Start TunGuard again:</p>
-<div class="language-shell highlight"><pre><span></span><code><span id="__span-13-1"><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>sudo<span class="w"> </span>systemctl<span class="w"> </span>start<span class="w"> </span>tanguard
+<p>Linux binaries are statically linked against musl, so they have no libc dependency at
+all. macOS uses Apple clang, Windows uses MinGW-w64. Android is built through the NDK
+and links against <strong>bionic</strong>, never glibc:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-13-1"><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="nb">export</span><span class="w"> </span><span class="nv">ANDROID_NDK_HOME</span><span class="o">=</span><span class="nv">$HOME</span>/Android/Sdk/ndk/27.2.12479018
+</span><span id="__span-13-2"><a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a>make<span class="w"> </span>android
 </span></code></pre></div>
-<p>The complete procedure is:</p>
-<div class="language-shell highlight"><pre><span></span><code><span id="__span-14-1"><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>sudo<span class="w"> </span>systemctl<span class="w"> </span>stop<span class="w"> </span>tanguard
-</span><span id="__span-14-2"><a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a>sudo<span class="w"> </span>./tanguard<span class="w"> </span>--reset
-</span><span id="__span-14-3"><a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a>sudo<span class="w"> </span>systemctl<span class="w"> </span>start<span class="w"> </span>tanguard
-</span></code></pre></div>
-<p>This resets the stored dashboard login without removing the configured peers or other persistent TunGuard data.</p>
-<h2 id="manual-run">Manual Run<a class="headerlink" href="#manual-run" title="Permanent link">⚓</a></h2>
-<p>TunGuard can also be started directly from the command line.</p>
-<div class="language-shell highlight"><pre><span></span><code><span id="__span-15-1"><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a>sudo<span class="w"> </span>./tanguard
-</span></code></pre></div>
-<p>Enable the web dashboard when running manually:</p>
-<div class="language-shell highlight"><pre><span></span><code><span id="__span-16-1"><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a>sudo<span class="w"> </span>./tanguard<span class="w"> </span>-web
-</span></code></pre></div>
-<p>Enable the SSH Gateway:</p>
-<div class="language-shell highlight"><pre><span></span><code><span id="__span-17-1"><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a>sudo<span class="w"> </span>./tanguard<span class="w"> </span>-ssh
-</span></code></pre></div>
-<p>Enable both:</p>
-<div class="language-shell highlight"><pre><span></span><code><span id="__span-18-1"><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a>sudo<span class="w"> </span>./tanguard<span class="w"> </span>-web<span class="w"> </span>-ssh
-</span></code></pre></div>
-<p>When using the systemd service installed by the installer, these options are configured through the service configuration rather than being required for normal operation.</p>
-<h2 id="ssh-gateway">SSH Gateway<a class="headerlink" href="#ssh-gateway" title="Permanent link">⚓</a></h2>
-<p>The optional SSH Gateway allows you to reach devices connected to TunGuard through the VPN.</p>
-<p>The default SSH Gateway port is:</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-19-1"><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a>2222
-</span></code></pre></div>
-<p>For example, to connect to a WireGuard peer at <code>10.100.0.2</code>:</p>
-<div class="language-shell highlight"><pre><span></span><code><span id="__span-20-1"><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a>ssh<span class="w"> </span>-J<span class="w"> </span>admin@YOUR_SERVER_IP:2222<span class="w"> </span>root@10.100.0.2
-</span></code></pre></div>
-<p>The SSH Gateway uses the TunGuard dashboard credentials for authentication.</p>
-<p>The jump host can be used without exposing SSH directly on the VPN device.</p>
-<h2 id="ssh-gateway-with-a-custom-port">SSH Gateway With a Custom Port<a class="headerlink" href="#ssh-gateway-with-a-custom-port" title="Permanent link">⚓</a></h2>
-<p>If the SSH Gateway is configured to use another port, specify that port in the jump host:</p>
-<div class="language-shell highlight"><pre><span></span><code><span id="__span-21-1"><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a>ssh<span class="w"> </span>-J<span class="w"> </span>admin@YOUR_SERVER_IP:CUSTOM_PORT<span class="w"> </span>root@10.100.0.2
-</span></code></pre></div>
-<h2 id="check-the-ssh-gateway">Check the SSH Gateway<a class="headerlink" href="#check-the-ssh-gateway" title="Permanent link">⚓</a></h2>
-<p>Check whether TunGuard is running:</p>
-<div class="language-shell highlight"><pre><span></span><code><span id="__span-22-1"><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a>sudo<span class="w"> </span>systemctl<span class="w"> </span>status<span class="w"> </span>tanguard
-</span></code></pre></div>
-<p>Then check that the SSH Gateway is listening on port <code>2222</code>:</p>
-<div class="language-shell highlight"><pre><span></span><code><span id="__span-23-1"><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a>sudo<span class="w"> </span>ss<span class="w"> </span>-lntp<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span><span class="m">2222</span>
-</span></code></pre></div>
-<h2 id="check-the-dashboardapi">Check the Dashboard/API<a class="headerlink" href="#check-the-dashboardapi" title="Permanent link">⚓</a></h2>
-<p>The default dashboard and API port is:</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-24-1"><a id="__codelineno-24-1" name="__codelineno-24-1" href="#__codelineno-24-1"></a>9000
-</span></code></pre></div>
-<p>Check whether TunGuard is listening:</p>
-<div class="language-shell highlight"><pre><span></span><code><span id="__span-25-1"><a id="__codelineno-25-1" name="__codelineno-25-1" href="#__codelineno-25-1"></a>sudo<span class="w"> </span>ss<span class="w"> </span>-lntp<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span><span class="m">9000</span>
-</span></code></pre></div>
-<p>The health endpoint can be checked locally with:</p>
-<div class="language-shell highlight"><pre><span></span><code><span id="__span-26-1"><a id="__codelineno-26-1" name="__codelineno-26-1" href="#__codelineno-26-1"></a>curl<span class="w"> </span>http://127.0.0.1:9000/api/health
-</span></code></pre></div>
-<h2 id="check-the-wireguard-port">Check the WireGuard Port<a class="headerlink" href="#check-the-wireguard-port" title="Permanent link">⚓</a></h2>
-<p>The default WireGuard port is:</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-27-1"><a id="__codelineno-27-1" name="__codelineno-27-1" href="#__codelineno-27-1"></a>13231/udp
-</span></code></pre></div>
-<p>Check whether TunGuard is listening:</p>
-<div class="language-shell highlight"><pre><span></span><code><span id="__span-28-1"><a id="__codelineno-28-1" name="__codelineno-28-1" href="#__codelineno-28-1"></a>sudo<span class="w"> </span>ss<span class="w"> </span>-lunp<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span><span class="m">13231</span>
-</span></code></pre></div>
-<h2 id="update-tunguard">Update TunGuard<a class="headerlink" href="#update-tunguard" title="Permanent link">⚓</a></h2>
-<p>Run the installer again to update an existing installation:</p>
-<div class="language-shell highlight"><pre><span></span><code><span id="__span-29-1"><a id="__codelineno-29-1" name="__codelineno-29-1" href="#__codelineno-29-1"></a>curl<span class="w"> </span>-fsSL<span class="w"> </span>https://raw.githubusercontent.com/TunGuard/get/main/installer.sh<span class="w"> </span><span class="p">|</span><span class="w"> </span>bash
-</span></code></pre></div>
-<p>The installer replaces the TunGuard binary while preserving the existing persistent data and service configuration.</p>
-<h2 id="backup">Backup<a class="headerlink" href="#backup" title="Permanent link">⚓</a></h2>
-<p>Create a backup of the TunGuard data directory:</p>
-<div class="language-shell highlight"><pre><span></span><code><span id="__span-30-1"><a id="__codelineno-30-1" name="__codelineno-30-1" href="#__codelineno-30-1"></a>sudo<span class="w"> </span>tar<span class="w"> </span>-czf<span class="w"> </span>~/tanguard-backup.tar.gz<span class="w"> </span>-C<span class="w"> </span>/var/lib/tanguard<span class="w"> </span>.
-</span></code></pre></div>
-<p>The persistent data contains the server key, peer configuration, dashboard credentials, API key, and other TunGuard state.</p>
-<h2 id="useful-service-commands">Useful Service Commands<a class="headerlink" href="#useful-service-commands" title="Permanent link">⚓</a></h2>
-<p>A quick reference:</p>
-<div class="language-shell highlight"><pre><span></span><code><span id="__span-31-1"><a id="__codelineno-31-1" name="__codelineno-31-1" href="#__codelineno-31-1"></a><span class="c1"># Status</span>
-</span><span id="__span-31-2"><a id="__codelineno-31-2" name="__codelineno-31-2" href="#__codelineno-31-2"></a>sudo<span class="w"> </span>systemctl<span class="w"> </span>status<span class="w"> </span>tanguard
-</span><span id="__span-31-3"><a id="__codelineno-31-3" name="__codelineno-31-3" href="#__codelineno-31-3"></a>
-</span><span id="__span-31-4"><a id="__codelineno-31-4" name="__codelineno-31-4" href="#__codelineno-31-4"></a><span class="c1"># Start</span>
-</span><span id="__span-31-5"><a id="__codelineno-31-5" name="__codelineno-31-5" href="#__codelineno-31-5"></a>sudo<span class="w"> </span>systemctl<span class="w"> </span>start<span class="w"> </span>tanguard
-</span><span id="__span-31-6"><a id="__codelineno-31-6" name="__codelineno-31-6" href="#__codelineno-31-6"></a>
-</span><span id="__span-31-7"><a id="__codelineno-31-7" name="__codelineno-31-7" href="#__codelineno-31-7"></a><span class="c1"># Stop</span>
-</span><span id="__span-31-8"><a id="__codelineno-31-8" name="__codelineno-31-8" href="#__codelineno-31-8"></a>sudo<span class="w"> </span>systemctl<span class="w"> </span>stop<span class="w"> </span>tanguard
-</span><span id="__span-31-9"><a id="__codelineno-31-9" name="__codelineno-31-9" href="#__codelineno-31-9"></a>
-</span><span id="__span-31-10"><a id="__codelineno-31-10" name="__codelineno-31-10" href="#__codelineno-31-10"></a><span class="c1"># Restart</span>
-</span><span id="__span-31-11"><a id="__codelineno-31-11" name="__codelineno-31-11" href="#__codelineno-31-11"></a>sudo<span class="w"> </span>systemctl<span class="w"> </span>restart<span class="w"> </span>tanguard
-</span><span id="__span-31-12"><a id="__codelineno-31-12" name="__codelineno-31-12" href="#__codelineno-31-12"></a>
-</span><span id="__span-31-13"><a id="__codelineno-31-13" name="__codelineno-31-13" href="#__codelineno-31-13"></a><span class="c1"># Enable at boot</span>
-</span><span id="__span-31-14"><a id="__codelineno-31-14" name="__codelineno-31-14" href="#__codelineno-31-14"></a>sudo<span class="w"> </span>systemctl<span class="w"> </span><span class="nb">enable</span><span class="w"> </span>tanguard
-</span><span id="__span-31-15"><a id="__codelineno-31-15" name="__codelineno-31-15" href="#__codelineno-31-15"></a>
-</span><span id="__span-31-16"><a id="__codelineno-31-16" name="__codelineno-31-16" href="#__codelineno-31-16"></a><span class="c1"># Follow logs</span>
-</span><span id="__span-31-17"><a id="__codelineno-31-17" name="__codelineno-31-17" href="#__codelineno-31-17"></a>sudo<span class="w"> </span>journalctl<span class="w"> </span>-u<span class="w"> </span>tanguard<span class="w"> </span>-f
-</span><span id="__span-31-18"><a id="__codelineno-31-18" name="__codelineno-31-18" href="#__codelineno-31-18"></a>
-</span><span id="__span-31-19"><a id="__codelineno-31-19" name="__codelineno-31-19" href="#__codelineno-31-19"></a><span class="c1"># Last 100 log entries</span>
-</span><span id="__span-31-20"><a id="__codelineno-31-20" name="__codelineno-31-20" href="#__codelineno-31-20"></a>sudo<span class="w"> </span>journalctl<span class="w"> </span>-u<span class="w"> </span>tanguard<span class="w"> </span>-n<span class="w"> </span><span class="m">100</span>
-</span></code></pre></div>
+<p>Android binaries are PIE and dynamically linked against the device's own <code>libc.so</code>.
+That is deliberate: bionic refuses to run statically linked executables on ARM/ARM64
+below API 29, and every device already ships the loader and libc. All Android ABIs
+target <strong>minSdk 21</strong> (Android 5.0+).</p>
+<p>Releases for every platform are published on the
+<a href="https://github.com/TunGuard/client">TunGuard/client</a> releases page, which is what
+<code>client.sh</code> downloads from.</p>
+<h2 id="limitations">Limitations<a class="headerlink" href="#limitations" title="Permanent link">⚓</a></h2>
+<ul>
+<li><strong>The PSK is sent in cleartext</strong> over the control channel and stored on disk in the
+  state directory. On hostile networks, wrap the control link in a tunnel or encrypt
+  above it. The handshake is always outbound, so NAT and firewalls never block it.</li>
+<li><strong>Routers are not a target.</strong> Consumer router firmware (RouterOS, OpenWrt) is
+  deliberately unsupported: this client relays sockets and never creates a <code>tun0</code>
+  interface, so sideloading it onto locked-down firmware is not automatable. Point a
+  supported host at the control server instead.</li>
+<li><strong>BSD is not in the release matrix.</strong> Only Linux, macOS, Windows, and Android are
+  built.</li>
+<li><strong>No state beyond the two files</strong> in the state directory. The server stays the single
+  source of truth for what every pipeline should be doing.</li>
+</ul>
+<h2 id="next-steps">Next steps<a class="headerlink" href="#next-steps" title="Permanent link">⚓</a></h2>
+<ul>
+<li><a href="../../examples/tutorials/p2p/">P2P Mesh</a> — how the mesh is built, punched, and
+  relayed, and how to drive it from the dashboard or the API.</li>
+<li><a href="../../advanced/config/conf/#p2p-control-plane">Configuration</a> — the server-side
+  control-plane settings this client connects to.</li>
+</ul>
 
 
 
