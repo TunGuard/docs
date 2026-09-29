@@ -10,11 +10,50 @@ The API is available under:
 http://YOUR_SERVER_IP:9000/api
 ```
 
+## Endpoint overview
+
+| Endpoint | Method | Auth | Purpose |
+|---|---|---|---|
+| `/api/health` | GET | None | Liveness check |
+| `/api/status` | GET | Either | Server and peer status |
+| `/api/system` | GET | Either | Host metrics |
+| `/api/server_key` | GET | Either | Server public key and port |
+| `/api/configure` | POST | Either | Change key or listen port at runtime |
+| `/api/peers` | GET | Either | List peers |
+| `/api/peer/add` | POST | Either | Add an existing public key |
+| `/api/peer/remove` | POST | Either | Remove a peer |
+| `/api/peer/config` | POST | Either | Re-render a peer's configuration |
+| `/api/peer/generate-config` | POST | Either | Create a peer with a new key pair |
+| `/api/version` | GET | Either | Version and update check |
+| `/api/update` | POST | Either | Replace the binary and restart |
+| `/api/backup/download` | GET | Either | Download a data directory backup |
+| `/api/backup/restore` | POST | Either | Restore a backup |
+| `/api/peer-monitor/events` | GET | Either | Peer event history |
+| `/api/peer-monitor/state` | GET | Either | Latest peer metrics |
+| `/api/ws/ssh` | GET | Either | WebSocket SSH session |
+| `/api/auth/status` | GET | Dashboard | Current user, default-credential warning |
+| `/api/web/credentials` | POST | Dashboard | Change dashboard password |
+| `/api/key` | GET | Dashboard | Read the current API key |
+| `/api/key/regenerate` | POST | Dashboard | Issue a new API key |
+| `/api/mesh/*` | Various | Either | [P2P mesh](#p2p-mesh) |
+| `/api/trp/*` | Various | Either | [TCP relay proxies](#tcp-relay-trp) |
+
+"Either" means the dashboard login or an API key. "Dashboard" means the login is
+required and an API key is rejected.
+
 ## Authentication
 
 All `/api/*` endpoints require authentication except `/api/health`.
 
-You can authenticate using either the dashboard credentials or an API key.
+Most endpoints accept **either** the dashboard credentials or an API key. A small group
+of credential and key management endpoints accept **only** the dashboard login — see
+[Credential and key management](#credential-and-key-management).
+
+| Endpoint group | Accepted credentials |
+|---|---|
+| Most `/api/*`, all `/api/mesh/*`, all `/api/trp/*` | Dashboard login **or** API key |
+| `/api/auth/status`, `/api/web/credentials`, `/api/key`, `/api/key/regenerate` | Dashboard login only |
+| `/api/health` | None |
 
 ### Dashboard Authentication
 
@@ -60,6 +99,14 @@ The API key can also be sent using:
 Authorization: Bearer YOUR_API_KEY
 ```
 
+/// note | Why the API key cannot manage itself
+
+An API key is deliberately rejected by `/api/key` and `/api/key/regenerate`. A leaked
+key can therefore be rotated, but only by someone who also has the dashboard password.
+This is the difference between a key that can be neutralised and one that cannot.
+
+///
+
 ## Health
 
 ### `GET /api/health`
@@ -98,6 +145,81 @@ curl \
   http://localhost:9000/api/server_key
 ```
 
+## System Information
+
+### `GET /api/system`
+
+Returns host metrics: hostname, OS, kernel, CPU model and core count, CPU utilisation,
+load averages, process counts, uptime, memory, disk usage for the data directory, and
+per-interface network counters.
+
+```shell
+curl \
+  -H "X-API-Key: $API_KEY" \
+  http://localhost:9000/api/system
+```
+
+Response:
+
+```json
+{
+  "hostname": "vpn-01",
+  "os": "Debian GNU/Linux 12 (bookworm)",
+  "kernel": "6.1.0-18-amd64",
+  "cpu_model": "Intel(R) Xeon(R) Platinum 8375C CPU @ 2.90GHz",
+  "cpu_cores": 4,
+  "cpu_percent": 7.4,
+  "load": [0.11, 0.08, 0.02],
+  "uptime": 841203,
+  "processes": { "total": 214, "running": 3 },
+  "memory": { "total": 8123456, "used": 3910553, "percent": 48.1 },
+  "disk": { "total": 41153856, "used": 12451840, "percent": 30.2 },
+  "network": []
+}
+```
+
+`disk` reflects the partition holding `DATA_DIR`, not the whole filesystem.
+
+## Runtime Configuration
+
+### `POST /api/configure`
+
+Applies runtime changes without a restart. Both parameters are optional; send whichever
+you need.
+
+```shell
+curl -X POST \
+  -H "X-API-Key: $API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "private_key": "REPLACE_WITH_64_CHAR_HEX_PRIVATE_KEY",
+    "listen_port": 51820
+  }' \
+  http://localhost:9000/api/configure
+```
+
+### Parameters
+
+| Parameter | Required | Description |
+|---|---|---|
+| `private_key` | No | New WireGuard server private key. Must be valid hex |
+| `listen_port` | No | New WireGuard listen port. Recorded, but **a restart is required to apply it** |
+
+If a new `private_key` is accepted, it is written to `DATA_DIR/server_private.key` with
+mode `0600`, and the response includes the resulting `server_public_key`.
+
+/// warning | Rotating the server key invalidates every peer config
+
+    Peer configurations embed the server public key. After rotating, previously issued
+    client configurations stop working and must be regenerated with `/api/peer/config`.
+
+/// warning | Not available in mesh-only mode
+
+With `-mesh-only` there is no WireGuard interface to reconfigure, so this endpoint must
+not be used. Use the mesh and configuration file endpoints instead.
+
+///
+
 ## List Peers
 
 ### `GET /api/peers`
@@ -132,9 +254,12 @@ curl -X POST \
 
 | Parameter | Required | Description |
 |---|---|---|
-| `public_key` | Yes | WireGuard public key of the peer |
-| `allowed_ip` | Yes | VPN address assigned to the peer |
-| `device_name` | Yes | Name used to identify the peer |
+| `public_key` | Yes | WireGuard public key of the peer. Must be valid hex |
+| `allowed_ip` | Yes | VPN address assigned to the peer, in CIDR form. Must not already be assigned |
+| `device_name` | No | Label used to identify the peer in the dashboard |
+
+Returns `409` if the public key is already registered, or if `allowed_ip` is already
+assigned to another peer.
 
 ## Generate Peer Configuration
 
@@ -142,7 +267,8 @@ curl -X POST \
 
 Creates a new peer and generates its WireGuard client configuration.
 
-TunGuard generates the client's WireGuard key pair.
+TunGuard generates the client's WireGuard key pair. Nothing is required — every
+parameter has a default:
 
 ```shell
 curl -X POST \
@@ -157,12 +283,20 @@ curl -X POST \
 
 ### Parameters
 
-| Parameter | Required | Description |
-|---|---|---|
-| `device_name` | Yes | Name used to identify the peer |
-| `server_host` | Yes | Public hostname or IP address clients use to reach TunGuard |
+| Parameter | Required | Default | Description |
+|---|---|---|---|
+| `device_name` | No | — | Label used to identify the peer |
+| `device_id` | No | — | Identifier stored with the peer record |
+| `server_host` | No | Host of the request | Public hostname or IP clients use to reach TunGuard |
+| `allowed_ip` | No | Next free address | VPN address to assign. Must not already be assigned |
+| `dns` | No | `1.1.1.1` | DNS server written into the generated configuration |
 
-The response contains the generated client configuration.
+Leaving `server_host` out uses the `Host` header of the request, so the generated
+endpoint matches however you reached the server — but set it explicitly if you want a
+different public hostname in the output.
+
+The response contains the generated client configuration, including the peer's private
+key. Treat it as a secret.
 
 ## Get Peer Configuration
 
@@ -216,7 +350,76 @@ curl -X POST \
 |---|---|---|
 | `public_key` | Yes | WireGuard public key of the peer to remove |
 
-## API Key Management
+## Credential and key management
+
+These four endpoints all require the **dashboard login**. An API key is rejected, so a
+leaked key can always be rotated by someone who holds the password.
+
+### `GET /api/auth/status`
+
+Returns the authenticated username and whether the server is still on default
+credentials. Used by the dashboard to decide whether to force a password change.
+
+```shell
+curl -u admin:PASSWORD http://localhost:9000/api/auth/status
+```
+
+```json
+{
+  "authenticated": true,
+  "username": "admin",
+  "must_change": true
+}
+```
+
+`must_change` is `true` only when no credentials have been stored yet and the configured
+username and password are still `admin` / `tanguard`.
+
+### `POST /api/web/credentials`
+
+Changes the dashboard username and password.
+
+```shell
+curl -X POST \
+  -u admin:tanguard \
+  -H "Content-Type: application/json" \
+  -d '{
+    "username": "alice",
+    "password": "a-long-passphrase",
+    "confirm_password": "a-long-passphrase"
+  }' \
+  http://localhost:9000/api/web/credentials
+```
+
+### Parameters
+
+| Parameter | Required | Description |
+|---|---|---|
+| `username` | Yes | New dashboard username. Whitespace is trimmed; cannot be empty |
+| `password` | Yes | New password. Minimum 8 characters |
+| `confirm_password` | Yes | Must match `password` exactly |
+
+Changing the password invalidates every existing session and API key, so update your
+clients at the same time.
+
+### `GET /api/key`
+
+Returns the current API key, if one exists.
+
+```shell
+curl -u admin:PASSWORD http://localhost:9000/api/key
+```
+
+```json
+{
+  "exists": true,
+  "key": "REPLACE_WITH_YOUR_KEY",
+  "created_at": "2026-01-14T09:31:07Z"
+}
+```
+
+When no key has been generated yet, `exists` is `false` and `key` is an empty string.
+`created_at` is only present when a key exists.
 
 ### `POST /api/key/regenerate`
 
@@ -230,7 +433,178 @@ curl -X POST \
   http://localhost:9000/api/key/regenerate
 ```
 
-After rotating the key, update any applications or automation using the previous key.
+The response contains the new key and its creation timestamp. The previous key stops
+working immediately, so update any applications or automation that relied on it.
+
+## Version and updates
+
+### `GET /api/version`
+
+Returns the running version, the latest published release, and update metadata. The
+version check runs in the background; results are cached.
+
+```shell
+curl -H "X-API-Key: $API_KEY" http://localhost:9000/api/version
+```
+
+```json
+{
+  "current_version": "v1.2.0",
+  "latest_version": "v1.3.0",
+  "update_available": true,
+  "download_url": "https://github.com/TunGuard/tanguard-binary/releases/download/v1.3.0/tanguard-linux-amd64",
+  "release_notes": "https://api.github.com/repos/TunGuard/tanguard-binary/releases/latest",
+  "release_url": "https://github.com/TunGuard/tanguard-binary/releases/tag/v1.3.0",
+  "arch": "amd64",
+  "last_checked": "2026-01-14T09:00:00Z"
+}
+```
+
+Add `?refresh=1` to query GitHub immediately instead of returning the cached result:
+
+```shell
+curl -H "X-API-Key: $API_KEY" "http://localhost:9000/api/version?refresh=1"
+```
+
+### `POST /api/update`
+
+Downloads a new binary, replaces the running executable, and restarts the process with
+the same arguments.
+
+```shell
+curl -X POST \
+  -H "X-API-Key: $API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{"download_url": "https://github.com/TunGuard/tanguard-binary/releases/download/v1.3.0/tanguard-linux-amd64"}' \
+  http://localhost:9000/api/update
+```
+
+### Parameters
+
+| Parameter | Required | Description |
+|---|---|---|
+| `download_url` | Yes | URL of the replacement binary |
+
+/// danger | This endpoint replaces the running binary
+
+`/api/update` fetches `download_url` with no checksum or signature check, writes it over
+the running executable, and re-execs it. Anything able to call this endpoint can install
+arbitrary code as your server user.
+
+Prefer downloading the release yourself, verifying it, and restarting through your
+process supervisor. If you do use this endpoint, only ever pass a `download_url` you
+obtained directly from the project's own releases, and never from a redirecting
+shortener or mirror.
+
+The download is capped at 256 MB, and a payload under 100 KB is rejected. A second
+concurrent call returns `409` while an update is already in progress.
+
+///
+
+## Backup and restore
+
+### `GET /api/backup/download`
+
+Streams a `.tar.gz` backup of the data directory. The archive contains a `manifest.json`
+recording the tool, version, creation time, and data directory path.
+
+```shell
+curl \
+  -H "X-API-Key: $API_KEY" \
+  -o tanguard-backup.tar.gz \
+  http://localhost:9000/api/backup/download
+```
+
+### `POST /api/backup/restore`
+
+Restores a backup produced by `/api/backup/download`. Send the archive as a multipart
+form field named `backup`.
+
+```shell
+curl -X POST \
+  -H "X-API-Key: $API_KEY" \
+  -F "backup=@tanguard-backup.tar.gz" \
+  http://localhost:9000/api/backup/restore
+```
+
+/// warning | Back up before you restore
+
+    Restore overwrites the current data directory. Take a fresh download first, and do
+    not restore while peers are connected.
+
+    A backup contains peer private keys and the stored API key. Anyone holding the file
+    can impersonate your peers and read server credentials. Keep it encrypted at rest.
+
+///
+
+## Peer monitoring
+
+These endpoints expose the peer handshakes the dashboard charts. They are registered
+only when the peer monitor is running, and are absent in `-mesh-only` mode, where the
+responses are `404`.
+
+### `GET /api/peer-monitor/events`
+
+Returns recorded peer events as a JSON array.
+
+```shell
+curl -H "X-API-Key: $API_KEY" http://localhost:9000/api/peer-monitor/events
+```
+
+```json
+[
+  { "t": "2026-01-14T09:31:07Z", "peer": "a1b2c3d4", "event": "handshake", "detail": "" },
+  { "t": "2026-01-14T09:34:12Z", "peer": "e5f6a7b8", "event": "deferred", "detail": "handshake timeout" }
+]
+```
+
+### Query parameters
+
+| Parameter | Description |
+|---|---|
+| `since` | RFC 3339 timestamp. Returns only events strictly after it. Invalid values are ignored |
+| `peer` | Public key prefix. Returns only events for that peer |
+
+```shell
+curl -H "X-API-Key: $API_KEY" \
+  "http://localhost:9000/api/peer-monitor/events?peer=a1b2c3d4&since=2026-01-14T09:00:00Z"
+```
+
+This is a polling endpoint, not a stream — it returns the current buffer and closes.
+
+### `GET /api/peer-monitor/state`
+
+Returns a snapshot of the most recent metrics per peer, keyed by shortened public key.
+
+```shell
+curl -H "X-API-Key: $API_KEY" http://localhost:9000/api/peer-monitor/state
+```
+
+```json
+{
+  "a1b2c3d4": {
+    "handshake": 1768382345,
+    "endpoint": "198.51.100.24:4711",
+    "txBytes": 184432,
+    "rxBytes": 229104
+  }
+}
+```
+
+`handshake` is a Unix timestamp of the last completed handshake, or `0` if none has
+happened yet.
+
+## Web SSH
+
+### `GET /api/ws/ssh`
+
+Upgrades the connection to a WebSocket and opens a pseudo-terminal onto the host, which
+is how the dashboard's **SSH Gateway** works. In a browser this must be requested as a
+WebSocket; it cannot be called with a plain `curl` request.
+
+Credentials are taken from the `Host` header in the form `user:password@host:port`, and
+forwarded to the target host. A failure to connect is reported in-band over the socket
+rather than as an HTTP status.
 
 ## Example: Automation
 
@@ -504,3 +878,19 @@ curl -X POST \
 ```
 
 For production deployments, protect the dashboard and API with HTTPS when they are exposed over an untrusted network.
+
+An API key is a broad credential: it can add and remove peers, read and restore
+backups, and replace the server binary via `/api/update`. Scope it like a password, and
+prefer issuing short-lived credentials from a provisioning job over a long-lived shared
+key.
+
+Two endpoints deserve particular attention:
+
+- `/api/update` fetches an arbitrary URL and overwrites the running executable. Only
+  point it at releases you obtained directly from the project's own release page.
+- `/api/ws/ssh` opens an interactive shell to the host. Anyone who can reach the API can
+  reach the machine's SSH credentials, so keep the API off untrusted networks.
+
+Both are reasons to terminate TLS in front of the API and to keep the default dashboard
+credentials from surviving first boot.
+
