@@ -58,6 +58,10 @@ The default ports are:
 | WireGuard | `13231` | UDP |
 | Dashboard/API | `9000` | TCP |
 | SSH Gateway | `2222` | TCP |
+| P2P control channel | `7000` | TCP |
+| P2P rendezvous/relay | `7001` | UDP |
+
+The last two are only needed for the [P2P mesh](examples/tutorials/p2p.md).
 
 ## How do I create a WireGuard peer?
 
@@ -194,6 +198,49 @@ Authorization: Bearer YOUR_API_KEY
 ```
 
 The `/api/health` endpoint does not require authentication.
+
+## How do I build a P2P mesh?
+
+Install the client on each device:
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/TunGuard/get/main/client.sh | bash
+```
+
+Then open **P2P → Enroll device** in the dashboard and run the command it shows:
+
+```bash
+tun YOUR_SERVER_IP YOUR_PSK
+```
+
+Nothing else is needed. Devices sharing a PSK discover each other and punch a direct
+path automatically. See [P2P Mesh](examples/tutorials/p2p.md).
+
+## Is the P2P mesh a VPN?
+
+No. The mesh moves UDP datagrams directly between devices and has no tunnel, no
+assigned addresses, and no WireGuard underneath. A device on the mesh never receives a
+`wg0` address. If you need a VPN, use a peer instead — the two features are independent
+and can run at the same time.
+
+## My mesh devices are online but see no peers
+
+They are almost certainly not sharing a PSK. Peers only ever discover other devices in
+their own group, so two different PSKs means two separate meshes that cannot see each
+other. Compare the group keys on the P2P page.
+
+## My mesh links are online but never go direct
+
+A link only turns direct once a packet genuinely arrives from the peer. When a NAT or
+firewall blocks the hole punch it stays relayed, which is normal and still carries
+traffic — the server just stays in the path. Check that `7001/UDP` is open and
+bidirectional on the server. See
+[When the relay is used](examples/tutorials/p2p.md#when-the-relay-is-used).
+
+## Does mesh traffic between my devices get encrypted?
+
+Not by TunGuard itself — the client relays datagrams as they arrive. If you need
+confidentiality on the direct path, run a WireGuard peer over the mesh.
 
 ## Where can I report a bug?
 

@@ -1,12 +1,12 @@
 
 [project]
 site_name = "TunGuard"
-site_description = "Advanced userspace WireGuard networking tool providing seamless P2P connections and public exposure without kernel drivers or extra installs."
+site_description = "Self-hosted overlay networking: direct peer-to-peer mesh, TCP relay, and WireGuard-compatible VPN from one control plane. No kernel drivers, no extra installs."
 site_author = "TunGuard Team"
 copyright = """
 <p>
 &copy; <a href="https://github.com/TunGuard"><em>TunGuard</em></a><br/>
-<span>This project is licensed under Apache-2.0.</span><br/>
+<span>This project is licensed under MIT.</span><br/>
 <span>This project is not affiliated, associated, authorized, endorsed by, or in any way officially connected with Jason A. Donenfeld, ZX2C4 or Edge Security.</span><br/>
 <span>"WireGuard" and the "WireGuard" logo are registered trademarks of Jason A. Donenfeld.</span>
 </p>

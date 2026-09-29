@@ -18,7 +18,27 @@ This documentation provides you not only with the basic setup and configuration 
 
 ## About
 
-`TunGuard` is a lightweight, zero-dependency userspace networking utility designed for high-performance peer-to-peer connectivity and public endpoint exposure. Built around WireGuard's core protocols, TunGuard operates entirely in userspace—eliminating the need to install kernel drivers, run elevated system daemons, or execute system-wide VPN configurations. It allows developers and sysadmins to create secure, instant network overlays and expose internal services across NATs and firewalls seamlessly.
+`TunGuard` is a self-hosted networking platform for connecting remote devices and exposing internal services. One server gives you three things: a direct peer-to-peer mesh between devices, a TCP relay for publishing services that run on them, and a WireGuard-compatible VPN for ordinary client access.
+
+The mesh and the relay are TunGuard's own protocols, not WireGuard. Devices sharing a group key discover each other automatically, punch a direct UDP path through NAT, and fall back to relaying through the server when no direct path can be opened — so traffic leaves the server path as soon as the peers can reach each other. The VPN half still produces standard WireGuard configurations and QR codes for any device that wants one.
+
+Everything runs in userspace, so there are no kernel modules to install, no `apt install wireguard`, and no container runtime. A small client binary keeps unattended devices on the mesh with no local configuration, and a web dashboard and API drive all of it.
+
+## What TunGuard Does
+
+Pick the part that matches what you are building.
+
+- **[P2P Mesh](examples/tutorials/p2p.md)** — devices sharing a group key discover each
+  other, punch a direct UDP path through NAT, and relay through the server only when a
+  direct path is not possible. TunGuard's own protocol; no VPN involved.
+- **[TunGuard Client](guides/client.md)** — one small binary that puts an unattended
+  device on the mesh. No config file, no routes, no local state beyond a device id.
+- **[VPN Access](guides/clients.md)** — standard WireGuard configurations and QR codes,
+  generated from the dashboard for phones, laptops, and routers.
+- **[TCP Relay](guides/api.md#tcp-relay-trp)** — publish a service running on a mesh
+  node to the internet on a port of your choosing.
+- **[Dashboard and API](guides/api.md)** — everything above is drivable from a browser or
+  from `curl`.
 
 ## Contents
 
