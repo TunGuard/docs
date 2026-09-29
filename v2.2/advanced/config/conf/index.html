@@ -6,7 +6,7 @@
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width,initial-scale=1">
       
-        <meta name="description" content="Advanced userspace WireGuard networking tool providing seamless P2P connections and public exposure without kernel drivers or extra installs.">
+        <meta name="description" content="Self-hosted overlay networking: direct peer-to-peer mesh, TCP relay, and WireGuard-compatible VPN from one control plane. No kernel drivers, no extra installs.">
       
       
         <meta name="author" content="TunGuard Team">
@@ -15,7 +15,7 @@
         <link rel="canonical" href="https://tunguard.github.io/v2.2/advanced/config/conf/">
       
       
-        <link rel="prev" href="../../api/">
+        <link rel="prev" href="../../../getting-started/">
       
       
         <link rel="next" href="../openwrt/">
@@ -266,14 +266,29 @@
     
     
     
+      
+  
+  
+  
+    
+  
+  
+    
+      
+    
+    
+    
       <li class="md-tabs__item md-tabs__item--active">
-        <a href="../../api/" class="md-tabs__link">
+        <a href="././" class="md-tabs__link">
           
   
   Advanced
 
         </a>
       </li>
+    
+  
+
     
   
 
@@ -544,33 +559,6 @@
                 
   
   
-  
-  
-    <li class="md-nav__item">
-      <a href="../../api/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-  API Reference
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
     
   
   
@@ -592,10 +580,10 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_2" checked>
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_1" checked>
         
           
-          <label class="md-nav__link" for="__nav_4_2" id="__nav_4_2_label" tabindex="">
+          <label class="md-nav__link" for="__nav_4_1" id="__nav_4_1_label" tabindex="">
             
   
   
@@ -612,8 +600,8 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_2_label" aria-expanded="true">
-          <label class="md-nav__title" for="__nav_4_2">
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_1_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_4_1">
             <span class="md-nav__icon md-icon"></span>
             
   
@@ -942,14 +930,69 @@
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="API Key">
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#p2p-control-plane" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        P2P Control Plane
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="P2P Control Plane">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#tungard_api_key" class="md-nav__link">
+  <a href="#mesh_enabled" class="md-nav__link">
     <span class="md-ellipsis">
       <span class="md-typeset">
-        <code>TUNGARD_API_KEY</code>
+        <code>MESH_ENABLED</code>
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#control_listen" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        <code>CONTROL_LISTEN</code>
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#relay_listen" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        <code>RELAY_LISTEN</code>
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#control_timeout_s" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        <code>CONTROL_TIMEOUT_S</code>
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mesh_data_dir" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        <code>MESH_DATA_DIR</code>
       </span>
     </span>
   </a>
@@ -1041,10 +1084,10 @@
         
           
         
-        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4_3" >
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4_2" >
         
           
-          <label class="md-nav__link" for="__nav_4_3" id="__nav_4_3_label" tabindex="">
+          <label class="md-nav__link" for="__nav_4_2" id="__nav_4_2_label" tabindex="">
             
   
   
@@ -1061,8 +1104,8 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_3_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_4_3">
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_2">
             <span class="md-nav__icon md-icon"></span>
             
   
@@ -1131,10 +1174,10 @@
         
           
         
-        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4_4" >
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4_3" >
         
           
-          <label class="md-nav__link" for="__nav_4_4" id="__nav_4_4_label" tabindex="">
+          <label class="md-nav__link" for="__nav_4_3" id="__nav_4_3_label" tabindex="">
             
   
   
@@ -1151,8 +1194,8 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_4_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_4_4">
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_3">
             <span class="md-nav__icon md-icon"></span>
             
   
@@ -1488,7 +1531,7 @@
   <span class="md-ellipsis">
     
   
-  P2P Connections
+  P2P Mesh
 
     
   </span>
@@ -1664,6 +1707,33 @@
     
   
   CLI
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../guides/client/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  TunGuard Client
 
     
   </span>
@@ -2032,14 +2102,69 @@
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="API Key">
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#p2p-control-plane" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        P2P Control Plane
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="P2P Control Plane">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#tungard_api_key" class="md-nav__link">
+  <a href="#mesh_enabled" class="md-nav__link">
     <span class="md-ellipsis">
       <span class="md-typeset">
-        <code>TUNGARD_API_KEY</code>
+        <code>MESH_ENABLED</code>
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#control_listen" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        <code>CONTROL_LISTEN</code>
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#relay_listen" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        <code>RELAY_LISTEN</code>
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#control_timeout_s" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        <code>CONTROL_TIMEOUT_S</code>
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mesh_data_dir" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        <code>MESH_DATA_DIR</code>
       </span>
     </span>
   </a>
@@ -2108,8 +2233,16 @@
     
     
     
+      
+  
+  
+    
+    
+    
+    
+    
       <li class="md-path__item">
-        <a href="../../api/" class="md-path__link">
+        <a href="././" class="md-path__link">
           
   
   <span class="md-ellipsis">
@@ -2118,6 +2251,9 @@
 
         </a>
       </li>
+    
+  
+
     
   
 
@@ -2253,9 +2389,29 @@
 <td>SSH host key path. Automatically generated when missing</td>
 </tr>
 <tr>
-<td><code>TUNGARD_API_KEY</code></td>
-<td>—</td>
-<td>API key for PHP or script integrations. Can also be supplied per request</td>
+<td><code>MESH_ENABLED</code></td>
+<td><code>true</code></td>
+<td>Enables the P2P control plane. See <a href="#p2p-control-plane">P2P Control Plane</a></td>
+</tr>
+<tr>
+<td><code>CONTROL_LISTEN</code></td>
+<td><code>:7000</code></td>
+<td>TCP control listener used by the P2P client</td>
+</tr>
+<tr>
+<td><code>RELAY_LISTEN</code></td>
+<td><code>:7001</code></td>
+<td>UDP rendezvous and relay listener for the P2P mesh</td>
+</tr>
+<tr>
+<td><code>CONTROL_TIMEOUT_S</code></td>
+<td><code>10</code></td>
+<td>Seconds allowed for a P2P client handshake</td>
+</tr>
+<tr>
+<td><code>MESH_DATA_DIR</code></td>
+<td><code>DATA_DIR</code></td>
+<td>Where the P2P node registry is stored</td>
 </tr>
 </tbody>
 </table>
@@ -2395,35 +2551,78 @@
 <div class="language-text highlight"><pre><span></span><code><span id="__span-25-1"><a id="__codelineno-25-1" name="__codelineno-25-1" href="#__codelineno-25-1"></a>SSH_KEY_FILE=/var/lib/tanguard/ssh_host_key
 </span></code></pre></div>
 <h2 id="api-key">API Key<a class="headerlink" href="#api-key" title="Permanent link">⚓</a></h2>
-<h3 id="tungard_api_key"><code>TUNGARD_API_KEY</code><a class="headerlink" href="#tungard_api_key" title="Permanent link">⚓</a></h3>
-<p>Sets an API key that can be used by applications and scripts.</p>
-<p>Example:</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-26-1"><a id="__codelineno-26-1" name="__codelineno-26-1" href="#__codelineno-26-1"></a>TUNGARD_API_KEY=your-api-key
+<p>The API key is not set through an environment variable. It is generated from the
+dashboard under <strong>Settings → API Key</strong>, or with:</p>
+<div class="language-sh highlight"><pre><span></span><code><span id="__span-26-1"><a id="__codelineno-26-1" name="__codelineno-26-1" href="#__codelineno-26-1"></a>curl<span class="w"> </span>-X<span class="w"> </span>POST<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-26-2"><a id="__codelineno-26-2" name="__codelineno-26-2" href="#__codelineno-26-2"></a><span class="w">  </span>-u<span class="w"> </span>admin:PASSWORD<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-26-3"><a id="__codelineno-26-3" name="__codelineno-26-3" href="#__codelineno-26-3"></a><span class="w">  </span>http://127.0.0.1:9000/api/key/regenerate
 </span></code></pre></div>
-<p>The API key can also be supplied with individual API requests.</p>
-<p>For example:</p>
+<p>It is stored in <code>api_key.json</code> inside <code>DATA_DIR</code>, and can then be supplied with
+individual API requests:</p>
 <div class="language-sh highlight"><pre><span></span><code><span id="__span-27-1"><a id="__codelineno-27-1" name="__codelineno-27-1" href="#__codelineno-27-1"></a>curl<span class="w"> </span><span class="se">\</span>
 </span><span id="__span-27-2"><a id="__codelineno-27-2" name="__codelineno-27-2" href="#__codelineno-27-2"></a><span class="w">  </span>-H<span class="w"> </span><span class="s2">"X-API-Key: YOUR_API_KEY"</span><span class="w"> </span><span class="se">\</span>
 </span><span id="__span-27-3"><a id="__codelineno-27-3" name="__codelineno-27-3" href="#__codelineno-27-3"></a><span class="w">  </span>http://127.0.0.1:9000/api/peers
 </span></code></pre></div>
-<p>See the <a href="../../api/">API</a> documentation for authentication and available endpoints.</p>
+<p>Regenerating the key invalidates the previous one immediately.</p>
+<p>See the <a href="../../../guides/api/">API</a> documentation for authentication and available
+endpoints.</p>
+<h2 id="p2p-control-plane">P2P Control Plane<a class="headerlink" href="#p2p-control-plane" title="Permanent link">⚓</a></h2>
+<p>The P2P mesh runs as a second subsystem alongside WireGuard. It is enabled by default
+and needs no configuration, but these variables control it.</p>
+<h3 id="mesh_enabled"><code>MESH_ENABLED</code><a class="headerlink" href="#mesh_enabled" title="Permanent link">⚓</a></h3>
+<p>Enables the P2P control plane.</p>
+<p>Default:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-28-1"><a id="__codelineno-28-1" name="__codelineno-28-1" href="#__codelineno-28-1"></a>true
+</span></code></pre></div>
+<p>With <code>MESH_ENABLED=false</code> the control listener and the rendezvous hub are never
+started, and every <code>/api/mesh/*</code> endpoint returns <code>503 tun control plane is disabled</code>.
+Starting with <code>-mesh-only</code> while the mesh is disabled makes the process refuse to run.</p>
+<h3 id="control_listen"><code>CONTROL_LISTEN</code><a class="headerlink" href="#control_listen" title="Permanent link">⚓</a></h3>
+<p>The TCP address that clients dial out to. This is the port that goes in the
+<code>tun &lt;server-ip&gt; &lt;psk&gt;</code> command.</p>
+<p>Default:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-29-1"><a id="__codelineno-29-1" name="__codelineno-29-1" href="#__codelineno-29-1"></a>:7000
+</span></code></pre></div>
+<h3 id="relay_listen"><code>RELAY_LISTEN</code><a class="headerlink" href="#relay_listen" title="Permanent link">⚓</a></h3>
+<p>The UDP address of the rendezvous hub, where clients register their public endpoint and
+discover each other.</p>
+<p>Default:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-30-1"><a id="__codelineno-30-1" name="__codelineno-30-1" href="#__codelineno-30-1"></a>:7001
+</span></code></pre></div>
+<p>Both ports must be reachable from the internet. If the hub port is unreachable, clients
+still connect and appear online but never discover each other, so no link can go
+direct.</p>
+<h3 id="control_timeout_s"><code>CONTROL_TIMEOUT_S</code><a class="headerlink" href="#control_timeout_s" title="Permanent link">⚓</a></h3>
+<p>How long, in seconds, a client has to complete its handshake after connecting.</p>
+<p>Default:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-31-1"><a id="__codelineno-31-1" name="__codelineno-31-1" href="#__codelineno-31-1"></a>10
+</span></code></pre></div>
+<h3 id="mesh_data_dir"><code>MESH_DATA_DIR</code><a class="headerlink" href="#mesh_data_dir" title="Permanent link">⚓</a></h3>
+<p>Where the mesh node registry is stored.</p>
+<p>Default:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-32-1"><a id="__codelineno-32-1" name="__codelineno-32-1" href="#__codelineno-32-1"></a>(the value of DATA_DIR)
+</span></code></pre></div>
 <h2 id="example-configuration">Example Configuration<a class="headerlink" href="#example-configuration" title="Permanent link">⚓</a></h2>
 <p>A typical server configuration could look like:</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-28-1"><a id="__codelineno-28-1" name="__codelineno-28-1" href="#__codelineno-28-1"></a>WG_INTERFACE=wg0
-</span><span id="__span-28-2"><a id="__codelineno-28-2" name="__codelineno-28-2" href="#__codelineno-28-2"></a>WG_LISTEN_PORT=13231
-</span><span id="__span-28-3"><a id="__codelineno-28-3" name="__codelineno-28-3" href="#__codelineno-28-3"></a>WG_ADDRESS=10.100.0.1/24
-</span><span id="__span-28-4"><a id="__codelineno-28-4" name="__codelineno-28-4" href="#__codelineno-28-4"></a>WG_SUBNET=10.100.0.0/24
-</span><span id="__span-28-5"><a id="__codelineno-28-5" name="__codelineno-28-5" href="#__codelineno-28-5"></a>WG_MTU=1420
-</span><span id="__span-28-6"><a id="__codelineno-28-6" name="__codelineno-28-6" href="#__codelineno-28-6"></a>
-</span><span id="__span-28-7"><a id="__codelineno-28-7" name="__codelineno-28-7" href="#__codelineno-28-7"></a>API_LISTEN=:9000
-</span><span id="__span-28-8"><a id="__codelineno-28-8" name="__codelineno-28-8" href="#__codelineno-28-8"></a>DATA_DIR=/var/lib/tanguard
-</span><span id="__span-28-9"><a id="__codelineno-28-9" name="__codelineno-28-9" href="#__codelineno-28-9"></a>EXTERNAL_NIC=auto
-</span><span id="__span-28-10"><a id="__codelineno-28-10" name="__codelineno-28-10" href="#__codelineno-28-10"></a>
-</span><span id="__span-28-11"><a id="__codelineno-28-11" name="__codelineno-28-11" href="#__codelineno-28-11"></a>WEB_ENABLED=true
-</span><span id="__span-28-12"><a id="__codelineno-28-12" name="__codelineno-28-12" href="#__codelineno-28-12"></a>
-</span><span id="__span-28-13"><a id="__codelineno-28-13" name="__codelineno-28-13" href="#__codelineno-28-13"></a>SSH_ENABLED=true
-</span><span id="__span-28-14"><a id="__codelineno-28-14" name="__codelineno-28-14" href="#__codelineno-28-14"></a>SSH_LISTEN=:2222
-</span><span id="__span-28-15"><a id="__codelineno-28-15" name="__codelineno-28-15" href="#__codelineno-28-15"></a>SSH_KEY_FILE=auto
+<div class="language-text highlight"><pre><span></span><code><span id="__span-33-1"><a id="__codelineno-33-1" name="__codelineno-33-1" href="#__codelineno-33-1"></a>WG_INTERFACE=wg0
+</span><span id="__span-33-2"><a id="__codelineno-33-2" name="__codelineno-33-2" href="#__codelineno-33-2"></a>WG_LISTEN_PORT=13231
+</span><span id="__span-33-3"><a id="__codelineno-33-3" name="__codelineno-33-3" href="#__codelineno-33-3"></a>WG_ADDRESS=10.100.0.1/24
+</span><span id="__span-33-4"><a id="__codelineno-33-4" name="__codelineno-33-4" href="#__codelineno-33-4"></a>WG_SUBNET=10.100.0.0/24
+</span><span id="__span-33-5"><a id="__codelineno-33-5" name="__codelineno-33-5" href="#__codelineno-33-5"></a>WG_MTU=1420
+</span><span id="__span-33-6"><a id="__codelineno-33-6" name="__codelineno-33-6" href="#__codelineno-33-6"></a>
+</span><span id="__span-33-7"><a id="__codelineno-33-7" name="__codelineno-33-7" href="#__codelineno-33-7"></a>API_LISTEN=:9000
+</span><span id="__span-33-8"><a id="__codelineno-33-8" name="__codelineno-33-8" href="#__codelineno-33-8"></a>DATA_DIR=/var/lib/tanguard
+</span><span id="__span-33-9"><a id="__codelineno-33-9" name="__codelineno-33-9" href="#__codelineno-33-9"></a>EXTERNAL_NIC=auto
+</span><span id="__span-33-10"><a id="__codelineno-33-10" name="__codelineno-33-10" href="#__codelineno-33-10"></a>
+</span><span id="__span-33-11"><a id="__codelineno-33-11" name="__codelineno-33-11" href="#__codelineno-33-11"></a>WEB_ENABLED=true
+</span><span id="__span-33-12"><a id="__codelineno-33-12" name="__codelineno-33-12" href="#__codelineno-33-12"></a>
+</span><span id="__span-33-13"><a id="__codelineno-33-13" name="__codelineno-33-13" href="#__codelineno-33-13"></a>SSH_ENABLED=true
+</span><span id="__span-33-14"><a id="__codelineno-33-14" name="__codelineno-33-14" href="#__codelineno-33-14"></a>SSH_LISTEN=:2222
+</span><span id="__span-33-15"><a id="__codelineno-33-15" name="__codelineno-33-15" href="#__codelineno-33-15"></a>SSH_KEY_FILE=auto
+</span><span id="__span-33-16"><a id="__codelineno-33-16" name="__codelineno-33-16" href="#__codelineno-33-16"></a>
+</span><span id="__span-33-17"><a id="__codelineno-33-17" name="__codelineno-33-17" href="#__codelineno-33-17"></a>MESH_ENABLED=true
+</span><span id="__span-33-18"><a id="__codelineno-33-18" name="__codelineno-33-18" href="#__codelineno-33-18"></a>CONTROL_LISTEN=:7000
+</span><span id="__span-33-19"><a id="__codelineno-33-19" name="__codelineno-33-19" href="#__codelineno-33-19"></a>RELAY_LISTEN=:7001
 </span></code></pre></div>
 <p>Not every variable needs to be configured. TunGuard uses the defaults when a variable is not provided.</p>
 
@@ -2468,7 +2667,7 @@
     <div class="md-copyright__highlight">
       <p>
 &copy; <a href="https://github.com/TunGuard"><em>TunGuard</em></a><br/>
-<span>This project is licensed under Apache-2.0.</span><br/>
+<span>This project is licensed under MIT.</span><br/>
 <span>This project is not affiliated, associated, authorized, endorsed by, or in any way officially connected with Jason A. Donenfeld, ZX2C4 or Edge Security.</span><br/>
 <span>"WireGuard" and the "WireGuard" logo are registered trademarks of Jason A. Donenfeld.</span>
 </p>

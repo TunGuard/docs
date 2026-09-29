@@ -10,9 +10,6 @@
         <loc>https://tunguard.github.io/v2.2/getting-started/</loc>
       </url>
       <url>
-        <loc>https://tunguard.github.io/v2.2/advanced/api/</loc>
-      </url>
-      <url>
         <loc>https://tunguard.github.io/v2.2/advanced/config/conf/</loc>
       </url>
       <url>
@@ -50,6 +47,9 @@
       </url>
       <url>
         <loc>https://tunguard.github.io/v2.2/guides/cli/</loc>
+      </url>
+      <url>
+        <loc>https://tunguard.github.io/v2.2/guides/client/</loc>
       </url>
       <url>
         <loc>https://tunguard.github.io/v2.2/guides/clients/</loc>

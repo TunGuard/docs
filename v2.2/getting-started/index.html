@@ -6,7 +6,7 @@
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width,initial-scale=1">
       
-        <meta name="description" content="Advanced userspace WireGuard networking tool providing seamless P2P connections and public exposure without kernel drivers or extra installs.">
+        <meta name="description" content="Self-hosted overlay networking: direct peer-to-peer mesh, TCP relay, and WireGuard-compatible VPN from one control plane. No kernel drivers, no extra installs.">
       
       
         <meta name="author" content="TunGuard Team">
@@ -18,7 +18,7 @@
         <link rel="prev" href="../faq/">
       
       
-        <link rel="next" href="../advanced/api/">
+        <link rel="next" href="../advanced/config/conf/">
       
       
         
@@ -266,14 +266,27 @@
     
     
     
+      
+  
+  
+  
+  
+    
+      
+    
+    
+    
       <li class="md-tabs__item">
-        <a href="../advanced/api/" class="md-tabs__link">
+        <a href="../advanced/config/conf/" class="md-tabs__link">
           
   
   Advanced
 
         </a>
       </li>
+    
+  
+
     
   
 
@@ -611,6 +624,17 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#install-the-client" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Install the Client
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -677,33 +701,6 @@
   
   
   
-    <li class="md-nav__item">
-      <a href="../advanced/api/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-  API Reference
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
     
     
     
@@ -720,10 +717,10 @@
         
           
         
-        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4_2" >
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4_1" >
         
           
-          <label class="md-nav__link" for="__nav_4_2" id="__nav_4_2_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_4_1" id="__nav_4_1_label" tabindex="0">
             
   
   
@@ -740,8 +737,8 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_2_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_4_2">
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_1">
             <span class="md-nav__icon md-icon"></span>
             
   
@@ -834,10 +831,10 @@
         
           
         
-        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4_3" >
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4_2" >
         
           
-          <label class="md-nav__link" for="__nav_4_3" id="__nav_4_3_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_4_2" id="__nav_4_2_label" tabindex="0">
             
   
   
@@ -854,8 +851,8 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_3_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_4_3">
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_2">
             <span class="md-nav__icon md-icon"></span>
             
   
@@ -921,10 +918,10 @@
         
           
         
-        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4_4" >
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4_3" >
         
           
-          <label class="md-nav__link" for="__nav_4_4" id="__nav_4_4_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_4_3" id="__nav_4_3_label" tabindex="0">
             
   
   
@@ -941,8 +938,8 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_4_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_4_4">
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_3">
             <span class="md-nav__icon md-icon"></span>
             
   
@@ -1278,7 +1275,7 @@
   <span class="md-ellipsis">
     
   
-  P2P Connections
+  P2P Mesh
 
     
   </span>
@@ -1454,6 +1451,33 @@
     
   
   CLI
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../guides/client/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  TunGuard Client
 
     
   </span>
@@ -1654,6 +1678,17 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#install-the-client" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Install the Client
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -1724,7 +1759,12 @@
 <li><code>13231/UDP</code> — WireGuard</li>
 <li><code>9000/TCP</code> — Dashboard and API</li>
 <li><code>2222/TCP</code> — SSH Gateway, when enabled</li>
+<li><code>7000/TCP</code> — P2P control channel, used by the TunGuard client</li>
+<li><code>7001/UDP</code> — P2P rendezvous and relay</li>
 </ul>
+<p><code>7000/TCP</code> and <code>7001/UDP</code> are only needed if you plan to build a <a href="../examples/tutorials/p2p/">P2P
+mesh</a>. They are opened automatically; open them only when
+you intend to use them.</p>
 </div>
 <h2 id="installing-tunguard">Installing TunGuard<a class="headerlink" href="#installing-tunguard" title="Permanent link">⚓</a></h2>
 <h3 id="official-installer">Official Installer<a class="headerlink" href="#official-installer" title="Permanent link">⚓</a></h3>
@@ -1743,8 +1783,10 @@ There is no need to manually start the web server after installation.</p>
 <li><strong>Username:</strong> <code>admin</code></li>
 <li><strong>Password:</strong> <code>tanguard</code></li>
 </ul>
-<p>!!! note "Important Security Step"
-    You will be required to change the default password after your first login.</p>
+<div class="admonition warning">
+<p class="admonition-title">Important Security Step</p>
+<p>You will be required to change the default password after your first login.</p>
+</div>
 <hr />
 <h2 id="release-versions">Release Versions<a class="headerlink" href="#release-versions" title="Permanent link">⚓</a></h2>
 <p>TunGuard releases follow <a href="https://semver.org/">Semantic Versioning</a>.</p>
@@ -1756,19 +1798,31 @@ There is no need to manually start the web server after installation.</p>
 <ul>
 <li><a href="../guides/setup/">Dashboard</a></li>
 <li><a href="../guides/clients/">Peers</a></li>
+<li><a href="../examples/tutorials/p2p/">P2P Mesh</a></li>
+<li><a href="../guides/client/">TunGuard Client</a></li>
 <li><a href="../advanced/config/conf/">Configuration</a></li>
 <li><a href="../guides/admin/">SSH Gateway</a></li>
 <li><a href="../guides/api/">API</a></li>
 <li><a href="../guides/admin/">Backups</a></li>
 </ul>
-<p>!!! note "Updating TunGuard"
-    To update an existing installation you can click the release button on top right to  update on the dashboard  then for latest stable release, run:</p>
-<div class="language-text highlight"><pre><span></span><code>```bash
-curl -fsSL https://raw.githubusercontent.com/TunGuard/get/main/installer.sh | bash
-```
-
-The installer handles the update and restarts the TunGuard service.
-</code></pre></div>
+<div class="admonition note">
+<p class="admonition-title">Updating TunGuard</p>
+<p>To update an existing installation, run:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>curl<span class="w"> </span>-fsSL<span class="w"> </span>https://raw.githubusercontent.com/TunGuard/get/main/installer.sh<span class="w"> </span><span class="p">|</span><span class="w"> </span>bash
+</span></code></pre></div>
+<p>The installer replaces the binary, keeps your service configuration and your data
+directory, and restarts the service.</p>
+</div>
+<h2 id="install-the-client">Install the Client<a class="headerlink" href="#install-the-client" title="Permanent link">⚓</a></h2>
+<p>Devices that join a <a href="../examples/tutorials/p2p/">P2P mesh</a> also run a small client.
+Install it on each device with:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>curl<span class="w"> </span>-fsSL<span class="w"> </span>https://raw.githubusercontent.com/TunGuard/get/main/client.sh<span class="w"> </span><span class="p">|</span><span class="w"> </span>bash
+</span></code></pre></div>
+<p>Then enroll the device from the dashboard under <strong>P2P → Enroll device</strong> and run the
+command it shows you:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>tun<span class="w"> </span>YOUR_SERVER_IP<span class="w"> </span>YOUR_PSK
+</span></code></pre></div>
+<p>See <a href="../guides/client/">TunGuard Client</a> for the full client reference.</p>
 
   
 
@@ -1815,7 +1869,7 @@ The installer handles the update and restarts the TunGuard service.
     <div class="md-copyright__highlight">
       <p>
 &copy; <a href="https://github.com/TunGuard"><em>TunGuard</em></a><br/>
-<span>This project is licensed under Apache-2.0.</span><br/>
+<span>This project is licensed under MIT.</span><br/>
 <span>This project is not affiliated, associated, authorized, endorsed by, or in any way officially connected with Jason A. Donenfeld, ZX2C4 or Edge Security.</span><br/>
 <span>"WireGuard" and the "WireGuard" logo are registered trademarks of Jason A. Donenfeld.</span>
 </p>

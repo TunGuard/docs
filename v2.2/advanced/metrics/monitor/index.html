@@ -6,7 +6,7 @@
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width,initial-scale=1">
       
-        <meta name="description" content="Advanced userspace WireGuard networking tool providing seamless P2P connections and public exposure without kernel drivers or extra installs.">
+        <meta name="description" content="Self-hosted overlay networking: direct peer-to-peer mesh, TCP relay, and WireGuard-compatible VPN from one control plane. No kernel drivers, no extra installs.">
       
       
         <meta name="author" content="TunGuard Team">
@@ -266,14 +266,29 @@
     
     
     
+      
+  
+  
+  
+    
+  
+  
+    
+      
+    
+    
+    
       <li class="md-tabs__item md-tabs__item--active">
-        <a href="../../api/" class="md-tabs__link">
+        <a href="../../config/conf/" class="md-tabs__link">
           
   
   Advanced
 
         </a>
       </li>
+    
+  
+
     
   
 
@@ -546,33 +561,6 @@
   
   
   
-    <li class="md-nav__item">
-      <a href="../../api/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-  API Reference
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
     
     
     
@@ -592,10 +580,10 @@
         
           
         
-        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4_2" >
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4_1" >
         
           
-          <label class="md-nav__link" for="__nav_4_2" id="__nav_4_2_label" tabindex="">
+          <label class="md-nav__link" for="__nav_4_1" id="__nav_4_1_label" tabindex="">
             
   
   
@@ -612,8 +600,8 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_2_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_4_2">
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_1">
             <span class="md-nav__icon md-icon"></span>
             
   
@@ -709,10 +697,10 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_3" checked>
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_2" checked>
         
           
-          <label class="md-nav__link" for="__nav_4_3" id="__nav_4_3_label" tabindex="">
+          <label class="md-nav__link" for="__nav_4_2" id="__nav_4_2_label" tabindex="">
             
   
   
@@ -729,8 +717,8 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_3_label" aria-expanded="true">
-          <label class="md-nav__title" for="__nav_4_3">
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_4_2">
             <span class="md-nav__icon md-icon"></span>
             
   
@@ -930,10 +918,10 @@
         
           
         
-        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4_4" >
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4_3" >
         
           
-          <label class="md-nav__link" for="__nav_4_4" id="__nav_4_4_label" tabindex="">
+          <label class="md-nav__link" for="__nav_4_3" id="__nav_4_3_label" tabindex="">
             
   
   
@@ -950,8 +938,8 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_4_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_4_4">
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_3">
             <span class="md-nav__icon md-icon"></span>
             
   
@@ -1287,7 +1275,7 @@
   <span class="md-ellipsis">
     
   
-  P2P Connections
+  P2P Mesh
 
     
   </span>
@@ -1463,6 +1451,33 @@
     
   
   CLI
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../guides/client/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  TunGuard Client
 
     
   </span>
@@ -1706,8 +1721,16 @@
     
     
     
+      
+  
+  
+    
+    
+    
+    
+    
       <li class="md-path__item">
-        <a href="../../api/" class="md-path__link">
+        <a href="../../config/conf/" class="md-path__link">
           
   
   <span class="md-ellipsis">
@@ -1716,6 +1739,9 @@
 
         </a>
       </li>
+    
+  
+
     
   
 
@@ -1835,7 +1861,7 @@
 </span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="w">  </span>-H<span class="w"> </span><span class="s2">"X-API-Key: YOUR_API_KEY"</span><span class="w"> </span><span class="se">\</span>
 </span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="w">  </span>http://127.0.0.1:9000/api/status
 </span></code></pre></div>
-<p>See the <a href="../../api/">API</a> documentation for available endpoints and authentication.</p>
+<p>See the <a href="../../../guides/api/">API</a> documentation for available endpoints and authentication.</p>
 <h2 id="service-logs">Service Logs<a class="headerlink" href="#service-logs" title="Permanent link">⚓</a></h2>
 <p>For detailed events that are not represented in the dashboard, use the systemd logs:</p>
 <div class="language-sh highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>journalctl<span class="w"> </span>-u<span class="w"> </span>tanguard<span class="w"> </span>-f
@@ -1889,7 +1915,7 @@
     <div class="md-copyright__highlight">
       <p>
 &copy; <a href="https://github.com/TunGuard"><em>TunGuard</em></a><br/>
-<span>This project is licensed under Apache-2.0.</span><br/>
+<span>This project is licensed under MIT.</span><br/>
 <span>This project is not affiliated, associated, authorized, endorsed by, or in any way officially connected with Jason A. Donenfeld, ZX2C4 or Edge Security.</span><br/>
 <span>"WireGuard" and the "WireGuard" logo are registered trademarks of Jason A. Donenfeld.</span>
 </p>

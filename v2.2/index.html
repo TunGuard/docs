@@ -6,7 +6,7 @@
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width,initial-scale=1">
       
-        <meta name="description" content="Advanced userspace WireGuard networking tool providing seamless P2P connections and public exposure without kernel drivers or extra installs.">
+        <meta name="description" content="Self-hosted overlay networking: direct peer-to-peer mesh, TCP relay, and WireGuard-compatible VPN from one control plane. No kernel drivers, no extra installs.">
       
       
         <meta name="author" content="TunGuard Team">
@@ -264,14 +264,27 @@
     
     
     
+      
+  
+  
+  
+  
+    
+      
+    
+    
+    
       <li class="md-tabs__item">
-        <a href="./advanced/api/" class="md-tabs__link">
+        <a href="./advanced/config/conf/" class="md-tabs__link">
           
   
   Advanced
 
         </a>
       </li>
+    
+  
+
     
   
 
@@ -484,6 +497,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#what-tunguard-does" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        What TunGuard Does
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#contents" class="md-nav__link">
     <span class="md-ellipsis">
       <span class="md-typeset">
@@ -651,33 +675,6 @@
   
   
   
-    <li class="md-nav__item">
-      <a href="./advanced/api/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-  API Reference
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
     
     
     
@@ -694,10 +691,10 @@
         
           
         
-        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4_2" >
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4_1" >
         
           
-          <label class="md-nav__link" for="__nav_4_2" id="__nav_4_2_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_4_1" id="__nav_4_1_label" tabindex="0">
             
   
   
@@ -714,8 +711,8 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_2_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_4_2">
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_1">
             <span class="md-nav__icon md-icon"></span>
             
   
@@ -808,10 +805,10 @@
         
           
         
-        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4_3" >
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4_2" >
         
           
-          <label class="md-nav__link" for="__nav_4_3" id="__nav_4_3_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_4_2" id="__nav_4_2_label" tabindex="0">
             
   
   
@@ -828,8 +825,8 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_3_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_4_3">
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_2">
             <span class="md-nav__icon md-icon"></span>
             
   
@@ -895,10 +892,10 @@
         
           
         
-        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4_4" >
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4_3" >
         
           
-          <label class="md-nav__link" for="__nav_4_4" id="__nav_4_4_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_4_3" id="__nav_4_3_label" tabindex="0">
             
   
   
@@ -915,8 +912,8 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_4_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_4_4">
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_3">
             <span class="md-nav__icon md-icon"></span>
             
   
@@ -1252,7 +1249,7 @@
   <span class="md-ellipsis">
     
   
-  P2P Connections
+  P2P Mesh
 
     
   </span>
@@ -1447,6 +1444,33 @@
   
   
     <li class="md-nav__item">
+      <a href="./guides/client/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  TunGuard Client
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="./guides/clients/" class="md-nav__link">
         
   
@@ -1555,6 +1579,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#what-tunguard-does" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        What TunGuard Does
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#contents" class="md-nav__link">
     <span class="md-ellipsis">
       <span class="md-typeset">
@@ -1645,21 +1680,38 @@
   
 
 
-<h1 id="welcome-to-the-documentation-for-tunguard">Welcome to the Documentation for <code>Tunguard</code><a class="headerlink" href="#welcome-to-the-documentation-for-tunguard" title="Permanent link">⚓</a></h1>
+<h1 id="welcome-to-the-documentation-for-tunguard">Welcome to the Documentation for <code>TunGuard</code><a class="headerlink" href="#welcome-to-the-documentation-for-tunguard" title="Permanent link">⚓</a></h1>
 <div class="admonition info">
-<p class="admonition-title"> This Documentation is Versioned</p>
+<p class="admonition-title">This Documentation is Versioned</p>
 <p><strong>Make sure</strong> to select the correct version of this documentation! It should match the version of the image you are using. The default version corresponds to <a href="./getting-started/">the most recent stable release</a>.</p>
 </div>
-<p>This documentation provides you not only with the basic setup and configuration of <code>Tunguard</code> but also with advanced configuration, elaborate usage scenarios, detailed examples, hints and more.</p>
+<p>This documentation provides you not only with the basic setup and configuration of <code>TunGuard</code> but also with advanced configuration, elaborate usage scenarios, detailed examples, hints and more.</p>
 <h2 id="about">About<a class="headerlink" href="#about" title="Permanent link">⚓</a></h2>
-<p><code>Tunguard</code> is a lightweight, zero-dependency userspace networking utility designed for high-performance peer-to-peer connectivity and public endpoint exposure. Built around WireGuard's core protocols, TunGuard operates entirely in userspace—eliminating the need to install kernel drivers, run elevated system daemons, or execute system-wide VPN configurations. It allows developers and sysadmins to create secure, instant network overlays and expose internal services across NATs and firewalls seamlessly.</p>
+<p><code>TunGuard</code> is a self-hosted networking platform for connecting remote devices and exposing internal services. One server gives you three things: a direct peer-to-peer mesh between devices, a TCP relay for publishing services that run on them, and a WireGuard-compatible VPN for ordinary client access.</p>
+<p>The mesh and the relay are TunGuard's own protocols, not WireGuard. Devices sharing a group key discover each other automatically, punch a direct UDP path through NAT, and fall back to relaying through the server when no direct path can be opened — so traffic leaves the server path as soon as the peers can reach each other. The VPN half still produces standard WireGuard configurations and QR codes for any device that wants one.</p>
+<p>Everything runs in userspace, so there are no kernel modules to install, no <code>apt install wireguard</code>, and no container runtime. A small client binary keeps unattended devices on the mesh with no local configuration, and a web dashboard and API drive all of it.</p>
+<h2 id="what-tunguard-does">What TunGuard Does<a class="headerlink" href="#what-tunguard-does" title="Permanent link">⚓</a></h2>
+<p>Pick the part that matches what you are building.</p>
+<ul>
+<li><strong><a href="examples/tutorials/p2p/">P2P Mesh</a></strong> — devices sharing a group key discover each
+  other, punch a direct UDP path through NAT, and relay through the server only when a
+  direct path is not possible. TunGuard's own protocol; no VPN involved.</li>
+<li><strong><a href="guides/client/">TunGuard Client</a></strong> — one small binary that puts an unattended
+  device on the mesh. No config file, no routes, no local state beyond a device id.</li>
+<li><strong><a href="guides/clients/">VPN Access</a></strong> — standard WireGuard configurations and QR codes,
+  generated from the dashboard for phones, laptops, and routers.</li>
+<li><strong><a href="guides/api/#tcp-relay-trp">TCP Relay</a></strong> — publish a service running on a mesh
+  node to the internet on a port of your choosing.</li>
+<li><strong><a href="guides/api/">Dashboard and API</a></strong> — everything above is drivable from a browser or
+  from <code>curl</code>.</li>
+</ul>
 <h2 id="contents">Contents<a class="headerlink" href="#contents" title="Permanent link">⚓</a></h2>
 <h3 id="getting-started">Getting Started<a class="headerlink" href="#getting-started" title="Permanent link">⚓</a></h3>
-<p>If you're new to Tunguard, make sure to read the <a href="./getting-started/"><em>Getting Started</em> chapter</a> first. If you want to look at examples for new vps, we have an <a href="./examples/tutorials/basic-installation/"><em>Examples</em> page</a>.</p>
+<p>If you're new to TunGuard, make sure to read the <a href="./getting-started/"><em>Getting Started</em> chapter</a> first. If you want to look at examples for a new VPS, we have an <a href="./examples/tutorials/basic-installation/"><em>Examples</em> page</a>.</p>
 <h3 id="contributing">Contributing<a class="headerlink" href="#contributing" title="Permanent link">⚓</a></h3>
 <p>We are always happy to welcome new contributors. For guidelines and entrypoints please have a look at the <a href="./contributing/issues-and-pull-requests/">Contributing section</a>.</p>
 <h3 id="migration">Migration<a class="headerlink" href="#migration" title="Permanent link">⚓</a></h3>
-<p>If you are migrating from an older version of <code>wg-easy</code>, please read the <a href="./advanced/migrate/"><em>Migration</em> chapter</a>.</p>
+<p>If you are upgrading from an older version of <code>TunGuard</code>, please read the <a href="./advanced/migrate/"><em>Migration</em> chapter</a>.</p>
 
   
 
@@ -1706,7 +1758,7 @@
     <div class="md-copyright__highlight">
       <p>
 &copy; <a href="https://github.com/TunGuard"><em>TunGuard</em></a><br/>
-<span>This project is licensed under Apache-2.0.</span><br/>
+<span>This project is licensed under MIT.</span><br/>
 <span>This project is not affiliated, associated, authorized, endorsed by, or in any way officially connected with Jason A. Donenfeld, ZX2C4 or Edge Security.</span><br/>
 <span>"WireGuard" and the "WireGuard" logo are registered trademarks of Jason A. Donenfeld.</span>
 </p>

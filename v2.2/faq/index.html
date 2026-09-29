@@ -6,7 +6,7 @@
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width,initial-scale=1">
       
-        <meta name="description" content="Advanced userspace WireGuard networking tool providing seamless P2P connections and public exposure without kernel drivers or extra installs.">
+        <meta name="description" content="Self-hosted overlay networking: direct peer-to-peer mesh, TCP relay, and WireGuard-compatible VPN from one control plane. No kernel drivers, no extra installs.">
       
       
         <meta name="author" content="TunGuard Team">
@@ -266,14 +266,27 @@
     
     
     
+      
+  
+  
+  
+  
+    
+      
+    
+    
+    
       <li class="md-tabs__item">
-        <a href="../advanced/api/" class="md-tabs__link">
+        <a href="../advanced/config/conf/" class="md-tabs__link">
           
   
   Advanced
 
         </a>
       </li>
+    
+  
+
     
   
 
@@ -684,6 +697,61 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#how-do-i-build-a-p2p-mesh" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        How do I build a P2P mesh?
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#is-the-p2p-mesh-a-vpn" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Is the P2P mesh a VPN?
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#my-mesh-devices-are-online-but-see-no-peers" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        My mesh devices are online but see no peers
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#my-mesh-links-are-online-but-never-go-direct" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        My mesh links are online but never go direct
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#does-mesh-traffic-between-my-devices-get-encrypted" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Does mesh traffic between my devices get encrypted?
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#where-can-i-report-a-bug" class="md-nav__link">
     <span class="md-ellipsis">
       <span class="md-typeset">
@@ -786,33 +854,6 @@
   
   
   
-    <li class="md-nav__item">
-      <a href="../advanced/api/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-  API Reference
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
     
     
     
@@ -829,10 +870,10 @@
         
           
         
-        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4_2" >
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4_1" >
         
           
-          <label class="md-nav__link" for="__nav_4_2" id="__nav_4_2_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_4_1" id="__nav_4_1_label" tabindex="0">
             
   
   
@@ -849,8 +890,8 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_2_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_4_2">
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_1">
             <span class="md-nav__icon md-icon"></span>
             
   
@@ -943,10 +984,10 @@
         
           
         
-        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4_3" >
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4_2" >
         
           
-          <label class="md-nav__link" for="__nav_4_3" id="__nav_4_3_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_4_2" id="__nav_4_2_label" tabindex="0">
             
   
   
@@ -963,8 +1004,8 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_3_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_4_3">
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_2">
             <span class="md-nav__icon md-icon"></span>
             
   
@@ -1030,10 +1071,10 @@
         
           
         
-        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4_4" >
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4_3" >
         
           
-          <label class="md-nav__link" for="__nav_4_4" id="__nav_4_4_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_4_3" id="__nav_4_3_label" tabindex="0">
             
   
   
@@ -1050,8 +1091,8 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_4_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_4_4">
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_3">
             <span class="md-nav__icon md-icon"></span>
             
   
@@ -1387,7 +1428,7 @@
   <span class="md-ellipsis">
     
   
-  P2P Connections
+  P2P Mesh
 
     
   </span>
@@ -1563,6 +1604,33 @@
     
   
   CLI
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../guides/client/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  TunGuard Client
 
     
   </span>
@@ -1862,6 +1930,61 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#how-do-i-build-a-p2p-mesh" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        How do I build a P2P mesh?
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#is-the-p2p-mesh-a-vpn" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Is the P2P mesh a VPN?
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#my-mesh-devices-are-online-but-see-no-peers" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        My mesh devices are online but see no peers
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#my-mesh-links-are-online-but-never-go-direct" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        My mesh links are online but never go direct
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#does-mesh-traffic-between-my-devices-get-encrypted" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Does mesh traffic between my devices get encrypted?
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#where-can-i-report-a-bug" class="md-nav__link">
     <span class="md-ellipsis">
       <span class="md-typeset">
@@ -1964,8 +2087,19 @@
 <td style="text-align: right;"><code>2222</code></td>
 <td>TCP</td>
 </tr>
+<tr>
+<td>P2P control channel</td>
+<td style="text-align: right;"><code>7000</code></td>
+<td>TCP</td>
+</tr>
+<tr>
+<td>P2P rendezvous/relay</td>
+<td style="text-align: right;"><code>7001</code></td>
+<td>UDP</td>
+</tr>
 </tbody>
 </table>
+<p>The last two are only needed for the <a href="../examples/tutorials/p2p/">P2P mesh</a>.</p>
 <h2 id="how-do-i-create-a-wireguard-peer">How do I create a WireGuard peer?<a class="headerlink" href="#how-do-i-create-a-wireguard-peer" title="Permanent link">⚓</a></h2>
 <p>Open <strong>Peers</strong> in the dashboard and create a new peer.</p>
 <p>TunGuard can generate the client configuration and QR code.</p>
@@ -2038,6 +2172,33 @@
 <div class="language-text highlight"><pre><span></span><code><span id="__span-14-1"><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>Authorization: Bearer YOUR_API_KEY
 </span></code></pre></div>
 <p>The <code>/api/health</code> endpoint does not require authentication.</p>
+<h2 id="how-do-i-build-a-p2p-mesh">How do I build a P2P mesh?<a class="headerlink" href="#how-do-i-build-a-p2p-mesh" title="Permanent link">⚓</a></h2>
+<p>Install the client on each device:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-15-1"><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a>curl<span class="w"> </span>-fsSL<span class="w"> </span>https://raw.githubusercontent.com/TunGuard/get/main/client.sh<span class="w"> </span><span class="p">|</span><span class="w"> </span>bash
+</span></code></pre></div>
+<p>Then open <strong>P2P → Enroll device</strong> in the dashboard and run the command it shows:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-16-1"><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a>tun<span class="w"> </span>YOUR_SERVER_IP<span class="w"> </span>YOUR_PSK
+</span></code></pre></div>
+<p>Nothing else is needed. Devices sharing a PSK discover each other and punch a direct
+path automatically. See <a href="../examples/tutorials/p2p/">P2P Mesh</a>.</p>
+<h2 id="is-the-p2p-mesh-a-vpn">Is the P2P mesh a VPN?<a class="headerlink" href="#is-the-p2p-mesh-a-vpn" title="Permanent link">⚓</a></h2>
+<p>No. The mesh moves UDP datagrams directly between devices and has no tunnel, no
+assigned addresses, and no WireGuard underneath. A device on the mesh never receives a
+<code>wg0</code> address. If you need a VPN, use a peer instead — the two features are independent
+and can run at the same time.</p>
+<h2 id="my-mesh-devices-are-online-but-see-no-peers">My mesh devices are online but see no peers<a class="headerlink" href="#my-mesh-devices-are-online-but-see-no-peers" title="Permanent link">⚓</a></h2>
+<p>They are almost certainly not sharing a PSK. Peers only ever discover other devices in
+their own group, so two different PSKs means two separate meshes that cannot see each
+other. Compare the group keys on the P2P page.</p>
+<h2 id="my-mesh-links-are-online-but-never-go-direct">My mesh links are online but never go direct<a class="headerlink" href="#my-mesh-links-are-online-but-never-go-direct" title="Permanent link">⚓</a></h2>
+<p>A link only turns direct once a packet genuinely arrives from the peer. When a NAT or
+firewall blocks the hole punch it stays relayed, which is normal and still carries
+traffic — the server just stays in the path. Check that <code>7001/UDP</code> is open and
+bidirectional on the server. See
+<a href="../examples/tutorials/p2p/#when-the-relay-is-used">When the relay is used</a>.</p>
+<h2 id="does-mesh-traffic-between-my-devices-get-encrypted">Does mesh traffic between my devices get encrypted?<a class="headerlink" href="#does-mesh-traffic-between-my-devices-get-encrypted" title="Permanent link">⚓</a></h2>
+<p>Not by TunGuard itself — the client relays datagrams as they arrive. If you need
+confidentiality on the direct path, run a WireGuard peer over the mesh.</p>
 <h2 id="where-can-i-report-a-bug">Where can I report a bug?<a class="headerlink" href="#where-can-i-report-a-bug" title="Permanent link">⚓</a></h2>
 <p>Open an issue in the TunGuard repository.</p>
 <p>Include:</p>
@@ -2093,7 +2254,7 @@
     <div class="md-copyright__highlight">
       <p>
 &copy; <a href="https://github.com/TunGuard"><em>TunGuard</em></a><br/>
-<span>This project is licensed under Apache-2.0.</span><br/>
+<span>This project is licensed under MIT.</span><br/>
 <span>This project is not affiliated, associated, authorized, endorsed by, or in any way officially connected with Jason A. Donenfeld, ZX2C4 or Edge Security.</span><br/>
 <span>"WireGuard" and the "WireGuard" logo are registered trademarks of Jason A. Donenfeld.</span>
 </p>
