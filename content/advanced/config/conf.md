@@ -24,7 +24,11 @@ Most installations can use the default values. Change a setting when you need a 
 | `SSH_ENABLED` | `false` | Enables the SSH gateway. Can also be enabled with `-ssh` |
 | `SSH_LISTEN` | `:2222` | SSH gateway listen address |
 | `SSH_KEY_FILE` | `auto` | SSH host key path. Automatically generated when missing |
-| `TUNGARD_API_KEY` | — | API key for PHP or script integrations. Can also be supplied per request |
+| `MESH_ENABLED` | `true` | Enables the P2P control plane. See [P2P Control Plane](#p2p-control-plane) |
+| `CONTROL_LISTEN` | `:7000` | TCP control listener used by the P2P client |
+| `RELAY_LISTEN` | `:7001` | UDP rendezvous and relay listener for the P2P mesh |
+| `CONTROL_TIMEOUT_S` | `10` | Seconds allowed for a P2P client handshake |
+| `MESH_DATA_DIR` | `DATA_DIR` | Where the P2P node registry is stored |
 
 ## WireGuard Settings
 
@@ -289,19 +293,17 @@ SSH_KEY_FILE=/var/lib/tanguard/ssh_host_key
 
 ## API Key
 
-### `TUNGARD_API_KEY`
+The API key is not set through an environment variable. It is generated from the
+dashboard under **Settings → API Key**, or with:
 
-Sets an API key that can be used by applications and scripts.
-
-Example:
-
-```text
-TUNGARD_API_KEY=your-api-key
+```sh
+curl -X POST \
+  -u admin:PASSWORD \
+  http://127.0.0.1:9000/api/key/regenerate
 ```
 
-The API key can also be supplied with individual API requests.
-
-For example:
+It is stored in `api_key.json` inside `DATA_DIR`, and can then be supplied with
+individual API requests:
 
 ```sh
 curl \
@@ -309,7 +311,75 @@ curl \
   http://127.0.0.1:9000/api/peers
 ```
 
-See the [API](../api.md) documentation for authentication and available endpoints.
+Regenerating the key invalidates the previous one immediately.
+
+See the [API](../../guides/api.md) documentation for authentication and available
+endpoints.
+
+## P2P Control Plane
+
+The P2P mesh runs as a second subsystem alongside WireGuard. It is enabled by default
+and needs no configuration, but these variables control it.
+
+### `MESH_ENABLED`
+
+Enables the P2P control plane.
+
+Default:
+
+```text
+true
+```
+
+With `MESH_ENABLED=false` the control listener and the rendezvous hub are never
+started, and every `/api/mesh/*` endpoint returns `503 tun control plane is disabled`.
+Starting with `-mesh-only` while the mesh is disabled makes the process refuse to run.
+
+### `CONTROL_LISTEN`
+
+The TCP address that clients dial out to. This is the port that goes in the
+`tun <server-ip> <psk>` command.
+
+Default:
+
+```text
+:7000
+```
+
+### `RELAY_LISTEN`
+
+The UDP address of the rendezvous hub, where clients register their public endpoint and
+discover each other.
+
+Default:
+
+```text
+:7001
+```
+
+Both ports must be reachable from the internet. If the hub port is unreachable, clients
+still connect and appear online but never discover each other, so no link can go
+direct.
+
+### `CONTROL_TIMEOUT_S`
+
+How long, in seconds, a client has to complete its handshake after connecting.
+
+Default:
+
+```text
+10
+```
+
+### `MESH_DATA_DIR`
+
+Where the mesh node registry is stored.
+
+Default:
+
+```text
+(the value of DATA_DIR)
+```
 
 ## Example Configuration
 
@@ -331,6 +401,10 @@ WEB_ENABLED=true
 SSH_ENABLED=true
 SSH_LISTEN=:2222
 SSH_KEY_FILE=auto
+
+MESH_ENABLED=true
+CONTROL_LISTEN=:7000
+RELAY_LISTEN=:7001
 ```
 
 Not every variable needs to be configured. TunGuard uses the defaults when a variable is not provided.

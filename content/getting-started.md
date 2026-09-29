@@ -36,6 +36,12 @@ The default ports are:
 - `13231/UDP` — WireGuard
 - `9000/TCP` — Dashboard and API
 - `2222/TCP` — SSH Gateway, when enabled
+- `7000/TCP` — P2P control channel, used by the TunGuard client
+- `7001/UDP` — P2P rendezvous and relay
+
+`7000/TCP` and `7001/UDP` are only needed if you plan to build a [P2P
+mesh](examples/tutorials/p2p.md). They are opened automatically; open them only when
+you intend to use them.
 
 ///
 
@@ -67,8 +73,11 @@ The default login credentials are:
 * **Username:** `admin`
 * **Password:** `tanguard`
 
-!!! note "Important Security Step"
-    You will be required to change the default password after your first login.
+/// warning | Important Security Step
+
+You will be required to change the default password after your first login.
+
+///
 
 ---
 
@@ -88,16 +97,40 @@ Once TunGuard is installed, continue with the relevant guide:
 
 * [Dashboard](guides/setup.md)
 * [Peers](guides/clients.md)
+* [P2P Mesh](examples/tutorials/p2p.md)
+* [TunGuard Client](guides/client.md)
 * [Configuration](advanced/config/conf.md)
 * [SSH Gateway](guides/admin.md)
 * [API](guides/api.md)
 * [Backups](guides/admin.md)
 
-!!! note "Updating TunGuard"
-    To update an existing installation you can click the release button on top right to  update on the dashboard  then for latest stable release, run:
+/// note | Updating TunGuard
 
-    ```bash
-    curl -fsSL https://raw.githubusercontent.com/TunGuard/get/main/installer.sh | bash
-    ```
+To update an existing installation, run:
 
-    The installer handles the update and restarts the TunGuard service.
+```bash
+curl -fsSL https://raw.githubusercontent.com/TunGuard/get/main/installer.sh | bash
+```
+
+The installer replaces the binary, keeps your service configuration and your data
+directory, and restarts the service.
+
+///
+
+## Install the Client
+
+Devices that join a [P2P mesh](examples/tutorials/p2p.md) also run a small client.
+Install it on each device with:
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/TunGuard/get/main/client.sh | bash
+```
+
+Then enroll the device from the dashboard under **P2P → Enroll device** and run the
+command it shows you:
+
+```bash
+tun YOUR_SERVER_IP YOUR_PSK
+```
+
+See [TunGuard Client](guides/client.md) for the full client reference.
