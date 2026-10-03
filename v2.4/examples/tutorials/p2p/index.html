@@ -1,0 +1,2489 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Self-hosted overlay networking: direct peer-to-peer mesh, TCP relay, and WireGuard-compatible VPN from one control plane. No kernel drivers, no extra installs.">
+      
+      
+        <meta name="author" content="TunGuard Team">
+      
+      
+        <link rel="canonical" href="https://tunguard.github.io/v2.4/examples/tutorials/p2p/">
+      
+      
+        <link rel="prev" href="../basic-installation/">
+      
+      
+        <link rel="next" href="../router-provision/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../../assets/logo/favicon.png">
+      <meta name="generator" content="zensical-0.0.62">
+    
+    
+      
+        <title>P2P Mesh - TunGuard</title>
+      
+    
+    
+      
+        
+      
+      <link rel="stylesheet" href="../../../assets/stylesheets/modern/main.ce62732f.min.css">
+      
+        
+          
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/modern/palette.812a03bb.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=JetBrains+Mono:300,300i,400,400i,500,500i,700,700i%7CFira+Code:400,400i,700,700i&amp;display=fallback">
+        <style>:root{--md-text-font:"JetBrains Mono";--md-code-font:"Fira Code"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../..",location),__md_scope.pathname.endsWith("/")||(__md_scope=new URL(__md_scope.pathname+"/",location)),__md_hash=e=>[...e].reduce(((e,t)=>(e<<5)-e+t.charCodeAt(0)),0),__md_get=(e,t=localStorage,_=__md_scope)=>JSON.parse(t.getItem(_.pathname+"."+e)),__md_set=(e,t,_=localStorage,a=__md_scope)=>{try{_.setItem(a.pathname+"."+e,JSON.stringify(t))}catch(e){}},document.documentElement.setAttribute("data-platform",navigator.platform)</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer" aria-label="Navigation"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#the-two-ports" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      <div data-md-color-scheme="default" data-md-component="outdated" hidden>
+        
+      </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="TunGuard" class="md-header__button md-logo" aria-label="TunGuard" data-md-component="logo">
+      
+  <img src="../../../assets/logo/logo.png" alt="TunGuard">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer" aria-label="Navigation">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-menu" viewBox="0 0 24 24"><path d="M4 5h16M4 12h16M4 19h16"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            TunGuard
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              P2P Mesh
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-sun-moon" viewBox="0 0 24 24"><path d="M12 2v2M14.837 16.385a6 6 0 1 1-7.223-7.222c.624-.147.97.66.715 1.248a4 4 0 0 0 5.26 5.259c.589-.255 1.396.09 1.248.715M16 12a4 4 0 0 0-4-4M19 5l-1.256 1.256M20 12h2"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="blue-grey" data-md-color-accent="teal"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_2" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="teal" data-md-color-accent="cyan"  aria-label="Switch to system preference"  type="radio" name="__palette" id="__palette_2">
+    
+      <label class="md-header__button md-icon" title="Switch to system preference" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-moon" viewBox="0 0 24 24"><path d="M20.985 12.486a9 9 0 1 1-9.473-9.472c.405-.022.617.46.402.803a6 6 0 0 0 8.268 8.268c.344-.215.825-.004.803.401"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search" aria-label="Search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-search" viewBox="0 0 24 24"><path d="m21 21-4.34-4.34"/><circle cx="11" cy="11" r="8"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog" aria-label="Search">
+  <button type="button" class="md-search__button">
+    Search
+  </button>
+</div>
+      
+    
+    <div class="md-header__source">
+      
+        <a href="https://github.com/TunGuard/tanguard-binary" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.3.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2026 Fonticons, Inc.--><path fill="currentColor" d="M216.5 362.5c-66-8-112.5-55.5-112.5-117 0-25 9-52 24-70-6.5-16.5-5.5-51.5 2-66 20-2.5 47 8 63 22.5 19-6 39-9 63.5-9s44.5 3 62.5 8.5c15.5-14 43-24.5 63-22 7 13.5 8 48.5 1.5 65.5 16 19 24.5 44.5 24.5 70.5 0 61.5-46.5 108-113.5 116.5 17 11 28.5 35 28.5 62.5v52c0 15 12.5 23.5 27.5 17.5C441 459.5 512 369 512 257 512 115.5 397 0 255.5 0S0 115.5 0 257c0 111 70.5 203 165.5 237.5 13.5 5 26.5-4 26.5-17.5v-40c-7 3-16 5-24 5-33 0-52.5-18-66.5-51.5-5.5-13.5-11.5-21.5-23-23-6-.5-8-3-8-6 0-6 10-10.5 20-10.5 14.5 0 27 9 40 27.5 10 14.5 20.5 21 33 21s20.5-4.5 32-16c8.5-8.5 15-16 21-21"/></svg>
+  </div>
+  <div class="md-source__repository">
+    TunGuard/tanguard-binary
+  </div>
+</a>
+      
+    </div>
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../.." class="md-tabs__link">
+        
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../faq/" class="md-tabs__link">
+        
+  
+  FAQ
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../getting-started/" class="md-tabs__link">
+        
+  
+  Getting Started
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+      
+    
+    
+    
+      
+  
+  
+  
+  
+    
+      
+    
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../advanced/config/conf/" class="md-tabs__link">
+          
+  
+  Advanced
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+      
+    
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../contributing/general/" class="md-tabs__link">
+          
+  
+  Contributing
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+      
+    
+    
+    
+      
+  
+  
+  
+    
+  
+  
+    
+      
+    
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../basic-installation/" class="md-tabs__link">
+          
+  
+  Examples
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+      
+    
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../guides/admin/" class="md-tabs__link">
+          
+  
+  Guides
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="TunGuard" class="md-nav__button md-logo" aria-label="TunGuard" data-md-component="logo">
+      
+  <img src="../../../assets/logo/logo.png" alt="TunGuard">
+
+    </a>
+    TunGuard
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/TunGuard/tanguard-binary" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.3.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2026 Fonticons, Inc.--><path fill="currentColor" d="M216.5 362.5c-66-8-112.5-55.5-112.5-117 0-25 9-52 24-70-6.5-16.5-5.5-51.5 2-66 20-2.5 47 8 63 22.5 19-6 39-9 63.5-9s44.5 3 62.5 8.5c15.5-14 43-24.5 63-22 7 13.5 8 48.5 1.5 65.5 16 19 24.5 44.5 24.5 70.5 0 61.5-46.5 108-113.5 116.5 17 11 28.5 35 28.5 62.5v52c0 15 12.5 23.5 27.5 17.5C441 459.5 512 369 512 257 512 115.5 397 0 255.5 0S0 115.5 0 257c0 111 70.5 203 165.5 237.5 13.5 5 26.5-4 26.5-17.5v-40c-7 3-16 5-24 5-33 0-52.5-18-66.5-51.5-5.5-13.5-11.5-21.5-23-23-6-.5-8-3-8-6 0-6 10-10.5 20-10.5 14.5 0 27 9 40 27.5 10 14.5 20.5 21 33 21s20.5-4.5 32-16c8.5-8.5 15-16 21-21"/></svg>
+  </div>
+  <div class="md-source__repository">
+    TunGuard/tanguard-binary
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Home
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../faq/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  FAQ
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../getting-started/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Getting Started
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Advanced
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+  Advanced
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_1" id="__nav_4_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Config
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+  Config
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../advanced/config/conf/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Configuration
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../advanced/config/openwrt/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  OpenWrt
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_2" id="__nav_4_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Metrics
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+  Metrics
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../advanced/metrics/monitor/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Monitoring
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_3" id="__nav_4_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Migrate
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+  Migrate
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../advanced/migrate/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Migrate
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Contributing
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+  Contributing
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../contributing/general/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  General Information
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../contributing/issues-and-pull-requests/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Issues and Pull Requests
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../contributing/translation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Translation
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Examples
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+  Examples
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6_1" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_6_1" id="__nav_6_1_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Tutorials
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_6_1_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_6_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+  Tutorials
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../basic-installation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Public Access
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  P2P Mesh
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="././" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  P2P Mesh
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+
+<nav class="md-nav md-nav--secondary" aria-label="On this page">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      On this page
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#the-two-ports" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        The two ports
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#install-the-client" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Install the client
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#enroll-a-device" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Enroll a device
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#what-happens-next" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        What happens next
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#how-a-direct-path-is-opened" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        How a direct path is opened
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#when-the-relay-is-used" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        When the relay is used
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#dashboard" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Dashboard
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#enrolling-from-the-api" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Enrolling from the API
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#limits" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Limits
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#how-it-works-on-the-wire" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        How it works on the wire
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#running-the-mesh-without-wireguard" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Running the mesh without WireGuard
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#verify-a-link" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Verify a link
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#troubleshooting" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Troubleshooting
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#security" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Security
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#next-steps" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Next steps
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../router-provision/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Router Provision
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Guides
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+  Guides
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../guides/admin/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Admin Panel
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../guides/api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  API Reference
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../guides/cli/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  CLI
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../guides/client/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  TunGuard Client
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../guides/clients/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Edit Peer
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../guides/setup/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Setup
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  
+                    
+                    
+                    
+                    
+                      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+                      <div class="md-sidebar-button__wrapper">
+                        <label class="md-sidebar-button" for="__toc"></label>
+                      </div>
+                    
+                  
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--secondary" aria-label="On this page">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      On this page
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#the-two-ports" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        The two ports
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#install-the-client" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Install the client
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#enroll-a-device" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Enroll a device
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#what-happens-next" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        What happens next
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#how-a-direct-path-is-opened" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        How a direct path is opened
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#when-the-relay-is-used" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        When the relay is used
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#dashboard" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Dashboard
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#enrolling-from-the-api" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Enrolling from the API
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#limits" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Limits
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#how-it-works-on-the-wire" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        How it works on the wire
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#running-the-mesh-without-wireguard" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Running the mesh without WireGuard
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#verify-a-link" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Verify a link
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#troubleshooting" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Troubleshooting
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#security" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Security
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#next-steps" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Next steps
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+                
+
+
+
+  
+
+
+  <nav class="md-path" aria-label="Navigation" >
+    <ol class="md-path__list">
+      
+        
+  
+  
+    <li class="md-path__item">
+      <a href="../../.." class="md-path__link">
+        
+  
+  <span class="md-ellipsis">
+    Home
+  </span>
+
+      </a>
+    </li>
+  
+
+      
+      
+        
+  
+  
+    
+    
+    
+    
+    
+      
+  
+  
+    
+    
+    
+    
+    
+      <li class="md-path__item">
+        <a href="../basic-installation/" class="md-path__link">
+          
+  
+  <span class="md-ellipsis">
+    Examples
+  </span>
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+    
+    
+    
+    
+    
+      <li class="md-path__item">
+        <a href="../basic-installation/" class="md-path__link">
+          
+  
+  <span class="md-ellipsis">
+    Tutorials
+  </span>
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ol>
+  </nav>
+
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+  
+    <a href="https://github.com/TunGuard/tanguard-binary/edit/main/docs/content/examples/tutorials/p2p.md" title="Edit this page" class="md-content__button md-icon" rel="edit">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-file-pen" viewBox="0 0 24 24"><path d="M12.659 22H18a2 2 0 0 0 2-2V8a2.4 2.4 0 0 0-.706-1.706l-3.588-3.588A2.4 2.4 0 0 0 14 2H6a2 2 0 0 0-2 2v9.34"/><path d="M14 2v5a1 1 0 0 0 1 1h5M10.378 12.622a1 1 0 0 1 3 3.003L8.36 20.637a2 2 0 0 1-.854.506l-2.867.837a.5.5 0 0 1-.62-.62l.836-2.869a2 2 0 0 1 .506-.853z"/></svg>
+    </a>
+  
+  
+    
+      
+    
+    <a href="https://github.com/TunGuard/tanguard-binary/raw/main/docs/content/examples/tutorials/p2p.md" title="View source of this page" class="md-content__button md-icon">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-file-code-2" viewBox="0 0 24 24"><path d="M4 12.15V4a2 2 0 0 1 2-2h8a2.4 2.4 0 0 1 1.706.706l3.588 3.588A2.4 2.4 0 0 1 20 8v12a2 2 0 0 1-2 2h-3.35"/><path d="M14 2v5a1 1 0 0 0 1 1h5M5 16l-3 3 3 3M9 22l3-3-3-3"/></svg>
+    </a>
+  
+
+
+  <h1 id="__skip">P2P Mesh</h1>
+
+<p>TunGuard can run a peer-to-peer mesh between remote devices. The server introduces
+the devices and hands each one the address of the others; the devices then talk to
+each other directly, and the server is only used again if a direct path cannot be
+opened.</p>
+<p>This is a different mechanism from the WireGuard VPN. Peers on the <strong>Peers</strong> page get
+a WireGuard configuration and join the VPN subnet. Devices on the <strong>P2P</strong> page run
+the TunGuard <em>client</em> and form a mesh of direct UDP paths between themselves. Both can
+run on the same server at the same time.</p>
+<div class="admonition note">
+<p class="admonition-title">Two different things</p>
+<p>WireGuard peers and P2P mesh nodes are unrelated. A mesh node never receives a
+<code>wg0</code> address, and a WireGuard peer never appears on the P2P page. What they share
+is the TunGuard server that runs both subsystems.</p>
+</div>
+<h2 id="the-two-ports">The two ports<a class="headerlink" href="#the-two-ports" title="Permanent link">⚓</a></h2>
+<p>The mesh control plane is two sockets, both opened by the server:</p>
+<table>
+<thead>
+<tr>
+<th>Port</th>
+<th>Protocol</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>7000/TCP</code></td>
+<td><code>CONTROL_LISTEN</code></td>
+<td>The control channel every client dials out to. This is the port you put in the client command.</td>
+</tr>
+<tr>
+<td><code>7001/UDP</code></td>
+<td><code>RELAY_LISTEN</code></td>
+<td>The rendezvous hub. Clients register their public endpoint here and ask who else is online.</td>
+</tr>
+</tbody>
+</table>
+<p>Both must be reachable from the internet. The client only ever makes <em>outbound</em>
+connections, so it works from behind NAT — but the server has to be able to answer on
+both ports.</p>
+<div class="admonition warning">
+<p class="admonition-title">Open both ports</p>
+<p>If <code>7001/UDP</code> is blocked, clients can still connect and appear online, but they can
+never learn each other's addresses. Every link then stays relayed at best, and in
+practice nothing gets discovered. See <a href="#when-links-stay-relayed">When links stay
+relayed</a>.</p>
+</div>
+<h2 id="install-the-client">Install the client<a class="headerlink" href="#install-the-client" title="Permanent link">⚓</a></h2>
+<p>Every device that joins the mesh needs the TunGuard client. The installer picks the
+right binary for the machine, verifies its SHA-256 checksum, and links it as <code>tun</code>:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>curl<span class="w"> </span>-fsSL<span class="w"> </span>https://raw.githubusercontent.com/TunGuard/get/main/client.sh<span class="w"> </span><span class="p">|</span><span class="w"> </span>bash
+</span></code></pre></div>
+<p>This installs to <code>~/.local/bin/tun</code> on Linux and macOS, and to <code>$PREFIX/bin/tun</code> on
+Termux. If that directory is not on your <code>PATH</code> the installer tells you what to add.</p>
+<p>Supported platforms:</p>
+<table>
+<thead>
+<tr>
+<th>Platform</th>
+<th>Architectures</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Linux</td>
+<td><code>x86_64</code>, <code>arm64</code></td>
+</tr>
+<tr>
+<td>macOS</td>
+<td><code>x86_64</code>, <code>arm64</code></td>
+</tr>
+<tr>
+<td>Windows</td>
+<td><code>x86_64</code>, <code>i686</code></td>
+</tr>
+<tr>
+<td>Android / Termux</td>
+<td><code>arm64-v8a</code>, <code>armeabi-v7a</code>, <code>x86_64</code></td>
+</tr>
+</tbody>
+</table>
+<p>The client is a single static binary with no runtime dependencies. It is <em>not</em> a
+<code>WireGuard</code> client and does not need a <code>tun</code> device, a kernel module, or <code>root</code> to
+forward traffic — it only relays sockets.</p>
+<p>For the full client reference — state files, boot hooks, troubleshooting, and building
+from source — see <a href="../../../guides/client/">TunGuard Client</a>.</p>
+<h2 id="enroll-a-device">Enroll a device<a class="headerlink" href="#enroll-a-device" title="Permanent link">⚓</a></h2>
+<p>Enrolling gives a device its <strong>PSK</strong>, which is the only thing it needs to join.</p>
+<ol>
+<li>Open the dashboard and go to <strong>P2P</strong>.</li>
+<li>Click <strong>Enroll device</strong>.</li>
+<li>Enter a name, such as <code>shop-router</code>.</li>
+<li>Leave the <strong>PSK</strong> field blank to have one generated, or paste a key you already
+   have.</li>
+</ol>
+<p>The dialog then shows a ready-to-run command:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>tun<span class="w"> </span>YOUR_SERVER_IP<span class="w"> </span>YOUR_PSK
+</span></code></pre></div>
+<p>Copy it and run it on the device. The client forks into the background immediately and
+returns you to the shell.</p>
+<p>/// tip | The PSK is the group</p>
+<p>The PSK is not a per-device password. Devices that share a PSK are a <em>group</em>, and a
+group auto-meshes: every online member is punched to every other member, with no
+further action. Give a set of devices the same PSK to mesh them together, and a
+different PSK to keep two sets of devices apart. The dashboard's <strong>Groups</strong> column is
+exactly this grouping.</p>
+<p>///</p>
+<h2 id="what-happens-next">What happens next<a class="headerlink" href="#what-happens-next" title="Permanent link">⚓</a></h2>
+<p>Nothing else is required. The mesh builds itself.</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a> 1.  tun &lt;server&gt; &lt;psk&gt;            client dials server:7000
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a> 2.  "&lt;psk&gt;\n&lt;device_id&gt;\n"       identifies itself
+</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a> 3.  0x07 hub target              server hands over the hub address:7001
+</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a> 4.  TUN probe every 1s           server learns this device's public endpoint
+</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a> 5.  P1H every 2s                 "who else is on my PSK?"
+</span><span id="__span-2-6"><a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a> 6.  P1R reply                    every online peer with a fresh endpoint
+</span><span id="__span-2-7"><a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a> 7.  peer punch                   both ends aim at each other, once a second
+</span><span id="__span-2-8"><a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a> 8.  first packet received        link is direct; reported up to the dashboard
+</span></code></pre></div>
+<p>Steps 4 to 8 repeat for the life of the connection. A device that reboots, changes
+network, or reconnects is picked up automatically — the server re-runs the group sweep
+every five seconds, so a peer that comes online after you is linked without you doing
+anything.</p>
+<h2 id="how-a-direct-path-is-opened">How a direct path is opened<a class="headerlink" href="#how-a-direct-path-is-opened" title="Permanent link">⚓</a></h2>
+<p>Most devices sit behind NAT, so neither can receive an unsolicited packet from the
+other. TunGuard resolves this with a hole punch over UDP.</p>
+<ol>
+<li>Each client keeps one UDP socket aimed at the hub and sends a small <code>TUN</code> probe once
+   a second. That traffic is what makes the NAT allocate a public port for it, and the
+   hub records the public address the datagrams arrive from.</li>
+<li>Every other second a client sends a <code>P1H</code> rendezvous request to the hub. The server
+   replies <code>P1R</code> with the id, IP, and port of every online node in the same PSK group
+   that has a fresh endpoint.</li>
+<li>Each client opens one UDP socket per discovered peer, aimed at that peer's recorded
+   address, and sends a probe once a second. Both ends now send into each other's NAT
+   mapping at the same time, and the packets that arrive open the hole.</li>
+<li>A link is reported <strong>direct</strong> as soon as a peer socket receives anything at all.
+   That is a sound test: hub-bound probes only ever land on the hub socket, so anything
+   on a peer socket came straight from the peer.</li>
+</ol>
+<p>The hub socket is deliberately <em>not</em> <code>connect()</code>ed to the server. A connected UDP socket
+only accepts datagrams from its single peer, so the kernel would silently drop the very
+punch that completes the direct path. Using <code>sendto</code>/<code>recvfrom</code> keeps the NAT mapping
+open while still letting a punch land. The hub socket echoes anything that is not a
+<code>P1R</code> reply back to its sender, so a punch that arrives there instead of on a peer
+socket still lets both ends reach the same conclusion.</p>
+<h2 id="when-the-relay-is-used">When the relay is used<a class="headerlink" href="#when-the-relay-is-used" title="Permanent link">⚓</a></h2>
+<p>Not every network can be punched. A symmetric NAT on both ends, or a firewall that only
+permits traffic to a registered port, will keep a link from opening.</p>
+<p>When that happens the server stays in the path. Every pair the server attempts to punch
+also gets a relay circuit, and any datagram that arrives on the hub without a <code>TUN</code> or
+<code>P1H</code> header is forwarded to the sender's linked peers. The mesh keeps carrying traffic;
+it is just routed through the server instead of going direct.</p>
+<p>Both paths exist at the same time. The direct one is preferred because it bypasses the
+server, and the relay is the fallback that is always there behind it — there is no
+switch to choose between them. A link turns direct the moment a packet genuinely
+arrives from the peer, so the <strong>Direct links</strong> figure reflects what is really happening
+rather than what was intended.</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>Direct (preferred)              Relayed (fallback)
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>
+</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>  Peer A &lt;========&gt; Peer B        Peer A
+</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>     ^          ^                    |
+</span><span id="__span-3-5"><a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>     |          |                    v
+</span><span id="__span-3-6"><a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>     |   hole punch            TunGuard server
+</span><span id="__span-3-7"><a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a>     |    + probes                    ^
+</span><span id="__span-3-8"><a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a>     |          |                    |
+</span><span id="__span-3-9"><a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a>     +----------+                    |
+</span><span id="__span-3-10"><a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a>   no server in the path            Peer B
+</span></code></pre></div>
+<h2 id="dashboard">Dashboard<a class="headerlink" href="#dashboard" title="Permanent link">⚓</a></h2>
+<p>The <strong>P2P</strong> page shows the whole mesh.</p>
+<ul>
+<li><strong>Devices</strong> — total enrolled nodes, online or not.</li>
+<li><strong>Groups</strong> — distinct PSKs. Each one is an independent mesh.</li>
+<li><strong>Direct links</strong> — peer links that have completed a hole punch.</li>
+<li><strong>Control / hub</strong> — the addresses the control plane is listening on.</li>
+</ul>
+<p>Below that, devices are grouped by PSK, each showing its endpoint, the peers it holds,
+and how many of those are direct. The links table at the bottom lists every punch
+target with its state.</p>
+<p>The server-side view of one row:</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>id</code></td>
+<td>The node handle every API call needs</td>
+</tr>
+<tr>
+<td><code>device_id</code></td>
+<td>The client's own stable 8-hex identity, reported on connect</td>
+</tr>
+<tr>
+<td><code>control_ip</code></td>
+<td>Address the control channel came from</td>
+</tr>
+<tr>
+<td><code>relay_ep</code></td>
+<td>Public UDP endpoint registered at the hub</td>
+</tr>
+<tr>
+<td><code>relay_seen</code></td>
+<td>When that endpoint was last refreshed</td>
+</tr>
+<tr>
+<td><code>peers</code> / <code>direct_peers</code></td>
+<td>Peers held, and how many are direct</td>
+</tr>
+</tbody>
+</table>
+<p>A node that shows a <code>relay_ep</code> but no direct links is the one to look at first — that
+means discovery worked and the punch did not.</p>
+<h2 id="enrolling-from-the-api">Enrolling from the API<a class="headerlink" href="#enrolling-from-the-api" title="Permanent link">⚓</a></h2>
+<p>Everything on the P2P page is scriptable. The full reference is in the
+<a href="../../../guides/api/#p2p-mesh">API Reference</a>; this is the whole onboarding flow:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="nv">API_KEY</span><span class="o">=</span><span class="s2">"REPLACE_WITH_YOUR_KEY"</span>
+</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="nv">API</span><span class="o">=</span><span class="s2">"http://localhost:9000"</span>
+</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>
+</span><span id="__span-4-4"><a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="c1"># Enroll a device and keep the id and PSK it returns</span>
+</span><span id="__span-4-5"><a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="nv">ADDED</span><span class="o">=</span><span class="s2">"</span><span class="k">$(</span>curl<span class="w"> </span>-sS<span class="w"> </span>-X<span class="w"> </span>POST<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-4-6"><a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a><span class="w">  </span>-H<span class="w"> </span><span class="s2">"X-API-Key: </span><span class="nv">$API_KEY</span><span class="s2">"</span><span class="w"> </span>-H<span class="w"> </span><span class="s2">"Content-Type: application/json"</span><span class="w"> </span><span class="se">\</span>
+</span><span id="__span-4-7"><a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a><span class="w">  </span><span class="s2">"</span><span class="nv">$API</span><span class="s2">/api/mesh/node/add"</span><span class="w"> </span>-d<span class="w"> </span><span class="s1">'{"name":"edge-a"}'</span><span class="k">)</span><span class="s2">"</span>
+</span><span id="__span-4-8"><a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a>
+</span><span id="__span-4-9"><a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a><span class="nv">NODE_ID</span><span class="o">=</span><span class="s2">"</span><span class="k">$(</span><span class="nb">printf</span><span class="w"> </span><span class="s1">'%s'</span><span class="w"> </span><span class="s2">"</span><span class="nv">$ADDED</span><span class="s2">"</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>python3<span class="w"> </span>-c<span class="w"> </span><span class="s2">"import json,sys;print(json.load(sys.stdin)['id'])"</span><span class="k">)</span><span class="s2">"</span>
+</span><span id="__span-4-10"><a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a><span class="nv">PSK</span><span class="o">=</span><span class="s2">"</span><span class="k">$(</span><span class="nb">printf</span><span class="w"> </span><span class="s1">'%s'</span><span class="w"> </span><span class="s2">"</span><span class="nv">$ADDED</span><span class="s2">"</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>python3<span class="w"> </span>-c<span class="w"> </span><span class="s2">"import json,sys;print(json.load(sys.stdin)['psk'])"</span><span class="k">)</span><span class="s2">"</span>
+</span><span id="__span-4-11"><a id="__codelineno-4-11" name="__codelineno-4-11" href="#__codelineno-4-11"></a>
+</span><span id="__span-4-12"><a id="__codelineno-4-12" name="__codelineno-4-12" href="#__codelineno-4-12"></a><span class="nb">echo</span><span class="w"> </span><span class="s2">"run on the device:  tun YOUR_SERVER_IP </span><span class="nv">$PSK</span><span class="s2">"</span>
+</span></code></pre></div>
+<p>Useful follow-ups:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="c1"># Watch the mesh come up</span>
+</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>curl<span class="w"> </span>-H<span class="w"> </span><span class="s2">"X-API-Key: </span><span class="nv">$API_KEY</span><span class="s2">"</span><span class="w"> </span><span class="s2">"</span><span class="nv">$API</span><span class="s2">/api/mesh/groups"</span>
+</span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>curl<span class="w"> </span>-H<span class="w"> </span><span class="s2">"X-API-Key: </span><span class="nv">$API_KEY</span><span class="s2">"</span><span class="w"> </span><span class="s2">"</span><span class="nv">$API</span><span class="s2">/api/mesh/links"</span>
+</span><span id="__span-5-4"><a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>
+</span><span id="__span-5-5"><a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a><span class="c1"># Force a re-punch of one pair (both nodes must be online)</span>
+</span><span id="__span-5-6"><a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a>curl<span class="w"> </span>-X<span class="w"> </span>POST<span class="w"> </span>-H<span class="w"> </span><span class="s2">"X-API-Key: </span><span class="nv">$API_KEY</span><span class="s2">"</span><span class="w"> </span>-H<span class="w"> </span><span class="s2">"Content-Type: application/json"</span><span class="w"> </span><span class="se">\</span>
+</span><span id="__span-5-7"><a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a><span class="w">  </span><span class="s2">"</span><span class="nv">$API</span><span class="s2">/api/mesh/p2p/connect"</span><span class="w"> </span>-d<span class="w"> </span><span class="s2">"{\"a\":\"</span><span class="nv">$NODE_ID</span><span class="s2">\",\"b\":\"OTHER_NODE_ID\"}"</span>
+</span><span id="__span-5-8"><a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a>
+</span><span id="__span-5-9"><a id="__codelineno-5-9" name="__codelineno-5-9" href="#__codelineno-5-9"></a><span class="c1"># Re-punch a whole group</span>
+</span><span id="__span-5-10"><a id="__codelineno-5-10" name="__codelineno-5-10" href="#__codelineno-5-10"></a>curl<span class="w"> </span>-X<span class="w"> </span>POST<span class="w"> </span>-H<span class="w"> </span><span class="s2">"X-API-Key: </span><span class="nv">$API_KEY</span><span class="s2">"</span><span class="w"> </span>-H<span class="w"> </span><span class="s2">"Content-Type: application/json"</span><span class="w"> </span><span class="se">\</span>
+</span><span id="__span-5-11"><a id="__codelineno-5-11" name="__codelineno-5-11" href="#__codelineno-5-11"></a><span class="w">  </span><span class="s2">"</span><span class="nv">$API</span><span class="s2">/api/mesh/p2p/mesh"</span><span class="w"> </span>-d<span class="w"> </span><span class="s1">'{"group":"'</span><span class="s2">"</span><span class="nv">$PSK</span><span class="s2">"</span><span class="s1">'"}'</span>
+</span></code></pre></div>
+<div class="admonition note">
+<p class="admonition-title">Unknown keys self-enroll</p>
+<p>The server does not reject a PSK it has never seen — it registers a new node for it.
+That is what makes "run the client with the shared PSK" the entire onboarding flow. It
+also means a leaked PSK silently adds a node, so treat it as a credential.</p>
+</div>
+<h2 id="limits">Limits<a class="headerlink" href="#limits" title="Permanent link">⚓</a></h2>
+<ul>
+<li><strong>8 peers per node.</strong> A node holds at most 8 simultaneous punches, and the server
+  refuses to push a ninth. A group of 9+ devices meshes fine, but each node only
+  tracks 8 of its peers.</li>
+<li><strong>Endpoints expire after 120 seconds.</strong> A peer whose hub traffic stops is no longer
+  offered as a punch target, so a stale entry cannot cause a client to probe a dead
+  port.</li>
+<li><strong>Peers are addressed by node id</strong>, not by a server-assigned slot, so both ends of a
+  link agree on who they are talking to without extra bookkeeping.</li>
+</ul>
+<h2 id="how-it-works-on-the-wire">How it works on the wire<a class="headerlink" href="#how-it-works-on-the-wire" title="Permanent link">⚓</a></h2>
+<p>For anyone building tooling against it. Every control frame is exactly <strong>17 bytes</strong>:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>[0]      command
+</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>[1..8]   payload (8 bytes)
+</span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>[9..16]  peer node id (8 ASCII hex chars, or '0' padding)
+</span></code></pre></div>
+<table>
+<thead>
+<tr>
+<th>Command</th>
+<th>Name</th>
+<th>Payload</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>0x00</code></td>
+<td>Reset</td>
+<td>none — drops every FRP, TRP, P2P, and hub session</td>
+</tr>
+<tr>
+<td><code>0x01</code></td>
+<td>FRP reverse proxy</td>
+<td><code>local_port</code> (2B BE) + <code>remote_port</code> (2B BE)</td>
+</tr>
+<tr>
+<td><code>0x02</code></td>
+<td>P2P, legacy single peer</td>
+<td><code>target_ip</code> (4 raw) + <code>target_port</code> (2B BE)</td>
+</tr>
+<tr>
+<td><code>0x03</code></td>
+<td>TRP pull reverse proxy</td>
+<td><code>target_ip</code> (4 raw) + <code>service_port</code> (2B BE) + <code>public_port</code> (2B BE)</td>
+</tr>
+<tr>
+<td><code>0x04</code></td>
+<td>P2P add peer</td>
+<td><code>target_ip</code> (4 raw) + <code>target_port</code> (2B BE); peer id in the id field</td>
+</tr>
+<tr>
+<td><code>0x05</code></td>
+<td>P2P drop peer</td>
+<td>none; peer id in the id field</td>
+</tr>
+<tr>
+<td><code>0x06</code></td>
+<td>P2P clear all</td>
+<td>none</td>
+</tr>
+<tr>
+<td><code>0x07</code></td>
+<td>P2P join hub</td>
+<td><code>hub_ip</code> (4 raw) + <code>hub_port</code> (2B BE); carries the node's <strong>own</strong> id</td>
+</tr>
+<tr>
+<td><code>0x08</code></td>
+<td>Stop hub</td>
+<td>none — drops the rendezvous socket, node stays online</td>
+</tr>
+</tbody>
+</table>
+<p>Ports in a payload are big-endian. The four address bytes are already in network order
+and are copied straight into <code>sin_addr.s_addr</code>; the client never reorders them.</p>
+<p>Hub datagrams, all prefixed with the sender's own 8-character node id so the server
+never has to guess who is talking — several devices behind one NAT share a public IP:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>'T','U','N' | id(8) | counter(1)     keepalive probe, once a second
+</span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>'P','1','H' | id(8)                 rendezvous request, every other second
+</span><span id="__span-7-3"><a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>'P','1','R' | count(1) | count x { id(8) | ip(4) | port(2) }
+</span></code></pre></div>
+<p>Clients also report upward unprompted every five seconds:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>[0]      0xFE
+</span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>[1]      peer count
+</span><span id="__span-8-3"><a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a>then count x { node id (8 ASCII hex), flags (1 byte, bit 0 = direct path open) }
+</span></code></pre></div>
+<p><code>0xFE</code> is never sent by the server, so a frame starting with it is unambiguously a
+status report. This is how the dashboard knows which links are genuinely direct.</p>
+<div class="admonition danger">
+<p class="admonition-title">Frame length is load-bearing</p>
+<p>A control frame is 17 bytes. Sending only the 10 payload bytes desynchronizes the
+stream, and the client reads your next command shifted by seven bytes — which looks
+exactly like a client that is ignoring the dashboard.</p>
+</div>
+<h2 id="running-the-mesh-without-wireguard">Running the mesh without WireGuard<a class="headerlink" href="#running-the-mesh-without-wireguard" title="Permanent link">⚓</a></h2>
+<p>The mesh does not need a <code>tun</code> device. To run only the control plane and the dashboard —
+useful on a host that cannot create a tunnel interface, or when the VPN is not wanted:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>sudo<span class="w"> </span>./tanguard<span class="w"> </span>-mesh-only
+</span></code></pre></div>
+<p><code>-mesh-only</code> implies the dashboard, since the dashboard is the only way to drive the
+mesh by hand. The server's help output covers the other flags:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>./tanguard<span class="w"> </span>--help
+</span></code></pre></div>
+<p>The relevant settings are environment variables, documented in
+<a href="../../../advanced/config/conf/#p2p-control-plane">Configuration</a>:</p>
+<table>
+<thead>
+<tr>
+<th>Variable</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>MESH_ENABLED</code></td>
+<td><code>true</code></td>
+<td>Set to <code>false</code> to disable the control plane entirely</td>
+</tr>
+<tr>
+<td><code>CONTROL_LISTEN</code></td>
+<td><code>:7000</code></td>
+<td>TCP control listener</td>
+</tr>
+<tr>
+<td><code>RELAY_LISTEN</code></td>
+<td><code>:7001</code></td>
+<td>UDP rendezvous/relay listener</td>
+</tr>
+<tr>
+<td><code>CONTROL_TIMEOUT_S</code></td>
+<td><code>10</code></td>
+<td>Seconds allowed for the client handshake</td>
+</tr>
+<tr>
+<td><code>MESH_DATA_DIR</code></td>
+<td><code>DATA_DIR</code></td>
+<td>Where the node registry is stored</td>
+</tr>
+</tbody>
+</table>
+<p>With <code>MESH_ENABLED=false</code> the hub never starts and every mesh endpoint returns
+<code>503 tun control plane is disabled</code>. In <code>-mesh-only</code> mode the process refuses to start
+at all.</p>
+<h2 id="verify-a-link">Verify a link<a class="headerlink" href="#verify-a-link" title="Permanent link">⚓</a></h2>
+<p>On the device, the client is silent by design — no logs, no pidfile. Check it this way:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="c1"># the process is alive (this is the reliable health check)</span>
+</span><span id="__span-11-2"><a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a>pgrep<span class="w"> </span>-laf<span class="w"> </span>tun
+</span><span id="__span-11-3"><a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a>
+</span><span id="__span-11-4"><a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a><span class="c1"># the control connection to your server:7000 is established</span>
+</span><span id="__span-11-5"><a id="__codelineno-11-5" name="__codelineno-11-5" href="#__codelineno-11-5"></a>ss<span class="w"> </span>-tnp<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>tun<span class="w">        </span><span class="c1"># Linux</span>
+</span><span id="__span-11-6"><a id="__codelineno-11-6" name="__codelineno-11-6" href="#__codelineno-11-6"></a>netstat<span class="w"> </span>-tnp<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>tun<span class="w">   </span><span class="c1"># macOS</span>
+</span></code></pre></div>
+<p>For a direct mesh link, you should see the client holding UDP sockets to its peers on
+top of the hub socket.</p>
+<p>Server-side, the same fact is visible in the log:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>[mesh] registered 3f2a1b04 (dev-6bb8a2) in psk group 9c1f… device="6bb8a291" from 203.0.113.10
+</span><span id="__span-12-2"><a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a>[mesh] node 3f2a1b04 (dev-6bb8a2) online, control=203.0.113.10 device="6bb8a291"
+</span><span id="__span-12-3"><a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a>[p2p]  node 3f2a1b04 reached 7d90ce35 directly (hole punch complete)
+</span></code></pre></div>
+<h2 id="troubleshooting">Troubleshooting<a class="headerlink" href="#troubleshooting" title="Permanent link">⚓</a></h2>
+<p><strong>A device is online but has no <code>relay_ep</code>.</strong>
+The client never reached the hub on <code>7001/UDP</code>. Check the port is open in the VPS
+firewall and security group, and that <code>ss -ulnp</code> on the server shows the socket bound.</p>
+<p><strong>Devices are online but no peers are listed.</strong>
+They are not sharing a PSK. Peers only ever discover others in their own group, so two
+different PSKs means two separate meshes. Compare them on the P2P page.</p>
+<p><strong>A link is listed but never turns direct.</strong>
+The hole punch is not getting through. This is normal on symmetric NAT, and it is not a
+misconfiguration — the relay is already carrying that link. Confirm <code>7001/UDP</code> is
+bidirectional (some providers only allow outbound UDP), but otherwise there is nothing
+to fix: direct and relayed paths are both maintained for every pair, and the direct one
+takes over on its own if it ever opens.</p>
+<p>Note that there is no switch to <em>force</em> a link onto the relay. <code>p2p/mesh</code> with
+<code>"enable": false</code> clears the peer table, but each client re-learns the same peers from
+the next <code>P1R</code> reply within a few seconds and starts punching again. Conversely,
+<code>relay/unlink</code> removes the fallback, which leaves a stuck link with no path at all — use
+it to isolate a node, not to pin traffic.</p>
+<p><strong>A link keeps flipping back to relayed.</strong>
+The node's endpoint changed, so every direct path that depended on the old mapping was
+dropped. This is expected when a device changes network. It re-punches on the next
+sweep; a stable link on a stable network does not flip.</p>
+<p><strong>A peer disappeared from the group after restarting it.</strong>
+The client lost its device id. It is generated once and stored in its state directory
+(<code>~/.tun</code> by default), so deleting that directory makes the node reappear as a
+stranger. Do not delete it — and see
+<a href="../../../guides/client/#state">TunGuard Client</a> for how to relocate it instead.</p>
+<p><strong><code>503 tun control plane is disabled</code> from every mesh endpoint.</strong>
+<code>MESH_ENABLED=false</code>, or the server was started without the mesh. <code>-mesh-only</code> and a
+normal start both bring it up by default.</p>
+<h2 id="security">Security<a class="headerlink" href="#security" title="Permanent link">⚓</a></h2>
+<ul>
+<li><strong>The PSK is a shared secret and it is sent in cleartext</strong> on the control channel.
+  On a hostile network, wrap the control link in a tunnel or encrypt above it. The
+  connection is always outbound, so NAT and firewalls never block the handshake itself.</li>
+<li><strong>Mesh traffic between peers is not encrypted by TunGuard.</strong> The client relays raw
+  UDP datagrams. Use the P2P mesh to carry WireGuard — that is, mesh the nodes and run
+  WireGuard over the result — if you need confidentiality on the direct path.</li>
+<li><strong>An unknown PSK self-enrolls.</strong> Anyone holding the key becomes a node. Keep it out
+  of shell history and off shared machines, and treat a node you did not enroll as
+  suspicious.</li>
+<li><strong>A relayed link means the server sees the traffic.</strong> Direct paths bypass it
+  entirely, which is the main reason to prefer them.</li>
+</ul>
+<h2 id="next-steps">Next steps<a class="headerlink" href="#next-steps" title="Permanent link">⚓</a></h2>
+<ul>
+<li><a href="../../../guides/client/">TunGuard Client</a> — installing, running, and verifying the
+  client on every supported platform.</li>
+<li><a href="../../../guides/api/#p2p-mesh">API Reference</a> — the full mesh API.</li>
+<li><a href="../../../advanced/config/conf/#p2p-control-plane">Configuration</a> — every mesh
+  environment variable.</li>
+</ul>
+
+
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-circle-arrow-up" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="m16 12-4-4-4 4M12 16V8"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      <p>
+&copy; <a href="https://github.com/TunGuard"><em>TunGuard</em></a><br/>
+<span>This project is licensed under MIT.</span><br/>
+<span>This project is not affiliated, associated, authorized, endorsed by, or in any way officially connected with Jason A. Donenfeld, ZX2C4 or Edge Security.</span><br/>
+<span>"WireGuard" and the "WireGuard" logo are registered trademarks of Jason A. Donenfeld.</span>
+</p>
+
+    </div>
+  
+  
+    Made with
+    <a href="https://zensical.org/" target="_blank" rel="noopener">
+      Zensical
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      
+      
+        
+        
+      <script id="__config" type="application/json">{"annotate":null,"base":"../../..","features":["navigation.instant","navigation.tabs","navigation.tabs.sticky","navigation.expand","navigation.path","navigation.top","navigation.sections","content.action.edit","content.action.view","content.code.copy","content.code.annotate","toc.follow"],"redirect":null,"search":"../../../assets/javascripts/workers/search.7d14d953.min.js","tags":null,"translations":{"clipboard.copied":"Copied to clipboard","clipboard.copy":"Copy to clipboard","search.result.more.one":"1 more on this page","search.result.more.other":"# more on this page","search.result.none":"No matching documents","search.result.one":"1 matching document","search.result.other":"# matching documents","search.result.placeholder":"Type to start searching","search.result.term.missing":"Missing","select.version":"Select version"},"version":{"provider":"mike"}}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.8dcc8e9c.min.js"></script>
+      
+    
+  </body>
+</html>

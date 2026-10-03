@@ -1,0 +1,4133 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Self-hosted overlay networking: direct peer-to-peer mesh, TCP relay, and WireGuard-compatible VPN from one control plane. No kernel drivers, no extra installs.">
+      
+      
+        <meta name="author" content="TunGuard Team">
+      
+      
+        <link rel="canonical" href="https://tunguard.github.io/v2.4/guides/api/">
+      
+      
+        <link rel="prev" href="../admin/">
+      
+      
+        <link rel="next" href="../cli/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/logo/favicon.png">
+      <meta name="generator" content="zensical-0.0.62">
+    
+    
+      
+        <title>API Reference - TunGuard</title>
+      
+    
+    
+      
+        
+      
+      <link rel="stylesheet" href="../../assets/stylesheets/modern/main.ce62732f.min.css">
+      
+        
+          
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/modern/palette.812a03bb.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=JetBrains+Mono:300,300i,400,400i,500,500i,700,700i%7CFira+Code:400,400i,700,700i&amp;display=fallback">
+        <style>:root{--md-text-font:"JetBrains Mono";--md-code-font:"Fira Code"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_scope.pathname.endsWith("/")||(__md_scope=new URL(__md_scope.pathname+"/",location)),__md_hash=e=>[...e].reduce(((e,t)=>(e<<5)-e+t.charCodeAt(0)),0),__md_get=(e,t=localStorage,_=__md_scope)=>JSON.parse(t.getItem(_.pathname+"."+e)),__md_set=(e,t,_=localStorage,a=__md_scope)=>{try{_.setItem(a.pathname+"."+e,JSON.stringify(t))}catch(e){}},document.documentElement.setAttribute("data-platform",navigator.platform)</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer" aria-label="Navigation"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#endpoint-overview" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      <div data-md-color-scheme="default" data-md-component="outdated" hidden>
+        
+      </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="TunGuard" class="md-header__button md-logo" aria-label="TunGuard" data-md-component="logo">
+      
+  <img src="../../assets/logo/logo.png" alt="TunGuard">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer" aria-label="Navigation">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-menu" viewBox="0 0 24 24"><path d="M4 5h16M4 12h16M4 19h16"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            TunGuard
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              API Reference
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-sun-moon" viewBox="0 0 24 24"><path d="M12 2v2M14.837 16.385a6 6 0 1 1-7.223-7.222c.624-.147.97.66.715 1.248a4 4 0 0 0 5.26 5.259c.589-.255 1.396.09 1.248.715M16 12a4 4 0 0 0-4-4M19 5l-1.256 1.256M20 12h2"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="blue-grey" data-md-color-accent="teal"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_2" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="teal" data-md-color-accent="cyan"  aria-label="Switch to system preference"  type="radio" name="__palette" id="__palette_2">
+    
+      <label class="md-header__button md-icon" title="Switch to system preference" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-moon" viewBox="0 0 24 24"><path d="M20.985 12.486a9 9 0 1 1-9.473-9.472c.405-.022.617.46.402.803a6 6 0 0 0 8.268 8.268c.344-.215.825-.004.803.401"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search" aria-label="Search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-search" viewBox="0 0 24 24"><path d="m21 21-4.34-4.34"/><circle cx="11" cy="11" r="8"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog" aria-label="Search">
+  <button type="button" class="md-search__button">
+    Search
+  </button>
+</div>
+      
+    
+    <div class="md-header__source">
+      
+        <a href="https://github.com/TunGuard/tanguard-binary" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.3.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2026 Fonticons, Inc.--><path fill="currentColor" d="M216.5 362.5c-66-8-112.5-55.5-112.5-117 0-25 9-52 24-70-6.5-16.5-5.5-51.5 2-66 20-2.5 47 8 63 22.5 19-6 39-9 63.5-9s44.5 3 62.5 8.5c15.5-14 43-24.5 63-22 7 13.5 8 48.5 1.5 65.5 16 19 24.5 44.5 24.5 70.5 0 61.5-46.5 108-113.5 116.5 17 11 28.5 35 28.5 62.5v52c0 15 12.5 23.5 27.5 17.5C441 459.5 512 369 512 257 512 115.5 397 0 255.5 0S0 115.5 0 257c0 111 70.5 203 165.5 237.5 13.5 5 26.5-4 26.5-17.5v-40c-7 3-16 5-24 5-33 0-52.5-18-66.5-51.5-5.5-13.5-11.5-21.5-23-23-6-.5-8-3-8-6 0-6 10-10.5 20-10.5 14.5 0 27 9 40 27.5 10 14.5 20.5 21 33 21s20.5-4.5 32-16c8.5-8.5 15-16 21-21"/></svg>
+  </div>
+  <div class="md-source__repository">
+    TunGuard/tanguard-binary
+  </div>
+</a>
+      
+    </div>
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../faq/" class="md-tabs__link">
+        
+  
+  FAQ
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../getting-started/" class="md-tabs__link">
+        
+  
+  Getting Started
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+      
+    
+    
+    
+      
+  
+  
+  
+  
+    
+      
+    
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../advanced/config/conf/" class="md-tabs__link">
+          
+  
+  Advanced
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+      
+    
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../contributing/general/" class="md-tabs__link">
+          
+  
+  Contributing
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+      
+    
+    
+    
+      
+  
+  
+  
+  
+    
+      
+    
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../examples/tutorials/basic-installation/" class="md-tabs__link">
+          
+  
+  Examples
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+      
+    
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../admin/" class="md-tabs__link">
+          
+  
+  Guides
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="TunGuard" class="md-nav__button md-logo" aria-label="TunGuard" data-md-component="logo">
+      
+  <img src="../../assets/logo/logo.png" alt="TunGuard">
+
+    </a>
+    TunGuard
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/TunGuard/tanguard-binary" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.3.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2026 Fonticons, Inc.--><path fill="currentColor" d="M216.5 362.5c-66-8-112.5-55.5-112.5-117 0-25 9-52 24-70-6.5-16.5-5.5-51.5 2-66 20-2.5 47 8 63 22.5 19-6 39-9 63.5-9s44.5 3 62.5 8.5c15.5-14 43-24.5 63-22 7 13.5 8 48.5 1.5 65.5 16 19 24.5 44.5 24.5 70.5 0 61.5-46.5 108-113.5 116.5 17 11 28.5 35 28.5 62.5v52c0 15 12.5 23.5 27.5 17.5C441 459.5 512 369 512 257 512 115.5 397 0 255.5 0S0 115.5 0 257c0 111 70.5 203 165.5 237.5 13.5 5 26.5-4 26.5-17.5v-40c-7 3-16 5-24 5-33 0-52.5-18-66.5-51.5-5.5-13.5-11.5-21.5-23-23-6-.5-8-3-8-6 0-6 10-10.5 20-10.5 14.5 0 27 9 40 27.5 10 14.5 20.5 21 33 21s20.5-4.5 32-16c8.5-8.5 15-16 21-21"/></svg>
+  </div>
+  <div class="md-source__repository">
+    TunGuard/tanguard-binary
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Home
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../faq/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  FAQ
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../getting-started/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Getting Started
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Advanced
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+  Advanced
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_1" id="__nav_4_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Config
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+  Config
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../advanced/config/conf/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Configuration
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../advanced/config/openwrt/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  OpenWrt
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_2" id="__nav_4_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Metrics
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+  Metrics
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../advanced/metrics/monitor/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Monitoring
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_3" id="__nav_4_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Migrate
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+  Migrate
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../advanced/migrate/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Migrate
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Contributing
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+  Contributing
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../contributing/general/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  General Information
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../contributing/issues-and-pull-requests/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Issues and Pull Requests
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../contributing/translation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Translation
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Examples
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+  Examples
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_6_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_6_1" id="__nav_6_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Tutorials
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_6_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+  Tutorials
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../examples/tutorials/basic-installation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Public Access
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../examples/tutorials/p2p/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  P2P Mesh
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../examples/tutorials/router-provision/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Router Provision
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Guides
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+  Guides
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../admin/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Admin Panel
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  API Reference
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="././" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  API Reference
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+
+<nav class="md-nav md-nav--secondary" aria-label="On this page">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      On this page
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#endpoint-overview" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Endpoint overview
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#authentication" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Authentication
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Authentication">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#dashboard-authentication" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Dashboard Authentication
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#api-key" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        API Key
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#health" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Health
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Health">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#get-apihealth" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        <code>GET /api/health</code>
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#server-status" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Server Status
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Server Status">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#get-apistatus" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        <code>GET /api/status</code>
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#server-public-key" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Server Public Key
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Server Public Key">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#get-apiserver_key" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        <code>GET /api/server_key</code>
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#system-information" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        System Information
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="System Information">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#get-apisystem" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        <code>GET /api/system</code>
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#runtime-configuration" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Runtime Configuration
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Runtime Configuration">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#post-apiconfigure" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        <code>POST /api/configure</code>
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parameters" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Parameters
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#list-peers" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        List Peers
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="List Peers">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#get-apipeers" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        <code>GET /api/peers</code>
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#add-peer" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Add Peer
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Add Peer">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#post-apipeeradd" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        <code>POST /api/peer/add</code>
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parameters_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Parameters
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#generate-peer-configuration" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Generate Peer Configuration
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Generate Peer Configuration">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#post-apipeergenerate-config" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        <code>POST /api/peer/generate-config</code>
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parameters_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Parameters
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#get-peer-configuration" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Get Peer Configuration
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Get Peer Configuration">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#post-apipeerconfig" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        <code>POST /api/peer/config</code>
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parameters_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Parameters
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#remove-peer" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Remove Peer
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Remove Peer">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#post-apipeerremove" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        <code>POST /api/peer/remove</code>
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parameters_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Parameters
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#credential-and-key-management" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Credential and key management
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Credential and key management">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#get-apiauthstatus" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        <code>GET /api/auth/status</code>
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#post-apiwebcredentials" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        <code>POST /api/web/credentials</code>
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parameters_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Parameters
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#get-apikey" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        <code>GET /api/key</code>
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#post-apikeyregenerate" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        <code>POST /api/key/regenerate</code>
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#version-and-updates" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Version and updates
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Version and updates">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#get-apiversion" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        <code>GET /api/version</code>
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#post-apiupdate" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        <code>POST /api/update</code>
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parameters_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Parameters
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#backup-and-restore" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Backup and restore
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Backup and restore">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#get-apibackupdownload" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        <code>GET /api/backup/download</code>
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#post-apibackuprestore" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        <code>POST /api/backup/restore</code>
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#peer-monitoring" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Peer monitoring
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Peer monitoring">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#get-apipeer-monitorevents" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        <code>GET /api/peer-monitor/events</code>
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#query-parameters" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Query parameters
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#get-apipeer-monitorstate" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        <code>GET /api/peer-monitor/state</code>
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#web-ssh" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Web SSH
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Web SSH">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#get-apiwsssh" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        <code>GET /api/ws/ssh</code>
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#example-automation" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Example: Automation
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#example-add-a-peer" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Example: Add a Peer
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#p2p-mesh" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        P2P Mesh
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="P2P Mesh">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#nodes-and-groups" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Nodes and Groups
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#direct-paths" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Direct Paths
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rendezvous-hub" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Rendezvous Hub
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tcp-relay-trp" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        TCP Relay (TRP)
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mesh-errors" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Mesh Errors
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mesh-end-to-end" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Mesh End to End
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#api-security" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        API Security
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../cli/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  CLI
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../client/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  TunGuard Client
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../clients/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Edit Peer
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../setup/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Setup
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  
+                    
+                    
+                    
+                    
+                      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+                      <div class="md-sidebar-button__wrapper">
+                        <label class="md-sidebar-button" for="__toc"></label>
+                      </div>
+                    
+                  
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--secondary" aria-label="On this page">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      On this page
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#endpoint-overview" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Endpoint overview
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#authentication" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Authentication
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Authentication">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#dashboard-authentication" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Dashboard Authentication
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#api-key" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        API Key
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#health" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Health
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Health">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#get-apihealth" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        <code>GET /api/health</code>
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#server-status" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Server Status
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Server Status">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#get-apistatus" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        <code>GET /api/status</code>
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#server-public-key" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Server Public Key
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Server Public Key">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#get-apiserver_key" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        <code>GET /api/server_key</code>
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#system-information" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        System Information
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="System Information">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#get-apisystem" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        <code>GET /api/system</code>
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#runtime-configuration" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Runtime Configuration
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Runtime Configuration">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#post-apiconfigure" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        <code>POST /api/configure</code>
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parameters" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Parameters
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#list-peers" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        List Peers
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="List Peers">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#get-apipeers" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        <code>GET /api/peers</code>
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#add-peer" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Add Peer
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Add Peer">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#post-apipeeradd" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        <code>POST /api/peer/add</code>
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parameters_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Parameters
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#generate-peer-configuration" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Generate Peer Configuration
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Generate Peer Configuration">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#post-apipeergenerate-config" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        <code>POST /api/peer/generate-config</code>
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parameters_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Parameters
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#get-peer-configuration" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Get Peer Configuration
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Get Peer Configuration">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#post-apipeerconfig" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        <code>POST /api/peer/config</code>
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parameters_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Parameters
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#remove-peer" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Remove Peer
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Remove Peer">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#post-apipeerremove" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        <code>POST /api/peer/remove</code>
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parameters_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Parameters
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#credential-and-key-management" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Credential and key management
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Credential and key management">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#get-apiauthstatus" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        <code>GET /api/auth/status</code>
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#post-apiwebcredentials" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        <code>POST /api/web/credentials</code>
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parameters_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Parameters
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#get-apikey" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        <code>GET /api/key</code>
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#post-apikeyregenerate" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        <code>POST /api/key/regenerate</code>
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#version-and-updates" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Version and updates
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Version and updates">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#get-apiversion" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        <code>GET /api/version</code>
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#post-apiupdate" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        <code>POST /api/update</code>
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parameters_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Parameters
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#backup-and-restore" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Backup and restore
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Backup and restore">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#get-apibackupdownload" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        <code>GET /api/backup/download</code>
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#post-apibackuprestore" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        <code>POST /api/backup/restore</code>
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#peer-monitoring" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Peer monitoring
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Peer monitoring">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#get-apipeer-monitorevents" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        <code>GET /api/peer-monitor/events</code>
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#query-parameters" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Query parameters
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#get-apipeer-monitorstate" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        <code>GET /api/peer-monitor/state</code>
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#web-ssh" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Web SSH
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Web SSH">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#get-apiwsssh" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        <code>GET /api/ws/ssh</code>
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#example-automation" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Example: Automation
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#example-add-a-peer" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Example: Add a Peer
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#p2p-mesh" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        P2P Mesh
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="P2P Mesh">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#nodes-and-groups" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Nodes and Groups
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#direct-paths" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Direct Paths
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rendezvous-hub" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Rendezvous Hub
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tcp-relay-trp" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        TCP Relay (TRP)
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mesh-errors" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Mesh Errors
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mesh-end-to-end" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Mesh End to End
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#api-security" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        API Security
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+                
+
+
+
+  
+
+
+  <nav class="md-path" aria-label="Navigation" >
+    <ol class="md-path__list">
+      
+        
+  
+  
+    <li class="md-path__item">
+      <a href="../.." class="md-path__link">
+        
+  
+  <span class="md-ellipsis">
+    Home
+  </span>
+
+      </a>
+    </li>
+  
+
+      
+      
+        
+  
+  
+    
+    
+    
+    
+    
+      <li class="md-path__item">
+        <a href="../admin/" class="md-path__link">
+          
+  
+  <span class="md-ellipsis">
+    Guides
+  </span>
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ol>
+  </nav>
+
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+  
+    <a href="https://github.com/TunGuard/tanguard-binary/edit/main/docs/content/guides/api.md" title="Edit this page" class="md-content__button md-icon" rel="edit">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-file-pen" viewBox="0 0 24 24"><path d="M12.659 22H18a2 2 0 0 0 2-2V8a2.4 2.4 0 0 0-.706-1.706l-3.588-3.588A2.4 2.4 0 0 0 14 2H6a2 2 0 0 0-2 2v9.34"/><path d="M14 2v5a1 1 0 0 0 1 1h5M10.378 12.622a1 1 0 0 1 3 3.003L8.36 20.637a2 2 0 0 1-.854.506l-2.867.837a.5.5 0 0 1-.62-.62l.836-2.869a2 2 0 0 1 .506-.853z"/></svg>
+    </a>
+  
+  
+    
+      
+    
+    <a href="https://github.com/TunGuard/tanguard-binary/raw/main/docs/content/guides/api.md" title="View source of this page" class="md-content__button md-icon">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-file-code-2" viewBox="0 0 24 24"><path d="M4 12.15V4a2 2 0 0 1 2-2h8a2.4 2.4 0 0 1 1.706.706l3.588 3.588A2.4 2.4 0 0 1 20 8v12a2 2 0 0 1-2 2h-3.35"/><path d="M14 2v5a1 1 0 0 0 1 1h5M5 16l-3 3 3 3M9 22l3-3-3-3"/></svg>
+    </a>
+  
+
+
+  <h1 id="__skip">API Reference</h1>
+
+<p>TunGuard provides an HTTP API for managing the VPN server, its peers, and the P2P mesh.</p>
+<p>The API is available under:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>http://YOUR_SERVER_IP:9000/api
+</span></code></pre></div>
+<h2 id="endpoint-overview">Endpoint overview<a class="headerlink" href="#endpoint-overview" title="Permanent link">⚓</a></h2>
+<table>
+<thead>
+<tr>
+<th>Endpoint</th>
+<th>Method</th>
+<th>Auth</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>/api/health</code></td>
+<td>GET</td>
+<td>None</td>
+<td>Liveness check</td>
+</tr>
+<tr>
+<td><code>/api/status</code></td>
+<td>GET</td>
+<td>Either</td>
+<td>Server and peer status</td>
+</tr>
+<tr>
+<td><code>/api/system</code></td>
+<td>GET</td>
+<td>Either</td>
+<td>Host metrics</td>
+</tr>
+<tr>
+<td><code>/api/server_key</code></td>
+<td>GET</td>
+<td>Either</td>
+<td>Server public key and port</td>
+</tr>
+<tr>
+<td><code>/api/configure</code></td>
+<td>POST</td>
+<td>Either</td>
+<td>Change key or listen port at runtime</td>
+</tr>
+<tr>
+<td><code>/api/peers</code></td>
+<td>GET</td>
+<td>Either</td>
+<td>List peers</td>
+</tr>
+<tr>
+<td><code>/api/peer/add</code></td>
+<td>POST</td>
+<td>Either</td>
+<td>Add an existing public key</td>
+</tr>
+<tr>
+<td><code>/api/peer/remove</code></td>
+<td>POST</td>
+<td>Either</td>
+<td>Remove a peer</td>
+</tr>
+<tr>
+<td><code>/api/peer/config</code></td>
+<td>POST</td>
+<td>Either</td>
+<td>Re-render a peer's configuration</td>
+</tr>
+<tr>
+<td><code>/api/peer/generate-config</code></td>
+<td>POST</td>
+<td>Either</td>
+<td>Create a peer with a new key pair</td>
+</tr>
+<tr>
+<td><code>/api/version</code></td>
+<td>GET</td>
+<td>Either</td>
+<td>Version and update check</td>
+</tr>
+<tr>
+<td><code>/api/update</code></td>
+<td>POST</td>
+<td>Either</td>
+<td>Replace the binary and restart</td>
+</tr>
+<tr>
+<td><code>/api/backup/download</code></td>
+<td>GET</td>
+<td>Either</td>
+<td>Download a data directory backup</td>
+</tr>
+<tr>
+<td><code>/api/backup/restore</code></td>
+<td>POST</td>
+<td>Either</td>
+<td>Restore a backup</td>
+</tr>
+<tr>
+<td><code>/api/peer-monitor/events</code></td>
+<td>GET</td>
+<td>Either</td>
+<td>Peer event history</td>
+</tr>
+<tr>
+<td><code>/api/peer-monitor/state</code></td>
+<td>GET</td>
+<td>Either</td>
+<td>Latest peer metrics</td>
+</tr>
+<tr>
+<td><code>/api/ws/ssh</code></td>
+<td>GET</td>
+<td>Either</td>
+<td>WebSocket SSH session</td>
+</tr>
+<tr>
+<td><code>/api/auth/status</code></td>
+<td>GET</td>
+<td>Dashboard</td>
+<td>Current user, default-credential warning</td>
+</tr>
+<tr>
+<td><code>/api/web/credentials</code></td>
+<td>POST</td>
+<td>Dashboard</td>
+<td>Change dashboard password</td>
+</tr>
+<tr>
+<td><code>/api/key</code></td>
+<td>GET</td>
+<td>Dashboard</td>
+<td>Read the current API key</td>
+</tr>
+<tr>
+<td><code>/api/key/regenerate</code></td>
+<td>POST</td>
+<td>Dashboard</td>
+<td>Issue a new API key</td>
+</tr>
+<tr>
+<td><code>/api/mesh/*</code></td>
+<td>Various</td>
+<td>Either</td>
+<td><a href="#p2p-mesh">P2P mesh</a></td>
+</tr>
+<tr>
+<td><code>/api/trp/*</code></td>
+<td>Various</td>
+<td>Either</td>
+<td><a href="#tcp-relay-trp">TCP relay proxies</a></td>
+</tr>
+</tbody>
+</table>
+<p>"Either" means the dashboard login or an API key. "Dashboard" means the login is
+required and an API key is rejected.</p>
+<h2 id="authentication">Authentication<a class="headerlink" href="#authentication" title="Permanent link">⚓</a></h2>
+<p>All <code>/api/*</code> endpoints require authentication except <code>/api/health</code>.</p>
+<p>Most endpoints accept <strong>either</strong> the dashboard credentials or an API key. A small group
+of credential and key management endpoints accept <strong>only</strong> the dashboard login — see
+<a href="#credential-and-key-management">Credential and key management</a>.</p>
+<table>
+<thead>
+<tr>
+<th>Endpoint group</th>
+<th>Accepted credentials</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Most <code>/api/*</code>, all <code>/api/mesh/*</code>, all <code>/api/trp/*</code></td>
+<td>Dashboard login <strong>or</strong> API key</td>
+</tr>
+<tr>
+<td><code>/api/auth/status</code>, <code>/api/web/credentials</code>, <code>/api/key</code>, <code>/api/key/regenerate</code></td>
+<td>Dashboard login only</td>
+</tr>
+<tr>
+<td><code>/api/health</code></td>
+<td>None</td>
+</tr>
+</tbody>
+</table>
+<h3 id="dashboard-authentication">Dashboard Authentication<a class="headerlink" href="#dashboard-authentication" title="Permanent link">⚓</a></h3>
+<p>Use HTTP Basic Authentication:</p>
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>curl<span class="w"> </span>-u<span class="w"> </span>admin:PASSWORD<span class="w"> </span>http://localhost:9000/api/status
+</span></code></pre></div>
+<h3 id="api-key">API Key<a class="headerlink" href="#api-key" title="Permanent link">⚓</a></h3>
+<p>Generate or rotate the API key from:</p>
+<p><strong>Settings → API Key</strong></p>
+<p>You can also generate one from the terminal using dashboard authentication:</p>
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>curl<span class="w"> </span>-X<span class="w"> </span>POST<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">  </span>-u<span class="w"> </span>admin:PASSWORD<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="w">  </span>http://localhost:9000/api/key/regenerate
+</span></code></pre></div>
+<p>The response contains the new API key.</p>
+<p>Store it securely:</p>
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="nv">API_KEY</span><span class="o">=</span><span class="s2">"REPLACE_WITH_YOUR_KEY"</span>
+</span></code></pre></div>
+<p>Use the key with the <code>X-API-Key</code> header:</p>
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>curl<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="w">  </span>-H<span class="w"> </span><span class="s2">"X-API-Key: </span><span class="nv">$API_KEY</span><span class="s2">"</span><span class="w"> </span><span class="se">\</span>
+</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="w">  </span>http://localhost:9000/api/status
+</span></code></pre></div>
+<p>The API key can also be sent using:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>Authorization: Bearer YOUR_API_KEY
+</span></code></pre></div>
+<div class="admonition note">
+<p class="admonition-title">Why the API key cannot manage itself</p>
+<p>An API key is deliberately rejected by <code>/api/key</code> and <code>/api/key/regenerate</code>. A leaked
+key can therefore be rotated, but only by someone who also has the dashboard password.
+This is the difference between a key that can be neutralised and one that cannot.</p>
+</div>
+<h2 id="health">Health<a class="headerlink" href="#health" title="Permanent link">⚓</a></h2>
+<h3 id="get-apihealth"><code>GET /api/health</code><a class="headerlink" href="#get-apihealth" title="Permanent link">⚓</a></h3>
+<p>Returns the health status of the TunGuard server.</p>
+<p>This endpoint does not require authentication and exposes no sensitive information.</p>
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>curl<span class="w"> </span>http://localhost:9000/api/health
+</span></code></pre></div>
+<p>This endpoint is suitable for uptime checks and load balancers.</p>
+<h2 id="server-status">Server Status<a class="headerlink" href="#server-status" title="Permanent link">⚓</a></h2>
+<h3 id="get-apistatus"><code>GET /api/status</code><a class="headerlink" href="#get-apistatus" title="Permanent link">⚓</a></h3>
+<p>Returns information about the TunGuard server and WireGuard status.</p>
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>curl<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="w">  </span>-H<span class="w"> </span><span class="s2">"X-API-Key: </span><span class="nv">$API_KEY</span><span class="s2">"</span><span class="w"> </span><span class="se">\</span>
+</span><span id="__span-7-3"><a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="w">  </span>http://localhost:9000/api/status
+</span></code></pre></div>
+<h2 id="server-public-key">Server Public Key<a class="headerlink" href="#server-public-key" title="Permanent link">⚓</a></h2>
+<h3 id="get-apiserver_key"><code>GET /api/server_key</code><a class="headerlink" href="#get-apiserver_key" title="Permanent link">⚓</a></h3>
+<p>Returns the WireGuard server public key.</p>
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>curl<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="w">  </span>-H<span class="w"> </span><span class="s2">"X-API-Key: </span><span class="nv">$API_KEY</span><span class="s2">"</span><span class="w"> </span><span class="se">\</span>
+</span><span id="__span-8-3"><a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span class="w">  </span>http://localhost:9000/api/server_key
+</span></code></pre></div>
+<h2 id="system-information">System Information<a class="headerlink" href="#system-information" title="Permanent link">⚓</a></h2>
+<h3 id="get-apisystem"><code>GET /api/system</code><a class="headerlink" href="#get-apisystem" title="Permanent link">⚓</a></h3>
+<p>Returns host metrics: hostname, OS, kernel, CPU model and core count, CPU utilisation,
+load averages, process counts, uptime, memory, disk usage for the data directory, and
+per-interface network counters.</p>
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>curl<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-9-2"><a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="w">  </span>-H<span class="w"> </span><span class="s2">"X-API-Key: </span><span class="nv">$API_KEY</span><span class="s2">"</span><span class="w"> </span><span class="se">\</span>
+</span><span id="__span-9-3"><a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a><span class="w">  </span>http://localhost:9000/api/system
+</span></code></pre></div>
+<p>Response:</p>
+<div class="language-json highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="p">{</span>
+</span><span id="__span-10-2"><a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a><span class="w">  </span><span class="nt">"hostname"</span><span class="p">:</span><span class="w"> </span><span class="s2">"vpn-01"</span><span class="p">,</span>
+</span><span id="__span-10-3"><a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a><span class="w">  </span><span class="nt">"os"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Debian GNU/Linux 12 (bookworm)"</span><span class="p">,</span>
+</span><span id="__span-10-4"><a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a><span class="w">  </span><span class="nt">"kernel"</span><span class="p">:</span><span class="w"> </span><span class="s2">"6.1.0-18-amd64"</span><span class="p">,</span>
+</span><span id="__span-10-5"><a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a><span class="w">  </span><span class="nt">"cpu_model"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Intel(R) Xeon(R) Platinum 8375C CPU @ 2.90GHz"</span><span class="p">,</span>
+</span><span id="__span-10-6"><a id="__codelineno-10-6" name="__codelineno-10-6" href="#__codelineno-10-6"></a><span class="w">  </span><span class="nt">"cpu_cores"</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span>
+</span><span id="__span-10-7"><a id="__codelineno-10-7" name="__codelineno-10-7" href="#__codelineno-10-7"></a><span class="w">  </span><span class="nt">"cpu_percent"</span><span class="p">:</span><span class="w"> </span><span class="mf">7.4</span><span class="p">,</span>
+</span><span id="__span-10-8"><a id="__codelineno-10-8" name="__codelineno-10-8" href="#__codelineno-10-8"></a><span class="w">  </span><span class="nt">"load"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="mf">0.11</span><span class="p">,</span><span class="w"> </span><span class="mf">0.08</span><span class="p">,</span><span class="w"> </span><span class="mf">0.02</span><span class="p">],</span>
+</span><span id="__span-10-9"><a id="__codelineno-10-9" name="__codelineno-10-9" href="#__codelineno-10-9"></a><span class="w">  </span><span class="nt">"uptime"</span><span class="p">:</span><span class="w"> </span><span class="mi">841203</span><span class="p">,</span>
+</span><span id="__span-10-10"><a id="__codelineno-10-10" name="__codelineno-10-10" href="#__codelineno-10-10"></a><span class="w">  </span><span class="nt">"processes"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">"total"</span><span class="p">:</span><span class="w"> </span><span class="mi">214</span><span class="p">,</span><span class="w"> </span><span class="nt">"running"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="w"> </span><span class="p">},</span>
+</span><span id="__span-10-11"><a id="__codelineno-10-11" name="__codelineno-10-11" href="#__codelineno-10-11"></a><span class="w">  </span><span class="nt">"memory"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">"total"</span><span class="p">:</span><span class="w"> </span><span class="mi">8123456</span><span class="p">,</span><span class="w"> </span><span class="nt">"used"</span><span class="p">:</span><span class="w"> </span><span class="mi">3910553</span><span class="p">,</span><span class="w"> </span><span class="nt">"percent"</span><span class="p">:</span><span class="w"> </span><span class="mf">48.1</span><span class="w"> </span><span class="p">},</span>
+</span><span id="__span-10-12"><a id="__codelineno-10-12" name="__codelineno-10-12" href="#__codelineno-10-12"></a><span class="w">  </span><span class="nt">"disk"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">"total"</span><span class="p">:</span><span class="w"> </span><span class="mi">41153856</span><span class="p">,</span><span class="w"> </span><span class="nt">"used"</span><span class="p">:</span><span class="w"> </span><span class="mi">12451840</span><span class="p">,</span><span class="w"> </span><span class="nt">"percent"</span><span class="p">:</span><span class="w"> </span><span class="mf">30.2</span><span class="w"> </span><span class="p">},</span>
+</span><span id="__span-10-13"><a id="__codelineno-10-13" name="__codelineno-10-13" href="#__codelineno-10-13"></a><span class="w">  </span><span class="nt">"network"</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span>
+</span><span id="__span-10-14"><a id="__codelineno-10-14" name="__codelineno-10-14" href="#__codelineno-10-14"></a><span class="p">}</span>
+</span></code></pre></div>
+<p><code>disk</code> reflects the partition holding <code>DATA_DIR</code>, not the whole filesystem.</p>
+<h2 id="runtime-configuration">Runtime Configuration<a class="headerlink" href="#runtime-configuration" title="Permanent link">⚓</a></h2>
+<h3 id="post-apiconfigure"><code>POST /api/configure</code><a class="headerlink" href="#post-apiconfigure" title="Permanent link">⚓</a></h3>
+<p>Applies runtime changes without a restart. Both parameters are optional; send whichever
+you need.</p>
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>curl<span class="w"> </span>-X<span class="w"> </span>POST<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-11-2"><a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a><span class="w">  </span>-H<span class="w"> </span><span class="s2">"X-API-Key: </span><span class="nv">$API_KEY</span><span class="s2">"</span><span class="w"> </span><span class="se">\</span>
+</span><span id="__span-11-3"><a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a><span class="w">  </span>-H<span class="w"> </span><span class="s2">"Content-Type: application/json"</span><span class="w"> </span><span class="se">\</span>
+</span><span id="__span-11-4"><a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a><span class="w">  </span>-d<span class="w"> </span><span class="s1">'{</span>
+</span><span id="__span-11-5"><a id="__codelineno-11-5" name="__codelineno-11-5" href="#__codelineno-11-5"></a><span class="s1">    "private_key": "REPLACE_WITH_64_CHAR_HEX_PRIVATE_KEY",</span>
+</span><span id="__span-11-6"><a id="__codelineno-11-6" name="__codelineno-11-6" href="#__codelineno-11-6"></a><span class="s1">    "listen_port": 51820</span>
+</span><span id="__span-11-7"><a id="__codelineno-11-7" name="__codelineno-11-7" href="#__codelineno-11-7"></a><span class="s1">  }'</span><span class="w"> </span><span class="se">\</span>
+</span><span id="__span-11-8"><a id="__codelineno-11-8" name="__codelineno-11-8" href="#__codelineno-11-8"></a><span class="w">  </span>http://localhost:9000/api/configure
+</span></code></pre></div>
+<h3 id="parameters">Parameters<a class="headerlink" href="#parameters" title="Permanent link">⚓</a></h3>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>private_key</code></td>
+<td>No</td>
+<td>New WireGuard server private key. Must be valid hex</td>
+</tr>
+<tr>
+<td><code>listen_port</code></td>
+<td>No</td>
+<td>New WireGuard listen port. Recorded, but <strong>a restart is required to apply it</strong></td>
+</tr>
+</tbody>
+</table>
+<p>If a new <code>private_key</code> is accepted, it is written to <code>DATA_DIR/server_private.key</code> with
+mode <code>0600</code>, and the response includes the resulting <code>server_public_key</code>.</p>
+<div class="admonition warning">
+<p class="admonition-title">Rotating the server key invalidates every peer config</p>
+<div class="language-text highlight"><pre><span></span><code>Peer configurations embed the server public key. After rotating, previously issued
+client configurations stop working and must be regenerated with `/api/peer/config`.
+</code></pre></div>
+<div class="admonition warning">
+<p class="admonition-title">Not available in mesh-only mode</p>
+<p>With <code>-mesh-only</code> there is no WireGuard interface to reconfigure, so this endpoint must
+not be used. Use the mesh and configuration file endpoints instead.</p>
+</div>
+<h2 id="list-peers">List Peers<a class="headerlink" href="#list-peers" title="Permanent link">⚓</a></h2>
+<h3 id="get-apipeers"><code>GET /api/peers</code><a class="headerlink" href="#get-apipeers" title="Permanent link">⚓</a></h3>
+<p>Returns the peers currently configured on the TunGuard server.</p>
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>curl<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-12-2"><a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a><span class="w">  </span>-H<span class="w"> </span><span class="s2">"X-API-Key: </span><span class="nv">$API_KEY</span><span class="s2">"</span><span class="w"> </span><span class="se">\</span>
+</span><span id="__span-12-3"><a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a><span class="w">  </span>http://localhost:9000/api/peers
+</span></code></pre></div>
+<h2 id="add-peer">Add Peer<a class="headerlink" href="#add-peer" title="Permanent link">⚓</a></h2>
+<h3 id="post-apipeeradd"><code>POST /api/peer/add</code><a class="headerlink" href="#post-apipeeradd" title="Permanent link">⚓</a></h3>
+<p>Adds a peer using an existing WireGuard public key.</p>
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-13-1"><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>curl<span class="w"> </span>-X<span class="w"> </span>POST<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-13-2"><a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a><span class="w">  </span>-H<span class="w"> </span><span class="s2">"X-API-Key: </span><span class="nv">$API_KEY</span><span class="s2">"</span><span class="w"> </span><span class="se">\</span>
+</span><span id="__span-13-3"><a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a><span class="w">  </span>-H<span class="w"> </span><span class="s2">"Content-Type: application/json"</span><span class="w"> </span><span class="se">\</span>
+</span><span id="__span-13-4"><a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a><span class="w">  </span>-d<span class="w"> </span><span class="s1">'{</span>
+</span><span id="__span-13-5"><a id="__codelineno-13-5" name="__codelineno-13-5" href="#__codelineno-13-5"></a><span class="s1">    "public_key": "PEER_PUBKEY_HEX",</span>
+</span><span id="__span-13-6"><a id="__codelineno-13-6" name="__codelineno-13-6" href="#__codelineno-13-6"></a><span class="s1">    "allowed_ip": "10.100.0.2/32",</span>
+</span><span id="__span-13-7"><a id="__codelineno-13-7" name="__codelineno-13-7" href="#__codelineno-13-7"></a><span class="s1">    "device_name": "my-device"</span>
+</span><span id="__span-13-8"><a id="__codelineno-13-8" name="__codelineno-13-8" href="#__codelineno-13-8"></a><span class="s1">  }'</span><span class="w"> </span><span class="se">\</span>
+</span><span id="__span-13-9"><a id="__codelineno-13-9" name="__codelineno-13-9" href="#__codelineno-13-9"></a><span class="w">  </span>http://localhost:9000/api/peer/add
+</span></code></pre></div>
+<h3 id="parameters_1">Parameters<a class="headerlink" href="#parameters_1" title="Permanent link">⚓</a></h3>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>public_key</code></td>
+<td>Yes</td>
+<td>WireGuard public key of the peer. Must be valid hex</td>
+</tr>
+<tr>
+<td><code>allowed_ip</code></td>
+<td>Yes</td>
+<td>VPN address assigned to the peer, in CIDR form. Must not already be assigned</td>
+</tr>
+<tr>
+<td><code>device_name</code></td>
+<td>No</td>
+<td>Label used to identify the peer in the dashboard</td>
+</tr>
+</tbody>
+</table>
+<p>Returns <code>409</code> if the public key is already registered, or if <code>allowed_ip</code> is already
+assigned to another peer.</p>
+<h2 id="generate-peer-configuration">Generate Peer Configuration<a class="headerlink" href="#generate-peer-configuration" title="Permanent link">⚓</a></h2>
+<h3 id="post-apipeergenerate-config"><code>POST /api/peer/generate-config</code><a class="headerlink" href="#post-apipeergenerate-config" title="Permanent link">⚓</a></h3>
+<p>Creates a new peer and generates its WireGuard client configuration.</p>
+<p>TunGuard generates the client's WireGuard key pair. Nothing is required — every
+parameter has a default:</p>
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-14-1"><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>curl<span class="w"> </span>-X<span class="w"> </span>POST<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-14-2"><a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a><span class="w">  </span>-H<span class="w"> </span><span class="s2">"X-API-Key: </span><span class="nv">$API_KEY</span><span class="s2">"</span><span class="w"> </span><span class="se">\</span>
+</span><span id="__span-14-3"><a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a><span class="w">  </span>-H<span class="w"> </span><span class="s2">"Content-Type: application/json"</span><span class="w"> </span><span class="se">\</span>
+</span><span id="__span-14-4"><a id="__codelineno-14-4" name="__codelineno-14-4" href="#__codelineno-14-4"></a><span class="w">  </span>-d<span class="w"> </span><span class="s1">'{</span>
+</span><span id="__span-14-5"><a id="__codelineno-14-5" name="__codelineno-14-5" href="#__codelineno-14-5"></a><span class="s1">    "device_name": "my-phone",</span>
+</span><span id="__span-14-6"><a id="__codelineno-14-6" name="__codelineno-14-6" href="#__codelineno-14-6"></a><span class="s1">    "server_host": "vpn.example.com"</span>
+</span><span id="__span-14-7"><a id="__codelineno-14-7" name="__codelineno-14-7" href="#__codelineno-14-7"></a><span class="s1">  }'</span><span class="w"> </span><span class="se">\</span>
+</span><span id="__span-14-8"><a id="__codelineno-14-8" name="__codelineno-14-8" href="#__codelineno-14-8"></a><span class="w">  </span>http://localhost:9000/api/peer/generate-config
+</span></code></pre></div>
+<h3 id="parameters_2">Parameters<a class="headerlink" href="#parameters_2" title="Permanent link">⚓</a></h3>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Required</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>device_name</code></td>
+<td>No</td>
+<td>—</td>
+<td>Label used to identify the peer</td>
+</tr>
+<tr>
+<td><code>device_id</code></td>
+<td>No</td>
+<td>—</td>
+<td>Identifier stored with the peer record</td>
+</tr>
+<tr>
+<td><code>server_host</code></td>
+<td>No</td>
+<td>Host of the request</td>
+<td>Public hostname or IP clients use to reach TunGuard</td>
+</tr>
+<tr>
+<td><code>allowed_ip</code></td>
+<td>No</td>
+<td>Next free address</td>
+<td>VPN address to assign. Must not already be assigned</td>
+</tr>
+<tr>
+<td><code>dns</code></td>
+<td>No</td>
+<td><code>1.1.1.1</code></td>
+<td>DNS server written into the generated configuration</td>
+</tr>
+</tbody>
+</table>
+<p>Leaving <code>server_host</code> out uses the <code>Host</code> header of the request, so the generated
+endpoint matches however you reached the server — but set it explicitly if you want a
+different public hostname in the output.</p>
+<p>The response contains the generated client configuration, including the peer's private
+key. Treat it as a secret.</p>
+<h2 id="get-peer-configuration">Get Peer Configuration<a class="headerlink" href="#get-peer-configuration" title="Permanent link">⚓</a></h2>
+<h3 id="post-apipeerconfig"><code>POST /api/peer/config</code><a class="headerlink" href="#post-apipeerconfig" title="Permanent link">⚓</a></h3>
+<p>Generates the complete WireGuard configuration for an existing peer.</p>
+<p>This is useful for re-downloading or re-rendering a configuration for a peer created using <code>/api/peer/generate-config</code>.</p>
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-15-1"><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a>curl<span class="w"> </span>-X<span class="w"> </span>POST<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-15-2"><a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a><span class="w">  </span>-H<span class="w"> </span><span class="s2">"X-API-Key: </span><span class="nv">$API_KEY</span><span class="s2">"</span><span class="w"> </span><span class="se">\</span>
+</span><span id="__span-15-3"><a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a><span class="w">  </span>-H<span class="w"> </span><span class="s2">"Content-Type: application/json"</span><span class="w"> </span><span class="se">\</span>
+</span><span id="__span-15-4"><a id="__codelineno-15-4" name="__codelineno-15-4" href="#__codelineno-15-4"></a><span class="w">  </span>-d<span class="w"> </span><span class="s1">'{</span>
+</span><span id="__span-15-5"><a id="__codelineno-15-5" name="__codelineno-15-5" href="#__codelineno-15-5"></a><span class="s1">    "public_key": "PEER_PUBKEY_HEX",</span>
+</span><span id="__span-15-6"><a id="__codelineno-15-6" name="__codelineno-15-6" href="#__codelineno-15-6"></a><span class="s1">    "server_host": "vpn.example.com"</span>
+</span><span id="__span-15-7"><a id="__codelineno-15-7" name="__codelineno-15-7" href="#__codelineno-15-7"></a><span class="s1">  }'</span><span class="w"> </span><span class="se">\</span>
+</span><span id="__span-15-8"><a id="__codelineno-15-8" name="__codelineno-15-8" href="#__codelineno-15-8"></a><span class="w">  </span>http://localhost:9000/api/peer/config
+</span></code></pre></div>
+<h3 id="parameters_3">Parameters<a class="headerlink" href="#parameters_3" title="Permanent link">⚓</a></h3>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>public_key</code></td>
+<td>Yes</td>
+<td>WireGuard public key of the peer</td>
+</tr>
+<tr>
+<td><code>server_host</code></td>
+<td>Yes</td>
+<td>Public hostname or IP address clients use to reach TunGuard</td>
+</tr>
+</tbody>
+</table>
+<p>For peers created using <code>generate-config</code>, the returned configuration can include the client's private key.</p>
+<p>Treat generated configurations as sensitive.</p>
+<h2 id="remove-peer">Remove Peer<a class="headerlink" href="#remove-peer" title="Permanent link">⚓</a></h2>
+<h3 id="post-apipeerremove"><code>POST /api/peer/remove</code><a class="headerlink" href="#post-apipeerremove" title="Permanent link">⚓</a></h3>
+<p>Removes a peer from TunGuard.</p>
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-16-1"><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a>curl<span class="w"> </span>-X<span class="w"> </span>POST<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-16-2"><a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a><span class="w">  </span>-H<span class="w"> </span><span class="s2">"X-API-Key: </span><span class="nv">$API_KEY</span><span class="s2">"</span><span class="w"> </span><span class="se">\</span>
+</span><span id="__span-16-3"><a id="__codelineno-16-3" name="__codelineno-16-3" href="#__codelineno-16-3"></a><span class="w">  </span>-H<span class="w"> </span><span class="s2">"Content-Type: application/json"</span><span class="w"> </span><span class="se">\</span>
+</span><span id="__span-16-4"><a id="__codelineno-16-4" name="__codelineno-16-4" href="#__codelineno-16-4"></a><span class="w">  </span>-d<span class="w"> </span><span class="s1">'{</span>
+</span><span id="__span-16-5"><a id="__codelineno-16-5" name="__codelineno-16-5" href="#__codelineno-16-5"></a><span class="s1">    "public_key": "PEER_PUBKEY_HEX"</span>
+</span><span id="__span-16-6"><a id="__codelineno-16-6" name="__codelineno-16-6" href="#__codelineno-16-6"></a><span class="s1">  }'</span><span class="w"> </span><span class="se">\</span>
+</span><span id="__span-16-7"><a id="__codelineno-16-7" name="__codelineno-16-7" href="#__codelineno-16-7"></a><span class="w">  </span>http://localhost:9000/api/peer/remove
+</span></code></pre></div>
+<h3 id="parameters_4">Parameters<a class="headerlink" href="#parameters_4" title="Permanent link">⚓</a></h3>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>public_key</code></td>
+<td>Yes</td>
+<td>WireGuard public key of the peer to remove</td>
+</tr>
+</tbody>
+</table>
+<h2 id="credential-and-key-management">Credential and key management<a class="headerlink" href="#credential-and-key-management" title="Permanent link">⚓</a></h2>
+<p>These four endpoints all require the <strong>dashboard login</strong>. An API key is rejected, so a
+leaked key can always be rotated by someone who holds the password.</p>
+<h3 id="get-apiauthstatus"><code>GET /api/auth/status</code><a class="headerlink" href="#get-apiauthstatus" title="Permanent link">⚓</a></h3>
+<p>Returns the authenticated username and whether the server is still on default
+credentials. Used by the dashboard to decide whether to force a password change.</p>
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-17-1"><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a>curl<span class="w"> </span>-u<span class="w"> </span>admin:PASSWORD<span class="w"> </span>http://localhost:9000/api/auth/status
+</span></code></pre></div>
+<div class="language-json highlight"><pre><span></span><code><span id="__span-18-1"><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a><span class="p">{</span>
+</span><span id="__span-18-2"><a id="__codelineno-18-2" name="__codelineno-18-2" href="#__codelineno-18-2"></a><span class="w">  </span><span class="nt">"authenticated"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+</span><span id="__span-18-3"><a id="__codelineno-18-3" name="__codelineno-18-3" href="#__codelineno-18-3"></a><span class="w">  </span><span class="nt">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"admin"</span><span class="p">,</span>
+</span><span id="__span-18-4"><a id="__codelineno-18-4" name="__codelineno-18-4" href="#__codelineno-18-4"></a><span class="w">  </span><span class="nt">"must_change"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span>
+</span><span id="__span-18-5"><a id="__codelineno-18-5" name="__codelineno-18-5" href="#__codelineno-18-5"></a><span class="p">}</span>
+</span></code></pre></div>
+<p><code>must_change</code> is <code>true</code> only when no credentials have been stored yet and the configured
+username and password are still <code>admin</code> / <code>tanguard</code>.</p>
+<h3 id="post-apiwebcredentials"><code>POST /api/web/credentials</code><a class="headerlink" href="#post-apiwebcredentials" title="Permanent link">⚓</a></h3>
+<p>Changes the dashboard username and password.</p>
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-19-1"><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a>curl<span class="w"> </span>-X<span class="w"> </span>POST<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-19-2"><a id="__codelineno-19-2" name="__codelineno-19-2" href="#__codelineno-19-2"></a><span class="w">  </span>-u<span class="w"> </span>admin:tanguard<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-19-3"><a id="__codelineno-19-3" name="__codelineno-19-3" href="#__codelineno-19-3"></a><span class="w">  </span>-H<span class="w"> </span><span class="s2">"Content-Type: application/json"</span><span class="w"> </span><span class="se">\</span>
+</span><span id="__span-19-4"><a id="__codelineno-19-4" name="__codelineno-19-4" href="#__codelineno-19-4"></a><span class="w">  </span>-d<span class="w"> </span><span class="s1">'{</span>
+</span><span id="__span-19-5"><a id="__codelineno-19-5" name="__codelineno-19-5" href="#__codelineno-19-5"></a><span class="s1">    "username": "alice",</span>
+</span><span id="__span-19-6"><a id="__codelineno-19-6" name="__codelineno-19-6" href="#__codelineno-19-6"></a><span class="s1">    "password": "a-long-passphrase",</span>
+</span><span id="__span-19-7"><a id="__codelineno-19-7" name="__codelineno-19-7" href="#__codelineno-19-7"></a><span class="s1">    "confirm_password": "a-long-passphrase"</span>
+</span><span id="__span-19-8"><a id="__codelineno-19-8" name="__codelineno-19-8" href="#__codelineno-19-8"></a><span class="s1">  }'</span><span class="w"> </span><span class="se">\</span>
+</span><span id="__span-19-9"><a id="__codelineno-19-9" name="__codelineno-19-9" href="#__codelineno-19-9"></a><span class="w">  </span>http://localhost:9000/api/web/credentials
+</span></code></pre></div>
+<h3 id="parameters_5">Parameters<a class="headerlink" href="#parameters_5" title="Permanent link">⚓</a></h3>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>username</code></td>
+<td>Yes</td>
+<td>New dashboard username. Whitespace is trimmed; cannot be empty</td>
+</tr>
+<tr>
+<td><code>password</code></td>
+<td>Yes</td>
+<td>New password. Minimum 8 characters</td>
+</tr>
+<tr>
+<td><code>confirm_password</code></td>
+<td>Yes</td>
+<td>Must match <code>password</code> exactly</td>
+</tr>
+</tbody>
+</table>
+<p>Changing the password invalidates every existing session and API key, so update your
+clients at the same time.</p>
+<h3 id="get-apikey"><code>GET /api/key</code><a class="headerlink" href="#get-apikey" title="Permanent link">⚓</a></h3>
+<p>Returns the current API key, if one exists.</p>
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-20-1"><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a>curl<span class="w"> </span>-u<span class="w"> </span>admin:PASSWORD<span class="w"> </span>http://localhost:9000/api/key
+</span></code></pre></div>
+<div class="language-json highlight"><pre><span></span><code><span id="__span-21-1"><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a><span class="p">{</span>
+</span><span id="__span-21-2"><a id="__codelineno-21-2" name="__codelineno-21-2" href="#__codelineno-21-2"></a><span class="w">  </span><span class="nt">"exists"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+</span><span id="__span-21-3"><a id="__codelineno-21-3" name="__codelineno-21-3" href="#__codelineno-21-3"></a><span class="w">  </span><span class="nt">"key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"REPLACE_WITH_YOUR_KEY"</span><span class="p">,</span>
+</span><span id="__span-21-4"><a id="__codelineno-21-4" name="__codelineno-21-4" href="#__codelineno-21-4"></a><span class="w">  </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2026-01-14T09:31:07Z"</span>
+</span><span id="__span-21-5"><a id="__codelineno-21-5" name="__codelineno-21-5" href="#__codelineno-21-5"></a><span class="p">}</span>
+</span></code></pre></div>
+<p>When no key has been generated yet, <code>exists</code> is <code>false</code> and <code>key</code> is an empty string.
+<code>created_at</code> is only present when a key exists.</p>
+<h3 id="post-apikeyregenerate"><code>POST /api/key/regenerate</code><a class="headerlink" href="#post-apikeyregenerate" title="Permanent link">⚓</a></h3>
+<p>Creates a new API key and invalidates the previous key.</p>
+<p>Dashboard authentication is required for this endpoint.</p>
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-22-1"><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a>curl<span class="w"> </span>-X<span class="w"> </span>POST<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-22-2"><a id="__codelineno-22-2" name="__codelineno-22-2" href="#__codelineno-22-2"></a><span class="w">  </span>-u<span class="w"> </span>admin:PASSWORD<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-22-3"><a id="__codelineno-22-3" name="__codelineno-22-3" href="#__codelineno-22-3"></a><span class="w">  </span>http://localhost:9000/api/key/regenerate
+</span></code></pre></div>
+<p>The response contains the new key and its creation timestamp. The previous key stops
+working immediately, so update any applications or automation that relied on it.</p>
+<h2 id="version-and-updates">Version and updates<a class="headerlink" href="#version-and-updates" title="Permanent link">⚓</a></h2>
+<h3 id="get-apiversion"><code>GET /api/version</code><a class="headerlink" href="#get-apiversion" title="Permanent link">⚓</a></h3>
+<p>Returns the running version, the latest published release, and update metadata. The
+version check runs in the background; results are cached.</p>
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-23-1"><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a>curl<span class="w"> </span>-H<span class="w"> </span><span class="s2">"X-API-Key: </span><span class="nv">$API_KEY</span><span class="s2">"</span><span class="w"> </span>http://localhost:9000/api/version
+</span></code></pre></div>
+<div class="language-json highlight"><pre><span></span><code><span id="__span-24-1"><a id="__codelineno-24-1" name="__codelineno-24-1" href="#__codelineno-24-1"></a><span class="p">{</span>
+</span><span id="__span-24-2"><a id="__codelineno-24-2" name="__codelineno-24-2" href="#__codelineno-24-2"></a><span class="w">  </span><span class="nt">"current_version"</span><span class="p">:</span><span class="w"> </span><span class="s2">"v1.2.0"</span><span class="p">,</span>
+</span><span id="__span-24-3"><a id="__codelineno-24-3" name="__codelineno-24-3" href="#__codelineno-24-3"></a><span class="w">  </span><span class="nt">"latest_version"</span><span class="p">:</span><span class="w"> </span><span class="s2">"v1.3.0"</span><span class="p">,</span>
+</span><span id="__span-24-4"><a id="__codelineno-24-4" name="__codelineno-24-4" href="#__codelineno-24-4"></a><span class="w">  </span><span class="nt">"update_available"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+</span><span id="__span-24-5"><a id="__codelineno-24-5" name="__codelineno-24-5" href="#__codelineno-24-5"></a><span class="w">  </span><span class="nt">"download_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://github.com/TunGuard/tanguard-binary/releases/download/v1.3.0/tanguard-linux-amd64"</span><span class="p">,</span>
+</span><span id="__span-24-6"><a id="__codelineno-24-6" name="__codelineno-24-6" href="#__codelineno-24-6"></a><span class="w">  </span><span class="nt">"release_notes"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.github.com/repos/TunGuard/tanguard-binary/releases/latest"</span><span class="p">,</span>
+</span><span id="__span-24-7"><a id="__codelineno-24-7" name="__codelineno-24-7" href="#__codelineno-24-7"></a><span class="w">  </span><span class="nt">"release_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://github.com/TunGuard/tanguard-binary/releases/tag/v1.3.0"</span><span class="p">,</span>
+</span><span id="__span-24-8"><a id="__codelineno-24-8" name="__codelineno-24-8" href="#__codelineno-24-8"></a><span class="w">  </span><span class="nt">"arch"</span><span class="p">:</span><span class="w"> </span><span class="s2">"amd64"</span><span class="p">,</span>
+</span><span id="__span-24-9"><a id="__codelineno-24-9" name="__codelineno-24-9" href="#__codelineno-24-9"></a><span class="w">  </span><span class="nt">"last_checked"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2026-01-14T09:00:00Z"</span>
+</span><span id="__span-24-10"><a id="__codelineno-24-10" name="__codelineno-24-10" href="#__codelineno-24-10"></a><span class="p">}</span>
+</span></code></pre></div>
+<p>Add <code>?refresh=1</code> to query GitHub immediately instead of returning the cached result:</p>
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-25-1"><a id="__codelineno-25-1" name="__codelineno-25-1" href="#__codelineno-25-1"></a>curl<span class="w"> </span>-H<span class="w"> </span><span class="s2">"X-API-Key: </span><span class="nv">$API_KEY</span><span class="s2">"</span><span class="w"> </span><span class="s2">"http://localhost:9000/api/version?refresh=1"</span>
+</span></code></pre></div>
+<h3 id="post-apiupdate"><code>POST /api/update</code><a class="headerlink" href="#post-apiupdate" title="Permanent link">⚓</a></h3>
+<p>Downloads a new binary, replaces the running executable, and restarts the process with
+the same arguments.</p>
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-26-1"><a id="__codelineno-26-1" name="__codelineno-26-1" href="#__codelineno-26-1"></a>curl<span class="w"> </span>-X<span class="w"> </span>POST<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-26-2"><a id="__codelineno-26-2" name="__codelineno-26-2" href="#__codelineno-26-2"></a><span class="w">  </span>-H<span class="w"> </span><span class="s2">"X-API-Key: </span><span class="nv">$API_KEY</span><span class="s2">"</span><span class="w"> </span><span class="se">\</span>
+</span><span id="__span-26-3"><a id="__codelineno-26-3" name="__codelineno-26-3" href="#__codelineno-26-3"></a><span class="w">  </span>-H<span class="w"> </span><span class="s2">"Content-Type: application/json"</span><span class="w"> </span><span class="se">\</span>
+</span><span id="__span-26-4"><a id="__codelineno-26-4" name="__codelineno-26-4" href="#__codelineno-26-4"></a><span class="w">  </span>-d<span class="w"> </span><span class="s1">'{"download_url": "https://github.com/TunGuard/tanguard-binary/releases/download/v1.3.0/tanguard-linux-amd64"}'</span><span class="w"> </span><span class="se">\</span>
+</span><span id="__span-26-5"><a id="__codelineno-26-5" name="__codelineno-26-5" href="#__codelineno-26-5"></a><span class="w">  </span>http://localhost:9000/api/update
+</span></code></pre></div>
+<h3 id="parameters_6">Parameters<a class="headerlink" href="#parameters_6" title="Permanent link">⚓</a></h3>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>download_url</code></td>
+<td>Yes</td>
+<td>URL of the replacement binary</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition danger">
+<p class="admonition-title">This endpoint replaces the running binary</p>
+<p><code>/api/update</code> fetches <code>download_url</code> with no checksum or signature check, writes it over
+the running executable, and re-execs it. Anything able to call this endpoint can install
+arbitrary code as your server user.</p>
+<p>Prefer downloading the release yourself, verifying it, and restarting through your
+process supervisor. If you do use this endpoint, only ever pass a <code>download_url</code> you
+obtained directly from the project's own releases, and never from a redirecting
+shortener or mirror.</p>
+<p>The download is capped at 256 MB, and a payload under 100 KB is rejected. A second
+concurrent call returns <code>409</code> while an update is already in progress.</p>
+</div>
+<h2 id="backup-and-restore">Backup and restore<a class="headerlink" href="#backup-and-restore" title="Permanent link">⚓</a></h2>
+<h3 id="get-apibackupdownload"><code>GET /api/backup/download</code><a class="headerlink" href="#get-apibackupdownload" title="Permanent link">⚓</a></h3>
+<p>Streams a <code>.tar.gz</code> backup of the data directory. The archive contains a <code>manifest.json</code>
+recording the tool, version, creation time, and data directory path.</p>
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-27-1"><a id="__codelineno-27-1" name="__codelineno-27-1" href="#__codelineno-27-1"></a>curl<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-27-2"><a id="__codelineno-27-2" name="__codelineno-27-2" href="#__codelineno-27-2"></a><span class="w">  </span>-H<span class="w"> </span><span class="s2">"X-API-Key: </span><span class="nv">$API_KEY</span><span class="s2">"</span><span class="w"> </span><span class="se">\</span>
+</span><span id="__span-27-3"><a id="__codelineno-27-3" name="__codelineno-27-3" href="#__codelineno-27-3"></a><span class="w">  </span>-o<span class="w"> </span>tanguard-backup.tar.gz<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-27-4"><a id="__codelineno-27-4" name="__codelineno-27-4" href="#__codelineno-27-4"></a><span class="w">  </span>http://localhost:9000/api/backup/download
+</span></code></pre></div>
+<h3 id="post-apibackuprestore"><code>POST /api/backup/restore</code><a class="headerlink" href="#post-apibackuprestore" title="Permanent link">⚓</a></h3>
+<p>Restores a backup produced by <code>/api/backup/download</code>. Send the archive as a multipart
+form field named <code>backup</code>.</p>
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-28-1"><a id="__codelineno-28-1" name="__codelineno-28-1" href="#__codelineno-28-1"></a>curl<span class="w"> </span>-X<span class="w"> </span>POST<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-28-2"><a id="__codelineno-28-2" name="__codelineno-28-2" href="#__codelineno-28-2"></a><span class="w">  </span>-H<span class="w"> </span><span class="s2">"X-API-Key: </span><span class="nv">$API_KEY</span><span class="s2">"</span><span class="w"> </span><span class="se">\</span>
+</span><span id="__span-28-3"><a id="__codelineno-28-3" name="__codelineno-28-3" href="#__codelineno-28-3"></a><span class="w">  </span>-F<span class="w"> </span><span class="s2">"backup=@tanguard-backup.tar.gz"</span><span class="w"> </span><span class="se">\</span>
+</span><span id="__span-28-4"><a id="__codelineno-28-4" name="__codelineno-28-4" href="#__codelineno-28-4"></a><span class="w">  </span>http://localhost:9000/api/backup/restore
+</span></code></pre></div>
+<div class="admonition warning">
+<p class="admonition-title">Back up before you restore</p>
+<div class="language-text highlight"><pre><span></span><code>Restore overwrites the current data directory. Take a fresh download first, and do
+not restore while peers are connected.
+
+A backup contains peer private keys and the stored API key. Anyone holding the file
+can impersonate your peers and read server credentials. Keep it encrypted at rest.
+</code></pre></div>
+</div>
+<h2 id="peer-monitoring">Peer monitoring<a class="headerlink" href="#peer-monitoring" title="Permanent link">⚓</a></h2>
+<p>These endpoints expose the peer handshakes the dashboard charts. They are registered
+only when the peer monitor is running, and are absent in <code>-mesh-only</code> mode, where the
+responses are <code>404</code>.</p>
+<h3 id="get-apipeer-monitorevents"><code>GET /api/peer-monitor/events</code><a class="headerlink" href="#get-apipeer-monitorevents" title="Permanent link">⚓</a></h3>
+<p>Returns recorded peer events as a JSON array.</p>
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-29-1"><a id="__codelineno-29-1" name="__codelineno-29-1" href="#__codelineno-29-1"></a>curl<span class="w"> </span>-H<span class="w"> </span><span class="s2">"X-API-Key: </span><span class="nv">$API_KEY</span><span class="s2">"</span><span class="w"> </span>http://localhost:9000/api/peer-monitor/events
+</span></code></pre></div>
+<div class="language-json highlight"><pre><span></span><code><span id="__span-30-1"><a id="__codelineno-30-1" name="__codelineno-30-1" href="#__codelineno-30-1"></a><span class="p">[</span>
+</span><span id="__span-30-2"><a id="__codelineno-30-2" name="__codelineno-30-2" href="#__codelineno-30-2"></a><span class="w">  </span><span class="p">{</span><span class="w"> </span><span class="nt">"t"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2026-01-14T09:31:07Z"</span><span class="p">,</span><span class="w"> </span><span class="nt">"peer"</span><span class="p">:</span><span class="w"> </span><span class="s2">"a1b2c3d4"</span><span class="p">,</span><span class="w"> </span><span class="nt">"event"</span><span class="p">:</span><span class="w"> </span><span class="s2">"handshake"</span><span class="p">,</span><span class="w"> </span><span class="nt">"detail"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="w"> </span><span class="p">},</span>
+</span><span id="__span-30-3"><a id="__codelineno-30-3" name="__codelineno-30-3" href="#__codelineno-30-3"></a><span class="w">  </span><span class="p">{</span><span class="w"> </span><span class="nt">"t"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2026-01-14T09:34:12Z"</span><span class="p">,</span><span class="w"> </span><span class="nt">"peer"</span><span class="p">:</span><span class="w"> </span><span class="s2">"e5f6a7b8"</span><span class="p">,</span><span class="w"> </span><span class="nt">"event"</span><span class="p">:</span><span class="w"> </span><span class="s2">"deferred"</span><span class="p">,</span><span class="w"> </span><span class="nt">"detail"</span><span class="p">:</span><span class="w"> </span><span class="s2">"handshake timeout"</span><span class="w"> </span><span class="p">}</span>
+</span><span id="__span-30-4"><a id="__codelineno-30-4" name="__codelineno-30-4" href="#__codelineno-30-4"></a><span class="p">]</span>
+</span></code></pre></div>
+<h3 id="query-parameters">Query parameters<a class="headerlink" href="#query-parameters" title="Permanent link">⚓</a></h3>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>since</code></td>
+<td>RFC 3339 timestamp. Returns only events strictly after it. Invalid values are ignored</td>
+</tr>
+<tr>
+<td><code>peer</code></td>
+<td>Public key prefix. Returns only events for that peer</td>
+</tr>
+</tbody>
+</table>
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-31-1"><a id="__codelineno-31-1" name="__codelineno-31-1" href="#__codelineno-31-1"></a>curl<span class="w"> </span>-H<span class="w"> </span><span class="s2">"X-API-Key: </span><span class="nv">$API_KEY</span><span class="s2">"</span><span class="w"> </span><span class="se">\</span>
+</span><span id="__span-31-2"><a id="__codelineno-31-2" name="__codelineno-31-2" href="#__codelineno-31-2"></a><span class="w">  </span><span class="s2">"http://localhost:9000/api/peer-monitor/events?peer=a1b2c3d4&amp;since=2026-01-14T09:00:00Z"</span>
+</span></code></pre></div>
+<p>This is a polling endpoint, not a stream — it returns the current buffer and closes.</p>
+<h3 id="get-apipeer-monitorstate"><code>GET /api/peer-monitor/state</code><a class="headerlink" href="#get-apipeer-monitorstate" title="Permanent link">⚓</a></h3>
+<p>Returns a snapshot of the most recent metrics per peer, keyed by shortened public key.</p>
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-32-1"><a id="__codelineno-32-1" name="__codelineno-32-1" href="#__codelineno-32-1"></a>curl<span class="w"> </span>-H<span class="w"> </span><span class="s2">"X-API-Key: </span><span class="nv">$API_KEY</span><span class="s2">"</span><span class="w"> </span>http://localhost:9000/api/peer-monitor/state
+</span></code></pre></div>
+<div class="language-json highlight"><pre><span></span><code><span id="__span-33-1"><a id="__codelineno-33-1" name="__codelineno-33-1" href="#__codelineno-33-1"></a><span class="p">{</span>
+</span><span id="__span-33-2"><a id="__codelineno-33-2" name="__codelineno-33-2" href="#__codelineno-33-2"></a><span class="w">  </span><span class="nt">"a1b2c3d4"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-33-3"><a id="__codelineno-33-3" name="__codelineno-33-3" href="#__codelineno-33-3"></a><span class="w">    </span><span class="nt">"handshake"</span><span class="p">:</span><span class="w"> </span><span class="mi">1768382345</span><span class="p">,</span>
+</span><span id="__span-33-4"><a id="__codelineno-33-4" name="__codelineno-33-4" href="#__codelineno-33-4"></a><span class="w">    </span><span class="nt">"endpoint"</span><span class="p">:</span><span class="w"> </span><span class="s2">"198.51.100.24:4711"</span><span class="p">,</span>
+</span><span id="__span-33-5"><a id="__codelineno-33-5" name="__codelineno-33-5" href="#__codelineno-33-5"></a><span class="w">    </span><span class="nt">"txBytes"</span><span class="p">:</span><span class="w"> </span><span class="mi">184432</span><span class="p">,</span>
+</span><span id="__span-33-6"><a id="__codelineno-33-6" name="__codelineno-33-6" href="#__codelineno-33-6"></a><span class="w">    </span><span class="nt">"rxBytes"</span><span class="p">:</span><span class="w"> </span><span class="mi">229104</span>
+</span><span id="__span-33-7"><a id="__codelineno-33-7" name="__codelineno-33-7" href="#__codelineno-33-7"></a><span class="w">  </span><span class="p">}</span>
+</span><span id="__span-33-8"><a id="__codelineno-33-8" name="__codelineno-33-8" href="#__codelineno-33-8"></a><span class="p">}</span>
+</span></code></pre></div>
+<p><code>handshake</code> is a Unix timestamp of the last completed handshake, or <code>0</code> if none has
+happened yet.</p>
+<h2 id="web-ssh">Web SSH<a class="headerlink" href="#web-ssh" title="Permanent link">⚓</a></h2>
+<h3 id="get-apiwsssh"><code>GET /api/ws/ssh</code><a class="headerlink" href="#get-apiwsssh" title="Permanent link">⚓</a></h3>
+<p>Upgrades the connection to a WebSocket and opens a pseudo-terminal onto the host, which
+is how the dashboard's <strong>SSH Gateway</strong> works. In a browser this must be requested as a
+WebSocket; it cannot be called with a plain <code>curl</code> request.</p>
+<p>Credentials are taken from the <code>Host</code> header in the form <code>user:password@host:port</code>, and
+forwarded to the target host. A failure to connect is reported in-band over the socket
+rather than as an HTTP status.</p>
+<h2 id="example-automation">Example: Automation<a class="headerlink" href="#example-automation" title="Permanent link">⚓</a></h2>
+<p>A simple script can use an API key to retrieve peer information:</p>
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-34-1"><a id="__codelineno-34-1" name="__codelineno-34-1" href="#__codelineno-34-1"></a><span class="ch">#!/bin/sh</span>
+</span><span id="__span-34-2"><a id="__codelineno-34-2" name="__codelineno-34-2" href="#__codelineno-34-2"></a>
+</span><span id="__span-34-3"><a id="__codelineno-34-3" name="__codelineno-34-3" href="#__codelineno-34-3"></a><span class="nv">API_KEY</span><span class="o">=</span><span class="s2">"REPLACE_WITH_YOUR_KEY"</span>
+</span><span id="__span-34-4"><a id="__codelineno-34-4" name="__codelineno-34-4" href="#__codelineno-34-4"></a><span class="nv">API</span><span class="o">=</span><span class="s2">"http://localhost:9000"</span>
+</span><span id="__span-34-5"><a id="__codelineno-34-5" name="__codelineno-34-5" href="#__codelineno-34-5"></a>
+</span><span id="__span-34-6"><a id="__codelineno-34-6" name="__codelineno-34-6" href="#__codelineno-34-6"></a>curl<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-34-7"><a id="__codelineno-34-7" name="__codelineno-34-7" href="#__codelineno-34-7"></a><span class="w">  </span>-H<span class="w"> </span><span class="s2">"X-API-Key: </span><span class="nv">$API_KEY</span><span class="s2">"</span><span class="w"> </span><span class="se">\</span>
+</span><span id="__span-34-8"><a id="__codelineno-34-8" name="__codelineno-34-8" href="#__codelineno-34-8"></a><span class="w">  </span><span class="s2">"</span><span class="nv">$API</span><span class="s2">/api/peers"</span>
+</span></code></pre></div>
+<h2 id="example-add-a-peer">Example: Add a Peer<a class="headerlink" href="#example-add-a-peer" title="Permanent link">⚓</a></h2>
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-35-1"><a id="__codelineno-35-1" name="__codelineno-35-1" href="#__codelineno-35-1"></a><span class="ch">#!/bin/sh</span>
+</span><span id="__span-35-2"><a id="__codelineno-35-2" name="__codelineno-35-2" href="#__codelineno-35-2"></a>
+</span><span id="__span-35-3"><a id="__codelineno-35-3" name="__codelineno-35-3" href="#__codelineno-35-3"></a><span class="nv">API_KEY</span><span class="o">=</span><span class="s2">"REPLACE_WITH_YOUR_KEY"</span>
+</span><span id="__span-35-4"><a id="__codelineno-35-4" name="__codelineno-35-4" href="#__codelineno-35-4"></a><span class="nv">API</span><span class="o">=</span><span class="s2">"http://localhost:9000"</span>
+</span><span id="__span-35-5"><a id="__codelineno-35-5" name="__codelineno-35-5" href="#__codelineno-35-5"></a>
+</span><span id="__span-35-6"><a id="__codelineno-35-6" name="__codelineno-35-6" href="#__codelineno-35-6"></a>curl<span class="w"> </span>-X<span class="w"> </span>POST<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-35-7"><a id="__codelineno-35-7" name="__codelineno-35-7" href="#__codelineno-35-7"></a><span class="w">  </span>-H<span class="w"> </span><span class="s2">"X-API-Key: </span><span class="nv">$API_KEY</span><span class="s2">"</span><span class="w"> </span><span class="se">\</span>
+</span><span id="__span-35-8"><a id="__codelineno-35-8" name="__codelineno-35-8" href="#__codelineno-35-8"></a><span class="w">  </span>-H<span class="w"> </span><span class="s2">"Content-Type: application/json"</span><span class="w"> </span><span class="se">\</span>
+</span><span id="__span-35-9"><a id="__codelineno-35-9" name="__codelineno-35-9" href="#__codelineno-35-9"></a><span class="w">  </span>-d<span class="w"> </span><span class="s1">'{</span>
+</span><span id="__span-35-10"><a id="__codelineno-35-10" name="__codelineno-35-10" href="#__codelineno-35-10"></a><span class="s1">    "public_key": "PEER_PUBKEY_HEX",</span>
+</span><span id="__span-35-11"><a id="__codelineno-35-11" name="__codelineno-35-11" href="#__codelineno-35-11"></a><span class="s1">    "allowed_ip": "10.100.0.2/32",</span>
+</span><span id="__span-35-12"><a id="__codelineno-35-12" name="__codelineno-35-12" href="#__codelineno-35-12"></a><span class="s1">    "device_name": "customer-device"</span>
+</span><span id="__span-35-13"><a id="__codelineno-35-13" name="__codelineno-35-13" href="#__codelineno-35-13"></a><span class="s1">  }'</span><span class="w"> </span><span class="se">\</span>
+</span><span id="__span-35-14"><a id="__codelineno-35-14" name="__codelineno-35-14" href="#__codelineno-35-14"></a><span class="w">  </span><span class="s2">"</span><span class="nv">$API</span><span class="s2">/api/peer/add"</span>
+</span></code></pre></div>
+<h2 id="p2p-mesh">P2P Mesh<a class="headerlink" href="#p2p-mesh" title="Permanent link">⚓</a></h2>
+<p>The <a href="../../examples/tutorials/p2p/">P2P mesh</a> is driven by endpoints under <code>/api/mesh/*</code>.
+They use the same authentication as the rest of <code>/api/*</code>, and they answer whenever the
+control plane is running — in a normal server start and under <code>-mesh-only</code> alike.</p>
+<p>Mutating calls are <code>POST</code> with a JSON body. A <code>GET</code> on one of those returns <code>405</code>.</p>
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-36-1"><a id="__codelineno-36-1" name="__codelineno-36-1" href="#__codelineno-36-1"></a><span class="nv">API_KEY</span><span class="o">=</span><span class="s2">"REPLACE_WITH_YOUR_KEY"</span>
+</span><span id="__span-36-2"><a id="__codelineno-36-2" name="__codelineno-36-2" href="#__codelineno-36-2"></a><span class="nv">H</span><span class="o">=</span><span class="s2">"X-API-Key: </span><span class="nv">$API_KEY</span><span class="s2">"</span>
+</span><span id="__span-36-3"><a id="__codelineno-36-3" name="__codelineno-36-3" href="#__codelineno-36-3"></a><span class="nv">JSON</span><span class="o">=</span><span class="s2">"Content-Type: application/json"</span>
+</span><span id="__span-36-4"><a id="__codelineno-36-4" name="__codelineno-36-4" href="#__codelineno-36-4"></a><span class="nv">API</span><span class="o">=</span><span class="s2">"http://localhost:9000"</span>
+</span></code></pre></div>
+<div class="admonition note">
+<p class="admonition-title">When the mesh is disabled</p>
+<p>With <code>MESH_ENABLED=false</code> the control plane is never started and every endpoint below
+returns <code>503 tun control plane is disabled</code>. Under <code>-mesh-only</code> the process refuses to
+start at all. See <a href="../../advanced/config/conf/#p2p-control-plane">P2P Control Plane</a>.</p>
+</div>
+<h3 id="nodes-and-groups">Nodes and Groups<a class="headerlink" href="#nodes-and-groups" title="Permanent link">⚓</a></h3>
+<p>A <strong>node</strong> is a client allowed onto the mesh. Nodes that share a <strong>PSK</strong> form a group,
+and a group auto-meshes: every online member is punched to every other member. A node
+added without a PSK gets a unique one. Every <code>node/add</code> response returns the generated
+<code>psk</code> — save it, it is the device's join credential.</p>
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-37-1"><a id="__codelineno-37-1" name="__codelineno-37-1" href="#__codelineno-37-1"></a><span class="c1"># Mesh state: enabled, node/group counts, listen addresses</span>
+</span><span id="__span-37-2"><a id="__codelineno-37-2" name="__codelineno-37-2" href="#__codelineno-37-2"></a>curl<span class="w"> </span>-H<span class="w"> </span><span class="s2">"</span><span class="nv">$H</span><span class="s2">"</span><span class="w"> </span><span class="s2">"</span><span class="nv">$API</span><span class="s2">/api/mesh/status"</span>
+</span><span id="__span-37-3"><a id="__codelineno-37-3" name="__codelineno-37-3" href="#__codelineno-37-3"></a>
+</span><span id="__span-37-4"><a id="__codelineno-37-4" name="__codelineno-37-4" href="#__codelineno-37-4"></a><span class="c1"># List nodes. PSKs are masked; add ?show_psk=1 to reveal them</span>
+</span><span id="__span-37-5"><a id="__codelineno-37-5" name="__codelineno-37-5" href="#__codelineno-37-5"></a>curl<span class="w"> </span>-H<span class="w"> </span><span class="s2">"</span><span class="nv">$H</span><span class="s2">"</span><span class="w"> </span><span class="s2">"</span><span class="nv">$API</span><span class="s2">/api/mesh/nodes"</span>
+</span><span id="__span-37-6"><a id="__codelineno-37-6" name="__codelineno-37-6" href="#__codelineno-37-6"></a>curl<span class="w"> </span>-H<span class="w"> </span><span class="s2">"</span><span class="nv">$H</span><span class="s2">"</span><span class="w"> </span><span class="s2">"</span><span class="nv">$API</span><span class="s2">/api/mesh/nodes?show_psk=1"</span>
+</span><span id="__span-37-7"><a id="__codelineno-37-7" name="__codelineno-37-7" href="#__codelineno-37-7"></a>
+</span><span id="__span-37-8"><a id="__codelineno-37-8" name="__codelineno-37-8" href="#__codelineno-37-8"></a><span class="c1"># Devices bucketed by shared PSK, with per-group link counts</span>
+</span><span id="__span-37-9"><a id="__codelineno-37-9" name="__codelineno-37-9" href="#__codelineno-37-9"></a>curl<span class="w"> </span>-H<span class="w"> </span><span class="s2">"</span><span class="nv">$H</span><span class="s2">"</span><span class="w"> </span><span class="s2">"</span><span class="nv">$API</span><span class="s2">/api/mesh/groups"</span>
+</span><span id="__span-37-10"><a id="__codelineno-37-10" name="__codelineno-37-10" href="#__codelineno-37-10"></a>
+</span><span id="__span-37-11"><a id="__codelineno-37-11" name="__codelineno-37-11" href="#__codelineno-37-11"></a><span class="c1"># Every direct and relayed link between nodes</span>
+</span><span id="__span-37-12"><a id="__codelineno-37-12" name="__codelineno-37-12" href="#__codelineno-37-12"></a>curl<span class="w"> </span>-H<span class="w"> </span><span class="s2">"</span><span class="nv">$H</span><span class="s2">"</span><span class="w"> </span><span class="s2">"</span><span class="nv">$API</span><span class="s2">/api/mesh/links"</span>
+</span></code></pre></div>
+<p><code>GET /api/mesh/nodes</code> returns one object per node:</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>id</code></td>
+<td>The node handle every other call needs</td>
+</tr>
+<tr>
+<td><code>name</code></td>
+<td>Label you chose at enrollment</td>
+</tr>
+<tr>
+<td><code>psk</code></td>
+<td>The group key (masked unless <code>show_psk=1</code>)</td>
+</tr>
+<tr>
+<td><code>device_id</code></td>
+<td>The client's own stable identity, reported on connect</td>
+</tr>
+<tr>
+<td><code>online</code></td>
+<td>Whether the control channel is currently up</td>
+</tr>
+<tr>
+<td><code>control_ip</code></td>
+<td>Address the control channel came from</td>
+</tr>
+<tr>
+<td><code>relay_ep</code></td>
+<td>Public UDP endpoint registered at the hub</td>
+</tr>
+<tr>
+<td><code>relay_seen</code></td>
+<td>When that endpoint was last refreshed</td>
+</tr>
+<tr>
+<td><code>peers</code></td>
+<td>Number of peers this node holds</td>
+</tr>
+<tr>
+<td><code>direct_peers</code></td>
+<td>How many of those are direct</td>
+</tr>
+<tr>
+<td><code>connected_for</code></td>
+<td>How long the node has been connected</td>
+</tr>
+</tbody>
+</table>
+<p>A node with a <code>relay_ep</code> but no <code>direct_peers</code> is the one to investigate: discovery
+worked and the hole punch did not.</p>
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-38-1"><a id="__codelineno-38-1" name="__codelineno-38-1" href="#__codelineno-38-1"></a><span class="c1"># Add a node. Omit "psk" to have one generated.</span>
+</span><span id="__span-38-2"><a id="__codelineno-38-2" name="__codelineno-38-2" href="#__codelineno-38-2"></a><span class="c1"># A "name" is only a label - it is NOT a unique key, and duplicates are allowed.</span>
+</span><span id="__span-38-3"><a id="__codelineno-38-3" name="__codelineno-38-3" href="#__codelineno-38-3"></a>curl<span class="w"> </span>-X<span class="w"> </span>POST<span class="w"> </span>-H<span class="w"> </span><span class="s2">"</span><span class="nv">$H</span><span class="s2">"</span><span class="w"> </span>-H<span class="w"> </span><span class="s2">"</span><span class="nv">$JSON</span><span class="s2">"</span><span class="w"> </span><span class="s2">"</span><span class="nv">$API</span><span class="s2">/api/mesh/node/add"</span><span class="w"> </span><span class="se">\</span>
+</span><span id="__span-38-4"><a id="__codelineno-38-4" name="__codelineno-38-4" href="#__codelineno-38-4"></a><span class="w">  </span>-d<span class="w"> </span><span class="s1">'{"name":"edge-a"}'</span>
+</span><span id="__span-38-5"><a id="__codelineno-38-5" name="__codelineno-38-5" href="#__codelineno-38-5"></a>
+</span><span id="__span-38-6"><a id="__codelineno-38-6" name="__codelineno-38-6" href="#__codelineno-38-6"></a><span class="c1"># Add a node into an existing group</span>
+</span><span id="__span-38-7"><a id="__codelineno-38-7" name="__codelineno-38-7" href="#__codelineno-38-7"></a>curl<span class="w"> </span>-X<span class="w"> </span>POST<span class="w"> </span>-H<span class="w"> </span><span class="s2">"</span><span class="nv">$H</span><span class="s2">"</span><span class="w"> </span>-H<span class="w"> </span><span class="s2">"</span><span class="nv">$JSON</span><span class="s2">"</span><span class="w"> </span><span class="s2">"</span><span class="nv">$API</span><span class="s2">/api/mesh/node/add"</span><span class="w"> </span><span class="se">\</span>
+</span><span id="__span-38-8"><a id="__codelineno-38-8" name="__codelineno-38-8" href="#__codelineno-38-8"></a><span class="w">  </span>-d<span class="w"> </span><span class="s1">'{"name":"edge-b","psk":"shared-group-key"}'</span>
+</span><span id="__span-38-9"><a id="__codelineno-38-9" name="__codelineno-38-9" href="#__codelineno-38-9"></a>
+</span><span id="__span-38-10"><a id="__codelineno-38-10" name="__codelineno-38-10" href="#__codelineno-38-10"></a><span class="c1"># Remove a node entirely, or just reset it (clears its link state, keeps the record)</span>
+</span><span id="__span-38-11"><a id="__codelineno-38-11" name="__codelineno-38-11" href="#__codelineno-38-11"></a>curl<span class="w"> </span>-X<span class="w"> </span>POST<span class="w"> </span>-H<span class="w"> </span><span class="s2">"</span><span class="nv">$H</span><span class="s2">"</span><span class="w"> </span>-H<span class="w"> </span><span class="s2">"</span><span class="nv">$JSON</span><span class="s2">"</span><span class="w"> </span><span class="s2">"</span><span class="nv">$API</span><span class="s2">/api/mesh/node/remove"</span><span class="w"> </span><span class="se">\</span>
+</span><span id="__span-38-12"><a id="__codelineno-38-12" name="__codelineno-38-12" href="#__codelineno-38-12"></a><span class="w">  </span>-d<span class="w"> </span><span class="s1">'{"id":"NODE_ID"}'</span>
+</span><span id="__span-38-13"><a id="__codelineno-38-13" name="__codelineno-38-13" href="#__codelineno-38-13"></a>curl<span class="w"> </span>-X<span class="w"> </span>POST<span class="w"> </span>-H<span class="w"> </span><span class="s2">"</span><span class="nv">$H</span><span class="s2">"</span><span class="w"> </span>-H<span class="w"> </span><span class="s2">"</span><span class="nv">$JSON</span><span class="s2">"</span><span class="w"> </span><span class="s2">"</span><span class="nv">$API</span><span class="s2">/api/mesh/node/reset"</span><span class="w"> </span><span class="se">\</span>
+</span><span id="__span-38-14"><a id="__codelineno-38-14" name="__codelineno-38-14" href="#__codelineno-38-14"></a><span class="w">  </span>-d<span class="w"> </span><span class="s1">'{"id":"NODE_ID"}'</span>
+</span></code></pre></div>
+<div class="admonition warning">
+<p class="admonition-title">Removing a node leaves its proxies behind</p>
+<p><code>node/remove</code> does not clean up the node's TCP relays. Remove those with
+<code>/api/trp/proxy/remove</code> first, or they keep holding their listeners.</p>
+</div>
+<h3 id="direct-paths">Direct Paths<a class="headerlink" href="#direct-paths" title="Permanent link">⚓</a></h3>
+<p>Nodes in the same group are punched to each other automatically, so these calls are for
+forcing a re-punch, forcing a group back onto the relay, or taking nodes off the mesh.</p>
+<p><code>p2p/connect</code> needs both nodes online — an offline or unknown id returns
+<code>400 node offline</code>.</p>
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-39-1"><a id="__codelineno-39-1" name="__codelineno-39-1" href="#__codelineno-39-1"></a><span class="c1"># Force an immediate direct path between two nodes</span>
+</span><span id="__span-39-2"><a id="__codelineno-39-2" name="__codelineno-39-2" href="#__codelineno-39-2"></a>curl<span class="w"> </span>-X<span class="w"> </span>POST<span class="w"> </span>-H<span class="w"> </span><span class="s2">"</span><span class="nv">$H</span><span class="s2">"</span><span class="w"> </span>-H<span class="w"> </span><span class="s2">"</span><span class="nv">$JSON</span><span class="s2">"</span><span class="w"> </span><span class="s2">"</span><span class="nv">$API</span><span class="s2">/api/mesh/p2p/connect"</span><span class="w"> </span><span class="se">\</span>
+</span><span id="__span-39-3"><a id="__codelineno-39-3" name="__codelineno-39-3" href="#__codelineno-39-3"></a><span class="w">  </span>-d<span class="w"> </span><span class="s1">'{"a":"NODE_ID_A","b":"NODE_ID_B"}'</span>
+</span><span id="__span-39-4"><a id="__codelineno-39-4" name="__codelineno-39-4" href="#__codelineno-39-4"></a>
+</span><span id="__span-39-5"><a id="__codelineno-39-5" name="__codelineno-39-5" href="#__codelineno-39-5"></a><span class="c1"># Re-punch a whole group. "group" is the PSK.</span>
+</span><span id="__span-39-6"><a id="__codelineno-39-6" name="__codelineno-39-6" href="#__codelineno-39-6"></a>curl<span class="w"> </span>-X<span class="w"> </span>POST<span class="w"> </span>-H<span class="w"> </span><span class="s2">"</span><span class="nv">$H</span><span class="s2">"</span><span class="w"> </span>-H<span class="w"> </span><span class="s2">"</span><span class="nv">$JSON</span><span class="s2">"</span><span class="w"> </span><span class="s2">"</span><span class="nv">$API</span><span class="s2">/api/mesh/p2p/mesh"</span><span class="w"> </span><span class="se">\</span>
+</span><span id="__span-39-7"><a id="__codelineno-39-7" name="__codelineno-39-7" href="#__codelineno-39-7"></a><span class="w">  </span>-d<span class="w"> </span><span class="s1">'{"group":"shared-group-key"}'</span>
+</span><span id="__span-39-8"><a id="__codelineno-39-8" name="__codelineno-39-8" href="#__codelineno-39-8"></a>
+</span><span id="__span-39-9"><a id="__codelineno-39-9" name="__codelineno-39-9" href="#__codelineno-39-9"></a><span class="c1"># Clear a group's peer table and punch targets</span>
+</span><span id="__span-39-10"><a id="__codelineno-39-10" name="__codelineno-39-10" href="#__codelineno-39-10"></a>curl<span class="w"> </span>-X<span class="w"> </span>POST<span class="w"> </span>-H<span class="w"> </span><span class="s2">"</span><span class="nv">$H</span><span class="s2">"</span><span class="w"> </span>-H<span class="w"> </span><span class="s2">"</span><span class="nv">$JSON</span><span class="s2">"</span><span class="w"> </span><span class="s2">"</span><span class="nv">$API</span><span class="s2">/api/mesh/p2p/mesh"</span><span class="w"> </span><span class="se">\</span>
+</span><span id="__span-39-11"><a id="__codelineno-39-11" name="__codelineno-39-11" href="#__codelineno-39-11"></a><span class="w">  </span>-d<span class="w"> </span><span class="s1">'{"group":"shared-group-key","enable":false}'</span>
+</span></code></pre></div>
+<p><code>"enable": false</code> clears the server-side peer table and tells every member to drop its
+punch targets. It is not a persistent "relay only" mode: each client re-learns the same
+peers from the next rendezvous reply within a few seconds and resumes punching.</p>
+<h3 id="rendezvous-hub">Rendezvous Hub<a class="headerlink" href="#rendezvous-hub" title="Permanent link">⚓</a></h3>
+<p>Attach a node to the relay hub, or detach it. Both need the node connected; an offline
+or unknown id returns <code>400 node offline</code>.</p>
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-40-1"><a id="__codelineno-40-1" name="__codelineno-40-1" href="#__codelineno-40-1"></a>curl<span class="w"> </span>-X<span class="w"> </span>POST<span class="w"> </span>-H<span class="w"> </span><span class="s2">"</span><span class="nv">$H</span><span class="s2">"</span><span class="w"> </span>-H<span class="w"> </span><span class="s2">"</span><span class="nv">$JSON</span><span class="s2">"</span><span class="w"> </span><span class="s2">"</span><span class="nv">$API</span><span class="s2">/api/mesh/relay/join"</span><span class="w"> </span><span class="se">\</span>
+</span><span id="__span-40-2"><a id="__codelineno-40-2" name="__codelineno-40-2" href="#__codelineno-40-2"></a><span class="w">  </span>-d<span class="w"> </span><span class="s1">'{"id":"NODE_ID"}'</span>
+</span><span id="__span-40-3"><a id="__codelineno-40-3" name="__codelineno-40-3" href="#__codelineno-40-3"></a>curl<span class="w"> </span>-X<span class="w"> </span>POST<span class="w"> </span>-H<span class="w"> </span><span class="s2">"</span><span class="nv">$H</span><span class="s2">"</span><span class="w"> </span>-H<span class="w"> </span><span class="s2">"</span><span class="nv">$JSON</span><span class="s2">"</span><span class="w"> </span><span class="s2">"</span><span class="nv">$API</span><span class="s2">/api/mesh/relay/leave"</span><span class="w"> </span><span class="se">\</span>
+</span><span id="__span-40-4"><a id="__codelineno-40-4" name="__codelineno-40-4" href="#__codelineno-40-4"></a><span class="w">  </span>-d<span class="w"> </span><span class="s1">'{"id":"NODE_ID"}'</span>
+</span></code></pre></div>
+<p>Leaving drops only that node's P2P work. A full reset would also tear down its TCP
+relay sessions, which is not what leaving the mesh should do.</p>
+<p>To manage the relay circuits by hand — pin a relayed path, or drop every link leaving a
+node:</p>
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-41-1"><a id="__codelineno-41-1" name="__codelineno-41-1" href="#__codelineno-41-1"></a>curl<span class="w"> </span>-X<span class="w"> </span>POST<span class="w"> </span>-H<span class="w"> </span><span class="s2">"</span><span class="nv">$H</span><span class="s2">"</span><span class="w"> </span>-H<span class="w"> </span><span class="s2">"</span><span class="nv">$JSON</span><span class="s2">"</span><span class="w"> </span><span class="s2">"</span><span class="nv">$API</span><span class="s2">/api/mesh/relay/link"</span><span class="w"> </span><span class="se">\</span>
+</span><span id="__span-41-2"><a id="__codelineno-41-2" name="__codelineno-41-2" href="#__codelineno-41-2"></a><span class="w">  </span>-d<span class="w"> </span><span class="s1">'{"src":"NODE_ID_A","dst":"NODE_ID_B"}'</span>
+</span><span id="__span-41-3"><a id="__codelineno-41-3" name="__codelineno-41-3" href="#__codelineno-41-3"></a>curl<span class="w"> </span>-X<span class="w"> </span>POST<span class="w"> </span>-H<span class="w"> </span><span class="s2">"</span><span class="nv">$H</span><span class="s2">"</span><span class="w"> </span>-H<span class="w"> </span><span class="s2">"</span><span class="nv">$JSON</span><span class="s2">"</span><span class="w"> </span><span class="s2">"</span><span class="nv">$API</span><span class="s2">/api/mesh/relay/unlink"</span><span class="w"> </span><span class="se">\</span>
+</span><span id="__span-41-4"><a id="__codelineno-41-4" name="__codelineno-41-4" href="#__codelineno-41-4"></a><span class="w">  </span>-d<span class="w"> </span><span class="s1">'{"src":"NODE_ID_A"}'</span>
+</span></code></pre></div>
+<p>These are for overriding the automatic behaviour. Left alone, the server keeps a relay
+circuit for every pair it attempts to punch, so a link that cannot go direct still
+carries traffic.</p>
+<div class="admonition warning">
+<p class="admonition-title"><code>relay/unlink</code> removes the fallback</p>
+<p>Dropping a node's relay circuits leaves it with no path for any link that fails to go
+direct. Use it to isolate a node while debugging, not to pin traffic onto the relay —
+direct and relayed paths are maintained together, and there is no switch between them.</p>
+</div>
+<h3 id="tcp-relay-trp">TCP Relay (TRP)<a class="headerlink" href="#tcp-relay-trp" title="Permanent link">⚓</a></h3>
+<p>A TRP proxy listens on the server and forwards each connection to <code>target_ip:target_port</code>
+on the target node over its mesh path.</p>
+<p>Leave <code>bind_port</code> as an <strong>empty string</strong> to let the OS pick a free port — the chosen port
+comes back as <code>bind_port</code> and in <code>public_url</code>. <code>"0"</code> is rejected; only an empty string
+means auto-assign. <code>target_port</code> is always required and always numeric.</p>
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-42-1"><a id="__codelineno-42-1" name="__codelineno-42-1" href="#__codelineno-42-1"></a><span class="c1"># List proxies, with live connection counts</span>
+</span><span id="__span-42-2"><a id="__codelineno-42-2" name="__codelineno-42-2" href="#__codelineno-42-2"></a>curl<span class="w"> </span>-H<span class="w"> </span><span class="s2">"</span><span class="nv">$H</span><span class="s2">"</span><span class="w"> </span><span class="s2">"</span><span class="nv">$API</span><span class="s2">/api/trp/proxies"</span>
+</span><span id="__span-42-3"><a id="__codelineno-42-3" name="__codelineno-42-3" href="#__codelineno-42-3"></a>
+</span><span id="__span-42-4"><a id="__codelineno-42-4" name="__codelineno-42-4" href="#__codelineno-42-4"></a><span class="c1"># Auto-assigned listen port, forwarding to port 8022 on the node</span>
+</span><span id="__span-42-5"><a id="__codelineno-42-5" name="__codelineno-42-5" href="#__codelineno-42-5"></a>curl<span class="w"> </span>-X<span class="w"> </span>POST<span class="w"> </span>-H<span class="w"> </span><span class="s2">"</span><span class="nv">$H</span><span class="s2">"</span><span class="w"> </span>-H<span class="w"> </span><span class="s2">"</span><span class="nv">$JSON</span><span class="s2">"</span><span class="w"> </span><span class="s2">"</span><span class="nv">$API</span><span class="s2">/api/trp/proxy/add"</span><span class="w"> </span><span class="se">\</span>
+</span><span id="__span-42-6"><a id="__codelineno-42-6" name="__codelineno-42-6" href="#__codelineno-42-6"></a><span class="w">  </span>-d<span class="w"> </span><span class="s1">'{"node_id":"NODE_ID","bind_port":"","target_port":"8022"}'</span>
+</span><span id="__span-42-7"><a id="__codelineno-42-7" name="__codelineno-42-7" href="#__codelineno-42-7"></a>
+</span><span id="__span-42-8"><a id="__codelineno-42-8" name="__codelineno-42-8" href="#__codelineno-42-8"></a><span class="c1"># Fixed listen port and an explicit target address</span>
+</span><span id="__span-42-9"><a id="__codelineno-42-9" name="__codelineno-42-9" href="#__codelineno-42-9"></a>curl<span class="w"> </span>-X<span class="w"> </span>POST<span class="w"> </span>-H<span class="w"> </span><span class="s2">"</span><span class="nv">$H</span><span class="s2">"</span><span class="w"> </span>-H<span class="w"> </span><span class="s2">"</span><span class="nv">$JSON</span><span class="s2">"</span><span class="w"> </span><span class="s2">"</span><span class="nv">$API</span><span class="s2">/api/trp/proxy/add"</span><span class="w"> </span><span class="se">\</span>
+</span><span id="__span-42-10"><a id="__codelineno-42-10" name="__codelineno-42-10" href="#__codelineno-42-10"></a><span class="w">  </span>-d<span class="w"> </span><span class="s1">'{"node_id":"NODE_ID","bind_ip":"0.0.0.0","bind_port":"18022","target_ip":"127.0.0.1","target_port":"8022"}'</span>
+</span><span id="__span-42-11"><a id="__codelineno-42-11" name="__codelineno-42-11" href="#__codelineno-42-11"></a>
+</span><span id="__span-42-12"><a id="__codelineno-42-12" name="__codelineno-42-12" href="#__codelineno-42-12"></a><span class="c1"># Remove a proxy</span>
+</span><span id="__span-42-13"><a id="__codelineno-42-13" name="__codelineno-42-13" href="#__codelineno-42-13"></a>curl<span class="w"> </span>-X<span class="w"> </span>POST<span class="w"> </span>-H<span class="w"> </span><span class="s2">"</span><span class="nv">$H</span><span class="s2">"</span><span class="w"> </span>-H<span class="w"> </span><span class="s2">"</span><span class="nv">$JSON</span><span class="s2">"</span><span class="w"> </span><span class="s2">"</span><span class="nv">$API</span><span class="s2">/api/trp/proxy/remove"</span><span class="w"> </span><span class="se">\</span>
+</span><span id="__span-42-14"><a id="__codelineno-42-14" name="__codelineno-42-14" href="#__codelineno-42-14"></a><span class="w">  </span>-d<span class="w"> </span><span class="s1">'{"id":"PROXY_ID"}'</span>
+</span></code></pre></div>
+<h3 id="mesh-errors">Mesh Errors<a class="headerlink" href="#mesh-errors" title="Permanent link">⚓</a></h3>
+<p>Failures are JSON with an <code>error</code> field, so scripts can branch on them:</p>
+<table>
+<thead>
+<tr>
+<th>Status</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>400</code></td>
+<td>Bad request — <code>id required</code>, <code>node_id required</code>, <code>unknown group</code>, <code>node offline</code>, port out of range, or malformed JSON</td>
+</tr>
+<tr>
+<td><code>401</code></td>
+<td>Missing or invalid dashboard login / API key</td>
+</tr>
+<tr>
+<td><code>404</code></td>
+<td>No such node, proxy, or binding</td>
+</tr>
+<tr>
+<td><code>405</code></td>
+<td><code>GET</code> used on a <code>POST</code>-only route</td>
+</tr>
+<tr>
+<td><code>503</code></td>
+<td>Mesh control plane not running — set <code>MESH_ENABLED=true</code> (the default)</td>
+</tr>
+</tbody>
+</table>
+<h3 id="mesh-end-to-end">Mesh End to End<a class="headerlink" href="#mesh-end-to-end" title="Permanent link">⚓</a></h3>
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-43-1"><a id="__codelineno-43-1" name="__codelineno-43-1" href="#__codelineno-43-1"></a><span class="ch">#!/usr/bin/env bash</span>
+</span><span id="__span-43-2"><a id="__codelineno-43-2" name="__codelineno-43-2" href="#__codelineno-43-2"></a><span class="nb">set</span><span class="w"> </span>-euo<span class="w"> </span>pipefail
+</span><span id="__span-43-3"><a id="__codelineno-43-3" name="__codelineno-43-3" href="#__codelineno-43-3"></a><span class="nv">API_KEY</span><span class="o">=</span><span class="s2">"REPLACE_WITH_YOUR_KEY"</span>
+</span><span id="__span-43-4"><a id="__codelineno-43-4" name="__codelineno-43-4" href="#__codelineno-43-4"></a><span class="nv">API</span><span class="o">=</span><span class="s2">"http://localhost:9000"</span>
+</span><span id="__span-43-5"><a id="__codelineno-43-5" name="__codelineno-43-5" href="#__codelineno-43-5"></a>field<span class="o">()</span><span class="w"> </span><span class="o">{</span><span class="w"> </span>python3<span class="w"> </span>-c<span class="w"> </span><span class="s2">"import json,sys;print(json.load(sys.stdin)['</span><span class="nv">$1</span><span class="s2">'])"</span><span class="p">;</span><span class="w"> </span><span class="o">}</span>
+</span><span id="__span-43-6"><a id="__codelineno-43-6" name="__codelineno-43-6" href="#__codelineno-43-6"></a>
+</span><span id="__span-43-7"><a id="__codelineno-43-7" name="__codelineno-43-7" href="#__codelineno-43-7"></a><span class="c1"># Enroll a device and keep the id and PSK it returns</span>
+</span><span id="__span-43-8"><a id="__codelineno-43-8" name="__codelineno-43-8" href="#__codelineno-43-8"></a><span class="nv">ADDED</span><span class="o">=</span><span class="s2">"</span><span class="k">$(</span>curl<span class="w"> </span>-sS<span class="w"> </span>-X<span class="w"> </span>POST<span class="w"> </span>-H<span class="w"> </span><span class="s2">"X-API-Key: </span><span class="nv">$API_KEY</span><span class="s2">"</span><span class="w"> </span><span class="se">\</span>
+</span><span id="__span-43-9"><a id="__codelineno-43-9" name="__codelineno-43-9" href="#__codelineno-43-9"></a><span class="w">  </span>-H<span class="w"> </span><span class="s2">"Content-Type: application/json"</span><span class="w"> </span><span class="s2">"</span><span class="nv">$API</span><span class="s2">/api/mesh/node/add"</span><span class="w"> </span><span class="se">\</span>
+</span><span id="__span-43-10"><a id="__codelineno-43-10" name="__codelineno-43-10" href="#__codelineno-43-10"></a><span class="w">  </span>-d<span class="w"> </span><span class="s1">'{"name":"edge-a"}'</span><span class="k">)</span><span class="s2">"</span>
+</span><span id="__span-43-11"><a id="__codelineno-43-11" name="__codelineno-43-11" href="#__codelineno-43-11"></a><span class="nv">NODE_ID</span><span class="o">=</span><span class="s2">"</span><span class="k">$(</span><span class="nb">printf</span><span class="w"> </span><span class="s1">'%s'</span><span class="w"> </span><span class="s2">"</span><span class="nv">$ADDED</span><span class="s2">"</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>field<span class="w"> </span>id<span class="k">)</span><span class="s2">"</span>
+</span><span id="__span-43-12"><a id="__codelineno-43-12" name="__codelineno-43-12" href="#__codelineno-43-12"></a><span class="nv">PSK</span><span class="o">=</span><span class="s2">"</span><span class="k">$(</span><span class="nb">printf</span><span class="w"> </span><span class="s1">'%s'</span><span class="w"> </span><span class="s2">"</span><span class="nv">$ADDED</span><span class="s2">"</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>field<span class="w"> </span>psk<span class="k">)</span><span class="s2">"</span>
+</span><span id="__span-43-13"><a id="__codelineno-43-13" name="__codelineno-43-13" href="#__codelineno-43-13"></a><span class="nb">echo</span><span class="w"> </span><span class="s2">"run on the device:  tun YOUR_SERVER_IP </span><span class="nv">$PSK</span><span class="s2">"</span>
+</span><span id="__span-43-14"><a id="__codelineno-43-14" name="__codelineno-43-14" href="#__codelineno-43-14"></a>
+</span><span id="__span-43-15"><a id="__codelineno-43-15" name="__codelineno-43-15" href="#__codelineno-43-15"></a><span class="c1"># Expose a service running on that node</span>
+</span><span id="__span-43-16"><a id="__codelineno-43-16" name="__codelineno-43-16" href="#__codelineno-43-16"></a><span class="nv">PROXY</span><span class="o">=</span><span class="s2">"</span><span class="k">$(</span>curl<span class="w"> </span>-sS<span class="w"> </span>-X<span class="w"> </span>POST<span class="w"> </span>-H<span class="w"> </span><span class="s2">"X-API-Key: </span><span class="nv">$API_KEY</span><span class="s2">"</span><span class="w"> </span><span class="se">\</span>
+</span><span id="__span-43-17"><a id="__codelineno-43-17" name="__codelineno-43-17" href="#__codelineno-43-17"></a><span class="w">  </span>-H<span class="w"> </span><span class="s2">"Content-Type: application/json"</span><span class="w"> </span><span class="s2">"</span><span class="nv">$API</span><span class="s2">/api/trp/proxy/add"</span><span class="w"> </span><span class="se">\</span>
+</span><span id="__span-43-18"><a id="__codelineno-43-18" name="__codelineno-43-18" href="#__codelineno-43-18"></a><span class="w">  </span>-d<span class="w"> </span><span class="s2">"{\"node_id\":\"</span><span class="nv">$NODE_ID</span><span class="s2">\",\"bind_port\":\"\",\"target_port\":\"8022\"}"</span><span class="k">)</span><span class="s2">"</span>
+</span><span id="__span-43-19"><a id="__codelineno-43-19" name="__codelineno-43-19" href="#__codelineno-43-19"></a><span class="nb">echo</span><span class="w"> </span><span class="s2">"reachable at </span><span class="k">$(</span><span class="nb">printf</span><span class="w"> </span><span class="s1">'%s'</span><span class="w"> </span><span class="s2">"</span><span class="nv">$PROXY</span><span class="s2">"</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>field<span class="w"> </span>public_url<span class="k">)</span><span class="s2">"</span>
+</span><span id="__span-43-20"><a id="__codelineno-43-20" name="__codelineno-43-20" href="#__codelineno-43-20"></a>
+</span><span id="__span-43-21"><a id="__codelineno-43-21" name="__codelineno-43-21" href="#__codelineno-43-21"></a><span class="c1"># Tear down</span>
+</span><span id="__span-43-22"><a id="__codelineno-43-22" name="__codelineno-43-22" href="#__codelineno-43-22"></a>curl<span class="w"> </span>-sS<span class="w"> </span>-X<span class="w"> </span>POST<span class="w"> </span>-H<span class="w"> </span><span class="s2">"X-API-Key: </span><span class="nv">$API_KEY</span><span class="s2">"</span><span class="w"> </span><span class="se">\</span>
+</span><span id="__span-43-23"><a id="__codelineno-43-23" name="__codelineno-43-23" href="#__codelineno-43-23"></a><span class="w">  </span>-H<span class="w"> </span><span class="s2">"Content-Type: application/json"</span><span class="w"> </span><span class="s2">"</span><span class="nv">$API</span><span class="s2">/api/trp/proxy/remove"</span><span class="w"> </span><span class="se">\</span>
+</span><span id="__span-43-24"><a id="__codelineno-43-24" name="__codelineno-43-24" href="#__codelineno-43-24"></a><span class="w">  </span>-d<span class="w"> </span><span class="s2">"{\"id\":\"</span><span class="k">$(</span><span class="nb">printf</span><span class="w"> </span><span class="s1">'%s'</span><span class="w"> </span><span class="s2">"</span><span class="nv">$PROXY</span><span class="s2">"</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>field<span class="w"> </span>id<span class="k">)</span><span class="s2">\"}"</span>
+</span><span id="__span-43-25"><a id="__codelineno-43-25" name="__codelineno-43-25" href="#__codelineno-43-25"></a>curl<span class="w"> </span>-sS<span class="w"> </span>-X<span class="w"> </span>POST<span class="w"> </span>-H<span class="w"> </span><span class="s2">"X-API-Key: </span><span class="nv">$API_KEY</span><span class="s2">"</span><span class="w"> </span><span class="se">\</span>
+</span><span id="__span-43-26"><a id="__codelineno-43-26" name="__codelineno-43-26" href="#__codelineno-43-26"></a><span class="w">  </span>-H<span class="w"> </span><span class="s2">"Content-Type: application/json"</span><span class="w"> </span><span class="s2">"</span><span class="nv">$API</span><span class="s2">/api/mesh/node/remove"</span><span class="w"> </span><span class="se">\</span>
+</span><span id="__span-43-27"><a id="__codelineno-43-27" name="__codelineno-43-27" href="#__codelineno-43-27"></a><span class="w">  </span>-d<span class="w"> </span><span class="s2">"{\"id\":\"</span><span class="nv">$NODE_ID</span><span class="s2">\"}"</span>
+</span></code></pre></div>
+<h2 id="api-security">API Security<a class="headerlink" href="#api-security" title="Permanent link">⚓</a></h2>
+<p>API keys provide access to protected TunGuard API endpoints. Keep them private and do not commit them to source control.</p>
+<p>If a key is exposed, rotate it immediately from:</p>
+<p><strong>Settings → API Key</strong></p>
+<p>or:</p>
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-44-1"><a id="__codelineno-44-1" name="__codelineno-44-1" href="#__codelineno-44-1"></a>curl<span class="w"> </span>-X<span class="w"> </span>POST<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-44-2"><a id="__codelineno-44-2" name="__codelineno-44-2" href="#__codelineno-44-2"></a><span class="w">  </span>-u<span class="w"> </span>admin:PASSWORD<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-44-3"><a id="__codelineno-44-3" name="__codelineno-44-3" href="#__codelineno-44-3"></a><span class="w">  </span>http://localhost:9000/api/key/regenerate
+</span></code></pre></div>
+<p>For production deployments, protect the dashboard and API with HTTPS when they are exposed over an untrusted network.</p>
+<p>An API key is a broad credential: it can add and remove peers, read and restore
+backups, and replace the server binary via <code>/api/update</code>. Scope it like a password, and
+prefer issuing short-lived credentials from a provisioning job over a long-lived shared
+key.</p>
+<p>Two endpoints deserve particular attention:</p>
+<ul>
+<li><code>/api/update</code> fetches an arbitrary URL and overwrites the running executable. Only
+  point it at releases you obtained directly from the project's own release page.</li>
+<li><code>/api/ws/ssh</code> opens an interactive shell to the host. Anyone who can reach the API can
+  reach the machine's SSH credentials, so keep the API off untrusted networks.</li>
+</ul>
+<p>Both are reasons to terminate TLS in front of the API and to keep the default dashboard
+credentials from surviving first boot.</p>
+</div>
+
+
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-circle-arrow-up" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="m16 12-4-4-4 4M12 16V8"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      <p>
+&copy; <a href="https://github.com/TunGuard"><em>TunGuard</em></a><br/>
+<span>This project is licensed under MIT.</span><br/>
+<span>This project is not affiliated, associated, authorized, endorsed by, or in any way officially connected with Jason A. Donenfeld, ZX2C4 or Edge Security.</span><br/>
+<span>"WireGuard" and the "WireGuard" logo are registered trademarks of Jason A. Donenfeld.</span>
+</p>
+
+    </div>
+  
+  
+    Made with
+    <a href="https://zensical.org/" target="_blank" rel="noopener">
+      Zensical
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      
+      
+        
+        
+      <script id="__config" type="application/json">{"annotate":null,"base":"../..","features":["navigation.instant","navigation.tabs","navigation.tabs.sticky","navigation.expand","navigation.path","navigation.top","navigation.sections","content.action.edit","content.action.view","content.code.copy","content.code.annotate","toc.follow"],"redirect":null,"search":"../../assets/javascripts/workers/search.7d14d953.min.js","tags":null,"translations":{"clipboard.copied":"Copied to clipboard","clipboard.copy":"Copy to clipboard","search.result.more.one":"1 more on this page","search.result.more.other":"# more on this page","search.result.none":"No matching documents","search.result.one":"1 matching document","search.result.other":"# matching documents","search.result.placeholder":"Type to start searching","search.result.term.missing":"Missing","select.version":"Select version"},"version":{"provider":"mike"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.8dcc8e9c.min.js"></script>
+      
+    
+  </body>
+</html>
