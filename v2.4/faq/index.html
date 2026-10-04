@@ -2130,8 +2130,10 @@ new credentials before anything else loads.</p>
 inter-device traffic — including over P2P, which the server refuses to punch for
 a cross-group pair. Devices that need to reach each other must be in the same
 group, with inter-device traffic switched on for it.</p>
-<p>A group also has to be allowed to reach the internet (and the server) separately;
-a device in a sealed group can talk to its own group and nothing else.</p>
+<p>That group also needs its own internet access switched on: a sealed group can
+talk to its own group and nothing beyond the tunnel. Reaching the server itself is
+never part of that — the server's own addresses always pass, which is how you would
+come back here and turn the switch on again.</p>
 <h2 id="i-cannot-access-the-dashboard">I cannot access the dashboard<a class="headerlink" href="#i-cannot-access-the-dashboard" title="Permanent link">⚓</a></h2>
 <p>TunGuard's dashboard and API use port <code>9000</code> by default.</p>
 <p>Make sure the port is reachable from your network and that your server or cloud provider firewall allows TCP traffic on port <code>9000</code>.</p>
