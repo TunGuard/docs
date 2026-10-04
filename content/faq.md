@@ -48,8 +48,10 @@ inter-device traffic — including over P2P, which the server refuses to punch f
 a cross-group pair. Devices that need to reach each other must be in the same
 group, with inter-device traffic switched on for it.
 
-A group also has to be allowed to reach the internet (and the server) separately;
-a device in a sealed group can talk to its own group and nothing else.
+That group also needs its own internet access switched on: a sealed group can
+talk to its own group and nothing beyond the tunnel. Reaching the server itself is
+never part of that — the server's own addresses always pass, which is how you would
+come back here and turn the switch on again.
 
 ## I cannot access the dashboard
 
