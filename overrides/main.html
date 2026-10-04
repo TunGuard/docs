@@ -1,0 +1,9 @@
+{# Site-wide <head> additions. Zensical's `extrahead` block is the documented
+   place for custom meta tags, and overriding main.html (rather than base.html)
+   is the stable choice: main.html inherits everything from base.html, so a
+   change upstream to the head cannot collide with this file. #}
+{% extends "base.html" %}
+
+{% block extrahead %}
+<meta name="google-site-verification" content="qk4z4XjKirsxHnB8huMe20-6p28GvDYIlPmteRVOwek" />
+{% endblock %}

@@ -60,3 +60,11 @@ We are always happy to welcome new contributors. For guidelines and entrypoints 
 If you are upgrading from an older version of `TunGuard`, please read the [_Migration_ chapter][docs-migration].
 
 [docs-migration]: ./advanced/migrate/
+
+### Privacy
+
+`TunGuard` is self-hosted and collects nothing on your behalf. The [_Privacy Policy_][docs-privacy]
+spells out exactly what the server stores, which two third-party CDNs the dashboard
+loads assets from, and what this documentation site does.
+
+[docs-privacy]: ./privacy.md

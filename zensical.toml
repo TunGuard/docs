@@ -8,7 +8,8 @@ copyright = """
 &copy; <a href="https://github.com/TunGuard"><em>TunGuard</em></a><br/>
 <span>This project is licensed under MIT.</span><br/>
 <span>This project is not affiliated, associated, authorized, endorsed by, or in any way officially connected with Jason A. Donenfeld, ZX2C4 or Edge Security.</span><br/>
-<span>"WireGuard" and the "WireGuard" logo are registered trademarks of Jason A. Donenfeld.</span>
+<span>"WireGuard" and the "WireGuard" logo are registered trademarks of Jason A. Donenfeld.</span><br/>
+<span><a href="https://tunguard.github.io/latest/privacy/">Privacy Policy</a></span>
 </p>
 """
 
@@ -37,6 +38,10 @@ features = [
   "content.code.annotate",
   "toc.follow",                 # Active right-hand Table of Contents follows scrolling
 ]
+
+# Template overrides: overrides/main.html adds the site-wide <head> meta tags
+# (currently the Google site-verification token) without touching the theme.
+custom_dir = "overrides"
 
 [project.theme.font]
 text = "JetBrains Mono"         # Swapped to a premium developer monospaced look for body text
@@ -81,7 +86,7 @@ provider = "mike"
 # ----------------------------------------------------
 
 [project.markdown_extensions.pymdownx.blocks.admonition]
-types = ["danger", "note", "info", "question", "warning"]
+types = ["danger", "note", "info", "question", "tip", "warning"]
 
 [project.markdown_extensions.md_in_html]
 
