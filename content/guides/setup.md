@@ -26,6 +26,7 @@ On a fresh installation, use the default credentials:
 - **Password**: `tanguard`
 
 You will be required to create new dashboard credentials after your first login.
+Until you do, `/login.html` takes over and the rest of the dashboard stays closed.
 
 ## Dashboard Setup
 

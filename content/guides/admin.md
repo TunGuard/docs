@@ -109,15 +109,34 @@ Administrators can:
 
 See [Edit Peer](./clients.md) for the available peer settings.
 
-## Groups
+## Policy Groups
 
-Groups are planned for organizing peers into logical collections.
+Policy groups are available from the **Policy** section. Each group holds a set of
+devices and its own set of rules:
 
-Groups will allow administrators to manage peers based on their role, location, network, or other requirements.
+| Rule | Allows |
+|---|---|
+| Inter-device traffic | Devices in this group to reach each other |
+| P2P mesh | Devices in this group to be punched together |
+| TCP relay | Port mappings (TRP proxies) onto these devices |
+| WireGuard access | Internet access out through the tunnel |
 
-A peer will be able to move between groups without needing to recreate the peer.
+Every rule starts **off**, and every device is in exactly one group. Devices in no
+custom group are in **Default**, whose rules apply until you change them.
 
-Group functionality is currently under development.
+Administrators can:
+
+- Create, rename, edit and delete groups
+- Move devices between groups, including back to Default
+- See how many packets the filter has dropped for inter-device and internet access
+
+/// warning | Groups do not reach into each other
+
+Inter-device traffic stays inside one group. Opening it on one group does not open
+any other group, and a device in Default cannot reach a device in a custom group.
+Devices that need to talk to each other belong in the same group.
+
+///
 
 ## Server Settings
 

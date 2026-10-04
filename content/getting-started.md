@@ -75,7 +75,8 @@ The default login credentials are:
 
 /// warning | Important Security Step
 
-You will be required to change the default password after your first login.
+Until you change them, a dedicated setup page at `http://YOUR_SERVER_IP:9000/login.html`
+takes over and asks for new credentials. The dashboard only opens once they are set.
 
 ///
 

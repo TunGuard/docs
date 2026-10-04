@@ -37,6 +37,7 @@ http://YOUR_SERVER_IP:9000/api
 | `/api/key/regenerate` | POST | Dashboard | Issue a new API key |
 | `/api/mesh/*` | Various | Either | [P2P mesh](#p2p-mesh) |
 | `/api/trp/*` | Various | Either | [TCP relay proxies](#tcp-relay-trp) |
+| `/api/policy/*` | Various | Either | [Policy groups](#policy-groups-api) |
 
 "Either" means the dashboard login or an API key. "Dashboard" means the login is
 required and an API key is rejected.
@@ -699,10 +700,28 @@ curl -H "$H" "$API/api/mesh/links"
 | `relay_seen` | When that endpoint was last refreshed |
 | `peers` | Number of peers this node holds |
 | `direct_peers` | How many of those are direct |
+| `tested_peers` | How many of those answered a link test |
 | `connected_for` | How long the node has been connected |
 
 A node with a `relay_ep` but no `direct_peers` is the one to investigate: discovery
 worked and the hole punch did not.
+
+`GET /api/mesh/links` returns one object per link:
+
+| Field | Description |
+|---|---|
+| `from` / `to` | Node ids of the two ends |
+| `online` | Whether the far node is connected |
+| `endpoint` | Public endpoint the punch is aimed at |
+| `direct` | A punch landed and the peer answered |
+| `tested` | A link test completed on this link |
+| `rtt_ms` | Round trip the client measured, in milliseconds |
+| `direct_since` | When the link first went direct |
+
+`direct` and `tested` answer different questions. `direct` is the punch: one packet
+arrived, once. `tested` is the client's own round trip to the peer — a small packet it
+sent that the peer echoed back — so `direct` with `tested` false is a link that punched
+and then went quiet, which is what the dashboard shows as **no answer**.
 
 ```shell
 # Add a node. Omit "psk" to have one generated.
@@ -734,7 +753,11 @@ Nodes in the same group are punched to each other automatically, so these calls 
 forcing a re-punch, forcing a group back onto the relay, or taking nodes off the mesh.
 
 `p2p/connect` needs both nodes online — an offline or unknown id returns
-`400 node offline`.
+`400 node offline`. Two nodes whose devices sit in **different policy groups**
+cannot be punched together and the call is refused with
+`400 policy groups are isolated`: a direct path never passes through the
+server, so it is enforced at the point the link is created. Put both devices in
+one group with `allow_inter_device` on to link them.
 
 ```shell
 # Force an immediate direct path between two nodes
@@ -823,7 +846,7 @@ Failures are JSON with an `error` field, so scripts can branch on them:
 
 | Status | Meaning |
 |---|---|
-| `400` | Bad request — `id required`, `node_id required`, `unknown group`, `node offline`, port out of range, or malformed JSON |
+| `400` | Bad request — `id required`, `node_id required`, `unknown group`, `node offline`, `policy groups are isolated`, port out of range, or malformed JSON |
 | `401` | Missing or invalid dashboard login / API key |
 | `404` | No such node, proxy, or binding |
 | `405` | `GET` used on a `POST`-only route |
@@ -860,6 +883,82 @@ curl -sS -X POST -H "X-API-Key: $API_KEY" \
   -H "Content-Type: application/json" "$API/api/mesh/node/remove" \
   -d "{\"id\":\"$NODE_ID\"}"
 ```
+
+## Policy Groups API
+
+A policy group is a set of devices with its own rules. Every device the server
+knows about is in exactly one group, and a device in no custom group is in
+`default`. The group decides what a device may reach:
+
+| Rule | Allows |
+|---|---|
+| `allow_inter_device` | Traffic to the other devices **of the same group** |
+| `allow_p2p_mesh` | P2P mesh participation |
+| `allow_trp` | TCP relay proxies onto the group |
+| `allow_wg_access` | Internet access out through the tunnel |
+
+```shell
+API="http://localhost:9000"
+H="X-API-Key: $API_KEY"
+JSON="Content-Type: application/json"
+
+# Every group with its members, every known device, and the packet-filter
+# drop counters for inter-device and internet traffic
+curl -H "$H" "$API/api/policy/groups"
+
+# Create a group. Every omitted rule is OFF, so a new group denies by default
+curl -X POST -H "$H" -H "$JSON" "$API/api/policy/group/create" \
+  -d '{"name":"office","allow_inter_device":true,"allow_wg_access":true}'
+
+# Change a group. Omitted rules and an empty name keep their current value,
+# so this turns on inter-device traffic without touching the other rules
+curl -X POST -H "$H" -H "$JSON" "$API/api/policy/group/update" \
+  -d '{"id":"GROUP_ID","allow_inter_device":true}'
+
+# Delete a group. Its devices fall back to the default group
+curl -X POST -H "$H" -H "$JSON" "$API/api/policy/group/delete" \
+  -d '{"id":"GROUP_ID"}'
+
+# Move WireGuard peers into a group, by public key
+curl -X POST -H "$H" -H "$JSON" "$API/api/policy/group/assign" \
+  -d '{"id":"GROUP_ID","devices":["PEER_PUBKEY_HEX"]}'
+
+# Move tun-client devices into a group, by device id
+curl -X POST -H "$H" -H "$JSON" "$API/api/policy/group/assign-device" \
+  -d '{"id":"GROUP_ID","devices":["DEVICE_ID"]}'
+
+# Send devices back to the default group
+curl -X POST -H "$H" -H "$JSON" "$API/api/policy/group/unassign" \
+  -d '{"devices":["PEER_PUBKEY_HEX"]}'
+curl -X POST -H "$H" -H "$JSON" "$API/api/policy/group/unassign-device" \
+  -d '{"devices":["DEVICE_ID"]}'
+
+# Replace the whole policy in one call: groups, peer membership, and device
+# membership. Rejected outright if any name names a device the server has
+# never seen
+curl -X POST -H "$H" -H "$JSON" "$API/api/policy/apply" \
+  -d '{"groups":[{"id":"office","name":"Office","allow_inter_device":true,"allow_wg_access":true}],
+       "assign":{"PEER_PUBKEY_HEX":"office"},
+       "device_assign":{"DEVICE_ID":"office"}}'
+```
+
+A device is named by **public key** when it is a WireGuard peer, and by **device
+id** when it is a tun-client device with no peer of its own. Sending the wrong
+identity returns `400 unknown device`. `group/unassign` and
+`group/unassign-device` do not need an `id` — the group id in their response is
+always `default`.
+
+/// warning | Groups are sealed from each other
+
+`allow_inter_device` opens traffic to the other devices of **that group only**.
+It never grants reach into or out of another group, and it does not depend on the
+other group's own setting: one open side is enough, but only within one group.
+Before `2.4.2`, an open group could reach into a closed one; that leak is fixed,
+so cross-group traffic now needs the devices to be in the same group — and
+`/api/mesh/p2p/connect` refuses such a pair with
+`400 policy groups are isolated`.
+
+///
 
 ## API Security
 

@@ -35,7 +35,21 @@ Username: admin
 Password: tanguard
 ```
 
-You will be required to change the credentials after the first login.
+You will be required to change the credentials after the first login. Until you do,
+`http://YOUR_SERVER_IP:9000/login.html` is the only page you reach, and it asks for
+new credentials before anything else loads.
+
+## Why can my devices not see each other?
+
+Check which policy group each device is in, on the **Policy** page.
+
+Devices in different groups never talk, even when the group is set to allow
+inter-device traffic — including over P2P, which the server refuses to punch for
+a cross-group pair. Devices that need to reach each other must be in the same
+group, with inter-device traffic switched on for it.
+
+A group also has to be allowed to reach the internet (and the server) separately;
+a device in a sealed group can talk to its own group and nothing else.
 
 ## I cannot access the dashboard
 

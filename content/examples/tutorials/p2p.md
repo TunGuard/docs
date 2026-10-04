@@ -112,6 +112,7 @@ Nothing else is required. The mesh builds itself.
  6.  P1R reply                    every online peer with a fresh endpoint
  7.  peer punch                   both ends aim at each other, once a second
  8.  first packet received        link is direct; reported up to the dashboard
+ 9.  P1T every 3s                 each end tests the link and times the round trip
 ```
 
 Steps 4 to 8 repeat for the life of the connection. A device that reboots, changes
@@ -136,6 +137,8 @@ other. TunGuard resolves this with a hole punch over UDP.
 4. A link is reported **direct** as soon as a peer socket receives anything at all.
    That is a sound test: hub-bound probes only ever land on the hub socket, so anything
    on a peer socket came straight from the peer.
+5. Once the link is direct, each client sends it a `P1T` packet every three seconds and
+   times the echo. That is the **link test**, and it is reported separately.
 
 The hub socket is deliberately *not* `connect()`ed to the server. A connected UDP socket
 only accepts datagrams from its single peer, so the kernel would silently drop the very
@@ -159,6 +162,33 @@ server, and the relay is the fallback that is always there behind it — there i
 switch to choose between them. A link turns direct the moment a packet genuinely
 arrives from the peer, so the **Direct links** figure reflects what is really happening
 rather than what was intended.
+
+## Direct is not the same as working
+
+A hole punch is one packet arriving, once. It can succeed against a peer that has since
+moved, changed network, or started dropping what it receives — and `direct` stays set,
+because it is a fact about the punch and nothing has contradicted it.
+
+The link test is what answers the question you actually care about. Every three seconds
+each client sends a 12-byte packet the peer echoes back:
+
+```text
+'P','1','T' | node_id(8) | seq(1)
+```
+
+The echo of the sequence that is outstanding is what counts, so a late reply to an older
+test cannot be mistaken for the current one, and the reply to a punch probe cannot be
+mistaken for a test at all. The round trip is timed on a monotonic clock, so an NTP
+adjustment cannot invent latency. A test that gets no echo within two seconds drops the
+result rather than leaving the old figure on screen.
+
+In the links table this is its own column:
+
+| State | Meaning |
+|---|---|
+| **direct**, with a time | The peer answers, and the time is the round trip it measured |
+| **direct**, *no answer* | The punch completed, but the peer is no longer answering anything |
+| **via hub**, not tested | No punch yet, so there is nothing to test |
 
 ```text
 Direct (preferred)              Relayed (fallback)
