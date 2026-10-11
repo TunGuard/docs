@@ -98,10 +98,12 @@ Once TunGuard is installed, continue with the relevant guide:
 
 * [Dashboard](guides/setup.md)
 * [Peers](guides/clients.md)
+* [AdGuard DNS Filtering](guides/adguard.md)
+* [Domains & HTTPS Proxy](guides/domains.md)
+* [SSH Access](guides/ssh.md)
 * [P2P Mesh](examples/tutorials/p2p.md)
 * [TunGuard Client](guides/client.md)
 * [Configuration](advanced/config/conf.md)
-* [SSH Gateway](guides/admin.md)
 * [API](guides/api.md)
 * [Backups](guides/admin.md)
 

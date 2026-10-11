@@ -29,6 +29,18 @@ Most installations can use the default values. Change a setting when you need a 
 | `RELAY_LISTEN` | `:7001` | UDP rendezvous and relay listener for the P2P mesh |
 | `CONTROL_TIMEOUT_S` | `10` | Seconds allowed for a P2P client handshake |
 | `MESH_DATA_DIR` | `DATA_DIR` | Where the P2P node registry is stored |
+| `DOMAIN_ENABLED` | `true` | HTTPS domain proxy. Set to `false` to disable |
+| `DOMAIN_HTTP_PORT` | `80` | Public HTTP port used for the ACME challenge and redirects |
+| `DOMAIN_HTTPS_PORT` | `443` | Public HTTPS port of the domain proxy |
+| `DOMAIN_CHALLENGE_PORT` | `8100` | Loopback port the Let's Encrypt HTTP-01 challenge answers on |
+| `ADGUARD_ENABLED` | `true` | Run the managed AdGuard Home instance |
+| `ADGUARD_BINARY` | `adguardhome` | Path or name of the AdGuard Home binary |
+| `ADGUARD_DATA_DIR` | `DATA_DIR` | Where AdGuard's configuration and data live |
+| `ADGUARD_DNS_LISTEN` | `<tunnel IP>:53` | Address AdGuard's DNS service binds. Falls back to `127.0.0.1:5353` when `WG_ADDRESS` is unparsable |
+| `ADGUARD_WEB_LISTEN` | `127.0.0.1:1116` | Loopback address of the AdGuard admin UI |
+| `ADGUARD_UPSTREAM` | `1.1.1.1` | Upstream resolver AdGuard queries |
+| `ADGUARD_UPSTREAM_FAMILY` | `1.1.1.2` | Upstream used while the adult-content filter is on |
+| `ADGUARD_FILTER_ADULT` | `false` | Switch AdGuard to family-mode filtering |
 
 ## WireGuard Settings
 
@@ -380,6 +392,162 @@ Default:
 ```text
 (the value of DATA_DIR)
 ```
+
+## Domain Proxy
+
+The HTTPS domain proxy publishes an internal service on a public domain with an
+automatic Let's Encrypt certificate. It is **on by default** but does nothing
+until the first mapping is added.
+
+### `DOMAIN_ENABLED`
+
+Enables the HTTPS domain proxy.
+
+Default:
+
+```text
+true
+```
+
+The proxy binds no ports and makes no certificate request until a mapping is
+configured. Set it to `false` to disable entirely.
+
+### `DOMAIN_HTTP_PORT`
+
+Default:
+
+```text
+80
+```
+
+The public HTTP port, used for the HTTP-01 challenge and the HTTP→HTTPS
+redirect.
+
+### `DOMAIN_HTTPS_PORT`
+
+Default:
+
+```text
+443
+```
+
+The public HTTPS port of the domain proxy.
+
+### `DOMAIN_CHALLENGE_PORT`
+
+Default:
+
+```text
+8100
+```
+
+The loopback-only port where the Let's Encrypt HTTP-01 challenge answers,
+before a managed webserver (nginx, Apache, Caddy, Traefik) proxies it to the
+public HTTP port.
+
+See [Domains & HTTPS Proxy](../../guides/domains.md) for how to manage
+mappings.
+
+## AdGuard Home
+
+TunGuard can manage an AdGuard Home instance for DNS filtering. It is enabled
+by default and starts with TunGuard; devices in an
+[AdGuard-enabled policy group](../../guides/admin.md#policy-groups) have their
+port-53 DNS redirected to it.
+
+### `ADGUARD_ENABLED`
+
+Runs the managed AdGuard Home instance.
+
+Default:
+
+```text
+true
+```
+
+### `ADGUARD_BINARY`
+
+Path or name of the AdGuard Home binary.
+
+Default:
+
+```text
+adguardhome
+```
+
+When missing, TunGuard looks next to its own executable, in `DATA_DIR`, in the
+working directory, `/usr/local/bin`, and `/usr/bin`, then downloads the official
+release for the architecture.
+
+### `ADGUARD_DATA_DIR`
+
+Where AdGuard's configuration and data live.
+
+Default:
+
+```text
+(the value of DATA_DIR)
+```
+
+### `ADGUARD_DNS_LISTEN`
+
+The address AdGuard's DNS service binds.
+
+Default:
+
+```text
+(the tunnel IP from WG_ADDRESS, port 53)
+```
+
+For example, with `WG_ADDRESS=10.100.0.1/24` the DNS service listens on
+`10.100.0.1:53`. If `WG_ADDRESS` cannot be parsed it falls back to
+`127.0.0.1:5353`.
+
+### `ADGUARD_WEB_LISTEN`
+
+The loopback address of the AdGuard admin UI.
+
+Default:
+
+```text
+127.0.0.1:1116
+```
+
+Remote access goes through the authenticated `/adguard-ui/` proxy on the
+dashboard port.
+
+### `ADGUARD_UPSTREAM`
+
+The upstream resolver AdGuard queries.
+
+Default:
+
+```text
+1.1.1.1
+```
+
+### `ADGUARD_UPSTREAM_FAMILY`
+
+The upstream used while the adult-content filter is on.
+
+Default:
+
+```text
+1.1.1.2
+```
+
+### `ADGUARD_FILTER_ADULT`
+
+Switches AdGuard to family-mode filtering.
+
+Default:
+
+```text
+false
+```
+
+See [AdGuard DNS Filtering](../../guides/adguard.md) for the full feature
+guide.
 
 ## Example Configuration
 

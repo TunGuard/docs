@@ -100,3 +100,12 @@ You can then connect to a VPN device through the TunGuard server:
 ```shell
 ssh -J admin@YOUR_SERVER_IP:2222 root@10.100.0.2
 ```
+
+See [SSH Access](ssh.md) for the full story: the jump host, the browser SSH
+terminal, and the built-in `ssh` client.
+
+## Next steps
+
+TunGuard also ships a managed [AdGuard DNS Filtering](adguard.md) instance, a
+[Domains & HTTPS Proxy](domains.md) for publishing internal services, and
+[Policy Groups](admin.md#policy-groups) for isolating devices from each other.

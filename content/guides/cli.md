@@ -157,6 +157,38 @@ The SSH Gateway uses the TunGuard dashboard credentials for authentication.
 
 The jump host can be used without exposing SSH directly on the VPN device.
 
+See [SSH Access](ssh.md) for the browser SSH terminal, the built-in `ssh`
+client, and the `jump` command.
+
+## Domains (HTTPS Reverse Proxy)
+
+TunGuard can publish a domain with automatic HTTPS in front of a TRP mapping or
+a tunneled service. Manage mappings from the console:
+
+```text
+domain list                                     mappings: domain, backend, target, state
+domain add app.example.com --trp 3              behind an existing TRP mapping
+domain add api.example.com --wg 10.100.0.2 8080 behind a tunneled WireGuard service
+domain update app.example.com --disable         pause without deleting
+domain remove app.example.com                   by id or domain name
+```
+
+See [Domains & HTTPS Proxy](domains.md) for the full guide.
+
+## AdGuard Home
+
+The built-in AdGuard Home can filter DNS for devices in an AdGuard-enabled
+policy group:
+
+```text
+adguard status     state, DNS/Web listen addresses, upstream, adult filter
+adguard start      launch the managed AdGuard Home instance
+adguard stop       stop it
+adguard config     binary, data dir and all ADGUARD_* settings
+```
+
+See [AdGuard DNS Filtering](adguard.md) for the full guide.
+
 ## SSH Gateway With a Custom Port
 
 If the SSH Gateway is configured to use another port, specify that port in the jump host:

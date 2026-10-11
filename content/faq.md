@@ -179,6 +179,42 @@ If the restored server private key is different, existing clients will need upda
 
 Yes. You can add an existing peer key through the **Peers** section instead of generating a new key.
 
+## How do I block ads for my devices?
+
+TunGuard includes a managed [AdGuard Home](guides/adguard.md) DNS filter. Create a policy group, turn on **Allow AdGuard DNS filtering** (and **Allow standard WireGuard internet access**), and move the device — for example your phone — into that group on the **Policy** page.
+
+The server enforces it: the port-53 DNS of an AdGuard-group device is redirected to AdGuard, so protection applies immediately, no matter what DNS server the WireGuard profile says, and no re-import is needed. Moving the device back to Default turns the filter off.
+
+## Why do I still see ads on my phone?
+
+Check, in order:
+
+1. The phone is actually connected to the VPN (its traffic goes through the
+   tunnel).
+2. The phone is in an **AdGuard-enabled policy group** on the **Policy** page —
+   the built-in Default group does *not* filter.
+3. AdGuard is running — Settings → AdGuard, or `adguard status`.
+4. On Android, **Private DNS** is set to **Off** (or **Automatic**). Private DNS
+   uses DNS-over-HTTPS/TLS, which is encrypted and bypasses the server-side
+   port-53 redirect entirely.
+
+You can watch filtered queries in real time in the AdGuard web UI at
+`http://YOUR_SERVER_IP:9000/adguard-ui/` → Query Log.
+
+## How do I publish a service on a public domain?
+
+Use the [Domains & HTTPS Proxy](guides/domains.md). Point the domain's A record
+at your server, then add a mapping from the **Domains** page, the API, or the
+console:
+
+```text
+domain add app.example.com --wg 10.100.0.2 8080
+```
+
+for a service on a WireGuard peer, or `--trp <id>` for a service behind a TRP
+port mapping. TunGuard issues a Let's Encrypt certificate automatically; keep
+ports `80` and `443` reachable.
+
 ## What is the SSH Gateway?
 
 The optional SSH Gateway allows SSH access to WireGuard-connected devices through the TunGuard server.
@@ -194,6 +230,9 @@ For example:
 ```shell
 ssh -J admin@yourserver:2222 root@10.100.0.2
 ```
+
+See [SSH Access](guides/ssh.md) for the jump host, the in-browser SSH terminal,
+and the built-in `ssh` client.
 
 ## How do I use the API?
 

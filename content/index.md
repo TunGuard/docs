@@ -35,6 +35,13 @@ Pick the part that matches what you are building.
   device on the mesh. No config file, no routes, no local state beyond a device id.
 - **[VPN Access](guides/clients.md)** — standard WireGuard configurations and QR codes,
   generated from the dashboard for phones, laptops, and routers.
+- **[AdGuard DNS Filtering](guides/adguard.md)** — a managed AdGuard Home instance that
+  filters DNS for devices in an AdGuard-enabled policy group, enforced on the server,
+  so moving a device into the group protects it immediately.
+- **[Domains & HTTPS Proxy](guides/domains.md)** — put a public domain with automatic
+  Let's Encrypt HTTPS in front of a TRP mapping or a tunneled service.
+- **[SSH Access](guides/ssh.md)** — jump host, browser SSH terminals, and a built-in
+  `ssh` client, all using your dashboard login.
 - **[TCP Relay](guides/api.md#tcp-relay-trp)** — publish a service running on a mesh
   node to the internet on a port of your choosing.
 - **[Dashboard and API](guides/api.md)** — everything above is drivable from a browser or

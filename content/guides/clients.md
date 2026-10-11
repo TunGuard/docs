@@ -57,6 +57,29 @@ For example:
 1.1.1.1
 ```
 
+If the peer belongs to a policy group with **AdGuard DNS filtering** enabled,
+the generated profile instead points at the server's own AdGuard (for example
+`10.100.0.1`), so its queries get filtered.
+
+/// note | AdGuard protection no longer needs the profile
+
+Since `2.4.17` the server **redirects** the port-53 DNS of any device in an
+AdGuard-enabled group, whatever its profile says. A phone generated with
+`DNS = 1.1.1.1` is protected the moment it is moved into an AdGuard group — no
+re-import — and returns to unfiltered DNS when it is moved back. See
+[AdGuard DNS Filtering](adguard.md).
+
+///
+
+/// warning | Android Private DNS
+
+If an Android device has **Private DNS** set to a specific provider
+(DNS-over-HTTPS/TLS), its queries are encrypted and bypass the server-side
+redirect. Set Private DNS to **Off** or **Automatic** so the filtered DNS in the
+WireGuard profile is used.
+
+///
+
 ## Persistent Keepalive
 
 The interval, in seconds, at which the peer sends keepalive packets to the TunGuard server.

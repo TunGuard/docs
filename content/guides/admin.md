@@ -120,6 +120,9 @@ devices and its own set of rules:
 | P2P mesh | Devices in this group to be punched together |
 | TCP relay | Port mappings (TRP proxies) onto these devices |
 | WireGuard access | Internet access out through the tunnel |
+| AdGuard DNS filtering | Port-53 DNS of this group's devices is redirected to the embedded AdGuard Home |
+
+See [AdGuard DNS Filtering](adguard.md) for what the AdGuard switch does.
 
 Every rule starts **off**, and every device is in exactly one group. Devices in no
 custom group are in **Default**, whose rules apply until you change them.
@@ -157,21 +160,32 @@ Changes to networking settings can affect connected peers. Make sure client conf
 
 ## SSH Gateway
 
-The optional SSH Gateway allows administrators to reach devices connected through TunGuard.
+The optional SSH Gateway turns TunGuard into a jump host so administrators can
+reach devices connected through TunGuard without exposing SSH on them.
 
-The default port is:
-
-```text
-2222
-```
-
-For example:
+The full story — enabling it, jumping to a peer, the browser SSH terminal, and
+the built-in `ssh` client — is in the [SSH Access](ssh.md) guide. As a quick
+start, with the gateway enabled the default port is `2222` and you connect
+with:
 
 ```shell
 ssh -J admin@YOUR_SERVER_IP:2222 root@10.100.0.2
 ```
 
-See the [CLI](./cli.md) guide for SSH Gateway commands and configuration.
+## Domains & HTTPS
+
+TunGuard can publish an internal service on a public domain with automatic
+Let's Encrypt HTTPS — in front of a TRP mapping or a tunneled WireGuard
+service. Manage mappings from the **Domains** page, the API, or the console.
+See [Domains & HTTPS Proxy](domains.md).
+
+## AdGuard DNS Filtering
+
+A managed AdGuard Home can filter DNS for devices in an
+[AdGuard-enabled policy group](#policy-groups). It starts automatically, its
+DNS service binds to the tunnel address, and protected devices are redirected
+to it on the server — moving a device into the group takes effect immediately.
+See [AdGuard DNS Filtering](adguard.md).
 
 ## Security
 

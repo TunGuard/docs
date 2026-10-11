@@ -38,6 +38,16 @@ http://YOUR_SERVER_IP:9000/api
 | `/api/mesh/*` | Various | Either | [P2P mesh](#p2p-mesh) |
 | `/api/trp/*` | Various | Either | [TCP relay proxies](#tcp-relay-trp) |
 | `/api/policy/*` | Various | Either | [Policy groups](#policy-groups-api) |
+| `/api/domains` | GET | Either | List domain mappings and proxy status |
+| `/api/domains/status` | GET | Either | Domain proxy serving mode |
+| `/api/domain/add` | POST | Either | Add a domain mapping |
+| `/api/domain/update` | POST | Either | Update a domain mapping |
+| `/api/domain/remove` | POST | Either | Remove a domain mapping |
+| `/api/adguard` | GET | Either | AdGuard status |
+| `/api/adguard/start` | POST | Either | Start the managed AdGuard Home |
+| `/api/adguard/stop` | POST | Either | Stop the managed AdGuard Home |
+| `/api/adguard/config` | GET/POST | Either | Effective `ADGUARD_*` configuration |
+| `/adguard-ui/` | GET | Dashboard | Reverse proxy to the AdGuard web UI |
 
 "Either" means the dashboard login or an API key. "Dashboard" means the login is
 required and an API key is rejected.
@@ -959,6 +969,112 @@ so cross-group traffic now needs the devices to be in the same group — and
 `400 policy groups are isolated`.
 
 ///
+
+## Domains API
+
+These endpoints manage the [HTTPS domain proxy](domains.md) — a public domain
+in front of a TRP mapping or a tunneled service, with automatic Let's Encrypt
+certificates. They use the same credentials as the rest of `/api/*`, and return
+`409` `domain reverse proxy is disabled` when `DOMAIN_ENABLED=false`.
+
+```shell
+API="http://localhost:9000"
+H="X-API-Key: $API_KEY"
+JSON="Content-Type: application/json"
+
+# Every mapping, plus the proxy's serving status
+curl -H "$H" "$API/api/domains"
+
+# Proxy status alone: mode, webserver, ports
+curl -H "$H" "$API/api/domains/status"
+```
+
+### `GET /api/domains`
+
+Returns `{ domains: [...], status: {...} }`. Each domain includes its id,
+domain name, backend, target, enabled flag, and timestamps.
+
+### `GET /api/domains/status`
+
+Returns the serving mode and the addresses in use:
+
+| Field | Description |
+|---|---|
+| `enabled` | Whether the proxy is enabled |
+| `mode` | `builtin`, `external`, `idle`, or `blocked` |
+| `webserver` | Detected webserver (nginx, apache, caddy, traefik) |
+| `owner_80` / `owner_443` | Process holding ports 80/443, if any |
+| `http_port` / `https_port` | Public HTTP/HTTPS ports |
+| `challenge_port` | Loopback ACME challenge port |
+| `count` | Number of configured mappings |
+
+### `POST /api/domain/add`
+
+Create a mapping. Pass either a `trp` backend with `proxy_ref`, or a `wg`
+backend with `target_ip` and `target_port`:
+
+```shell
+# Behind an existing TRP mapping
+curl -X POST -H "$H" -H "$JSON" "$API/api/domain/add" \
+  -d '{"domain":"app.example.com","backend":"trp","proxy_ref":"3"}'
+
+# Behind a tunneled WireGuard service
+curl -X POST -H "$H" -H "$JSON" "$API/api/domain/add" \
+  -d '{"domain":"api.example.com","backend":"wg","target_ip":"10.100.0.2","target_port":8080}'
+```
+
+`enabled` defaults to `true`. The response includes the generated domain id.
+
+### `POST /api/domain/update`
+
+Update a mapping by `id`. Send only the fields you want to change. `enabled:
+false` pauses the mapping without deleting it.
+
+### `POST /api/domain/remove`
+
+Remove a mapping by `id`. Returns `404` if it does not exist.
+
+## AdGuard API
+
+These endpoints manage the embedded AdGuard Home instance used for
+[DNS filtering](adguard.md). They use the same credentials as the rest of
+`/api/*`.
+
+```shell
+# Status: enabled, running, and the web UI address
+curl -H "$H" "$API/api/adguard"
+```
+
+The response is:
+
+```json
+{
+  "enabled": true,
+  "running": true,
+  "web": "http://127.0.0.1:1116"
+}
+```
+
+### `POST /api/adguard/start` / `POST /api/adguard/stop`
+
+Start or stop the managed AdGuard Home. Both rebuild the tunnel DNS redirect
+rules: starting AdGuard enables redirecting AdGuard-group peers to it, stopping
+it clears every redirect. Returns `409` when AdGuard is disabled.
+
+### `GET/POST /api/adguard/config`
+
+Reads the effective configuration — `enabled`, `dns`, `web`, `upstream`,
+`family`, `adult` — mirroring the `ADGUARD_*` environment variables.
+
+### `/adguard-ui/` (dashboard login only)
+
+A reverse proxy to the AdGuard web UI on its loopback port. Requires the
+dashboard login (an API key is rejected) and returns `503` while AdGuard is not
+running:
+
+```text
+http://YOUR_SERVER_IP:9000/adguard-ui/
+```
 
 ## API Security
 
