@@ -43,6 +43,9 @@
         <loc>https://tunguard.github.io/v2.4/examples/tutorials/router-provision/</loc>
       </url>
       <url>
+        <loc>https://tunguard.github.io/v2.4/guides/adguard/</loc>
+      </url>
+      <url>
         <loc>https://tunguard.github.io/v2.4/guides/admin/</loc>
       </url>
       <url>
@@ -58,6 +61,12 @@
         <loc>https://tunguard.github.io/v2.4/guides/clients/</loc>
       </url>
       <url>
+        <loc>https://tunguard.github.io/v2.4/guides/domains/</loc>
+      </url>
+      <url>
         <loc>https://tunguard.github.io/v2.4/guides/setup/</loc>
+      </url>
+      <url>
+        <loc>https://tunguard.github.io/v2.4/guides/ssh/</loc>
       </url>
 </urlset>

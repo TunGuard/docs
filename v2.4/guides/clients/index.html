@@ -19,7 +19,7 @@
         <link rel="prev" href="../client/">
       
       
-        <link rel="next" href="../setup/">
+        <link rel="next" href="../domains/">
       
       
         
@@ -378,7 +378,7 @@
     
     
       <li class="md-tabs__item md-tabs__item--active">
-        <a href="../admin/" class="md-tabs__link">
+        <a href="../adguard/" class="md-tabs__link">
           
   
   Guides
@@ -1292,6 +1292,33 @@
   
   
     <li class="md-nav__item">
+      <a href="../adguard/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  AdGuard DNS Filtering
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../admin/" class="md-nav__link">
         
   
@@ -1558,6 +1585,33 @@
   
   
     <li class="md-nav__item">
+      <a href="../domains/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Domains & HTTPS Proxy
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../setup/" class="md-nav__link">
         
   
@@ -1566,6 +1620,33 @@
     
   
   Setup
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ssh/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  SSH Access
 
     
   </span>
@@ -1756,7 +1837,7 @@
     
     
       <li class="md-path__item">
-        <a href="../admin/" class="md-path__link">
+        <a href="../adguard/" class="md-path__link">
           
   
   <span class="md-ellipsis">
@@ -1828,6 +1909,24 @@
 <p>For example:</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>1.1.1.1
 </span></code></pre></div>
+<p>If the peer belongs to a policy group with <strong>AdGuard DNS filtering</strong> enabled,
+the generated profile instead points at the server's own AdGuard (for example
+<code>10.100.0.1</code>), so its queries get filtered.</p>
+<div class="admonition note">
+<p class="admonition-title">AdGuard protection no longer needs the profile</p>
+<p>Since <code>2.4.17</code> the server <strong>redirects</strong> the port-53 DNS of any device in an
+AdGuard-enabled group, whatever its profile says. A phone generated with
+<code>DNS = 1.1.1.1</code> is protected the moment it is moved into an AdGuard group — no
+re-import — and returns to unfiltered DNS when it is moved back. See
+<a href="../adguard/">AdGuard DNS Filtering</a>.</p>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Android Private DNS</p>
+<p>If an Android device has <strong>Private DNS</strong> set to a specific provider
+(DNS-over-HTTPS/TLS), its queries are encrypted and bypass the server-side
+redirect. Set Private DNS to <strong>Off</strong> or <strong>Automatic</strong> so the filtered DNS in the
+WireGuard profile is used.</p>
+</div>
 <h2 id="persistent-keepalive">Persistent Keepalive<a class="headerlink" href="#persistent-keepalive" title="Permanent link">⚓</a></h2>
 <p>The interval, in seconds, at which the peer sends keepalive packets to the TunGuard server.</p>
 <p>This can help maintain connections when the peer is behind NAT or a restrictive firewall.</p>

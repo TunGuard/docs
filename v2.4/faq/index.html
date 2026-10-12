@@ -378,7 +378,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../guides/admin/" class="md-tabs__link">
+        <a href="../guides/adguard/" class="md-tabs__link">
           
   
   Guides
@@ -698,6 +698,39 @@
     <span class="md-ellipsis">
       <span class="md-typeset">
         Does TunGuard support existing WireGuard keys?
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#how-do-i-block-ads-for-my-devices" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        How do I block ads for my devices?
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#why-do-i-still-see-ads-on-my-phone" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Why do I still see ads on my phone?
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#how-do-i-publish-a-service-on-a-public-domain" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        How do I publish a service on a public domain?
       </span>
     </span>
   </a>
@@ -1598,6 +1631,33 @@
   
   
     <li class="md-nav__item">
+      <a href="../guides/adguard/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  AdGuard DNS Filtering
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../guides/admin/" class="md-nav__link">
         
   
@@ -1733,6 +1793,33 @@
   
   
     <li class="md-nav__item">
+      <a href="../guides/domains/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Domains & HTTPS Proxy
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../guides/setup/" class="md-nav__link">
         
   
@@ -1741,6 +1828,33 @@
     
   
   Setup
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../guides/ssh/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  SSH Access
 
     
   </span>
@@ -1968,6 +2082,39 @@
     <span class="md-ellipsis">
       <span class="md-typeset">
         Does TunGuard support existing WireGuard keys?
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#how-do-i-block-ads-for-my-devices" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        How do I block ads for my devices?
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#why-do-i-still-see-ads-on-my-phone" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Why do I still see ads on my phone?
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#how-do-i-publish-a-service-on-a-public-domain" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        How do I publish a service on a public domain?
       </span>
     </span>
   </a>
@@ -2233,30 +2380,58 @@ come back here and turn the switch on again.</p>
 <p>If the restored server private key is different, existing clients will need updated configurations.</p>
 <h2 id="does-tunguard-support-existing-wireguard-keys">Does TunGuard support existing WireGuard keys?<a class="headerlink" href="#does-tunguard-support-existing-wireguard-keys" title="Permanent link">⚓</a></h2>
 <p>Yes. You can add an existing peer key through the <strong>Peers</strong> section instead of generating a new key.</p>
+<h2 id="how-do-i-block-ads-for-my-devices">How do I block ads for my devices?<a class="headerlink" href="#how-do-i-block-ads-for-my-devices" title="Permanent link">⚓</a></h2>
+<p>TunGuard includes a managed <a href="../guides/adguard/">AdGuard Home</a> DNS filter. Create a policy group, turn on <strong>Allow AdGuard DNS filtering</strong> (and <strong>Allow standard WireGuard internet access</strong>), and move the device — for example your phone — into that group on the <strong>Policy</strong> page.</p>
+<p>The server enforces it: the port-53 DNS of an AdGuard-group device is redirected to AdGuard, so protection applies immediately, no matter what DNS server the WireGuard profile says, and no re-import is needed. Moving the device back to Default turns the filter off.</p>
+<h2 id="why-do-i-still-see-ads-on-my-phone">Why do I still see ads on my phone?<a class="headerlink" href="#why-do-i-still-see-ads-on-my-phone" title="Permanent link">⚓</a></h2>
+<p>Check, in order:</p>
+<ol>
+<li>The phone is actually connected to the VPN (its traffic goes through the
+   tunnel).</li>
+<li>The phone is in an <strong>AdGuard-enabled policy group</strong> on the <strong>Policy</strong> page —
+   the built-in Default group does <em>not</em> filter.</li>
+<li>AdGuard is running — Settings → AdGuard, or <code>adguard status</code>.</li>
+<li>On Android, <strong>Private DNS</strong> is set to <strong>Off</strong> (or <strong>Automatic</strong>). Private DNS
+   uses DNS-over-HTTPS/TLS, which is encrypted and bypasses the server-side
+   port-53 redirect entirely.</li>
+</ol>
+<p>You can watch filtered queries in real time in the AdGuard web UI at
+<code>http://YOUR_SERVER_IP:9000/adguard-ui/</code> → Query Log.</p>
+<h2 id="how-do-i-publish-a-service-on-a-public-domain">How do I publish a service on a public domain?<a class="headerlink" href="#how-do-i-publish-a-service-on-a-public-domain" title="Permanent link">⚓</a></h2>
+<p>Use the <a href="../guides/domains/">Domains &amp; HTTPS Proxy</a>. Point the domain's A record
+at your server, then add a mapping from the <strong>Domains</strong> page, the API, or the
+console:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>domain add app.example.com --wg 10.100.0.2 8080
+</span></code></pre></div>
+<p>for a service on a WireGuard peer, or <code>--trp &lt;id&gt;</code> for a service behind a TRP
+port mapping. TunGuard issues a Let's Encrypt certificate automatically; keep
+ports <code>80</code> and <code>443</code> reachable.</p>
 <h2 id="what-is-the-ssh-gateway">What is the SSH Gateway?<a class="headerlink" href="#what-is-the-ssh-gateway" title="Permanent link">⚓</a></h2>
 <p>The optional SSH Gateway allows SSH access to WireGuard-connected devices through the TunGuard server.</p>
 <p>It uses port <code>2222</code> by default and can be enabled with:</p>
-<div class="language-shell highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>./tanguard<span class="w"> </span>-ssh
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>./tanguard<span class="w"> </span>-ssh
 </span></code></pre></div>
 <p>For example:</p>
-<div class="language-shell highlight"><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>ssh<span class="w"> </span>-J<span class="w"> </span>admin@yourserver:2222<span class="w"> </span>root@10.100.0.2
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-13-1"><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>ssh<span class="w"> </span>-J<span class="w"> </span>admin@yourserver:2222<span class="w"> </span>root@10.100.0.2
 </span></code></pre></div>
+<p>See <a href="../guides/ssh/">SSH Access</a> for the jump host, the in-browser SSH terminal,
+and the built-in <code>ssh</code> client.</p>
 <h2 id="how-do-i-use-the-api">How do I use the API?<a class="headerlink" href="#how-do-i-use-the-api" title="Permanent link">⚓</a></h2>
 <p>TunGuard provides an API under <code>/api/*</code>.</p>
 <p>Most API endpoints require dashboard authentication or an API key.</p>
 <p>API keys can be generated from <strong>Settings → API Key</strong> and supplied using either:</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-13-1"><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>X-API-Key: YOUR_API_KEY
+<div class="language-text highlight"><pre><span></span><code><span id="__span-14-1"><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>X-API-Key: YOUR_API_KEY
 </span></code></pre></div>
 <p>or:</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-14-1"><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>Authorization: Bearer YOUR_API_KEY
+<div class="language-text highlight"><pre><span></span><code><span id="__span-15-1"><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a>Authorization: Bearer YOUR_API_KEY
 </span></code></pre></div>
 <p>The <code>/api/health</code> endpoint does not require authentication.</p>
 <h2 id="how-do-i-build-a-p2p-mesh">How do I build a P2P mesh?<a class="headerlink" href="#how-do-i-build-a-p2p-mesh" title="Permanent link">⚓</a></h2>
 <p>Install the client on each device:</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-15-1"><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a>curl<span class="w"> </span>-fsSL<span class="w"> </span>https://raw.githubusercontent.com/TunGuard/get/main/client.sh<span class="w"> </span><span class="p">|</span><span class="w"> </span>bash
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-16-1"><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a>curl<span class="w"> </span>-fsSL<span class="w"> </span>https://raw.githubusercontent.com/TunGuard/get/main/client.sh<span class="w"> </span><span class="p">|</span><span class="w"> </span>bash
 </span></code></pre></div>
 <p>Then open <strong>P2P → Enroll device</strong> in the dashboard and run the command it shows:</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-16-1"><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a>tun<span class="w"> </span>YOUR_SERVER_IP<span class="w"> </span>YOUR_PSK
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-17-1"><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a>tun<span class="w"> </span>YOUR_SERVER_IP<span class="w"> </span>YOUR_PSK
 </span></code></pre></div>
 <p>Nothing else is needed. Devices sharing a PSK discover each other and punch a direct
 path automatically. See <a href="../examples/tutorials/p2p/">P2P Mesh</a>.</p>

@@ -16,8 +16,10 @@
         <link rel="canonical" href="https://tunguard.github.io/v2.4/guides/setup/">
       
       
-        <link rel="prev" href="../clients/">
+        <link rel="prev" href="../domains/">
       
+      
+        <link rel="next" href="../ssh/">
       
       
         
@@ -376,7 +378,7 @@
     
     
       <li class="md-tabs__item md-tabs__item--active">
-        <a href="../admin/" class="md-tabs__link">
+        <a href="../adguard/" class="md-tabs__link">
           
   
   Guides
@@ -1290,6 +1292,33 @@
   
   
     <li class="md-nav__item">
+      <a href="../adguard/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  AdGuard DNS Filtering
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../admin/" class="md-nav__link">
         
   
@@ -1406,6 +1435,33 @@
     
   
   Edit Peer
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../domains/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Domains & HTTPS Proxy
 
     
   </span>
@@ -1556,10 +1612,48 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#next-steps" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Next steps
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
       
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ssh/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  SSH Access
+
+    
+  </span>
+  
+  
+
+      </a>
     </li>
   
 
@@ -1685,6 +1779,17 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#next-steps" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Next steps
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -1732,7 +1837,7 @@
     
     
       <li class="md-path__item">
-        <a href="../admin/" class="md-path__link">
+        <a href="../adguard/" class="md-path__link">
           
   
   <span class="md-ellipsis">
@@ -1832,6 +1937,12 @@ Until you do, <code>/login.html</code> takes over and the rest of the dashboard 
 <p>You can then connect to a VPN device through the TunGuard server:</p>
 <div class="language-shell highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>ssh<span class="w"> </span>-J<span class="w"> </span>admin@YOUR_SERVER_IP:2222<span class="w"> </span>root@10.100.0.2
 </span></code></pre></div>
+<p>See <a href="../ssh/">SSH Access</a> for the full story: the jump host, the browser SSH
+terminal, and the built-in <code>ssh</code> client.</p>
+<h2 id="next-steps">Next steps<a class="headerlink" href="#next-steps" title="Permanent link">⚓</a></h2>
+<p>TunGuard also ships a managed <a href="../adguard/">AdGuard DNS Filtering</a> instance, a
+<a href="../domains/">Domains &amp; HTTPS Proxy</a> for publishing internal services, and
+<a href="../admin/#policy-groups">Policy Groups</a> for isolating devices from each other.</p>
 
 
 

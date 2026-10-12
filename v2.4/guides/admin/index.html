@@ -16,7 +16,7 @@
         <link rel="canonical" href="https://tunguard.github.io/v2.4/guides/admin/">
       
       
-        <link rel="prev" href="../../examples/tutorials/router-provision/">
+        <link rel="prev" href="../adguard/">
       
       
         <link rel="next" href="../api/">
@@ -378,7 +378,7 @@
     
     
       <li class="md-tabs__item md-tabs__item--active">
-        <a href="././" class="md-tabs__link">
+        <a href="../adguard/" class="md-tabs__link">
           
   
   Guides
@@ -1289,6 +1289,33 @@
                 
   
   
+  
+  
+    <li class="md-nav__item">
+      <a href="../adguard/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  AdGuard DNS Filtering
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
     
   
   
@@ -1463,6 +1490,28 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#domains-https" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Domains &amp; HTTPS
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#adguard-dns-filtering" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        AdGuard DNS Filtering
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#security" class="md-nav__link">
     <span class="md-ellipsis">
       <span class="md-typeset">
@@ -1597,6 +1646,33 @@
   
   
     <li class="md-nav__item">
+      <a href="../domains/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Domains & HTTPS Proxy
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../setup/" class="md-nav__link">
         
   
@@ -1605,6 +1681,33 @@
     
   
   Setup
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ssh/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  SSH Access
 
     
   </span>
@@ -1777,6 +1880,28 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#domains-https" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Domains &amp; HTTPS
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#adguard-dns-filtering" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        AdGuard DNS Filtering
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#security" class="md-nav__link">
     <span class="md-ellipsis">
       <span class="md-typeset">
@@ -1834,7 +1959,7 @@
     
     
       <li class="md-path__item">
-        <a href="././" class="md-path__link">
+        <a href="../adguard/" class="md-path__link">
           
   
   <span class="md-ellipsis">
@@ -1972,8 +2097,13 @@ devices and its own set of rules:</p>
 <td>WireGuard access</td>
 <td>Internet access out through the tunnel</td>
 </tr>
+<tr>
+<td>AdGuard DNS filtering</td>
+<td>Port-53 DNS of this group's devices is redirected to the embedded AdGuard Home</td>
+</tr>
 </tbody>
 </table>
+<p>See <a href="../adguard/">AdGuard DNS Filtering</a> for what the AdGuard switch does.</p>
 <p>Every rule starts <strong>off</strong>, and every device is in exactly one group. Devices in no
 custom group are in <strong>Default</strong>, whose rules apply until you change them.</p>
 <p>Administrators can:</p>
@@ -2003,14 +2133,25 @@ Devices that need to talk to each other belong in the same group.</p>
 </ul>
 <p>Changes to networking settings can affect connected peers. Make sure client configurations match the server configuration after making changes.</p>
 <h2 id="ssh-gateway">SSH Gateway<a class="headerlink" href="#ssh-gateway" title="Permanent link">⚓</a></h2>
-<p>The optional SSH Gateway allows administrators to reach devices connected through TunGuard.</p>
-<p>The default port is:</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>2222
+<p>The optional SSH Gateway turns TunGuard into a jump host so administrators can
+reach devices connected through TunGuard without exposing SSH on them.</p>
+<p>The full story — enabling it, jumping to a peer, the browser SSH terminal, and
+the built-in <code>ssh</code> client — is in the <a href="../ssh/">SSH Access</a> guide. As a quick
+start, with the gateway enabled the default port is <code>2222</code> and you connect
+with:</p>
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>ssh<span class="w"> </span>-J<span class="w"> </span>admin@YOUR_SERVER_IP:2222<span class="w"> </span>root@10.100.0.2
 </span></code></pre></div>
-<p>For example:</p>
-<div class="language-shell highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>ssh<span class="w"> </span>-J<span class="w"> </span>admin@YOUR_SERVER_IP:2222<span class="w"> </span>root@10.100.0.2
-</span></code></pre></div>
-<p>See the <a href=".././cli/">CLI</a> guide for SSH Gateway commands and configuration.</p>
+<h2 id="domains-https">Domains &amp; HTTPS<a class="headerlink" href="#domains-https" title="Permanent link">⚓</a></h2>
+<p>TunGuard can publish an internal service on a public domain with automatic
+Let's Encrypt HTTPS — in front of a TRP mapping or a tunneled WireGuard
+service. Manage mappings from the <strong>Domains</strong> page, the API, or the console.
+See <a href="../domains/">Domains &amp; HTTPS Proxy</a>.</p>
+<h2 id="adguard-dns-filtering">AdGuard DNS Filtering<a class="headerlink" href="#adguard-dns-filtering" title="Permanent link">⚓</a></h2>
+<p>A managed AdGuard Home can filter DNS for devices in an
+<a href="#policy-groups">AdGuard-enabled policy group</a>. It starts automatically, its
+DNS service binds to the tunnel address, and protected devices are redirected
+to it on the server — moving a device into the group takes effect immediately.
+See <a href="../adguard/">AdGuard DNS Filtering</a>.</p>
 <h2 id="security">Security<a class="headerlink" href="#security" title="Permanent link">⚓</a></h2>
 <p>The Admin Panel controls access to sensitive TunGuard functionality.</p>
 <p>Administrators should:</p>
