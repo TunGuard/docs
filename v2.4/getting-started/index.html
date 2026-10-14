@@ -7,7 +7,7 @@
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width,initial-scale=1">
       
-        <meta name="description" content="Self-hosted overlay networking: direct peer-to-peer mesh, TCP relay, and WireGuard-compatible VPN from one control plane. No kernel drivers, no extra installs.">
+        <meta name="description" content="The self-hosted, Zero Trust connectivity platform: direct peer-to-peer mesh, TCP relay, WireGuard-compatible VPN, managed DNS filtering, SSH gateway and automatic HTTPS from a single userspace binary.">
       
       
         <meta name="author" content="TunGuard Team">
@@ -68,6 +68,58 @@
     
     
 <meta name="google-site-verification" content="qk4z4XjKirsxHnB8huMe20-6p28GvDYIlPmteRVOwek" />
+<style>
+  /* ── TunGuard documentation animations ─────────────────────────────────
+     Small, self-contained, theme-aware motion for inline SVG diagrams.
+     Every effect is CSS only and honours prefers-reduced-motion. */
+
+  @keyframes tgSpin   { to { transform: rotate(360deg); } }
+  @keyframes tgSpinR  { to { transform: rotate(-360deg); } }
+  @keyframes tgFloat  { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-6px); } }
+  @keyframes tgBob    { 0%,100% { transform: translateY(0); } 50% { transform: translateY(4px); } }
+  @keyframes tgPulse  { 0%,100% { opacity: 1; } 50% { opacity: .3; } }
+  @keyframes tgBlink  { 0%,55%,100% { opacity: 1; } 30% { opacity: .15; } }
+  @keyframes tgFlow   { to { stroke-dashoffset: -34; } }
+  @keyframes tgDraw   { to { stroke-dashoffset: 0; } }
+  @keyframes tgRipple { 0% { transform: scale(.45); opacity: .75; } 100% { transform: scale(1.7); opacity: 0; } }
+  @keyframes tgSweep  { 0% { transform: translateX(-45%); } 100% { transform: translateX(145%); } }
+  @keyframes tgNudge  { 0%,100% { transform: translateX(0); } 50% { transform: translateX(5px); } }
+  @keyframes tgBar    { 0%,100% { transform: scaleY(.45); } 50% { transform: scaleY(1); } }
+  @keyframes tgDash   { to { stroke-dashoffset: -1000; } }
+
+  .tg-spin   { animation: tgSpin 9s linear infinite;  transform-origin: center; transform-box: fill-box; }
+  .tg-spin-r { animation: tgSpinR 14s linear infinite; transform-origin: center; transform-box: fill-box; }
+  .tg-float  { animation: tgFloat 4s ease-in-out infinite; }
+  .tg-bob    { animation: tgBob 3s ease-in-out infinite; }
+  .tg-pulse  { animation: tgPulse 2.4s ease-in-out infinite; }
+  .tg-blink  { animation: tgBlink 2s ease-in-out infinite; }
+  .tg-flow   { stroke-dasharray: 5 9; animation: tgFlow 1.3s linear infinite; }
+  .tg-dash   { stroke-dasharray: 4 6; animation: tgDash 18s linear infinite; }
+  .tg-draw   { stroke-dasharray: var(--tg-len, 220); stroke-dashoffset: var(--tg-len, 220); animation: tgDraw 2s ease forwards; }
+  .tg-ripple { animation: tgRipple 2.8s ease-out infinite; transform-origin: center; transform-box: fill-box; }
+  .tg-sweep  { animation: tgSweep 3.2s ease-in-out infinite; }
+  .tg-nudge  { animation: tgNudge 2.2s ease-in-out infinite; }
+  .tg-bar    { animation: tgBar 1.5s ease-in-out infinite; transform-origin: bottom; transform-box: fill-box; }
+
+  .tg-d1 { animation-delay: .25s; } .tg-d2 { animation-delay: .5s; }
+  .tg-d3 { animation-delay: .75s; } .tg-d4 { animation-delay: 1s; }
+
+  /* Theme-aware figure + inline icon helpers. */
+  .tg-figure {
+    display: block; margin: 1.4rem auto 1.8rem; width: 100%;
+    max-width: 680px; height: auto;
+    color: var(--md-primary-fg-color);
+  }
+  .tg-figure .tg-accent { color: var(--md-accent-fg-color); }
+  .tg-icon { display: inline-block; vertical-align: -0.22em; width: 1.3em; height: 1.3em; color: var(--md-accent-fg-color); }
+  .tg-cap { text-align: center; font-size: .78rem; opacity: .72; margin: -1rem 0 1.8rem; }
+  .tg-legend { list-style: none; padding-left: 0; }
+  .tg-legend li { display: flex; gap: .6rem; align-items: flex-start; margin: .5rem 0; }
+
+  @media (prefers-reduced-motion: reduce) {
+    [class^="tg-"], [class*=" tg-"] { animation: none !important; }
+  }
+</style>
 
   </head>
   
@@ -1857,6 +1909,34 @@
 
 
   <h1 id="__skip">Getting Started</h1>
+
+<p><svg class="tg-figure" viewBox="0 0 720 170" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" role="img" aria-label="Install TunGuard with the installer, open the dashboard, and connect a device">
+  <g class="tg-flow tg-accent" stroke-width="2.4">
+    <path d="M190 85h108"/>
+    <path d="M420 85h108"/>
+  </g>
+  <g class="tg-float">
+    <circle cx="130" cy="85" r="46" fill="var(--md-default-bg-color)"/>
+    <rect x="106" y="70" width="48" height="32" rx="4"/>
+    <path class="tg-nudge" d="M114 78l7 7-7 7"/>
+    <path class="tg-blink" d="M126 92h20"/>
+  </g>
+  <g class="tg-float tg-d2">
+    <circle class="tg-pulse tg-accent" cx="360" cy="85" r="52" fill="var(--md-default-bg-color)"/>
+    <rect x="338" y="58" width="44" height="14" rx="3"/>
+    <rect x="338" y="78" width="44" height="14" rx="3"/>
+    <rect x="338" y="98" width="44" height="14" rx="3"/>
+    <circle class="tg-blink" cx="346" cy="65" r="1.6" fill="currentColor" stroke="none"/>
+    <circle class="tg-blink tg-d1" cx="346" cy="85" r="1.6" fill="currentColor" stroke="none"/>
+    <circle class="tg-blink tg-d2" cx="346" cy="105" r="1.6" fill="currentColor" stroke="none"/>
+  </g>
+  <g class="tg-float tg-d3">
+    <circle cx="590" cy="85" r="46" fill="var(--md-default-bg-color)"/>
+    <rect x="576" y="64" width="28" height="42" rx="4"/>
+    <circle class="tg-blink" cx="590" cy="97" r="1.6" fill="currentColor" stroke="none"/>
+  </g>
+</svg></p>
+<p class="tg-cap">Install once, open the dashboard, connect a device.</p>
 
 <p>This page explains how to get started with <code>TunGuard</code>. The recommended installation method is the official installer, which installs TunGuard and starts the service automatically.</p>
 <h2 id="preliminary-steps">Preliminary Steps<a class="headerlink" href="#preliminary-steps" title="Permanent link">⚓</a></h2>

@@ -7,7 +7,7 @@
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width,initial-scale=1">
       
-        <meta name="description" content="Self-hosted overlay networking: direct peer-to-peer mesh, TCP relay, and WireGuard-compatible VPN from one control plane. No kernel drivers, no extra installs.">
+        <meta name="description" content="The self-hosted, Zero Trust connectivity platform: direct peer-to-peer mesh, TCP relay, WireGuard-compatible VPN, managed DNS filtering, SSH gateway and automatic HTTPS from a single userspace binary.">
       
       
         <meta name="author" content="TunGuard Team">
@@ -68,6 +68,58 @@
     
     
 <meta name="google-site-verification" content="qk4z4XjKirsxHnB8huMe20-6p28GvDYIlPmteRVOwek" />
+<style>
+  /* ── TunGuard documentation animations ─────────────────────────────────
+     Small, self-contained, theme-aware motion for inline SVG diagrams.
+     Every effect is CSS only and honours prefers-reduced-motion. */
+
+  @keyframes tgSpin   { to { transform: rotate(360deg); } }
+  @keyframes tgSpinR  { to { transform: rotate(-360deg); } }
+  @keyframes tgFloat  { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-6px); } }
+  @keyframes tgBob    { 0%,100% { transform: translateY(0); } 50% { transform: translateY(4px); } }
+  @keyframes tgPulse  { 0%,100% { opacity: 1; } 50% { opacity: .3; } }
+  @keyframes tgBlink  { 0%,55%,100% { opacity: 1; } 30% { opacity: .15; } }
+  @keyframes tgFlow   { to { stroke-dashoffset: -34; } }
+  @keyframes tgDraw   { to { stroke-dashoffset: 0; } }
+  @keyframes tgRipple { 0% { transform: scale(.45); opacity: .75; } 100% { transform: scale(1.7); opacity: 0; } }
+  @keyframes tgSweep  { 0% { transform: translateX(-45%); } 100% { transform: translateX(145%); } }
+  @keyframes tgNudge  { 0%,100% { transform: translateX(0); } 50% { transform: translateX(5px); } }
+  @keyframes tgBar    { 0%,100% { transform: scaleY(.45); } 50% { transform: scaleY(1); } }
+  @keyframes tgDash   { to { stroke-dashoffset: -1000; } }
+
+  .tg-spin   { animation: tgSpin 9s linear infinite;  transform-origin: center; transform-box: fill-box; }
+  .tg-spin-r { animation: tgSpinR 14s linear infinite; transform-origin: center; transform-box: fill-box; }
+  .tg-float  { animation: tgFloat 4s ease-in-out infinite; }
+  .tg-bob    { animation: tgBob 3s ease-in-out infinite; }
+  .tg-pulse  { animation: tgPulse 2.4s ease-in-out infinite; }
+  .tg-blink  { animation: tgBlink 2s ease-in-out infinite; }
+  .tg-flow   { stroke-dasharray: 5 9; animation: tgFlow 1.3s linear infinite; }
+  .tg-dash   { stroke-dasharray: 4 6; animation: tgDash 18s linear infinite; }
+  .tg-draw   { stroke-dasharray: var(--tg-len, 220); stroke-dashoffset: var(--tg-len, 220); animation: tgDraw 2s ease forwards; }
+  .tg-ripple { animation: tgRipple 2.8s ease-out infinite; transform-origin: center; transform-box: fill-box; }
+  .tg-sweep  { animation: tgSweep 3.2s ease-in-out infinite; }
+  .tg-nudge  { animation: tgNudge 2.2s ease-in-out infinite; }
+  .tg-bar    { animation: tgBar 1.5s ease-in-out infinite; transform-origin: bottom; transform-box: fill-box; }
+
+  .tg-d1 { animation-delay: .25s; } .tg-d2 { animation-delay: .5s; }
+  .tg-d3 { animation-delay: .75s; } .tg-d4 { animation-delay: 1s; }
+
+  /* Theme-aware figure + inline icon helpers. */
+  .tg-figure {
+    display: block; margin: 1.4rem auto 1.8rem; width: 100%;
+    max-width: 680px; height: auto;
+    color: var(--md-primary-fg-color);
+  }
+  .tg-figure .tg-accent { color: var(--md-accent-fg-color); }
+  .tg-icon { display: inline-block; vertical-align: -0.22em; width: 1.3em; height: 1.3em; color: var(--md-accent-fg-color); }
+  .tg-cap { text-align: center; font-size: .78rem; opacity: .72; margin: -1rem 0 1.8rem; }
+  .tg-legend { list-style: none; padding-left: 0; }
+  .tg-legend li { display: flex; gap: .6rem; align-items: flex-start; margin: .5rem 0; }
+
+  @media (prefers-reduced-motion: reduce) {
+    [class^="tg-"], [class*=" tg-"] { animation: none !important; }
+  }
+</style>
 
   </head>
   
@@ -1397,6 +1449,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#public-resolver-doh-and-dot" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Public resolver (DoH and DoT)
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#policy-group-integration" class="md-nav__link">
     <span class="md-ellipsis">
       <span class="md-typeset">
@@ -1798,6 +1861,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#public-resolver-doh-and-dot" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Public resolver (DoH and DoT)
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#policy-group-integration" class="md-nav__link">
     <span class="md-ellipsis">
       <span class="md-typeset">
@@ -1966,6 +2040,30 @@
 
   <h1 id="__skip">AdGuard DNS Filtering</h1>
 
+<p><svg class="tg-figure" viewBox="0 0 720 190" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" role="img" aria-label="Device DNS queries pass through the AdGuard filter before reaching the upstream resolver, and ad and tracker domains are blocked">
+  <g class="tg-flow tg-accent" stroke-width="2.4">
+    <path d="M180 95h92"/>
+    <path d="M420 70h120"/>
+  </g>
+  <path class="tg-dash" opacity=".5" d="M420 120h90"/>
+  <path stroke-width="2.6" d="M460 110l16 16M476 110l-16 16"/>
+  <g class="tg-float">
+    <circle cx="140" cy="95" r="44" fill="var(--md-default-bg-color)"/>
+    <rect x="126" y="76" width="28" height="38" rx="4"/>
+    <circle class="tg-blink" cx="140" cy="107" r="1.6" fill="currentColor" stroke="none"/>
+  </g>
+  <g class="tg-float tg-d2">
+    <circle cx="320" cy="95" r="56" fill="var(--md-default-bg-color)"/>
+    <path d="M320 60l26 11v20c0 14-10 26-26 30-16-4-26-16-26-30V71l26-11z"/>
+    <path class="tg-draw tg-accent" style="--tg-len:26" d="M308 90l8 8 18-20"/>
+  </g>
+  <g class="tg-float tg-d3">
+    <circle cx="560" cy="70" r="40" fill="var(--md-default-bg-color)"/>
+    <path d="M548 76a9 9 0 0 1 1-16 11 11 0 0 1 20-1 7 7 0 0 1 1 14z"/>
+  </g>
+</svg></p>
+<p class="tg-cap">Queries are filtered before they resolve. Ads and trackers never load.</p>
+
 <p>TunGuard can run a managed <a href="https://github.com/AdguardTeam/AdGuardHome">AdGuard Home</a>
 instance to filter DNS for the devices on your VPN. It is installed and tuned
 for you, so a phone under full-tunnel WireGuard gets ad-blocking without any
@@ -2049,6 +2147,33 @@ in its network settings so its queries actually go to the DNS server the VPN
 profile configures. Keep it Off, and the moment the device is in an AdGuard
 group its traffic is filtered, with no profile change.</p>
 </div>
+<h2 id="public-resolver-doh-and-dot">Public resolver (DoH and DoT)<a class="headerlink" href="#public-resolver-doh-and-dot" title="Permanent link">⚓</a></h2>
+<p>The VPN path filters the devices on your tunnel. You can also expose the <strong>same</strong>
+AdGuard filter to the wider internet as a public resolver, without any VPN
+client, by mapping a domain to it as a <code>dns</code> backend:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>domain add dns.example.com --dns
+</span></code></pre></div>
+<p>That serves:</p>
+<ul>
+<li><strong>DNS-over-HTTPS</strong> at <code>https://dns.example.com/dns-query</code></li>
+<li><strong>DNS-over-TLS</strong> at <code>dns.example.com:853</code></li>
+<li>A landing page at the root explaining both endpoints</li>
+</ul>
+<p>Only <code>/dns-query</code> is proxied to AdGuard: its admin UI and login are never
+reachable through the mapped domain. This is covered in full in
+<a href="../domains/#serving-a-public-dns-resolver-doh-dot">Domains &amp; HTTPS Proxy</a>.</p>
+<p>A few things worth knowing:</p>
+<ul>
+<li>It is the <strong>same resolver</strong>: the blocklists, custom rules and upstreams you
+  configure in the AdGuard web UI apply to public and VPN queries alike.</li>
+<li>TLS is terminated by TunGuard, so AdGuard's DoH follows the tunnel-style
+  setup internally; you do not configure DoT or the public certificate inside
+  AdGuard.</li>
+<li>The <code>dns</code> backend needs AdGuard to be running. Stop AdGuard and the public
+  resolver stops answering (the DoT listener goes down with it).</li>
+<li>It is an <strong>open resolver</strong>. AdGuard's rate limit bounds abuse, but anyone can
+  query it. See the <a href="../domains/#security-notes">security notes</a>.</li>
+</ul>
 <h2 id="policy-group-integration">Policy group integration<a class="headerlink" href="#policy-group-integration" title="Permanent link">⚓</a></h2>
 <p>The AdGuard DNS filtering capability is a per-group switch, like the other four
 policy rules:</p>
@@ -2182,21 +2307,21 @@ so the filter still runs.</p>
 </tr>
 </tbody>
 </table>
-<div class="language-shell highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>curl<span class="w"> </span>-H<span class="w"> </span><span class="s2">"X-API-Key: </span><span class="nv">$API_KEY</span><span class="s2">"</span><span class="w"> </span>http://localhost:9000/api/adguard
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>curl<span class="w"> </span>-H<span class="w"> </span><span class="s2">"X-API-Key: </span><span class="nv">$API_KEY</span><span class="s2">"</span><span class="w"> </span>http://localhost:9000/api/adguard
 </span></code></pre></div>
 <h3 id="console">Console<a class="headerlink" href="#console" title="Permanent link">⚓</a></h3>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>adguard status     state, DNS/Web listen addresses, upstream, adult filter
-</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>adguard start      launch the managed AdGuard Home instance
-</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>adguard stop       stop it
-</span><span id="__span-4-4"><a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>adguard config     binary, data dir and all ADGUARD_* settings
+<div class="language-text highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>adguard status     state, DNS/Web listen addresses, upstream, adult filter
+</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>adguard start      launch the managed AdGuard Home instance
+</span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>adguard stop       stop it
+</span><span id="__span-5-4"><a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>adguard config     binary, data dir and all ADGUARD_* settings
 </span></code></pre></div>
 <h2 id="verifying-that-filtering-works">Verifying that filtering works<a class="headerlink" href="#verifying-that-filtering-works" title="Permanent link">⚓</a></h2>
 <p>With a phone connected and in an AdGuard group:</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a># From the phone (or any peer in the group), you should see an answer of 0.0.0.0:
-</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>dig @10.100.0.1 doubleclick.net
-</span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>
-</span><span id="__span-5-4"><a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a># On the server, the redirect rules should list the phone's tunnel address:
-</span><span id="__span-5-5"><a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a>iptables -t nat -S TUNGARD_DNS
+<div class="language-text highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a># From the phone (or any peer in the group), you should see an answer of 0.0.0.0:
+</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>dig @10.100.0.1 doubleclick.net
+</span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>
+</span><span id="__span-6-4"><a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a># On the server, the redirect rules should list the phone's tunnel address:
+</span><span id="__span-6-5"><a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a>iptables -t nat -S TUNGARD_DNS
 </span></code></pre></div>
 <p>Then open <code>/adguard-ui/</code> → Query Log to watch the blocked lookups arrive in
 real time.</p>

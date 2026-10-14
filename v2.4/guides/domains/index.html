@@ -7,7 +7,7 @@
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width,initial-scale=1">
       
-        <meta name="description" content="Self-hosted overlay networking: direct peer-to-peer mesh, TCP relay, and WireGuard-compatible VPN from one control plane. No kernel drivers, no extra installs.">
+        <meta name="description" content="The self-hosted, Zero Trust connectivity platform: direct peer-to-peer mesh, TCP relay, WireGuard-compatible VPN, managed DNS filtering, SSH gateway and automatic HTTPS from a single userspace binary.">
       
       
         <meta name="author" content="TunGuard Team">
@@ -68,6 +68,58 @@
     
     
 <meta name="google-site-verification" content="qk4z4XjKirsxHnB8huMe20-6p28GvDYIlPmteRVOwek" />
+<style>
+  /* ── TunGuard documentation animations ─────────────────────────────────
+     Small, self-contained, theme-aware motion for inline SVG diagrams.
+     Every effect is CSS only and honours prefers-reduced-motion. */
+
+  @keyframes tgSpin   { to { transform: rotate(360deg); } }
+  @keyframes tgSpinR  { to { transform: rotate(-360deg); } }
+  @keyframes tgFloat  { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-6px); } }
+  @keyframes tgBob    { 0%,100% { transform: translateY(0); } 50% { transform: translateY(4px); } }
+  @keyframes tgPulse  { 0%,100% { opacity: 1; } 50% { opacity: .3; } }
+  @keyframes tgBlink  { 0%,55%,100% { opacity: 1; } 30% { opacity: .15; } }
+  @keyframes tgFlow   { to { stroke-dashoffset: -34; } }
+  @keyframes tgDraw   { to { stroke-dashoffset: 0; } }
+  @keyframes tgRipple { 0% { transform: scale(.45); opacity: .75; } 100% { transform: scale(1.7); opacity: 0; } }
+  @keyframes tgSweep  { 0% { transform: translateX(-45%); } 100% { transform: translateX(145%); } }
+  @keyframes tgNudge  { 0%,100% { transform: translateX(0); } 50% { transform: translateX(5px); } }
+  @keyframes tgBar    { 0%,100% { transform: scaleY(.45); } 50% { transform: scaleY(1); } }
+  @keyframes tgDash   { to { stroke-dashoffset: -1000; } }
+
+  .tg-spin   { animation: tgSpin 9s linear infinite;  transform-origin: center; transform-box: fill-box; }
+  .tg-spin-r { animation: tgSpinR 14s linear infinite; transform-origin: center; transform-box: fill-box; }
+  .tg-float  { animation: tgFloat 4s ease-in-out infinite; }
+  .tg-bob    { animation: tgBob 3s ease-in-out infinite; }
+  .tg-pulse  { animation: tgPulse 2.4s ease-in-out infinite; }
+  .tg-blink  { animation: tgBlink 2s ease-in-out infinite; }
+  .tg-flow   { stroke-dasharray: 5 9; animation: tgFlow 1.3s linear infinite; }
+  .tg-dash   { stroke-dasharray: 4 6; animation: tgDash 18s linear infinite; }
+  .tg-draw   { stroke-dasharray: var(--tg-len, 220); stroke-dashoffset: var(--tg-len, 220); animation: tgDraw 2s ease forwards; }
+  .tg-ripple { animation: tgRipple 2.8s ease-out infinite; transform-origin: center; transform-box: fill-box; }
+  .tg-sweep  { animation: tgSweep 3.2s ease-in-out infinite; }
+  .tg-nudge  { animation: tgNudge 2.2s ease-in-out infinite; }
+  .tg-bar    { animation: tgBar 1.5s ease-in-out infinite; transform-origin: bottom; transform-box: fill-box; }
+
+  .tg-d1 { animation-delay: .25s; } .tg-d2 { animation-delay: .5s; }
+  .tg-d3 { animation-delay: .75s; } .tg-d4 { animation-delay: 1s; }
+
+  /* Theme-aware figure + inline icon helpers. */
+  .tg-figure {
+    display: block; margin: 1.4rem auto 1.8rem; width: 100%;
+    max-width: 680px; height: auto;
+    color: var(--md-primary-fg-color);
+  }
+  .tg-figure .tg-accent { color: var(--md-accent-fg-color); }
+  .tg-icon { display: inline-block; vertical-align: -0.22em; width: 1.3em; height: 1.3em; color: var(--md-accent-fg-color); }
+  .tg-cap { text-align: center; font-size: .78rem; opacity: .72; margin: -1rem 0 1.8rem; }
+  .tg-legend { list-style: none; padding-left: 0; }
+  .tg-legend li { display: flex; gap: .6rem; align-items: flex-start; margin: .5rem 0; }
+
+  @media (prefers-reduced-motion: reduce) {
+    [class^="tg-"], [class*=" tg-"] { animation: none !important; }
+  }
+</style>
 
   </head>
   
@@ -1542,6 +1594,34 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#serving-a-public-dns-resolver-doh-dot" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Serving a public DNS resolver (DoH + DoT)
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Serving a public DNS resolver (DoH + DoT)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#how-the-endpoints-are-served" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        How the endpoints are served
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#managing-domain-mappings" class="md-nav__link">
     <span class="md-ellipsis">
       <span class="md-typeset">
@@ -1618,6 +1698,17 @@
     <span class="md-ellipsis">
       <span class="md-typeset">
         End to end: publish a service on a mesh node
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#end-to-end-publish-a-public-resolver" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        End to end: publish a public resolver
       </span>
     </span>
   </a>
@@ -1764,6 +1855,34 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#serving-a-public-dns-resolver-doh-dot" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Serving a public DNS resolver (DoH + DoT)
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Serving a public DNS resolver (DoH + DoT)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#how-the-endpoints-are-served" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        How the endpoints are served
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#managing-domain-mappings" class="md-nav__link">
     <span class="md-ellipsis">
       <span class="md-typeset">
@@ -1840,6 +1959,17 @@
     <span class="md-ellipsis">
       <span class="md-typeset">
         End to end: publish a service on a mesh node
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#end-to-end-publish-a-public-resolver" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        End to end: publish a public resolver
       </span>
     </span>
   </a>
@@ -1932,10 +2062,44 @@
 
   <h1 id="__skip">Domains & HTTPS Proxy</h1>
 
+<p><svg class="tg-figure" viewBox="0 0 720 190" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" role="img" aria-label="A domain is secured with automatic HTTPS and can serve a public DoH endpoint on 443 and a DoT endpoint on 853">
+  <g class="tg-flow tg-accent" stroke-width="2.4">
+    <path d="M446 80h54"/>
+    <path d="M446 110h54"/>
+    <path d="M220 95h120"/>
+  </g>
+  <g class="tg-float">
+    <circle cx="140" cy="95" r="46" fill="var(--md-default-bg-color)"/>
+    <circle cx="140" cy="95" r="26"/>
+    <g class="tg-spin"><ellipse cx="140" cy="95" rx="11" ry="26"/></g>
+    <path d="M114 95h52"/>
+    <path d="M120 79h40M120 111h40" opacity=".55"/>
+  </g>
+  <g class="tg-float tg-d2">
+    <circle cx="390" cy="95" r="46" fill="var(--md-default-bg-color)"/>
+    <rect x="372" y="88" width="36" height="28" rx="5"/>
+    <path d="M380 88v-7a10 10 0 0 1 20 0v7"/>
+    <circle class="tg-blink" cx="390" cy="101" r="2" fill="currentColor" stroke="none"/>
+  </g>
+  <g class="tg-float tg-d3">
+    <rect x="500" y="52" width="170" height="40" rx="10" fill="var(--md-default-bg-color)"/>
+    <text x="585" y="77" text-anchor="middle" font-size="15" fill="currentColor" stroke="none" font-family="ui-monospace,monospace">DoH :443</text>
+  </g>
+  <g class="tg-float tg-d4">
+    <rect x="500" y="104" width="170" height="40" rx="10" fill="var(--md-default-bg-color)"/>
+    <text x="585" y="129" text-anchor="middle" font-size="15" fill="currentColor" stroke="none" font-family="ui-monospace,monospace">DoT :853</text>
+  </g>
+</svg></p>
+<p class="tg-cap">Automatic HTTPS on your domain, plus an optional public DoH + DoT resolver.</p>
+
 <p>TunGuard can publish an internal service on a public domain with HTTPS handled
 automatically. You point a domain at the server and choose the service behind
 it; TunGuard terminates TLS with a Let's Encrypt certificate and proxies to
 that service.</p>
+<p>The same mapping can also turn a domain into a <strong>public DNS resolver</strong> that
+serves DNS-over-HTTPS (DoH) and DNS-over-TLS (DoT) backed by the managed
+<a href="../adguard/">AdGuard Home</a> filter. See
+<a href="#serving-a-public-dns-resolver-doh-dot">Serving a public DNS resolver</a>.</p>
 <p>The domain proxy is <strong>on by default</strong> but does nothing until you add a mapping
 — it binds no ports and makes no certificate request until the first domain is
 configured. Disable it entirely with <code>DOMAIN_ENABLED=false</code>.</p>
@@ -1960,6 +2124,11 @@ server</strong>:</p>
 <td><strong>WireGuard</strong> (<code>wg</code>)</td>
 <td><code>IP:port</code> of a tunneled service</td>
 <td>An app running on a WireGuard peer (or any address the server can reach)</td>
+</tr>
+<tr>
+<td><strong>DNS</strong> (<code>dns</code>)</td>
+<td>The managed AdGuard Home resolver</td>
+<td>A public, filtered DoH + DoT resolver (like <code>dns.adguard.com</code>)</td>
 </tr>
 </tbody>
 </table>
@@ -2013,6 +2182,73 @@ stack already on the machine:</p>
 loopback challenge port, so certificate issuance works through the existing web
 server. After any mapping change or issuance the server configuration is
 re-written and reloaded.</p>
+<h2 id="serving-a-public-dns-resolver-doh-dot">Serving a public DNS resolver (DoH + DoT)<a class="headerlink" href="#serving-a-public-dns-resolver-doh-dot" title="Permanent link">⚓</a></h2>
+<p>A <code>dns</code> mapping turns a domain into a standalone, unauthenticated resolver that
+serves the <a href="../adguard/">managed AdGuard Home</a> filter to anyone. This is the
+self-hosted equivalent of a public resolver such as <code>dns.adguard.com</code>: no
+TunGuard login, no VPN required, just point a device at your endpoints.</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>domain add dns.example.com --dns
+</span></code></pre></div>
+<p>The mapping exposes exactly two things:</p>
+<table>
+<thead>
+<tr>
+<th>Endpoint</th>
+<th>Address</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>DNS-over-HTTPS</strong></td>
+<td><code>https://dns.example.com/dns-query</code></td>
+<td>DoH, over the standard HTTPS port (<code>DOMAIN_HTTPS_PORT</code>, 443)</td>
+</tr>
+<tr>
+<td><strong>DNS-over-TLS</strong></td>
+<td><code>dns.example.com:853</code></td>
+<td>DoT, on <code>DOMAIN_DOT_PORT</code> (default 853)</td>
+</tr>
+</tbody>
+</table>
+<p>The root <code>https://dns.example.com/</code> serves a TunGuard landing page that shows
+these two endpoints, so the domain is self-explanatory to anyone who opens it.
+Only <code>/dns-query</code> is proxied to AdGuard: every other path is a <code>404</code>, and
+AdGuard's admin UI and login are never exposed through a DNS mapping.</p>
+<div class="admonition note">
+<p class="admonition-title">Requires AdGuard Home</p>
+<p>The <code>dns</code> backend needs the managed AdGuard Home instance. It is enabled by
+default (<code>ADGUARD_ENABLED=true</code>); if it is disabled, <code>domain add ... --dns</code>
+is rejected and <code>domain status</code> reports <code>AdGuard Home is not running</code>.</p>
+</div>
+<h3 id="how-the-endpoints-are-served">How the endpoints are served<a class="headerlink" href="#how-the-endpoints-are-served" title="Permanent link">⚓</a></h3>
+<p>DoH reuses the same HTTPS machinery as any other mapping, so it works whether
+TunGuard terminates TLS itself or an existing webserver does:</p>
+<ul>
+<li><strong>built-in proxy</strong> — the mapping is served directly on <code>DOMAIN_HTTPS_PORT</code>.</li>
+<li><strong>nginx / Apache / Caddy / Traefik</strong> — the generated vhost splits by path:
+  <code>/dns-query</code> is proxied to AdGuard, everything else falls through to the
+  TunGuard landing page on the loopback challenge listener.</li>
+</ul>
+<p>DoT is a dedicated listener that TunGuard always binds itself on
+<code>DOMAIN_DOT_PORT</code>, independent of the webserver:</p>
+<ul>
+<li>One listener serves <strong>every</strong> enabled <code>dns</code> mapping, selecting the certificate
+  per-connection by SNI. An unknown or non-DNS hostname is refused.</li>
+<li>Each accepted TLS connection is tunnelled verbatim to AdGuard's plain DNS
+  listener, so the DNS framing is the client's and AdGuard's, not TunGuard's.</li>
+<li>The listener starts when the first <code>dns</code> mapping becomes live and stops when
+  the last one is removed or disabled.</li>
+</ul>
+<p>Make sure <code>DOMAIN_DOT_PORT</code> (853) is reachable from the internet alongside
+80/443, or DoT clients will fail.</p>
+<div class="admonition warning">
+<p class="admonition-title">One resolver, many domains</p>
+<p>Because the DNS backend always points at the single AdGuard Home instance, every
+<code>dns</code> mapping on a server answers with the same filter and the same blocklists.
+Multiple domains are useful for branding or redundancy, not for different
+filtering per-domain.</p>
+</div>
 <h2 id="managing-domain-mappings">Managing domain mappings<a class="headerlink" href="#managing-domain-mappings" title="Permanent link">⚓</a></h2>
 <h3 id="dashboard">Dashboard<a class="headerlink" href="#dashboard" title="Permanent link">⚓</a></h3>
 <p>The <strong>Domains</strong> page lists every mapping with its state, and lets you add,
@@ -2059,54 +2295,66 @@ update (including pausing with <em>disable</em>), or remove entries.</p>
 </tr>
 </tbody>
 </table>
-<div class="language-shell highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="c1"># Behind an existing TRP mapping (referenced by id or unique id prefix)</span>
-</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>curl<span class="w"> </span>-X<span class="w"> </span>POST<span class="w"> </span><span class="se">\</span>
-</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="w">  </span>-H<span class="w"> </span><span class="s2">"X-API-Key: </span><span class="nv">$API_KEY</span><span class="s2">"</span><span class="w"> </span><span class="se">\</span>
-</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="w">  </span>-H<span class="w"> </span><span class="s2">"Content-Type: application/json"</span><span class="w"> </span><span class="se">\</span>
-</span><span id="__span-3-5"><a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="w">  </span>-d<span class="w"> </span><span class="s1">'{"domain":"app.example.com","backend":"trp","proxy_ref":"3"}'</span><span class="w"> </span><span class="se">\</span>
-</span><span id="__span-3-6"><a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="w">  </span>http://localhost:9000/api/domain/add
-</span><span id="__span-3-7"><a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a>
-</span><span id="__span-3-8"><a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a><span class="c1"># Behind a tunneled service</span>
-</span><span id="__span-3-9"><a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a>curl<span class="w"> </span>-X<span class="w"> </span>POST<span class="w"> </span><span class="se">\</span>
-</span><span id="__span-3-10"><a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a><span class="w">  </span>-H<span class="w"> </span><span class="s2">"X-API-Key: </span><span class="nv">$API_KEY</span><span class="s2">"</span><span class="w"> </span><span class="se">\</span>
-</span><span id="__span-3-11"><a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a><span class="w">  </span>-H<span class="w"> </span><span class="s2">"Content-Type: application/json"</span><span class="w"> </span><span class="se">\</span>
-</span><span id="__span-3-12"><a id="__codelineno-3-12" name="__codelineno-3-12" href="#__codelineno-3-12"></a><span class="w">  </span>-d<span class="w"> </span><span class="s1">'{"domain":"api.example.com","backend":"wg","target_ip":"10.100.0.2","target_port":8080}'</span><span class="w"> </span><span class="se">\</span>
-</span><span id="__span-3-13"><a id="__codelineno-3-13" name="__codelineno-3-13" href="#__codelineno-3-13"></a><span class="w">  </span>http://localhost:9000/api/domain/add
-</span><span id="__span-3-14"><a id="__codelineno-3-14" name="__codelineno-3-14" href="#__codelineno-3-14"></a>
-</span><span id="__span-3-15"><a id="__codelineno-3-15" name="__codelineno-3-15" href="#__codelineno-3-15"></a><span class="c1"># Pause without deleting</span>
-</span><span id="__span-3-16"><a id="__codelineno-3-16" name="__codelineno-3-16" href="#__codelineno-3-16"></a>curl<span class="w"> </span>-X<span class="w"> </span>POST<span class="w"> </span><span class="se">\</span>
-</span><span id="__span-3-17"><a id="__codelineno-3-17" name="__codelineno-3-17" href="#__codelineno-3-17"></a><span class="w">  </span>-H<span class="w"> </span><span class="s2">"X-API-Key: </span><span class="nv">$API_KEY</span><span class="s2">"</span><span class="w"> </span><span class="se">\</span>
-</span><span id="__span-3-18"><a id="__codelineno-3-18" name="__codelineno-3-18" href="#__codelineno-3-18"></a><span class="w">  </span>-H<span class="w"> </span><span class="s2">"Content-Type: application/json"</span><span class="w"> </span><span class="se">\</span>
-</span><span id="__span-3-19"><a id="__codelineno-3-19" name="__codelineno-3-19" href="#__codelineno-3-19"></a><span class="w">  </span>-d<span class="w"> </span><span class="s1">'{"id":"DOMAIN_ID","enabled":false}'</span><span class="w"> </span><span class="se">\</span>
-</span><span id="__span-3-20"><a id="__codelineno-3-20" name="__codelineno-3-20" href="#__codelineno-3-20"></a><span class="w">  </span>http://localhost:9000/api/domain/update
-</span><span id="__span-3-21"><a id="__codelineno-3-21" name="__codelineno-3-21" href="#__codelineno-3-21"></a>
-</span><span id="__span-3-22"><a id="__codelineno-3-22" name="__codelineno-3-22" href="#__codelineno-3-22"></a><span class="c1"># Remove</span>
-</span><span id="__span-3-23"><a id="__codelineno-3-23" name="__codelineno-3-23" href="#__codelineno-3-23"></a>curl<span class="w"> </span>-X<span class="w"> </span>POST<span class="w"> </span><span class="se">\</span>
-</span><span id="__span-3-24"><a id="__codelineno-3-24" name="__codelineno-3-24" href="#__codelineno-3-24"></a><span class="w">  </span>-H<span class="w"> </span><span class="s2">"X-API-Key: </span><span class="nv">$API_KEY</span><span class="s2">"</span><span class="w"> </span><span class="se">\</span>
-</span><span id="__span-3-25"><a id="__codelineno-3-25" name="__codelineno-3-25" href="#__codelineno-3-25"></a><span class="w">  </span>-H<span class="w"> </span><span class="s2">"Content-Type: application/json"</span><span class="w"> </span><span class="se">\</span>
-</span><span id="__span-3-26"><a id="__codelineno-3-26" name="__codelineno-3-26" href="#__codelineno-3-26"></a><span class="w">  </span>-d<span class="w"> </span><span class="s1">'{"id":"DOMAIN_ID"}'</span><span class="w"> </span><span class="se">\</span>
-</span><span id="__span-3-27"><a id="__codelineno-3-27" name="__codelineno-3-27" href="#__codelineno-3-27"></a><span class="w">  </span>http://localhost:9000/api/domain/remove
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="c1"># Behind an existing TRP mapping (referenced by id or unique id prefix)</span>
+</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>curl<span class="w"> </span>-X<span class="w"> </span>POST<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="w">  </span>-H<span class="w"> </span><span class="s2">"X-API-Key: </span><span class="nv">$API_KEY</span><span class="s2">"</span><span class="w"> </span><span class="se">\</span>
+</span><span id="__span-4-4"><a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="w">  </span>-H<span class="w"> </span><span class="s2">"Content-Type: application/json"</span><span class="w"> </span><span class="se">\</span>
+</span><span id="__span-4-5"><a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="w">  </span>-d<span class="w"> </span><span class="s1">'{"domain":"app.example.com","backend":"trp","proxy_ref":"3"}'</span><span class="w"> </span><span class="se">\</span>
+</span><span id="__span-4-6"><a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a><span class="w">  </span>http://localhost:9000/api/domain/add
+</span><span id="__span-4-7"><a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a>
+</span><span id="__span-4-8"><a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a><span class="c1"># Behind a tunneled service</span>
+</span><span id="__span-4-9"><a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a>curl<span class="w"> </span>-X<span class="w"> </span>POST<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-4-10"><a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a><span class="w">  </span>-H<span class="w"> </span><span class="s2">"X-API-Key: </span><span class="nv">$API_KEY</span><span class="s2">"</span><span class="w"> </span><span class="se">\</span>
+</span><span id="__span-4-11"><a id="__codelineno-4-11" name="__codelineno-4-11" href="#__codelineno-4-11"></a><span class="w">  </span>-H<span class="w"> </span><span class="s2">"Content-Type: application/json"</span><span class="w"> </span><span class="se">\</span>
+</span><span id="__span-4-12"><a id="__codelineno-4-12" name="__codelineno-4-12" href="#__codelineno-4-12"></a><span class="w">  </span>-d<span class="w"> </span><span class="s1">'{"domain":"api.example.com","backend":"wg","target_ip":"10.100.0.2","target_port":8080}'</span><span class="w"> </span><span class="se">\</span>
+</span><span id="__span-4-13"><a id="__codelineno-4-13" name="__codelineno-4-13" href="#__codelineno-4-13"></a><span class="w">  </span>http://localhost:9000/api/domain/add
+</span><span id="__span-4-14"><a id="__codelineno-4-14" name="__codelineno-4-14" href="#__codelineno-4-14"></a>
+</span><span id="__span-4-15"><a id="__codelineno-4-15" name="__codelineno-4-15" href="#__codelineno-4-15"></a><span class="c1"># A public DoH + DoT resolver</span>
+</span><span id="__span-4-16"><a id="__codelineno-4-16" name="__codelineno-4-16" href="#__codelineno-4-16"></a>curl<span class="w"> </span>-X<span class="w"> </span>POST<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-4-17"><a id="__codelineno-4-17" name="__codelineno-4-17" href="#__codelineno-4-17"></a><span class="w">  </span>-H<span class="w"> </span><span class="s2">"X-API-Key: </span><span class="nv">$API_KEY</span><span class="s2">"</span><span class="w"> </span><span class="se">\</span>
+</span><span id="__span-4-18"><a id="__codelineno-4-18" name="__codelineno-4-18" href="#__codelineno-4-18"></a><span class="w">  </span>-H<span class="w"> </span><span class="s2">"Content-Type: application/json"</span><span class="w"> </span><span class="se">\</span>
+</span><span id="__span-4-19"><a id="__codelineno-4-19" name="__codelineno-4-19" href="#__codelineno-4-19"></a><span class="w">  </span>-d<span class="w"> </span><span class="s1">'{"domain":"dns.example.com","backend":"dns"}'</span><span class="w"> </span><span class="se">\</span>
+</span><span id="__span-4-20"><a id="__codelineno-4-20" name="__codelineno-4-20" href="#__codelineno-4-20"></a><span class="w">  </span>http://localhost:9000/api/domain/add
+</span><span id="__span-4-21"><a id="__codelineno-4-21" name="__codelineno-4-21" href="#__codelineno-4-21"></a>
+</span><span id="__span-4-22"><a id="__codelineno-4-22" name="__codelineno-4-22" href="#__codelineno-4-22"></a><span class="c1"># Pause without deleting</span>
+</span><span id="__span-4-23"><a id="__codelineno-4-23" name="__codelineno-4-23" href="#__codelineno-4-23"></a>curl<span class="w"> </span>-X<span class="w"> </span>POST<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-4-24"><a id="__codelineno-4-24" name="__codelineno-4-24" href="#__codelineno-4-24"></a><span class="w">  </span>-H<span class="w"> </span><span class="s2">"X-API-Key: </span><span class="nv">$API_KEY</span><span class="s2">"</span><span class="w"> </span><span class="se">\</span>
+</span><span id="__span-4-25"><a id="__codelineno-4-25" name="__codelineno-4-25" href="#__codelineno-4-25"></a><span class="w">  </span>-H<span class="w"> </span><span class="s2">"Content-Type: application/json"</span><span class="w"> </span><span class="se">\</span>
+</span><span id="__span-4-26"><a id="__codelineno-4-26" name="__codelineno-4-26" href="#__codelineno-4-26"></a><span class="w">  </span>-d<span class="w"> </span><span class="s1">'{"id":"DOMAIN_ID","enabled":false}'</span><span class="w"> </span><span class="se">\</span>
+</span><span id="__span-4-27"><a id="__codelineno-4-27" name="__codelineno-4-27" href="#__codelineno-4-27"></a><span class="w">  </span>http://localhost:9000/api/domain/update
+</span><span id="__span-4-28"><a id="__codelineno-4-28" name="__codelineno-4-28" href="#__codelineno-4-28"></a>
+</span><span id="__span-4-29"><a id="__codelineno-4-29" name="__codelineno-4-29" href="#__codelineno-4-29"></a><span class="c1"># Remove</span>
+</span><span id="__span-4-30"><a id="__codelineno-4-30" name="__codelineno-4-30" href="#__codelineno-4-30"></a>curl<span class="w"> </span>-X<span class="w"> </span>POST<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-4-31"><a id="__codelineno-4-31" name="__codelineno-4-31" href="#__codelineno-4-31"></a><span class="w">  </span>-H<span class="w"> </span><span class="s2">"X-API-Key: </span><span class="nv">$API_KEY</span><span class="s2">"</span><span class="w"> </span><span class="se">\</span>
+</span><span id="__span-4-32"><a id="__codelineno-4-32" name="__codelineno-4-32" href="#__codelineno-4-32"></a><span class="w">  </span>-H<span class="w"> </span><span class="s2">"Content-Type: application/json"</span><span class="w"> </span><span class="se">\</span>
+</span><span id="__span-4-33"><a id="__codelineno-4-33" name="__codelineno-4-33" href="#__codelineno-4-33"></a><span class="w">  </span>-d<span class="w"> </span><span class="s1">'{"id":"DOMAIN_ID"}'</span><span class="w"> </span><span class="se">\</span>
+</span><span id="__span-4-34"><a id="__codelineno-4-34" name="__codelineno-4-34" href="#__codelineno-4-34"></a><span class="w">  </span>http://localhost:9000/api/domain/remove
 </span></code></pre></div>
 <p><code>GET /api/domains/status</code> reports the serving mode so you can tell whether the
 built-in proxy or an external webserver is active:</p>
-<div class="language-json highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="p">{</span>
-</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="w">  </span><span class="nt">"enabled"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
-</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="w">  </span><span class="nt">"mode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"external"</span><span class="p">,</span>
-</span><span id="__span-4-4"><a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="w">  </span><span class="nt">"webserver"</span><span class="p">:</span><span class="w"> </span><span class="s2">"nginx"</span><span class="p">,</span>
-</span><span id="__span-4-5"><a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="w">  </span><span class="nt">"owner_80"</span><span class="p">:</span><span class="w"> </span><span class="s2">"nginx"</span><span class="p">,</span>
-</span><span id="__span-4-6"><a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a><span class="w">  </span><span class="nt">"owner_443"</span><span class="p">:</span><span class="w"> </span><span class="s2">"nginx"</span><span class="p">,</span>
-</span><span id="__span-4-7"><a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a><span class="w">  </span><span class="nt">"http_port"</span><span class="p">:</span><span class="w"> </span><span class="mi">80</span><span class="p">,</span>
-</span><span id="__span-4-8"><a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a><span class="w">  </span><span class="nt">"https_port"</span><span class="p">:</span><span class="w"> </span><span class="mi">443</span><span class="p">,</span>
-</span><span id="__span-4-9"><a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a><span class="w">  </span><span class="nt">"challenge_port"</span><span class="p">:</span><span class="w"> </span><span class="mi">8100</span><span class="p">,</span>
-</span><span id="__span-4-10"><a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a><span class="w">  </span><span class="nt">"count"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span>
-</span><span id="__span-4-11"><a id="__codelineno-4-11" name="__codelineno-4-11" href="#__codelineno-4-11"></a><span class="p">}</span>
+<div class="language-json highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="p">{</span>
+</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="w">  </span><span class="nt">"enabled"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+</span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="w">  </span><span class="nt">"mode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"external"</span><span class="p">,</span>
+</span><span id="__span-5-4"><a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="w">  </span><span class="nt">"webserver"</span><span class="p">:</span><span class="w"> </span><span class="s2">"nginx"</span><span class="p">,</span>
+</span><span id="__span-5-5"><a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a><span class="w">  </span><span class="nt">"owner_80"</span><span class="p">:</span><span class="w"> </span><span class="s2">"nginx"</span><span class="p">,</span>
+</span><span id="__span-5-6"><a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a><span class="w">  </span><span class="nt">"owner_443"</span><span class="p">:</span><span class="w"> </span><span class="s2">"nginx"</span><span class="p">,</span>
+</span><span id="__span-5-7"><a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a><span class="w">  </span><span class="nt">"http_port"</span><span class="p">:</span><span class="w"> </span><span class="mi">80</span><span class="p">,</span>
+</span><span id="__span-5-8"><a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a><span class="w">  </span><span class="nt">"https_port"</span><span class="p">:</span><span class="w"> </span><span class="mi">443</span><span class="p">,</span>
+</span><span id="__span-5-9"><a id="__codelineno-5-9" name="__codelineno-5-9" href="#__codelineno-5-9"></a><span class="w">  </span><span class="nt">"challenge_port"</span><span class="p">:</span><span class="w"> </span><span class="mi">8100</span><span class="p">,</span>
+</span><span id="__span-5-10"><a id="__codelineno-5-10" name="__codelineno-5-10" href="#__codelineno-5-10"></a><span class="w">  </span><span class="nt">"dot_port"</span><span class="p">:</span><span class="w"> </span><span class="mi">853</span><span class="p">,</span>
+</span><span id="__span-5-11"><a id="__codelineno-5-11" name="__codelineno-5-11" href="#__codelineno-5-11"></a><span class="w">  </span><span class="nt">"dot"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+</span><span id="__span-5-12"><a id="__codelineno-5-12" name="__codelineno-5-12" href="#__codelineno-5-12"></a><span class="w">  </span><span class="nt">"count"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span>
+</span><span id="__span-5-13"><a id="__codelineno-5-13" name="__codelineno-5-13" href="#__codelineno-5-13"></a><span class="p">}</span>
 </span></code></pre></div>
+<p><code>dot</code> is <code>true</code> while the DoT listener is up (that is, while at least one <code>dns</code>
+mapping is live), and <code>dot_port</code> is where it listens.</p>
 <h3 id="console">Console<a class="headerlink" href="#console" title="Permanent link">⚓</a></h3>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>domain list                                     mappings: domain, backend, target, state
-</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>domain add app.example.com --trp 3              behind an existing TRP mapping
-</span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>domain add api.example.com --wg 10.100.0.2 8080 behind a tunneled service
-</span><span id="__span-5-4"><a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>domain update app.example.com --disable         pause without deleting
-</span><span id="__span-5-5"><a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a>domain remove app.example.com                   by id or domain name
+<div class="language-text highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>domain list                                     mappings: domain, backend, target, state
+</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>domain add app.example.com --trp 3              behind an existing TRP mapping
+</span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>domain add api.example.com --wg 10.100.0.2 8080 behind a tunneled service
+</span><span id="__span-6-4"><a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a>domain add dns.example.com --dns                a public DoH + DoT resolver
+</span><span id="__span-6-5"><a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a>domain update app.example.com --disable         pause without deleting
+</span><span id="__span-6-6"><a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a>domain remove app.example.com                   by id or domain name
 </span></code></pre></div>
 <h2 id="configuration">Configuration<a class="headerlink" href="#configuration" title="Permanent link">⚓</a></h2>
 <table>
@@ -2138,6 +2386,11 @@ built-in proxy or an external webserver is active:</p>
 <td><code>8100</code></td>
 <td>Loopback port the HTTP-01 challenge answers on</td>
 </tr>
+<tr>
+<td><code>DOMAIN_DOT_PORT</code></td>
+<td><code>853</code></td>
+<td>Public DNS-over-TLS port for <code>dns</code> mappings. <code>0</code> disables DoT</td>
+</tr>
 </tbody>
 </table>
 <p>Mappings persist in <code>DATA_DIR/domains/domains.json</code> (mode 0600), and
@@ -2153,34 +2406,60 @@ covered by the usual backup and restore flow.</p>
 <li>Certificates are only requested for domains that have a mapping, and unknown
   <code>Host</code> headers get a <code>404</code>.</li>
 <li>A backend that cannot be reached responds <code>502 bad gateway</code>.</li>
+<li>A <code>dns</code> mapping is an <strong>open resolver</strong> by design. Only <code>/dns-query</code> is
+  proxied to AdGuard and AdGuard's admin UI is never reachable through the
+  domain, but anyone who knows the endpoint can query it. The filter applies,
+  and AdGuard's own rate limit does too, so abuse is bounded rather than
+  blocked. Remove the mapping (or disable it) if you no longer want it public.</li>
 </ul>
 <h2 id="end-to-end-publish-a-service-on-a-mesh-node">End to end: publish a service on a mesh node<a class="headerlink" href="#end-to-end-publish-a-service-on-a-mesh-node" title="Permanent link">⚓</a></h2>
-<div class="language-shell highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="ch">#!/usr/bin/env bash</span>
-</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="nb">set</span><span class="w"> </span>-euo<span class="w"> </span>pipefail
-</span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="nv">API_KEY</span><span class="o">=</span><span class="s2">"REPLACE_WITH_YOUR_KEY"</span>
-</span><span id="__span-6-4"><a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="nv">API</span><span class="o">=</span><span class="s2">"http://localhost:9000"</span>
-</span><span id="__span-6-5"><a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a>field<span class="o">()</span><span class="w"> </span><span class="o">{</span><span class="w"> </span>python3<span class="w"> </span>-c<span class="w"> </span><span class="s2">"import json,sys;print(json.load(sys.stdin)['</span><span class="nv">$1</span><span class="s2">'])"</span><span class="p">;</span><span class="w"> </span><span class="o">}</span>
-</span><span id="__span-6-6"><a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a>
-</span><span id="__span-6-7"><a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a><span class="c1"># Enroll a node running the service</span>
-</span><span id="__span-6-8"><a id="__codelineno-6-8" name="__codelineno-6-8" href="#__codelineno-6-8"></a><span class="nv">ADDED</span><span class="o">=</span><span class="s2">"</span><span class="k">$(</span>curl<span class="w"> </span>-sS<span class="w"> </span>-X<span class="w"> </span>POST<span class="w"> </span>-H<span class="w"> </span><span class="s2">"X-API-Key: </span><span class="nv">$API_KEY</span><span class="s2">"</span><span class="w"> </span><span class="se">\</span>
-</span><span id="__span-6-9"><a id="__codelineno-6-9" name="__codelineno-6-9" href="#__codelineno-6-9"></a><span class="w">  </span>-H<span class="w"> </span><span class="s2">"Content-Type: application/json"</span><span class="w"> </span><span class="s2">"</span><span class="nv">$API</span><span class="s2">/api/mesh/node/add"</span><span class="w"> </span><span class="se">\</span>
-</span><span id="__span-6-10"><a id="__codelineno-6-10" name="__codelineno-6-10" href="#__codelineno-6-10"></a><span class="w">  </span>-d<span class="w"> </span><span class="s1">'{"name":"edge-a"}'</span><span class="k">)</span><span class="s2">"</span>
-</span><span id="__span-6-11"><a id="__codelineno-6-11" name="__codelineno-6-11" href="#__codelineno-6-11"></a><span class="nv">NODE_ID</span><span class="o">=</span><span class="s2">"</span><span class="k">$(</span><span class="nb">printf</span><span class="w"> </span><span class="s1">'%s'</span><span class="w"> </span><span class="s2">"</span><span class="nv">$ADDED</span><span class="s2">"</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>field<span class="w"> </span>id<span class="k">)</span><span class="s2">"</span>
-</span><span id="__span-6-12"><a id="__codelineno-6-12" name="__codelineno-6-12" href="#__codelineno-6-12"></a><span class="nb">echo</span><span class="w"> </span><span class="s2">"run on the device:  tun YOUR_SERVER_IP </span><span class="k">$(</span><span class="nb">printf</span><span class="w"> </span><span class="s1">'%s'</span><span class="w"> </span><span class="s2">"</span><span class="nv">$ADDED</span><span class="s2">"</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>field<span class="w"> </span>psk<span class="k">)</span><span class="s2">"</span>
-</span><span id="__span-6-13"><a id="__codelineno-6-13" name="__codelineno-6-13" href="#__codelineno-6-13"></a>
-</span><span id="__span-6-14"><a id="__codelineno-6-14" name="__codelineno-6-14" href="#__codelineno-6-14"></a><span class="c1"># Expose the service on the server through a TRP mapping</span>
-</span><span id="__span-6-15"><a id="__codelineno-6-15" name="__codelineno-6-15" href="#__codelineno-6-15"></a><span class="nv">PROXY</span><span class="o">=</span><span class="s2">"</span><span class="k">$(</span>curl<span class="w"> </span>-sS<span class="w"> </span>-X<span class="w"> </span>POST<span class="w"> </span>-H<span class="w"> </span><span class="s2">"X-API-Key: </span><span class="nv">$API_KEY</span><span class="s2">"</span><span class="w"> </span><span class="se">\</span>
-</span><span id="__span-6-16"><a id="__codelineno-6-16" name="__codelineno-6-16" href="#__codelineno-6-16"></a><span class="w">  </span>-H<span class="w"> </span><span class="s2">"Content-Type: application/json"</span><span class="w"> </span><span class="s2">"</span><span class="nv">$API</span><span class="s2">/api/trp/proxy/add"</span><span class="w"> </span><span class="se">\</span>
-</span><span id="__span-6-17"><a id="__codelineno-6-17" name="__codelineno-6-17" href="#__codelineno-6-17"></a><span class="w">  </span>-d<span class="w"> </span><span class="s2">"{\"node_id\":\"</span><span class="nv">$NODE_ID</span><span class="s2">\",\"bind_port\":\"\",\"target_port\":\"8022\"}"</span><span class="k">)</span><span class="s2">"</span>
-</span><span id="__span-6-18"><a id="__codelineno-6-18" name="__codelineno-6-18" href="#__codelineno-6-18"></a><span class="nv">PROXY_ID</span><span class="o">=</span><span class="s2">"</span><span class="k">$(</span><span class="nb">printf</span><span class="w"> </span><span class="s1">'%s'</span><span class="w"> </span><span class="s2">"</span><span class="nv">$PROXY</span><span class="s2">"</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>field<span class="w"> </span>id<span class="k">)</span><span class="s2">"</span>
-</span><span id="__span-6-19"><a id="__codelineno-6-19" name="__codelineno-6-19" href="#__codelineno-6-19"></a><span class="nb">echo</span><span class="w"> </span><span class="s2">"tunnel listener:   </span><span class="k">$(</span><span class="nb">printf</span><span class="w"> </span><span class="s1">'%s'</span><span class="w"> </span><span class="s2">"</span><span class="nv">$PROXY</span><span class="s2">"</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>field<span class="w"> </span>public_url<span class="k">)</span><span class="s2">"</span>
-</span><span id="__span-6-20"><a id="__codelineno-6-20" name="__codelineno-6-20" href="#__codelineno-6-20"></a>
-</span><span id="__span-6-21"><a id="__codelineno-6-21" name="__codelineno-6-21" href="#__codelineno-6-21"></a><span class="c1"># Put a public HTTPS domain in front of it</span>
-</span><span id="__span-6-22"><a id="__codelineno-6-22" name="__codelineno-6-22" href="#__codelineno-6-22"></a>curl<span class="w"> </span>-sS<span class="w"> </span>-X<span class="w"> </span>POST<span class="w"> </span>-H<span class="w"> </span><span class="s2">"X-API-Key: </span><span class="nv">$API_KEY</span><span class="s2">"</span><span class="w"> </span><span class="se">\</span>
-</span><span id="__span-6-23"><a id="__codelineno-6-23" name="__codelineno-6-23" href="#__codelineno-6-23"></a><span class="w">  </span>-H<span class="w"> </span><span class="s2">"Content-Type: application/json"</span><span class="w"> </span><span class="s2">"</span><span class="nv">$API</span><span class="s2">/api/domain/add"</span><span class="w"> </span><span class="se">\</span>
-</span><span id="__span-6-24"><a id="__codelineno-6-24" name="__codelineno-6-24" href="#__codelineno-6-24"></a><span class="w">  </span>-d<span class="w"> </span><span class="s2">"{\"domain\":\"dashboard.example.com\",\"backend\":\"trp\",\"proxy_ref\":\"</span><span class="nv">$PROXY_ID</span><span class="s2">\"}"</span>
-</span><span id="__span-6-25"><a id="__codelineno-6-25" name="__codelineno-6-25" href="#__codelineno-6-25"></a>
-</span><span id="__span-6-26"><a id="__codelineno-6-26" name="__codelineno-6-26" href="#__codelineno-6-26"></a><span class="nb">echo</span><span class="w"> </span><span class="s2">"open:  https://dashboard.example.com"</span>
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="ch">#!/usr/bin/env bash</span>
+</span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="nb">set</span><span class="w"> </span>-euo<span class="w"> </span>pipefail
+</span><span id="__span-7-3"><a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="nv">API_KEY</span><span class="o">=</span><span class="s2">"REPLACE_WITH_YOUR_KEY"</span>
+</span><span id="__span-7-4"><a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a><span class="nv">API</span><span class="o">=</span><span class="s2">"http://localhost:9000"</span>
+</span><span id="__span-7-5"><a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a>field<span class="o">()</span><span class="w"> </span><span class="o">{</span><span class="w"> </span>python3<span class="w"> </span>-c<span class="w"> </span><span class="s2">"import json,sys;print(json.load(sys.stdin)['</span><span class="nv">$1</span><span class="s2">'])"</span><span class="p">;</span><span class="w"> </span><span class="o">}</span>
+</span><span id="__span-7-6"><a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a>
+</span><span id="__span-7-7"><a id="__codelineno-7-7" name="__codelineno-7-7" href="#__codelineno-7-7"></a><span class="c1"># Enroll a node running the service</span>
+</span><span id="__span-7-8"><a id="__codelineno-7-8" name="__codelineno-7-8" href="#__codelineno-7-8"></a><span class="nv">ADDED</span><span class="o">=</span><span class="s2">"</span><span class="k">$(</span>curl<span class="w"> </span>-sS<span class="w"> </span>-X<span class="w"> </span>POST<span class="w"> </span>-H<span class="w"> </span><span class="s2">"X-API-Key: </span><span class="nv">$API_KEY</span><span class="s2">"</span><span class="w"> </span><span class="se">\</span>
+</span><span id="__span-7-9"><a id="__codelineno-7-9" name="__codelineno-7-9" href="#__codelineno-7-9"></a><span class="w">  </span>-H<span class="w"> </span><span class="s2">"Content-Type: application/json"</span><span class="w"> </span><span class="s2">"</span><span class="nv">$API</span><span class="s2">/api/mesh/node/add"</span><span class="w"> </span><span class="se">\</span>
+</span><span id="__span-7-10"><a id="__codelineno-7-10" name="__codelineno-7-10" href="#__codelineno-7-10"></a><span class="w">  </span>-d<span class="w"> </span><span class="s1">'{"name":"edge-a"}'</span><span class="k">)</span><span class="s2">"</span>
+</span><span id="__span-7-11"><a id="__codelineno-7-11" name="__codelineno-7-11" href="#__codelineno-7-11"></a><span class="nv">NODE_ID</span><span class="o">=</span><span class="s2">"</span><span class="k">$(</span><span class="nb">printf</span><span class="w"> </span><span class="s1">'%s'</span><span class="w"> </span><span class="s2">"</span><span class="nv">$ADDED</span><span class="s2">"</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>field<span class="w"> </span>id<span class="k">)</span><span class="s2">"</span>
+</span><span id="__span-7-12"><a id="__codelineno-7-12" name="__codelineno-7-12" href="#__codelineno-7-12"></a><span class="nb">echo</span><span class="w"> </span><span class="s2">"run on the device:  tun YOUR_SERVER_IP </span><span class="k">$(</span><span class="nb">printf</span><span class="w"> </span><span class="s1">'%s'</span><span class="w"> </span><span class="s2">"</span><span class="nv">$ADDED</span><span class="s2">"</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>field<span class="w"> </span>psk<span class="k">)</span><span class="s2">"</span>
+</span><span id="__span-7-13"><a id="__codelineno-7-13" name="__codelineno-7-13" href="#__codelineno-7-13"></a>
+</span><span id="__span-7-14"><a id="__codelineno-7-14" name="__codelineno-7-14" href="#__codelineno-7-14"></a><span class="c1"># Expose the service on the server through a TRP mapping</span>
+</span><span id="__span-7-15"><a id="__codelineno-7-15" name="__codelineno-7-15" href="#__codelineno-7-15"></a><span class="nv">PROXY</span><span class="o">=</span><span class="s2">"</span><span class="k">$(</span>curl<span class="w"> </span>-sS<span class="w"> </span>-X<span class="w"> </span>POST<span class="w"> </span>-H<span class="w"> </span><span class="s2">"X-API-Key: </span><span class="nv">$API_KEY</span><span class="s2">"</span><span class="w"> </span><span class="se">\</span>
+</span><span id="__span-7-16"><a id="__codelineno-7-16" name="__codelineno-7-16" href="#__codelineno-7-16"></a><span class="w">  </span>-H<span class="w"> </span><span class="s2">"Content-Type: application/json"</span><span class="w"> </span><span class="s2">"</span><span class="nv">$API</span><span class="s2">/api/trp/proxy/add"</span><span class="w"> </span><span class="se">\</span>
+</span><span id="__span-7-17"><a id="__codelineno-7-17" name="__codelineno-7-17" href="#__codelineno-7-17"></a><span class="w">  </span>-d<span class="w"> </span><span class="s2">"{\"node_id\":\"</span><span class="nv">$NODE_ID</span><span class="s2">\",\"bind_port\":\"\",\"target_port\":\"8022\"}"</span><span class="k">)</span><span class="s2">"</span>
+</span><span id="__span-7-18"><a id="__codelineno-7-18" name="__codelineno-7-18" href="#__codelineno-7-18"></a><span class="nv">PROXY_ID</span><span class="o">=</span><span class="s2">"</span><span class="k">$(</span><span class="nb">printf</span><span class="w"> </span><span class="s1">'%s'</span><span class="w"> </span><span class="s2">"</span><span class="nv">$PROXY</span><span class="s2">"</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>field<span class="w"> </span>id<span class="k">)</span><span class="s2">"</span>
+</span><span id="__span-7-19"><a id="__codelineno-7-19" name="__codelineno-7-19" href="#__codelineno-7-19"></a><span class="nb">echo</span><span class="w"> </span><span class="s2">"tunnel listener:   </span><span class="k">$(</span><span class="nb">printf</span><span class="w"> </span><span class="s1">'%s'</span><span class="w"> </span><span class="s2">"</span><span class="nv">$PROXY</span><span class="s2">"</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>field<span class="w"> </span>public_url<span class="k">)</span><span class="s2">"</span>
+</span><span id="__span-7-20"><a id="__codelineno-7-20" name="__codelineno-7-20" href="#__codelineno-7-20"></a>
+</span><span id="__span-7-21"><a id="__codelineno-7-21" name="__codelineno-7-21" href="#__codelineno-7-21"></a><span class="c1"># Put a public HTTPS domain in front of it</span>
+</span><span id="__span-7-22"><a id="__codelineno-7-22" name="__codelineno-7-22" href="#__codelineno-7-22"></a>curl<span class="w"> </span>-sS<span class="w"> </span>-X<span class="w"> </span>POST<span class="w"> </span>-H<span class="w"> </span><span class="s2">"X-API-Key: </span><span class="nv">$API_KEY</span><span class="s2">"</span><span class="w"> </span><span class="se">\</span>
+</span><span id="__span-7-23"><a id="__codelineno-7-23" name="__codelineno-7-23" href="#__codelineno-7-23"></a><span class="w">  </span>-H<span class="w"> </span><span class="s2">"Content-Type: application/json"</span><span class="w"> </span><span class="s2">"</span><span class="nv">$API</span><span class="s2">/api/domain/add"</span><span class="w"> </span><span class="se">\</span>
+</span><span id="__span-7-24"><a id="__codelineno-7-24" name="__codelineno-7-24" href="#__codelineno-7-24"></a><span class="w">  </span>-d<span class="w"> </span><span class="s2">"{\"domain\":\"dashboard.example.com\",\"backend\":\"trp\",\"proxy_ref\":\"</span><span class="nv">$PROXY_ID</span><span class="s2">\"}"</span>
+</span><span id="__span-7-25"><a id="__codelineno-7-25" name="__codelineno-7-25" href="#__codelineno-7-25"></a>
+</span><span id="__span-7-26"><a id="__codelineno-7-26" name="__codelineno-7-26" href="#__codelineno-7-26"></a><span class="nb">echo</span><span class="w"> </span><span class="s2">"open:  https://dashboard.example.com"</span>
+</span></code></pre></div>
+<h2 id="end-to-end-publish-a-public-resolver">End to end: publish a public resolver<a class="headerlink" href="#end-to-end-publish-a-public-resolver" title="Permanent link">⚓</a></h2>
+<p>A DNS front is a single mapping. Point the domain's <strong>A</strong> record at the server,
+open ports <strong>443</strong> and <strong>853</strong>, and add it:</p>
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="nv">API_KEY</span><span class="o">=</span><span class="s2">"REPLACE_WITH_YOUR_KEY"</span>
+</span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="nv">API</span><span class="o">=</span><span class="s2">"http://localhost:9000"</span>
+</span><span id="__span-8-3"><a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a>
+</span><span id="__span-8-4"><a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a>curl<span class="w"> </span>-sS<span class="w"> </span>-X<span class="w"> </span>POST<span class="w"> </span>-H<span class="w"> </span><span class="s2">"X-API-Key: </span><span class="nv">$API_KEY</span><span class="s2">"</span><span class="w"> </span><span class="se">\</span>
+</span><span id="__span-8-5"><a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a><span class="w">  </span>-H<span class="w"> </span><span class="s2">"Content-Type: application/json"</span><span class="w"> </span><span class="s2">"</span><span class="nv">$API</span><span class="s2">/api/domain/add"</span><span class="w"> </span><span class="se">\</span>
+</span><span id="__span-8-6"><a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a><span class="w">  </span>-d<span class="w"> </span><span class="s1">'{"domain":"dns.example.com","backend":"dns"}'</span>
+</span><span id="__span-8-7"><a id="__codelineno-8-7" name="__codelineno-8-7" href="#__codelineno-8-7"></a>
+</span><span id="__span-8-8"><a id="__codelineno-8-8" name="__codelineno-8-8" href="#__codelineno-8-8"></a><span class="nb">echo</span><span class="w"> </span><span class="s2">"DoH:  https://dns.example.com/dns-query"</span>
+</span><span id="__span-8-9"><a id="__codelineno-8-9" name="__codelineno-8-9" href="#__codelineno-8-9"></a><span class="nb">echo</span><span class="w"> </span><span class="s2">"DoT:  dns.example.com:853"</span>
+</span></code></pre></div>
+<p>Verify it resolves and filters:</p>
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="c1"># DoH (expect 0.0.0.0 for a blocked ad domain)</span>
+</span><span id="__span-9-2"><a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>curl<span class="w"> </span>-s<span class="w"> </span><span class="s2">"https://dns.example.com/dns-query?name=doubleclick.net&amp;type=A"</span><span class="w"> </span><span class="se">\</span>
+</span><span id="__span-9-3"><a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a><span class="w">  </span>-H<span class="w"> </span><span class="s2">"accept: application/dns-json"</span>
+</span><span id="__span-9-4"><a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a>
+</span><span id="__span-9-5"><a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a><span class="c1"># DoT</span>
+</span><span id="__span-9-6"><a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a>kdig<span class="w"> </span>+tls<span class="w"> </span>+tls-host<span class="o">=</span>dns.example.com<span class="w"> </span>@dns.example.com<span class="w"> </span>doubleclick.net
 </span></code></pre></div>
 
 

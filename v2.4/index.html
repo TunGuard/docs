@@ -7,7 +7,7 @@
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width,initial-scale=1">
       
-        <meta name="description" content="Self-hosted overlay networking: direct peer-to-peer mesh, TCP relay, and WireGuard-compatible VPN from one control plane. No kernel drivers, no extra installs.">
+        <meta name="description" content="The self-hosted, Zero Trust connectivity platform: direct peer-to-peer mesh, TCP relay, WireGuard-compatible VPN, managed DNS filtering, SSH gateway and automatic HTTPS from a single userspace binary.">
       
       
         <meta name="author" content="TunGuard Team">
@@ -66,6 +66,58 @@
     
     
 <meta name="google-site-verification" content="qk4z4XjKirsxHnB8huMe20-6p28GvDYIlPmteRVOwek" />
+<style>
+  /* ── TunGuard documentation animations ─────────────────────────────────
+     Small, self-contained, theme-aware motion for inline SVG diagrams.
+     Every effect is CSS only and honours prefers-reduced-motion. */
+
+  @keyframes tgSpin   { to { transform: rotate(360deg); } }
+  @keyframes tgSpinR  { to { transform: rotate(-360deg); } }
+  @keyframes tgFloat  { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-6px); } }
+  @keyframes tgBob    { 0%,100% { transform: translateY(0); } 50% { transform: translateY(4px); } }
+  @keyframes tgPulse  { 0%,100% { opacity: 1; } 50% { opacity: .3; } }
+  @keyframes tgBlink  { 0%,55%,100% { opacity: 1; } 30% { opacity: .15; } }
+  @keyframes tgFlow   { to { stroke-dashoffset: -34; } }
+  @keyframes tgDraw   { to { stroke-dashoffset: 0; } }
+  @keyframes tgRipple { 0% { transform: scale(.45); opacity: .75; } 100% { transform: scale(1.7); opacity: 0; } }
+  @keyframes tgSweep  { 0% { transform: translateX(-45%); } 100% { transform: translateX(145%); } }
+  @keyframes tgNudge  { 0%,100% { transform: translateX(0); } 50% { transform: translateX(5px); } }
+  @keyframes tgBar    { 0%,100% { transform: scaleY(.45); } 50% { transform: scaleY(1); } }
+  @keyframes tgDash   { to { stroke-dashoffset: -1000; } }
+
+  .tg-spin   { animation: tgSpin 9s linear infinite;  transform-origin: center; transform-box: fill-box; }
+  .tg-spin-r { animation: tgSpinR 14s linear infinite; transform-origin: center; transform-box: fill-box; }
+  .tg-float  { animation: tgFloat 4s ease-in-out infinite; }
+  .tg-bob    { animation: tgBob 3s ease-in-out infinite; }
+  .tg-pulse  { animation: tgPulse 2.4s ease-in-out infinite; }
+  .tg-blink  { animation: tgBlink 2s ease-in-out infinite; }
+  .tg-flow   { stroke-dasharray: 5 9; animation: tgFlow 1.3s linear infinite; }
+  .tg-dash   { stroke-dasharray: 4 6; animation: tgDash 18s linear infinite; }
+  .tg-draw   { stroke-dasharray: var(--tg-len, 220); stroke-dashoffset: var(--tg-len, 220); animation: tgDraw 2s ease forwards; }
+  .tg-ripple { animation: tgRipple 2.8s ease-out infinite; transform-origin: center; transform-box: fill-box; }
+  .tg-sweep  { animation: tgSweep 3.2s ease-in-out infinite; }
+  .tg-nudge  { animation: tgNudge 2.2s ease-in-out infinite; }
+  .tg-bar    { animation: tgBar 1.5s ease-in-out infinite; transform-origin: bottom; transform-box: fill-box; }
+
+  .tg-d1 { animation-delay: .25s; } .tg-d2 { animation-delay: .5s; }
+  .tg-d3 { animation-delay: .75s; } .tg-d4 { animation-delay: 1s; }
+
+  /* Theme-aware figure + inline icon helpers. */
+  .tg-figure {
+    display: block; margin: 1.4rem auto 1.8rem; width: 100%;
+    max-width: 680px; height: auto;
+    color: var(--md-primary-fg-color);
+  }
+  .tg-figure .tg-accent { color: var(--md-accent-fg-color); }
+  .tg-icon { display: inline-block; vertical-align: -0.22em; width: 1.3em; height: 1.3em; color: var(--md-accent-fg-color); }
+  .tg-cap { text-align: center; font-size: .78rem; opacity: .72; margin: -1rem 0 1.8rem; }
+  .tg-legend { list-style: none; padding-left: 0; }
+  .tg-legend li { display: flex; gap: .6rem; align-items: flex-start; margin: .5rem 0; }
+
+  @media (prefers-reduced-motion: reduce) {
+    [class^="tg-"], [class*=" tg-"] { animation: none !important; }
+  }
+</style>
 
   </head>
   
@@ -1829,6 +1881,50 @@
 
 
 <h1 id="welcome-to-the-documentation-for-tunguard">Welcome to the Documentation for <code>TunGuard</code><a class="headerlink" href="#welcome-to-the-documentation-for-tunguard" title="Permanent link">⚓</a></h1>
+<p><svg class="tg-figure" viewBox="0 0 720 300" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" role="img" aria-label="TunGuard connects laptops, phones, cloud, edge and AI through one userspace control plane">
+  <g class="tg-flow tg-accent" stroke-width="2.2" opacity=".9">
+    <path d="M360 150 140 70"/>
+    <path d="M360 150 120 230"/>
+    <path d="M360 150 580 70"/>
+    <path d="M360 150 600 230"/>
+    <path d="M360 150 360 44"/>
+    <path d="M360 150 360 256"/>
+  </g>
+  <circle class="tg-ripple tg-accent" cx="360" cy="150" r="52" stroke-width="2" opacity=".5"/>
+  <circle class="tg-ripple tg-accent tg-d2" cx="360" cy="150" r="52" stroke-width="2" opacity=".5"/>
+  <g class="tg-float">
+    <rect x="318" y="108" width="84" height="84" rx="18" fill="var(--md-default-bg-color)"/>
+    <path class="tg-draw tg-accent" style="--tg-len:40" d="M340 150l13 13 27-30"/>
+  </g>
+  <g class="tg-float tg-d2">
+    <circle cx="140" cy="70" r="26" fill="var(--md-default-bg-color)"/>
+    <path d="M128 64h24v13h-24z M124 81h32"/>
+  </g>
+  <g class="tg-float tg-d3">
+    <circle cx="120" cy="230" r="26" fill="var(--md-default-bg-color)"/>
+    <rect x="111" y="217" width="18" height="26" rx="3"/>
+    <circle class="tg-blink" cx="120" cy="237" r="1.7" fill="currentColor" stroke="none"/>
+  </g>
+  <g class="tg-float tg-d1">
+    <circle cx="580" cy="70" r="26" fill="var(--md-default-bg-color)"/>
+    <path d="M567 76a8 8 0 0 1 1-15 10 10 0 0 1 18-2 6.5 6.5 0 0 1 1 13z"/>
+  </g>
+  <g class="tg-float tg-d4">
+    <circle cx="600" cy="230" r="26" fill="var(--md-default-bg-color)"/>
+    <rect x="590" y="220" width="20" height="20" rx="3"/>
+    <path d="M594 220v-4M600 220v-4M606 220v-4M594 244v4M600 244v4M606 244v4"/>
+  </g>
+  <g class="tg-float tg-d1">
+    <circle cx="360" cy="44" r="26" fill="var(--md-default-bg-color)"/>
+    <path d="M348 44h8l4-8 4 16 4-8h8"/>
+  </g>
+  <g class="tg-float tg-d3">
+    <circle cx="360" cy="256" r="26" fill="var(--md-default-bg-color)"/>
+    <path d="M350 250h20M350 256h20M350 262h20"/>
+  </g>
+</svg></p>
+<p class="tg-cap">One userspace control plane connects people, cloud, edge devices and AI workloads.</p>
+
 <div class="admonition info">
 <p class="admonition-title">This Documentation is Versioned</p>
 <p><strong>Make sure</strong> to select the correct version of this documentation! It should match the version of the image you are using. The default version corresponds to <a href="./getting-started/">the most recent stable release</a>.</p>
@@ -1841,23 +1937,25 @@
 <h2 id="what-tunguard-does">What TunGuard Does<a class="headerlink" href="#what-tunguard-does" title="Permanent link">⚓</a></h2>
 <p>Pick the part that matches what you are building.</p>
 <ul>
-<li><strong><a href="examples/tutorials/p2p/">P2P Mesh</a></strong> — devices sharing a group key discover each
+<li><svg class="tg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle class="tg-blink" cx="12" cy="5" r="2.4" fill="currentColor" stroke="none"/><circle class="tg-blink tg-d1" cx="5" cy="18" r="2.4" fill="currentColor" stroke="none"/><circle class="tg-blink tg-d2" cx="19" cy="18" r="2.4" fill="currentColor" stroke="none"/><path class="tg-flow" d="M12 7 6 16M12 7l6 9M7 18h10"/></svg> <strong><a href="examples/tutorials/p2p/">P2P Mesh</a></strong> — devices sharing a group key discover each
   other, punch a direct UDP path through NAT, and relay through the server only when a
   direct path is not possible. TunGuard's own protocol; no VPN involved.</li>
-<li><strong><a href="guides/client/">TunGuard Client</a></strong> — one small binary that puts an unattended
+<li><svg class="tg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="5" width="14" height="14" rx="2"/><path d="M9 2v3M15 2v3M9 19v3M15 19v3M2 9h3M2 15h3M19 9h3M19 15h3"/><circle class="tg-blink" cx="12" cy="12" r="2" fill="currentColor" stroke="none"/></svg> <strong><a href="guides/client/">TunGuard Client</a></strong> — one small binary that puts an unattended
   device on the mesh. No config file, no routes, no local state beyond a device id.</li>
-<li><strong><a href="guides/clients/">VPN Access</a></strong> — standard WireGuard configurations and QR codes,
+<li><svg class="tg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2l8 3.5V12c0 4.6-3.4 8.5-8 10-4.6-1.5-8-5.4-8-10V5.5L12 2z"/><path class="tg-draw" style="--tg-len:14" d="M8.5 12l2.4 2.4 4.6-5"/></svg> <strong><a href="guides/clients/">VPN Access</a></strong> — standard WireGuard configurations and QR codes,
   generated from the dashboard for phones, laptops, and routers.</li>
-<li><strong><a href="guides/adguard/">AdGuard DNS Filtering</a></strong> — a managed AdGuard Home instance that
+<li><svg class="tg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2l8 3.5V12c0 4.6-3.4 8.5-8 10-4.6-1.5-8-5.4-8-10V5.5L12 2z"/><path d="M8 8h8l-3 4v4h-2v-4L8 8z"/></svg> <strong><a href="guides/adguard/">AdGuard DNS Filtering</a></strong> — a managed AdGuard Home instance that
   filters DNS for devices in an AdGuard-enabled policy group, enforced on the server,
-  so moving a device into the group protects it immediately.</li>
-<li><strong><a href="guides/domains/">Domains &amp; HTTPS Proxy</a></strong> — put a public domain with automatic
-  Let's Encrypt HTTPS in front of a TRP mapping or a tunneled service.</li>
-<li><strong><a href="guides/ssh/">SSH Access</a></strong> — jump host, browser SSH terminals, and a built-in
+  so moving a device into the group protects it immediately. The same filter can be
+  published as a public DNS resolver.</li>
+<li><svg class="tg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><g class="tg-spin"><ellipse cx="12" cy="12" rx="3.6" ry="9"/></g><path d="M3 12h18"/></svg> <strong><a href="guides/domains/">Domains &amp; HTTPS Proxy</a></strong> — put a public domain with automatic
+  Let's Encrypt HTTPS in front of a TRP mapping or a tunneled service, or map it as a
+  public DNS-over-HTTPS and DNS-over-TLS resolver.</li>
+<li><svg class="tg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2.5" y="4" width="19" height="16" rx="2.5"/><path class="tg-nudge" d="M6 9l3 3-3 3"/><path class="tg-blink" d="M12 15h6"/></svg> <strong><a href="guides/ssh/">SSH Access</a></strong> — jump host, browser SSH terminals, and a built-in
   <code>ssh</code> client, all using your dashboard login.</li>
-<li><strong><a href="guides/api/#tcp-relay-trp">TCP Relay</a></strong> — publish a service running on a mesh
+<li><svg class="tg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="6" rx="2"/><rect x="3" y="14" width="18" height="6" rx="2"/><circle class="tg-blink" cx="6.5" cy="7" r="1.1" fill="currentColor" stroke="none"/><circle class="tg-blink tg-d1" cx="6.5" cy="17" r="1.1" fill="currentColor" stroke="none"/><path class="tg-flow" d="M14 7h4M14 17h4"/></svg> <strong><a href="guides/api/#tcp-relay-trp">TCP Relay</a></strong> — publish a service running on a mesh
   node to the internet on a port of your choosing.</li>
-<li><strong><a href="guides/api/">Dashboard and API</a></strong> — everything above is drivable from a browser or
+<li><svg class="tg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 4C6 4 7 10 4 12c3 2 2 8 5 8"/><path d="M15 4c3 0 2 6 5 8-3 2-2 8-5 8"/><circle class="tg-blink" cx="12" cy="12" r="1.4" fill="currentColor" stroke="none"/></svg> <strong><a href="guides/api/">Dashboard and API</a></strong> — everything above is drivable from a browser or
   from <code>curl</code>.</li>
 </ul>
 <h2 id="contents">Contents<a class="headerlink" href="#contents" title="Permanent link">⚓</a></h2>

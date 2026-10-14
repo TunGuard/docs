@@ -7,7 +7,7 @@
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width,initial-scale=1">
       
-        <meta name="description" content="Self-hosted overlay networking: direct peer-to-peer mesh, TCP relay, and WireGuard-compatible VPN from one control plane. No kernel drivers, no extra installs.">
+        <meta name="description" content="The self-hosted, Zero Trust connectivity platform: direct peer-to-peer mesh, TCP relay, WireGuard-compatible VPN, managed DNS filtering, SSH gateway and automatic HTTPS from a single userspace binary.">
       
       
         <meta name="author" content="TunGuard Team">
@@ -68,6 +68,58 @@
     
     
 <meta name="google-site-verification" content="qk4z4XjKirsxHnB8huMe20-6p28GvDYIlPmteRVOwek" />
+<style>
+  /* ── TunGuard documentation animations ─────────────────────────────────
+     Small, self-contained, theme-aware motion for inline SVG diagrams.
+     Every effect is CSS only and honours prefers-reduced-motion. */
+
+  @keyframes tgSpin   { to { transform: rotate(360deg); } }
+  @keyframes tgSpinR  { to { transform: rotate(-360deg); } }
+  @keyframes tgFloat  { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-6px); } }
+  @keyframes tgBob    { 0%,100% { transform: translateY(0); } 50% { transform: translateY(4px); } }
+  @keyframes tgPulse  { 0%,100% { opacity: 1; } 50% { opacity: .3; } }
+  @keyframes tgBlink  { 0%,55%,100% { opacity: 1; } 30% { opacity: .15; } }
+  @keyframes tgFlow   { to { stroke-dashoffset: -34; } }
+  @keyframes tgDraw   { to { stroke-dashoffset: 0; } }
+  @keyframes tgRipple { 0% { transform: scale(.45); opacity: .75; } 100% { transform: scale(1.7); opacity: 0; } }
+  @keyframes tgSweep  { 0% { transform: translateX(-45%); } 100% { transform: translateX(145%); } }
+  @keyframes tgNudge  { 0%,100% { transform: translateX(0); } 50% { transform: translateX(5px); } }
+  @keyframes tgBar    { 0%,100% { transform: scaleY(.45); } 50% { transform: scaleY(1); } }
+  @keyframes tgDash   { to { stroke-dashoffset: -1000; } }
+
+  .tg-spin   { animation: tgSpin 9s linear infinite;  transform-origin: center; transform-box: fill-box; }
+  .tg-spin-r { animation: tgSpinR 14s linear infinite; transform-origin: center; transform-box: fill-box; }
+  .tg-float  { animation: tgFloat 4s ease-in-out infinite; }
+  .tg-bob    { animation: tgBob 3s ease-in-out infinite; }
+  .tg-pulse  { animation: tgPulse 2.4s ease-in-out infinite; }
+  .tg-blink  { animation: tgBlink 2s ease-in-out infinite; }
+  .tg-flow   { stroke-dasharray: 5 9; animation: tgFlow 1.3s linear infinite; }
+  .tg-dash   { stroke-dasharray: 4 6; animation: tgDash 18s linear infinite; }
+  .tg-draw   { stroke-dasharray: var(--tg-len, 220); stroke-dashoffset: var(--tg-len, 220); animation: tgDraw 2s ease forwards; }
+  .tg-ripple { animation: tgRipple 2.8s ease-out infinite; transform-origin: center; transform-box: fill-box; }
+  .tg-sweep  { animation: tgSweep 3.2s ease-in-out infinite; }
+  .tg-nudge  { animation: tgNudge 2.2s ease-in-out infinite; }
+  .tg-bar    { animation: tgBar 1.5s ease-in-out infinite; transform-origin: bottom; transform-box: fill-box; }
+
+  .tg-d1 { animation-delay: .25s; } .tg-d2 { animation-delay: .5s; }
+  .tg-d3 { animation-delay: .75s; } .tg-d4 { animation-delay: 1s; }
+
+  /* Theme-aware figure + inline icon helpers. */
+  .tg-figure {
+    display: block; margin: 1.4rem auto 1.8rem; width: 100%;
+    max-width: 680px; height: auto;
+    color: var(--md-primary-fg-color);
+  }
+  .tg-figure .tg-accent { color: var(--md-accent-fg-color); }
+  .tg-icon { display: inline-block; vertical-align: -0.22em; width: 1.3em; height: 1.3em; color: var(--md-accent-fg-color); }
+  .tg-cap { text-align: center; font-size: .78rem; opacity: .72; margin: -1rem 0 1.8rem; }
+  .tg-legend { list-style: none; padding-left: 0; }
+  .tg-legend li { display: flex; gap: .6rem; align-items: flex-start; margin: .5rem 0; }
+
+  @media (prefers-reduced-motion: reduce) {
+    [class^="tg-"], [class*=" tg-"] { animation: none !important; }
+  }
+</style>
 
   </head>
   
@@ -3446,6 +3498,42 @@
 
   <h1 id="__skip">API Reference</h1>
 
+<p><svg class="tg-figure" viewBox="0 0 720 180" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" role="img" aria-label="Scripts and the dashboard talk to the HTTP API, which manages peers, the mesh and domains">
+  <g class="tg-flow tg-accent" stroke-width="2.4">
+    <path d="M198 90h100"/>
+  </g>
+  <g class="tg-flow tg-accent tg-d1" stroke-width="2.4">
+    <path d="M424 60h76"/>
+    <path d="M424 90h76"/>
+    <path d="M424 120h76"/>
+  </g>
+  <g class="tg-float">
+    <circle cx="140" cy="90" r="46" fill="var(--md-default-bg-color)"/>
+    <rect x="116" y="72" width="48" height="36" rx="5"/>
+    <path class="tg-nudge" d="M126 82l6 6-6 6"/>
+    <path class="tg-blink" d="M136 104h18"/>
+  </g>
+  <g class="tg-float tg-d2">
+    <circle class="tg-pulse tg-accent" cx="362" cy="90" r="52" fill="var(--md-default-bg-color)"/>
+    <path d="M348 74c-8 0-6 16-14 16 8 0 6 16 14 16"/>
+    <path d="M376 74c8 0 6 16 14 16-8 0-6 16-14 16"/>
+    <circle class="tg-blink" cx="362" cy="90" r="2" fill="currentColor" stroke="none"/>
+  </g>
+  <g class="tg-float tg-d3">
+    <rect x="500" y="46" width="176" height="28" rx="8" fill="var(--md-default-bg-color)"/>
+    <text x="588" y="65" text-anchor="middle" font-size="15" fill="currentColor" stroke="none" font-family="ui-monospace,monospace">peers</text>
+  </g>
+  <g class="tg-float tg-d4">
+    <rect x="500" y="76" width="176" height="28" rx="8" fill="var(--md-default-bg-color)"/>
+    <text x="588" y="95" text-anchor="middle" font-size="15" fill="currentColor" stroke="none" font-family="ui-monospace,monospace">mesh</text>
+  </g>
+  <g class="tg-float tg-d2">
+    <rect x="500" y="106" width="176" height="28" rx="8" fill="var(--md-default-bg-color)"/>
+    <text x="588" y="125" text-anchor="middle" font-size="15" fill="currentColor" stroke="none" font-family="ui-monospace,monospace">domains</text>
+  </g>
+</svg></p>
+<p class="tg-cap">Every dashboard action has an HTTP API equivalent.</p>
+
 <p>TunGuard provides an HTTP API for managing the VPN server, its peers, and the P2P mesh.</p>
 <p>The API is available under:</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>http://YOUR_SERVER_IP:9000/api
@@ -3691,15 +3779,22 @@ of credential and key management endpoints accept <strong>only</strong> the dash
 <td>Dashboard login only</td>
 </tr>
 <tr>
-<td><code>/api/health</code></td>
+<td><code>/api/health</code>, <code>/api/login</code>, <code>/api/logout</code></td>
 <td>None</td>
 </tr>
 </tbody>
 </table>
 <h3 id="dashboard-authentication">Dashboard Authentication<a class="headerlink" href="#dashboard-authentication" title="Permanent link">⚓</a></h3>
-<p>Use HTTP Basic Authentication:</p>
+<p>The browser dashboard signs in through an HTML form and a session cookie. For
+scripts, use HTTP Basic Authentication:</p>
 <div class="language-shell highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>curl<span class="w"> </span>-u<span class="w"> </span>admin:PASSWORD<span class="w"> </span>http://localhost:9000/api/status
 </span></code></pre></div>
+<p><code>POST /api/login</code> with a JSON <code>{"username":...,"password":...}</code> body establishes
+the same session the browser gets and returns the cookie, and <code>POST /api/logout</code>
+clears it. Neither is needed for the Basic-auth flow above. If the server is
+still on the shipped <code>admin</code> / <code>tanguard</code> login, signing in reports
+<code>must_change: true</code> and the dashboard forces you to set your own login before
+you can use it.</p>
 <h3 id="api-key">API Key<a class="headerlink" href="#api-key" title="Permanent link">⚓</a></h3>
 <p>Generate or rotate the API key from:</p>
 <p><strong>Settings → API Key</strong></p>
