@@ -1,5 +1,9 @@
 # Zensical build output
 site/
+site-*/
+
+# Zensical cache
+.cache/
 
 # Python tooling
 __pycache__/

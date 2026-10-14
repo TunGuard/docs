@@ -16,12 +16,13 @@ copyright = """
 repo_url = "https://github.com/TunGuard/tanguard-binary"
 repo_name = "TunGuard/tanguard-binary"
 
-edit_uri = "edit/main/docs/content"
-docs_dir = "content/"
+edit_uri = "edit/main/content/en"
+docs_dir = "content/en/"
 site_url = "https://tunguard.github.io"
 
 [project.theme]
 variant = "modern"
+language = "en"
 favicon = "assets/logo/favicon.png"
 logo = "assets/logo/logo.png"
 features = [
@@ -77,6 +78,16 @@ primary = "teal"               # High-contrast teal branding
 accent = "cyan"                # Cyberpunk network link highlights
 toggle.icon = "lucide/moon"
 toggle.name = "Switch to system preference"
+
+# Language selector shown in the header. Each entry points at its own build of
+# the docs (English at the site root, French and Spanish under language
+# subdirectories). See content/contributing/translation.md for the workflow.
+[project.extra]
+alternate = [
+  { name = "English", link = "/docs/", lang = "en" },
+  { name = "Français", link = "/docs/fr/", lang = "fr" },
+  { name = "Español", link = "/docs/es/", lang = "es" },
+]
 
 [project.extra.version]
 provider = "mike"

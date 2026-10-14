@@ -60,6 +60,24 @@ jobs:
 
           echo "minor_version=$MINOR_VERSION" >> "$GITHUB_OUTPUT"
 
+      - name: Sync changelog
+        env:
+          VERSION: ${{ steps.release.outputs.version }}
+        run: |
+          # Prefer the changelog as it stood at the release tag, falling back to
+          # the default branch if the tag (or file) cannot be fetched.
+          if ! python scripts/sync_changelog.py --ref "$VERSION"; then
+            echo "::warning::Could not fetch CHANGELOG.md at $VERSION, using main"
+            python scripts/sync_changelog.py --ref main
+          fi
+
+      - name: Build translated sites
+        run: |
+          # English is built by mike (see below); French and Spanish are built
+          # here and merged into the version directory before it is published.
+          zensical build --clean --strict --config-file zensical.fr.toml
+          zensical build --clean --strict --config-file zensical.es.toml
+
       - name: Setup Git User
         run: |
           git config --global user.name "Frost-bit-star"
@@ -96,7 +114,25 @@ jobs:
       - name: Checkout generated site
         run: |
           git fetch origin gh-pages
-          git checkout -B pages-site origin/gh-pages
+          # The synced changelog leaves local changes in content/; they were
+          # already built, so force the switch to the deployed branch.
+          git checkout -f -B pages-site origin/gh-pages
+
+      - name: Merge translated sites
+        env:
+          MINOR_VERSION: ${{ steps.release.outputs.minor_version }}
+        run: |
+          # English is published at the site root; French and Spanish go under
+          # their own language subdirectories.
+          if [ -d "site-fr" ]; then
+            mkdir -p "$MINOR_VERSION/fr"
+            cp -r site-fr/. "$MINOR_VERSION/fr/"
+          fi
+
+          if [ -d "site-es" ]; then
+            mkdir -p "$MINOR_VERSION/es"
+            cp -r site-es/. "$MINOR_VERSION/es/"
+          fi
 
       - name: Verify generated documentation
         env:
@@ -111,8 +147,16 @@ jobs:
           ls -la "$MINOR_VERSION"
 
           echo ""
-          echo "Index:"
+          echo "Language directories:"
+          ls -la "$MINOR_VERSION/fr"
+          ls -la "$MINOR_VERSION/es"
+
+          echo ""
+          echo "Indexes:"
           ls -la "$MINOR_VERSION/index.html"
+          ls -la "$MINOR_VERSION/fr/index.html"
+          ls -la "$MINOR_VERSION/es/index.html"
+          ls -la "$MINOR_VERSION/changelog/index.html"
 
       - name: Configure GitHub Pages
         uses: actions/configure-pages@v5

@@ -1,0 +1,133 @@
+
+# Spanish build of the documentation. This is built separately with
+#   zensical build --config-file zensical.es.toml
+# and its output (site-es/) is merged under /es/ of the deployed site. The
+# content lives in content/es/ and is a translation of content/en/. See
+# content/contributing/translation.md.
+
+[project]
+site_name = "TunGuard"
+site_description = "The self-hosted, Zero Trust connectivity platform: direct peer-to-peer mesh, TCP relay, WireGuard-compatible VPN, managed DNS filtering, SSH gateway and automatic HTTPS from a single userspace binary."
+site_author = "TunGuard Team"
+copyright = """
+<p>
+&copy; <a href="https://github.com/TunGuard"><em>TunGuard</em></a><br/>
+<span>This project is licensed under MIT.</span><br/>
+<span>This project is not affiliated, associated, authorized, endorsed by, or in any way officially connected with Jason A. Donenfeld, ZX2C4 or Edge Security.</span><br/>
+<span>"WireGuard" and the "WireGuard" logo are registered trademarks of Jason A. Donenfeld.</span><br/>
+<span><a href="https://tunguard.github.io/latest/privacy/">Privacy Policy</a></span>
+</p>
+"""
+
+repo_url = "https://github.com/TunGuard/tanguard-binary"
+repo_name = "TunGuard/tanguard-binary"
+
+edit_uri = "edit/main/content/es"
+docs_dir = "content/es/"
+site_dir = "site-es"
+site_url = "https://tunguard.github.io/docs/es"
+
+[project.theme]
+variant = "modern"
+language = "es"
+favicon = "assets/logo/favicon.png"
+logo = "assets/logo/logo.png"
+features = [
+  "navigation.instant",
+  "navigation.tabs",
+  "navigation.tabs.sticky",    # Sticks the navbar to the top for slick scrolling
+  "navigation.expand",
+  "navigation.path",
+  "navigation.top",
+  "navigation.sections",        # Groups sidebar links cleanly instead of long flat lists
+  "content.action.edit",
+  "content.action.view",
+  "content.code.copy",
+  "content.code.annotate",
+  "toc.follow",                 # Active right-hand Table of Contents follows scrolling
+]
+
+# Template overrides: overrides/main.html adds the site-wide <head> meta tags
+# (currently the Google site-verification token) without touching the theme.
+custom_dir = "overrides"
+
+[project.theme.font]
+text = "JetBrains Mono"         # Swapped to a premium developer monospaced look for body text
+code = "Fira Code"              # Excellent ligature-supporting code font
+
+[project.theme.icon]
+repo = "fontawesome/brands/github"
+
+# ----------------------------------------------------
+# VISUAL PALETTE REDESIGN (Premium Deep Cyber Aesthetic)
+# ----------------------------------------------------
+
+# Palette toggle for automatic mode
+[[project.theme.palette]]
+media = "(prefers-color-scheme)"
+toggle.icon = "lucide/sun-moon"
+toggle.name = "Switch to light mode"
+
+# Palette toggle for crisp, modern light mode (Slate/Teal)
+[[project.theme.palette]]
+media = "(prefers-color-scheme: light)"
+scheme = "default"
+primary = "blue-grey"           # Dark charcoal headers instead of bright generic blue
+accent = "teal"                # Electric teal accents for status UI and links
+toggle.icon = "lucide/sun"
+toggle.name = "Switch to dark mode"
+
+# Palette toggle for high-end dark mode (Deep Space/Cyan)
+[[project.theme.palette]]
+media = "(prefers-color-scheme: dark)"
+scheme = "slate"               # Deep terminal dark background
+primary = "teal"               # High-contrast teal branding
+accent = "cyan"                # Cyberpunk network link highlights
+toggle.icon = "lucide/moon"
+toggle.name = "Switch to system preference"
+
+# Language selector shown in the header. Each entry points at its own build of
+# the docs (English at the site root, French and Spanish under language
+# subdirectories). See content/contributing/translation.md for the workflow.
+[project.extra]
+alternate = [
+  { name = "English", link = "/docs/", lang = "en" },
+  { name = "Français", link = "/docs/fr/", lang = "fr" },
+  { name = "Español", link = "/docs/es/", lang = "es" },
+]
+
+[project.extra.version]
+provider = "mike"
+
+# ----------------------------------------------------
+# MARKDOWN EXTENSIONS & CODE RENDERING
+# ----------------------------------------------------
+
+[project.markdown_extensions.pymdownx.blocks.admonition]
+types = ["danger", "note", "info", "question", "tip", "warning"]
+
+[project.markdown_extensions.md_in_html]
+
+[project.markdown_extensions.toc]
+permalink = "⚓"                  # Replaced generic link icons with a clean anchor variant
+
+[project.markdown_extensions.pymdownx.details]
+
+[project.markdown_extensions.pymdownx.emoji]
+emoji_generator = "zensical.extensions.emoji.to_svg"
+emoji_index = "zensical.extensions.emoji.twemoji"
+
+[project.markdown_extensions.pymdownx.highlight]
+anchor_linenums = true
+line_spans = "__span"
+pygments_lang_class = true
+use_pygments = true             # Explicitly enforces syntax highlighting engine colors
+
+[project.markdown_extensions.pymdownx.inlinehilite]
+
+[project.markdown_extensions.pymdownx.smartsymbols]
+
+[project.markdown_extensions.pymdownx.superfences]
+custom_fences = [
+  { name = "mermaid", class = "mermaid", format = "pymdownx.superfences.fence_code_format" },
+]
