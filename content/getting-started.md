@@ -4,6 +4,35 @@ hide:
     - navigation
 ---
 
+<svg class="tg-figure" viewBox="0 0 720 170" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" role="img" aria-label="Install TunGuard with the installer, open the dashboard, and connect a device">
+  <g class="tg-flow tg-accent" stroke-width="2.4">
+    <path d="M190 85h108"/>
+    <path d="M420 85h108"/>
+  </g>
+  <g class="tg-float">
+    <circle cx="130" cy="85" r="46" fill="var(--md-default-bg-color)"/>
+    <rect x="106" y="70" width="48" height="32" rx="4"/>
+    <path class="tg-nudge" d="M114 78l7 7-7 7"/>
+    <path class="tg-blink" d="M126 92h20"/>
+  </g>
+  <g class="tg-float tg-d2">
+    <circle class="tg-pulse tg-accent" cx="360" cy="85" r="52" fill="var(--md-default-bg-color)"/>
+    <rect x="338" y="58" width="44" height="14" rx="3"/>
+    <rect x="338" y="78" width="44" height="14" rx="3"/>
+    <rect x="338" y="98" width="44" height="14" rx="3"/>
+    <circle class="tg-blink" cx="346" cy="65" r="1.6" fill="currentColor" stroke="none"/>
+    <circle class="tg-blink tg-d1" cx="346" cy="85" r="1.6" fill="currentColor" stroke="none"/>
+    <circle class="tg-blink tg-d2" cx="346" cy="105" r="1.6" fill="currentColor" stroke="none"/>
+  </g>
+  <g class="tg-float tg-d3">
+    <circle cx="590" cy="85" r="46" fill="var(--md-default-bg-color)"/>
+    <rect x="576" y="64" width="28" height="42" rx="4"/>
+    <circle class="tg-blink" cx="590" cy="97" r="1.6" fill="currentColor" stroke="none"/>
+  </g>
+</svg>
+
+<p class="tg-cap">Install once, open the dashboard, connect a device.</p>
+
 This page explains how to get started with `TunGuard`. The recommended installation method is the official installer, which installs TunGuard and starts the service automatically.
 
 ## Preliminary Steps

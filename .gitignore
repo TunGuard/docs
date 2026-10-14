@@ -1,0 +1,11 @@
+# Zensical build output
+site/
+
+# Python tooling
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+
+# Editor / OS cruft
+.DS_Store

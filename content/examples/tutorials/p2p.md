@@ -2,6 +2,31 @@
 title: P2P Mesh
 ---
 
+<svg class="tg-figure" viewBox="0 0 720 210" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" role="img" aria-label="Two peers take a direct path when possible and fall back to the relay server only when needed">
+  <path class="tg-flow tg-accent" stroke-width="2.6" d="M150 96C300 40 420 40 570 96"/>
+  <g class="tg-dash" opacity=".5">
+    <path d="M150 112C240 170 300 176 360 176"/>
+    <path d="M570 112C480 170 420 176 360 176"/>
+  </g>
+  <g class="tg-float">
+    <circle cx="110" cy="100" r="40" fill="var(--md-default-bg-color)"/>
+    <rect x="92" y="88" width="36" height="24" rx="4"/>
+    <path d="M98 96h24M98 103h16"/>
+  </g>
+  <g class="tg-float tg-d2">
+    <circle cx="610" cy="100" r="40" fill="var(--md-default-bg-color)"/>
+    <rect x="594" y="86" width="32" height="28" rx="3"/>
+    <circle class="tg-blink" cx="610" cy="108" r="1.6" fill="currentColor" stroke="none"/>
+  </g>
+  <g class="tg-float tg-d3">
+    <circle class="tg-pulse tg-accent" cx="360" cy="176" r="30" fill="var(--md-default-bg-color)"/>
+    <rect x="346" y="164" width="28" height="24" rx="4"/>
+    <path d="M346 172h28M346 180h28"/>
+  </g>
+</svg>
+
+<p class="tg-cap">Direct paths first. The relay is only a fallback when no direct path opens.</p>
+
 TunGuard can run a peer-to-peer mesh between remote devices. The server introduces
 the devices and hands each one the address of the others; the devices then talk to
 each other directly, and the server is only used again if a direct path cannot be
@@ -37,8 +62,8 @@ both ports.
 
 If `7001/UDP` is blocked, clients can still connect and appear online, but they can
 never learn each other's addresses. Every link then stays relayed at best, and in
-practice nothing gets discovered. See [When links stay
-relayed](#when-links-stay-relayed).
+practice nothing gets discovered. See [When the relay is
+used](#when-the-relay-is-used).
 
 ///
 

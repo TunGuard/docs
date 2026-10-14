@@ -2,6 +2,33 @@
 title: TunGuard Client
 ---
 
+<svg class="tg-figure" viewBox="0 0 720 170" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" role="img" aria-label="A device running the tiny TunGuard client joins the mesh through one outbound connection">
+  <g class="tg-flow tg-accent" stroke-width="2.4">
+    <path d="M200 85h110"/>
+    <path d="M420 85h110"/>
+  </g>
+  <g class="tg-float">
+    <circle cx="140" cy="85" r="44" fill="var(--md-default-bg-color)"/>
+    <rect x="126" y="66" width="28" height="38" rx="4"/>
+    <circle class="tg-blink" cx="140" cy="97" r="1.6" fill="currentColor" stroke="none"/>
+  </g>
+  <g class="tg-float tg-d2">
+    <rect x="330" y="55" width="60" height="60" rx="12" fill="var(--md-default-bg-color)"/>
+    <rect x="352" y="77" width="16" height="16" rx="2"/>
+    <path d="M356 77v-5M364 77v-5M356 98v5M364 98v5M352 81h-5M352 89h-5M373 81h5M373 89h5"/>
+    <circle class="tg-blink" cx="360" cy="85" r="2" fill="currentColor" stroke="none"/>
+  </g>
+  <g class="tg-float tg-d3">
+    <circle cx="600" cy="85" r="44" fill="var(--md-default-bg-color)"/>
+    <circle class="tg-blink" cx="600" cy="60" r="4" fill="currentColor" stroke="none"/>
+    <circle class="tg-blink tg-d1" cx="580" cy="102" r="4" fill="currentColor" stroke="none"/>
+    <circle class="tg-blink tg-d2" cx="620" cy="102" r="4" fill="currentColor" stroke="none"/>
+    <path class="tg-flow" d="M600 64l-18 34M600 64l18 34M582 102h36"/>
+  </g>
+</svg>
+
+<p class="tg-cap">One tiny binary, one outbound connection, zero local configuration.</p>
+
 The TunGuard client is a small, fully remote-orchestated binary. It starts in the
 background, opens one **outbound** connection to your TunGuard server, identifies itself
 with a shared key, and then does nothing until the server sends a command.

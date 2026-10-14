@@ -2,6 +2,43 @@
 title: API Reference
 ---
 
+<svg class="tg-figure" viewBox="0 0 720 180" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" role="img" aria-label="Scripts and the dashboard talk to the HTTP API, which manages peers, the mesh and domains">
+  <g class="tg-flow tg-accent" stroke-width="2.4">
+    <path d="M198 90h100"/>
+  </g>
+  <g class="tg-flow tg-accent tg-d1" stroke-width="2.4">
+    <path d="M424 60h76"/>
+    <path d="M424 90h76"/>
+    <path d="M424 120h76"/>
+  </g>
+  <g class="tg-float">
+    <circle cx="140" cy="90" r="46" fill="var(--md-default-bg-color)"/>
+    <rect x="116" y="72" width="48" height="36" rx="5"/>
+    <path class="tg-nudge" d="M126 82l6 6-6 6"/>
+    <path class="tg-blink" d="M136 104h18"/>
+  </g>
+  <g class="tg-float tg-d2">
+    <circle class="tg-pulse tg-accent" cx="362" cy="90" r="52" fill="var(--md-default-bg-color)"/>
+    <path d="M348 74c-8 0-6 16-14 16 8 0 6 16 14 16"/>
+    <path d="M376 74c8 0 6 16 14 16-8 0-6 16-14 16"/>
+    <circle class="tg-blink" cx="362" cy="90" r="2" fill="currentColor" stroke="none"/>
+  </g>
+  <g class="tg-float tg-d3">
+    <rect x="500" y="46" width="176" height="28" rx="8" fill="var(--md-default-bg-color)"/>
+    <text x="588" y="65" text-anchor="middle" font-size="15" fill="currentColor" stroke="none" font-family="ui-monospace,monospace">peers</text>
+  </g>
+  <g class="tg-float tg-d4">
+    <rect x="500" y="76" width="176" height="28" rx="8" fill="var(--md-default-bg-color)"/>
+    <text x="588" y="95" text-anchor="middle" font-size="15" fill="currentColor" stroke="none" font-family="ui-monospace,monospace">mesh</text>
+  </g>
+  <g class="tg-float tg-d2">
+    <rect x="500" y="106" width="176" height="28" rx="8" fill="var(--md-default-bg-color)"/>
+    <text x="588" y="125" text-anchor="middle" font-size="15" fill="currentColor" stroke="none" font-family="ui-monospace,monospace">domains</text>
+  </g>
+</svg>
+
+<p class="tg-cap">Every dashboard action has an HTTP API equivalent.</p>
+
 TunGuard provides an HTTP API for managing the VPN server, its peers, and the P2P mesh.
 
 The API is available under:
@@ -64,15 +101,23 @@ of credential and key management endpoints accept **only** the dashboard login â
 |---|---|
 | Most `/api/*`, all `/api/mesh/*`, all `/api/trp/*` | Dashboard login **or** API key |
 | `/api/auth/status`, `/api/web/credentials`, `/api/key`, `/api/key/regenerate` | Dashboard login only |
-| `/api/health` | None |
+| `/api/health`, `/api/login`, `/api/logout` | None |
 
 ### Dashboard Authentication
 
-Use HTTP Basic Authentication:
+The browser dashboard signs in through an HTML form and a session cookie. For
+scripts, use HTTP Basic Authentication:
 
 ```shell
 curl -u admin:PASSWORD http://localhost:9000/api/status
 ```
+
+`POST /api/login` with a JSON `{"username":...,"password":...}` body establishes
+the same session the browser gets and returns the cookie, and `POST /api/logout`
+clears it. Neither is needed for the Basic-auth flow above. If the server is
+still on the shipped `admin` / `tanguard` login, signing in reports
+`must_change: true` and the dashboard forces you to set your own login before
+you can use it.
 
 ### API Key
 

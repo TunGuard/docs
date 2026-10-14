@@ -2,6 +2,42 @@
 title: SSH Access
 ---
 
+<svg class="tg-figure" viewBox="0 0 720 180" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" role="img" aria-label="An SSH client reaches the server as a jump host, which forwards to the machines on the VPN">
+  <g class="tg-flow tg-accent" stroke-width="2.4">
+    <path d="M196 90h104"/>
+  </g>
+  <g class="tg-flow tg-accent tg-d1" stroke-width="2.4">
+    <path d="M420 68h124"/>
+    <path d="M420 112h124"/>
+  </g>
+  <g class="tg-float">
+    <circle cx="140" cy="90" r="46" fill="var(--md-default-bg-color)"/>
+    <rect x="122" y="76" width="36" height="24" rx="4"/>
+    <path d="M114 104h52"/>
+  </g>
+  <g class="tg-float tg-d2">
+    <circle class="tg-pulse tg-accent" cx="360" cy="90" r="52" fill="var(--md-default-bg-color)"/>
+    <rect x="330" y="66" width="60" height="16" rx="3"/>
+    <rect x="330" y="86" width="60" height="16" rx="3"/>
+    <rect x="330" y="106" width="60" height="16" rx="3"/>
+    <circle class="tg-blink" cx="340" cy="74" r="1.6" fill="currentColor" stroke="none"/>
+    <circle class="tg-blink tg-d1" cx="340" cy="94" r="1.6" fill="currentColor" stroke="none"/>
+    <circle class="tg-blink tg-d2" cx="340" cy="114" r="1.6" fill="currentColor" stroke="none"/>
+  </g>
+  <g class="tg-float tg-d3">
+    <circle cx="592" cy="68" r="38" fill="var(--md-default-bg-color)"/>
+    <rect x="580" y="58" width="24" height="20" rx="3"/>
+    <path d="M576 84h32"/>
+  </g>
+  <g class="tg-float tg-d4">
+    <circle cx="592" cy="112" r="38" fill="var(--md-default-bg-color)"/>
+    <rect x="580" y="102" width="24" height="20" rx="3"/>
+    <path d="M576 128h32"/>
+  </g>
+</svg>
+
+<p class="tg-cap">One server becomes the jump host for every machine on your VPN.</p>
+
 TunGuard can act as an SSH jump host and gives you three ways to reach the
 machines on your VPN: SSH straight through the server with `ssh -J`, an SSH
 terminal in the browser from the dashboard, and a built-in `ssh` client in the

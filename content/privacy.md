@@ -108,10 +108,16 @@ To remove those requests, self-host the three assets: edit the stylesheet's
 
 ### Authentication and browser storage
 
-There are no cookies and no sessions. The dashboard uses HTTP Basic
-authentication, and automation uses an API key in the `X-API-Key` or
-`Authorization` header. The dashboard stores nothing in `localStorage` or
-`sessionStorage`, so clearing your browser data erases it completely.
+Signing in to the dashboard happens through an HTML form rather than the
+browser's native HTTP Basic popup. On success the server sets a random session
+token in an `HttpOnly`, `SameSite=Lax` cookie that lasts 12 hours; no cookie is
+set until you sign in, and signing out clears it. HTTP Basic authentication and
+the API key (`X-API-Key` or `Authorization: Bearer`) still work for scripts and
+automation.
+
+The dashboard stores nothing in `sessionStorage`, and the only thing it keeps in
+`localStorage` is your light or dark theme choice. Clearing your browser data
+erases them completely.
 
 ### Backups
 

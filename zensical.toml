@@ -1,7 +1,7 @@
 
 [project]
 site_name = "TunGuard"
-site_description = "Self-hosted overlay networking: direct peer-to-peer mesh, TCP relay, and WireGuard-compatible VPN from one control plane. No kernel drivers, no extra installs."
+site_description = "The self-hosted, Zero Trust connectivity platform: direct peer-to-peer mesh, TCP relay, WireGuard-compatible VPN, managed DNS filtering, SSH gateway and automatic HTTPS from a single userspace binary."
 site_author = "TunGuard Team"
 copyright = """
 <p>

@@ -2,6 +2,40 @@
 title: Admin Panel
 ---
 
+<svg class="tg-figure" viewBox="0 0 720 180" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" role="img" aria-label="A browser drives the TunGuard dashboard, which manages server state, peers and settings">
+  <g class="tg-flow tg-accent" stroke-width="2.4">
+    <path d="M198 90h100"/>
+    <path d="M422 90h120"/>
+  </g>
+  <g class="tg-float">
+    <circle cx="140" cy="90" r="46" fill="var(--md-default-bg-color)"/>
+    <rect x="112" y="66" width="56" height="44" rx="6"/>
+    <path d="M112 78h56"/>
+    <circle class="tg-blink" cx="120" cy="72" r="1.6" fill="currentColor" stroke="none"/>
+    <circle class="tg-blink tg-d1" cx="127" cy="72" r="1.6" fill="currentColor" stroke="none"/>
+    <path class="tg-sweep" d="M126 92h30" opacity=".7"/>
+  </g>
+  <g class="tg-float tg-d2">
+    <circle class="tg-pulse tg-accent" cx="362" cy="90" r="52" fill="var(--md-default-bg-color)"/>
+    <rect x="336" y="70" width="24" height="40" rx="3"/>
+    <rect x="364" y="70" width="24" height="18" rx="3"/>
+    <rect x="364" y="92" width="24" height="18" rx="3"/>
+    <circle class="tg-blink" cx="378" cy="88" r="1.6" fill="currentColor" stroke="none"/>
+    <circle class="tg-blink tg-d1" cx="378" cy="110" r="1.6" fill="currentColor" stroke="none"/>
+  </g>
+  <g class="tg-float tg-d3">
+    <circle cx="600" cy="90" r="46" fill="var(--md-default-bg-color)"/>
+    <rect x="584" y="66" width="32" height="12" rx="3"/>
+    <rect x="584" y="84" width="32" height="12" rx="3"/>
+    <rect x="584" y="102" width="32" height="12" rx="3"/>
+    <circle class="tg-blink" cx="590" cy="72" r="1.4" fill="currentColor" stroke="none"/>
+    <circle class="tg-blink tg-d1" cx="590" cy="90" r="1.4" fill="currentColor" stroke="none"/>
+    <circle class="tg-blink tg-d2" cx="590" cy="108" r="1.4" fill="currentColor" stroke="none"/>
+  </g>
+</svg>
+
+<p class="tg-cap">Manage peers, settings, backups and the API from the browser.</p>
+
 The TunGuard Admin Panel provides access to server settings, authentication, API access, backups, and peer management.
 
 ## Dashboard Login

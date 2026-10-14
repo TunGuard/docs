@@ -2,6 +2,31 @@
 title: AdGuard DNS Filtering
 ---
 
+<svg class="tg-figure" viewBox="0 0 720 190" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" role="img" aria-label="Device DNS queries pass through the AdGuard filter before reaching the upstream resolver, and ad and tracker domains are blocked">
+  <g class="tg-flow tg-accent" stroke-width="2.4">
+    <path d="M180 95h92"/>
+    <path d="M420 70h120"/>
+  </g>
+  <path class="tg-dash" opacity=".5" d="M420 120h90"/>
+  <path stroke-width="2.6" d="M460 110l16 16M476 110l-16 16"/>
+  <g class="tg-float">
+    <circle cx="140" cy="95" r="44" fill="var(--md-default-bg-color)"/>
+    <rect x="126" y="76" width="28" height="38" rx="4"/>
+    <circle class="tg-blink" cx="140" cy="107" r="1.6" fill="currentColor" stroke="none"/>
+  </g>
+  <g class="tg-float tg-d2">
+    <circle cx="320" cy="95" r="56" fill="var(--md-default-bg-color)"/>
+    <path d="M320 60l26 11v20c0 14-10 26-26 30-16-4-26-16-26-30V71l26-11z"/>
+    <path class="tg-draw tg-accent" style="--tg-len:26" d="M308 90l8 8 18-20"/>
+  </g>
+  <g class="tg-float tg-d3">
+    <circle cx="560" cy="70" r="40" fill="var(--md-default-bg-color)"/>
+    <path d="M548 76a9 9 0 0 1 1-16 11 11 0 0 1 20-1 7 7 0 0 1 1 14z"/>
+  </g>
+</svg>
+
+<p class="tg-cap">Queries are filtered before they resolve. Ads and trackers never load.</p>
+
 TunGuard can run a managed [AdGuard Home](https://github.com/AdguardTeam/AdGuardHome)
 instance to filter DNS for the devices on your VPN. It is installed and tuned
 for you, so a phone under full-tunnel WireGuard gets ad-blocking without any
@@ -104,6 +129,38 @@ profile configures. Keep it Off, and the moment the device is in an AdGuard
 group its traffic is filtered, with no profile change.
 
 ///
+
+## Public resolver (DoH and DoT)
+
+The VPN path filters the devices on your tunnel. You can also expose the **same**
+AdGuard filter to the wider internet as a public resolver, without any VPN
+client, by mapping a domain to it as a `dns` backend:
+
+```text
+domain add dns.example.com --dns
+```
+
+That serves:
+
+- **DNS-over-HTTPS** at `https://dns.example.com/dns-query`
+- **DNS-over-TLS** at `dns.example.com:853`
+- A landing page at the root explaining both endpoints
+
+Only `/dns-query` is proxied to AdGuard: its admin UI and login are never
+reachable through the mapped domain. This is covered in full in
+[Domains & HTTPS Proxy](domains.md#serving-a-public-dns-resolver-doh-dot).
+
+A few things worth knowing:
+
+- It is the **same resolver**: the blocklists, custom rules and upstreams you
+  configure in the AdGuard web UI apply to public and VPN queries alike.
+- TLS is terminated by TunGuard, so AdGuard's DoH follows the tunnel-style
+  setup internally; you do not configure DoT or the public certificate inside
+  AdGuard.
+- The `dns` backend needs AdGuard to be running. Stop AdGuard and the public
+  resolver stops answering (the DoT listener goes down with it).
+- It is an **open resolver**. AdGuard's rate limit bounds abuse, but anyone can
+  query it. See the [security notes](domains.md#security-notes).
 
 ## Policy group integration
 
