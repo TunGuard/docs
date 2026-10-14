@@ -1,0 +1,4454 @@
+
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="The self-hosted, Zero Trust connectivity platform: direct peer-to-peer mesh, TCP relay, WireGuard-compatible VPN, managed DNS filtering, SSH gateway and automatic HTTPS from a single userspace binary.">
+      
+      
+        <meta name="author" content="TunGuard Team">
+      
+      
+        <link rel="canonical" href="https://tunguard.github.io/v2.4/changelog/">
+      
+      
+        <link rel="prev" href="./..">
+      
+      
+        <link rel="next" href="../faq/">
+      
+      
+        
+          <link rel="alternate" href="/docs/" hreflang="en">
+        
+          <link rel="alternate" href="/docs/fr/" hreflang="fr">
+        
+          <link rel="alternate" href="/docs/es/" hreflang="es">
+        
+      
+      
+      <link rel="icon" href="../assets/logo/favicon.png">
+      <meta name="generator" content="zensical-0.0.62">
+    
+    
+      
+        <title>Changelog - TunGuard</title>
+      
+    
+    
+      
+        
+      
+      <link rel="stylesheet" href="../assets/stylesheets/modern/main.ce62732f.min.css">
+      
+        
+          
+        
+        <link rel="stylesheet" href="../assets/stylesheets/modern/palette.812a03bb.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=JetBrains+Mono:300,300i,400,400i,500,500i,700,700i%7CFira+Code:400,400i,700,700i&amp;display=fallback">
+        <style>:root{--md-text-font:"JetBrains Mono";--md-code-font:"Fira Code"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("..",location),__md_scope.pathname.endsWith("/")||(__md_scope=new URL(__md_scope.pathname+"/",location)),__md_hash=e=>[...e].reduce(((e,t)=>(e<<5)-e+t.charCodeAt(0)),0),__md_get=(e,t=localStorage,_=__md_scope)=>JSON.parse(t.getItem(_.pathname+"."+e)),__md_set=(e,t,_=localStorage,a=__md_scope)=>{try{_.setItem(a.pathname+"."+e,JSON.stringify(t))}catch(e){}},document.documentElement.setAttribute("data-platform",navigator.platform)</script>
+    
+      
+
+    
+    
+<meta name="google-site-verification" content="qk4z4XjKirsxHnB8huMe20-6p28GvDYIlPmteRVOwek" />
+<style>
+  /* ── TunGuard documentation animations ─────────────────────────────────
+     Small, self-contained, theme-aware motion for inline SVG diagrams.
+     Every effect is CSS only and honours prefers-reduced-motion. */
+
+  @keyframes tgSpin   { to { transform: rotate(360deg); } }
+  @keyframes tgSpinR  { to { transform: rotate(-360deg); } }
+  @keyframes tgFloat  { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-6px); } }
+  @keyframes tgBob    { 0%,100% { transform: translateY(0); } 50% { transform: translateY(4px); } }
+  @keyframes tgPulse  { 0%,100% { opacity: 1; } 50% { opacity: .3; } }
+  @keyframes tgBlink  { 0%,55%,100% { opacity: 1; } 30% { opacity: .15; } }
+  @keyframes tgFlow   { to { stroke-dashoffset: -34; } }
+  @keyframes tgDraw   { to { stroke-dashoffset: 0; } }
+  @keyframes tgRipple { 0% { transform: scale(.45); opacity: .75; } 100% { transform: scale(1.7); opacity: 0; } }
+  @keyframes tgSweep  { 0% { transform: translateX(-45%); } 100% { transform: translateX(145%); } }
+  @keyframes tgNudge  { 0%,100% { transform: translateX(0); } 50% { transform: translateX(5px); } }
+  @keyframes tgBar    { 0%,100% { transform: scaleY(.45); } 50% { transform: scaleY(1); } }
+  @keyframes tgDash   { to { stroke-dashoffset: -1000; } }
+
+  .tg-spin   { animation: tgSpin 9s linear infinite;  transform-origin: center; transform-box: fill-box; }
+  .tg-spin-r { animation: tgSpinR 14s linear infinite; transform-origin: center; transform-box: fill-box; }
+  .tg-float  { animation: tgFloat 4s ease-in-out infinite; }
+  .tg-bob    { animation: tgBob 3s ease-in-out infinite; }
+  .tg-pulse  { animation: tgPulse 2.4s ease-in-out infinite; }
+  .tg-blink  { animation: tgBlink 2s ease-in-out infinite; }
+  .tg-flow   { stroke-dasharray: 5 9; animation: tgFlow 1.3s linear infinite; }
+  .tg-dash   { stroke-dasharray: 4 6; animation: tgDash 18s linear infinite; }
+  .tg-draw   { stroke-dasharray: var(--tg-len, 220); stroke-dashoffset: var(--tg-len, 220); animation: tgDraw 2s ease forwards; }
+  .tg-ripple { animation: tgRipple 2.8s ease-out infinite; transform-origin: center; transform-box: fill-box; }
+  .tg-sweep  { animation: tgSweep 3.2s ease-in-out infinite; }
+  .tg-nudge  { animation: tgNudge 2.2s ease-in-out infinite; }
+  .tg-bar    { animation: tgBar 1.5s ease-in-out infinite; transform-origin: bottom; transform-box: fill-box; }
+
+  .tg-d1 { animation-delay: .25s; } .tg-d2 { animation-delay: .5s; }
+  .tg-d3 { animation-delay: .75s; } .tg-d4 { animation-delay: 1s; }
+
+  /* Theme-aware figure + inline icon helpers. */
+  .tg-figure {
+    display: block; margin: 1.4rem auto 1.8rem; width: 100%;
+    max-width: 680px; height: auto;
+    color: var(--md-primary-fg-color);
+  }
+  .tg-figure .tg-accent { color: var(--md-accent-fg-color); }
+  .tg-icon { display: inline-block; vertical-align: -0.22em; width: 1.3em; height: 1.3em; color: var(--md-accent-fg-color); }
+  .tg-cap { text-align: center; font-size: .78rem; opacity: .72; margin: -1rem 0 1.8rem; }
+  .tg-legend { list-style: none; padding-left: 0; }
+  .tg-legend li { display: flex; gap: .6rem; align-items: flex-start; margin: .5rem 0; }
+
+  @media (prefers-reduced-motion: reduce) {
+    [class^="tg-"], [class*=" tg-"] { animation: none !important; }
+  }
+</style>
+
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer" aria-label="Navigation"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#unreleased" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      <div data-md-color-scheme="default" data-md-component="outdated" hidden>
+        
+      </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="./.." title="TunGuard" class="md-header__button md-logo" aria-label="TunGuard" data-md-component="logo">
+      
+  <img src="../assets/logo/logo.png" alt="TunGuard">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer" aria-label="Navigation">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-menu" viewBox="0 0 24 24"><path d="M4 5h16M4 12h16M4 19h16"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            TunGuard
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Changelog
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-sun-moon" viewBox="0 0 24 24"><path d="M12 2v2M14.837 16.385a6 6 0 1 1-7.223-7.222c.624-.147.97.66.715 1.248a4 4 0 0 0 5.26 5.259c.589-.255 1.396.09 1.248.715M16 12a4 4 0 0 0-4-4M19 5l-1.256 1.256M20 12h2"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="blue-grey" data-md-color-accent="teal"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_2" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="teal" data-md-color-accent="cyan"  aria-label="Switch to system preference"  type="radio" name="__palette" id="__palette_2">
+    
+      <label class="md-header__button md-icon" title="Switch to system preference" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-moon" viewBox="0 0 24 24"><path d="M20.985 12.486a9 9 0 1 1-9.473-9.472c.405-.022.617.46.402.803a6 6 0 0 0 8.268 8.268c.344-.215.825-.004.803.401"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+      <div class="md-header__option">
+  <div class="md-select">
+    
+    <button class="md-header__button md-icon" aria-label="Select language">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-languages" viewBox="0 0 24 24"><path d="m5 8 6 6M4 14l6-6 2-3M2 5h12M7 2h1M22 22l-5-10-5 10M14 18h6"/></svg>
+    </button>
+    <div class="md-select__inner">
+      <ul class="md-select__list">
+        
+          <li class="md-select__item">
+            <a href="/docs/" hreflang="en" class="md-select__link">
+              English
+            </a>
+          </li>
+        
+          <li class="md-select__item">
+            <a href="/docs/fr/" hreflang="fr" class="md-select__link">
+              Français
+            </a>
+          </li>
+        
+          <li class="md-select__item">
+            <a href="/docs/es/" hreflang="es" class="md-select__link">
+              Español
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</div>
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search" aria-label="Search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-search" viewBox="0 0 24 24"><path d="m21 21-4.34-4.34"/><circle cx="11" cy="11" r="8"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog" aria-label="Search">
+  <button type="button" class="md-search__button">
+    Search
+  </button>
+</div>
+      
+    
+    <div class="md-header__source">
+      
+        <a href="https://github.com/TunGuard/tanguard-binary" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.3.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2026 Fonticons, Inc.--><path fill="currentColor" d="M216.5 362.5c-66-8-112.5-55.5-112.5-117 0-25 9-52 24-70-6.5-16.5-5.5-51.5 2-66 20-2.5 47 8 63 22.5 19-6 39-9 63.5-9s44.5 3 62.5 8.5c15.5-14 43-24.5 63-22 7 13.5 8 48.5 1.5 65.5 16 19 24.5 44.5 24.5 70.5 0 61.5-46.5 108-113.5 116.5 17 11 28.5 35 28.5 62.5v52c0 15 12.5 23.5 27.5 17.5C441 459.5 512 369 512 257 512 115.5 397 0 255.5 0S0 115.5 0 257c0 111 70.5 203 165.5 237.5 13.5 5 26.5-4 26.5-17.5v-40c-7 3-16 5-24 5-33 0-52.5-18-66.5-51.5-5.5-13.5-11.5-21.5-23-23-6-.5-8-3-8-6 0-6 10-10.5 20-10.5 14.5 0 27 9 40 27.5 10 14.5 20.5 21 33 21s20.5-4.5 32-16c8.5-8.5 15-16 21-21"/></svg>
+  </div>
+  <div class="md-source__repository">
+    TunGuard/tanguard-binary
+  </div>
+</a>
+      
+    </div>
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="./.." class="md-tabs__link">
+        
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    <li class="md-tabs__item md-tabs__item--active">
+      <a href="././" class="md-tabs__link">
+        
+  
+  Changelog
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../faq/" class="md-tabs__link">
+        
+  
+  FAQ
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../getting-started/" class="md-tabs__link">
+        
+  
+  Getting Started
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../privacy/" class="md-tabs__link">
+        
+  
+  Privacy Policy
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+      
+    
+    
+    
+      
+  
+  
+  
+  
+    
+      
+    
+    
+    
+      <li class="md-tabs__item">
+        <a href="../advanced/config/conf/" class="md-tabs__link">
+          
+  
+  Advanced
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+      
+    
+    
+    
+      <li class="md-tabs__item">
+        <a href="../contributing/general/" class="md-tabs__link">
+          
+  
+  Contributing
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+      
+    
+    
+    
+      
+  
+  
+  
+  
+    
+      
+    
+    
+    
+      <li class="md-tabs__item">
+        <a href="../examples/tutorials/basic-installation/" class="md-tabs__link">
+          
+  
+  Examples
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+      
+    
+    
+    
+      <li class="md-tabs__item">
+        <a href="../guides/adguard/" class="md-tabs__link">
+          
+  
+  Guides
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="./.." title="TunGuard" class="md-nav__button md-logo" aria-label="TunGuard" data-md-component="logo">
+      
+  <img src="../assets/logo/logo.png" alt="TunGuard">
+
+    </a>
+    TunGuard
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/TunGuard/tanguard-binary" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.3.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2026 Fonticons, Inc.--><path fill="currentColor" d="M216.5 362.5c-66-8-112.5-55.5-112.5-117 0-25 9-52 24-70-6.5-16.5-5.5-51.5 2-66 20-2.5 47 8 63 22.5 19-6 39-9 63.5-9s44.5 3 62.5 8.5c15.5-14 43-24.5 63-22 7 13.5 8 48.5 1.5 65.5 16 19 24.5 44.5 24.5 70.5 0 61.5-46.5 108-113.5 116.5 17 11 28.5 35 28.5 62.5v52c0 15 12.5 23.5 27.5 17.5C441 459.5 512 369 512 257 512 115.5 397 0 255.5 0S0 115.5 0 257c0 111 70.5 203 165.5 237.5 13.5 5 26.5-4 26.5-17.5v-40c-7 3-16 5-24 5-33 0-52.5-18-66.5-51.5-5.5-13.5-11.5-21.5-23-23-6-.5-8-3-8-6 0-6 10-10.5 20-10.5 14.5 0 27 9 40 27.5 10 14.5 20.5 21 33 21s20.5-4.5 32-16c8.5-8.5 15-16 21-21"/></svg>
+  </div>
+  <div class="md-source__repository">
+    TunGuard/tanguard-binary
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="./.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Home
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Changelog
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="././" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Changelog
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+
+<nav class="md-nav md-nav--secondary" aria-label="On this page">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      On this page
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#unreleased" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        [Unreleased]
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2418-2026-10-14" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        [2.4.18] - 2026-10-14
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="[2.4.18] - 2026-10-14">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#added" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Added
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#changed" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Changed
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2417-2026-10-11" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        [2.4.17] - 2026-10-11
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="[2.4.17] - 2026-10-11">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#added_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Added
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2416-2026-10-11" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        [2.4.16] - 2026-10-11
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="[2.4.16] - 2026-10-11">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#fixed" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Fixed
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#249-2026-10-10" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        [2.4.9] - 2026-10-10
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="[2.4.9] - 2026-10-10">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#fixed_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Fixed
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2411-2026-10-11" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        [2.4.11] - 2026-10-11
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="[2.4.11] - 2026-10-11">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#added_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Added
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2410-2026-10-10" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        [2.4.10] - 2026-10-10
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="[2.4.10] - 2026-10-10">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#fixed_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Fixed
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#248-2026-10-10" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        [2.4.8] - 2026-10-10
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="[2.4.8] - 2026-10-10">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#changed_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Changed
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#247-2026-10-10" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        [2.4.7] - 2026-10-10
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="[2.4.7] - 2026-10-10">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#added_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Added
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#246-2026-10-09" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        [2.4.6] - 2026-10-09
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="[2.4.6] - 2026-10-09">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#added_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Added
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#245-2026-10-08" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        [2.4.5] - 2026-10-08
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="[2.4.5] - 2026-10-08">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#added_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Added
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#changed_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Changed
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#244-2026-10-07" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        [2.4.4] - 2026-10-07
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="[2.4.4] - 2026-10-07">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#changed_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Changed
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#added_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Added
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#242-2026-10-04" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        [2.4.2] - 2026-10-04
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="[2.4.2] - 2026-10-04">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#added_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Added
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#fixed_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Fixed
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#changed_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Changed
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#241-2026-10-04" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        [2.4.1] - 2026-10-04
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="[2.4.1] - 2026-10-04">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#fixed_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Fixed
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#240-2026-10-03" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        [2.4.0] - 2026-10-03
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="[2.4.0] - 2026-10-03">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#added_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Added
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#fixed_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Fixed
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#232-2026-09-29" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        [2.3.2] - 2026-09-29
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="[2.3.2] - 2026-09-29">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#fixed_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Fixed
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#added_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Added
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#231-2026-09-29" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        [2.3.1] - 2026-09-29
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="[2.3.1] - 2026-09-29">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#fixed_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Fixed
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#230-2026-09-29" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        [2.3.0] - 2026-09-29
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="[2.3.0] - 2026-09-29">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#added_10" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Added
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#fixed_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Fixed
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#221-2026-08-18" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        [2.2.1] - 2026-08-18
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="[2.2.1] - 2026-08-18">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#fixed_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Fixed
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#220-2026-08-17" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        [2.2.0] - 2026-08-17
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="[2.2.0] - 2026-08-17">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#added_11" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Added
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#changed_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Changed
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#fixed_10" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Fixed
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#213-2026-08-17" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        [2.1.3] - 2026-08-17
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="[2.1.3] - 2026-08-17">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#changed_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Changed
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#212-2026-08-16" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        [2.1.2] - 2026-08-16
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="[2.1.2] - 2026-08-16">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#fixed_11" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Fixed
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#211-2026-08-16" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        [2.1.1] - 2026-08-16
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="[2.1.1] - 2026-08-16">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#added_12" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Added
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#fixed_12" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Fixed
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#210-2026-08-16" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        [2.1.0] - 2026-08-16
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="[2.1.0] - 2026-08-16">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#added_13" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Added
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#changed_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Changed
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#200-2026-08-14" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        [2.0.0] - 2026-08-14
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="[2.0.0] - 2026-08-14">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#added_14" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Added
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#changed_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Changed
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#fixed_13" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Fixed
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#130-2026-08-07" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        [1.3.0] - 2026-08-07
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="[1.3.0] - 2026-08-07">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#added_15" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Added
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#changed_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Changed
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#121-2026-08-04" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        [1.2.1] - 2026-08-04
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="[1.2.1] - 2026-08-04">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#fixed_14" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Fixed
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#120-2026-08-03" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        [1.2.0] - 2026-08-03
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="[1.2.0] - 2026-08-03">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#added_16" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Added
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#fixed_15" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Fixed
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#110-2026-08-03" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        [1.1.0] - 2026-08-03
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="[1.1.0] - 2026-08-03">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#added_17" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Added
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#changed_10" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Changed
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#100-2026-07-01" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        [1.0.0] - 2026-07-01
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="[1.0.0] - 2026-07-01">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#added_18" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Added
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../faq/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  FAQ
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../getting-started/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Getting Started
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../privacy/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Privacy Policy
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Advanced
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+  Advanced
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_6_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_6_1" id="__nav_6_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Config
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_6_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+  Config
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../advanced/config/conf/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Configuration
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../advanced/config/openwrt/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  OpenWrt
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_6_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_6_2" id="__nav_6_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Metrics
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_6_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+  Metrics
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../advanced/metrics/monitor/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Monitoring
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_6_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_6_3" id="__nav_6_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Migrate
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_6_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+  Migrate
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../advanced/migrate/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Migrate
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Contributing
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+  Contributing
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../contributing/general/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  General Information
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../contributing/issues-and-pull-requests/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Issues and Pull Requests
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../contributing/translation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Translation
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Examples
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+  Examples
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_8_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_8_1" id="__nav_8_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Tutorials
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_8_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+  Tutorials
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../examples/tutorials/basic-installation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Public Access
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../examples/tutorials/p2p/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  P2P Mesh
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../examples/tutorials/router-provision/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Router Provision
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_9" >
+        
+          
+          <label class="md-nav__link" for="__nav_9" id="__nav_9_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Guides
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_9">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+  Guides
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../guides/adguard/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  AdGuard DNS Filtering
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../guides/admin/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Admin Panel
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../guides/api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  API Reference
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../guides/cli/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  CLI
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../guides/client/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  TunGuard Client
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../guides/clients/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Edit Peer
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../guides/domains/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Domains & HTTPS Proxy
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../guides/setup/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Setup
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../guides/ssh/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  SSH Access
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  
+                    
+                    
+                    
+                    
+                      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+                      <div class="md-sidebar-button__wrapper">
+                        <label class="md-sidebar-button" for="__toc"></label>
+                      </div>
+                    
+                  
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--secondary" aria-label="On this page">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      On this page
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#unreleased" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        [Unreleased]
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2418-2026-10-14" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        [2.4.18] - 2026-10-14
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="[2.4.18] - 2026-10-14">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#added" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Added
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#changed" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Changed
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2417-2026-10-11" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        [2.4.17] - 2026-10-11
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="[2.4.17] - 2026-10-11">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#added_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Added
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2416-2026-10-11" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        [2.4.16] - 2026-10-11
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="[2.4.16] - 2026-10-11">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#fixed" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Fixed
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#249-2026-10-10" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        [2.4.9] - 2026-10-10
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="[2.4.9] - 2026-10-10">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#fixed_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Fixed
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2411-2026-10-11" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        [2.4.11] - 2026-10-11
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="[2.4.11] - 2026-10-11">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#added_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Added
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2410-2026-10-10" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        [2.4.10] - 2026-10-10
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="[2.4.10] - 2026-10-10">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#fixed_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Fixed
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#248-2026-10-10" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        [2.4.8] - 2026-10-10
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="[2.4.8] - 2026-10-10">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#changed_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Changed
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#247-2026-10-10" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        [2.4.7] - 2026-10-10
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="[2.4.7] - 2026-10-10">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#added_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Added
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#246-2026-10-09" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        [2.4.6] - 2026-10-09
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="[2.4.6] - 2026-10-09">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#added_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Added
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#245-2026-10-08" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        [2.4.5] - 2026-10-08
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="[2.4.5] - 2026-10-08">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#added_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Added
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#changed_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Changed
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#244-2026-10-07" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        [2.4.4] - 2026-10-07
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="[2.4.4] - 2026-10-07">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#changed_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Changed
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#added_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Added
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#242-2026-10-04" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        [2.4.2] - 2026-10-04
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="[2.4.2] - 2026-10-04">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#added_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Added
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#fixed_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Fixed
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#changed_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Changed
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#241-2026-10-04" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        [2.4.1] - 2026-10-04
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="[2.4.1] - 2026-10-04">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#fixed_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Fixed
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#240-2026-10-03" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        [2.4.0] - 2026-10-03
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="[2.4.0] - 2026-10-03">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#added_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Added
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#fixed_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Fixed
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#232-2026-09-29" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        [2.3.2] - 2026-09-29
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="[2.3.2] - 2026-09-29">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#fixed_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Fixed
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#added_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Added
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#231-2026-09-29" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        [2.3.1] - 2026-09-29
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="[2.3.1] - 2026-09-29">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#fixed_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Fixed
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#230-2026-09-29" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        [2.3.0] - 2026-09-29
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="[2.3.0] - 2026-09-29">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#added_10" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Added
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#fixed_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Fixed
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#221-2026-08-18" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        [2.2.1] - 2026-08-18
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="[2.2.1] - 2026-08-18">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#fixed_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Fixed
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#220-2026-08-17" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        [2.2.0] - 2026-08-17
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="[2.2.0] - 2026-08-17">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#added_11" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Added
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#changed_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Changed
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#fixed_10" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Fixed
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#213-2026-08-17" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        [2.1.3] - 2026-08-17
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="[2.1.3] - 2026-08-17">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#changed_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Changed
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#212-2026-08-16" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        [2.1.2] - 2026-08-16
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="[2.1.2] - 2026-08-16">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#fixed_11" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Fixed
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#211-2026-08-16" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        [2.1.1] - 2026-08-16
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="[2.1.1] - 2026-08-16">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#added_12" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Added
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#fixed_12" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Fixed
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#210-2026-08-16" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        [2.1.0] - 2026-08-16
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="[2.1.0] - 2026-08-16">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#added_13" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Added
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#changed_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Changed
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#200-2026-08-14" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        [2.0.0] - 2026-08-14
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="[2.0.0] - 2026-08-14">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#added_14" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Added
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#changed_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Changed
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#fixed_13" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Fixed
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#130-2026-08-07" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        [1.3.0] - 2026-08-07
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="[1.3.0] - 2026-08-07">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#added_15" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Added
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#changed_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Changed
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#121-2026-08-04" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        [1.2.1] - 2026-08-04
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="[1.2.1] - 2026-08-04">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#fixed_14" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Fixed
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#120-2026-08-03" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        [1.2.0] - 2026-08-03
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="[1.2.0] - 2026-08-03">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#added_16" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Added
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#fixed_15" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Fixed
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#110-2026-08-03" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        [1.1.0] - 2026-08-03
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="[1.1.0] - 2026-08-03">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#added_17" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Added
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#changed_10" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Changed
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#100-2026-07-01" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        [1.0.0] - 2026-07-01
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="[1.0.0] - 2026-07-01">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#added_18" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Added
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+                
+
+
+
+  
+
+
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+  
+    <a href="https://github.com/TunGuard/tanguard-binary/edit/main/content/en/changelog.md" title="Edit this page" class="md-content__button md-icon" rel="edit">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-file-pen" viewBox="0 0 24 24"><path d="M12.659 22H18a2 2 0 0 0 2-2V8a2.4 2.4 0 0 0-.706-1.706l-3.588-3.588A2.4 2.4 0 0 0 14 2H6a2 2 0 0 0-2 2v9.34"/><path d="M14 2v5a1 1 0 0 0 1 1h5M10.378 12.622a1 1 0 0 1 3 3.003L8.36 20.637a2 2 0 0 1-.854.506l-2.867.837a.5.5 0 0 1-.62-.62l.836-2.869a2 2 0 0 1 .506-.853z"/></svg>
+    </a>
+  
+  
+    
+      
+    
+    <a href="https://github.com/TunGuard/tanguard-binary/raw/main/content/en/changelog.md" title="View source of this page" class="md-content__button md-icon">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-file-code-2" viewBox="0 0 24 24"><path d="M4 12.15V4a2 2 0 0 1 2-2h8a2.4 2.4 0 0 1 1.706.706l3.588 3.588A2.4 2.4 0 0 1 20 8v12a2 2 0 0 1-2 2h-3.35"/><path d="M14 2v5a1 1 0 0 0 1 1h5M5 16l-3 3 3 3M9 22l3-3-3-3"/></svg>
+    </a>
+  
+
+
+  <h1 id="__skip">Changelog</h1>
+
+<p>All notable changes to TunGuard are documented in this file.</p>
+<p>The format is based on <a href="https://keepachangelog.com/en/1.0.0/">Keep a Changelog</a>,
+and this project adheres to <a href="https://semver.org/spec/v2.0.0.html">Semantic Versioning</a>.</p>
+<h2 id="unreleased">[Unreleased]<a class="headerlink" href="#unreleased" title="Permanent link">⚓</a></h2>
+<h2 id="2418-2026-10-14">[2.4.18] - 2026-10-14<a class="headerlink" href="#2418-2026-10-14" title="Permanent link">⚓</a></h2>
+<h3 id="added">Added<a class="headerlink" href="#added" title="Permanent link">⚓</a></h3>
+<ul>
+<li><strong>A mapped domain can now be a public, login-free DNS resolver.</strong> Add a
+  mapping with <code>domain add dns.example.com --dns</code> and TunGuard serves
+  AdGuard Home as DNS-over-HTTPS at <code>https://dns.example.com/dns-query</code> (on the
+  domain HTTPS port) and DNS-over-TLS on <code>dns.example.com:853</code>
+  (<code>DOMAIN_DOT_PORT</code>), so phones can point their Private DNS at it. Only the
+  <code>/dns-query</code> path is proxied to AdGuard; the root shows a TunGuard landing
+  page and every other path returns 404, so AdGuard's admin UI is never exposed
+  through the mapping. Works in both built-in mode and when nginx, Apache,
+  Caddy or Traefik is detected. Requires AdGuard Home to be enabled.</li>
+<li><strong>The dashboard signs in with a real HTML page instead of the browser's Basic
+  auth popup.</strong> A successful sign-in gets a 12-hour <code>HttpOnly</code>, <code>SameSite=Lax</code>
+  session cookie, and changing the login rotates every session. On a server
+  still on the shipped <code>admin</code> / <code>tanguard</code> login, signing in with the defaults
+  forces the "set your dashboard login" step before the dashboard opens. HTTP
+  Basic auth and API keys keep working for scripts, the SSH gateway and curl.</li>
+</ul>
+<h3 id="changed">Changed<a class="headerlink" href="#changed" title="Permanent link">⚓</a></h3>
+<ul>
+<li>The dashboard login page no longer triggers the native HTTP Basic challenge
+  (no <code>WWW-Authenticate</code>), and the dashboard login / key endpoints answer 401
+  with a JSON body rather than a Basic challenge.</li>
+</ul>
+<h2 id="2417-2026-10-11">[2.4.17] - 2026-10-11<a class="headerlink" href="#2417-2026-10-11" title="Permanent link">⚓</a></h2>
+<h3 id="added_1">Added<a class="headerlink" href="#added_1" title="Permanent link">⚓</a></h3>
+<ul>
+<li><strong>AdGuard now protects a phone the moment it is moved into an AdGuard group —
+  no re-import needed.</strong> Previously the filter only applied when a client
+  profile was generated with AdGuard as its DNS server, so a group move did not
+  change the DNS an already-installed phone used and ads kept showing (and
+  moving back out kept the filtered DNS). The server now intercepts the DNS of
+  peers whose policy group allows AdGuard: a <code>TUNGARD_DNS</code> iptables chain in the
+  nat table redirects each such peer's port-53 queries (udp and tcp) to the
+  AdGuard listener. Rules are rebuilt after any peer or policy group change, on
+  AdGuard start/stop, after a restore, and at startup, and removed again on
+  shutdown. One limitation: Android's "Private DNS" (DNS-over-HTTPS/TLS) bypasses
+  port-53 interception.</li>
+</ul>
+<h2 id="2416-2026-10-11">[2.4.16] - 2026-10-11<a class="headerlink" href="#2416-2026-10-11" title="Permanent link">⚓</a></h2>
+<h3 id="fixed">Fixed<a class="headerlink" href="#fixed" title="Permanent link">⚓</a></h3>
+<ul>
+<li><strong>AdGuard DNS is now reachable through the VPN.</strong> AdGuard was bound to
+  <code>127.0.0.1:5353</code>, and client WireGuard profiles were handed that same
+  loopback address as their <code>DNS =</code> value. On a phone <code>127.0.0.1</code> means the
+  phone itself, so DNS queries never reached the server and filtering silently
+  did nothing for any device with WireGuard access. The DNS listener now
+  defaults to the server's tunnel address on port 53 (<code>10.100.0.1:53</code>, derived
+  from <code>WG_ADDRESS</code>), and the client profile is handed that bare tunnel address.</li>
+<li><strong>The DNS listener is re-applied on every start.</strong> Previously the AdGuard
+  config's DNS block was only written on first run, so an existing
+  <code>AdGuardHome.yaml</code> kept its old loopback listener. Host and port are now
+  corrected on each start while the rest of the block (upstreams, blocklists,
+  cache) is preserved. When the tunnel address is not present (mesh-only mode),
+  it falls back to loopback so the filter still starts.</li>
+</ul>
+<h2 id="249-2026-10-10">[2.4.9] - 2026-10-10<a class="headerlink" href="#249-2026-10-10" title="Permanent link">⚓</a></h2>
+<h3 id="fixed_1">Fixed<a class="headerlink" href="#fixed_1" title="Permanent link">⚓</a></h3>
+<ul>
+<li><strong>Detect the web server actually holding ports 80/443.</strong> Detection now keys
+  off whoever owns the public ports first, then falls back to any running
+  supported server. Previously it only scanned running processes and could
+  pick a server that was not the one listening (e.g. nginx installed but idle
+  while apache served), so the mapping was written to the wrong config.</li>
+<li><strong>Manage config across server switches.</strong> When the active web server
+  changes (apache → nginx, nginx → caddy, ...), the generated config of the
+  previous server is removed — vhost files and sites-enabled symlinks, the
+  Caddyfile import with its site file, or the traefik dynamic file — so stale
+  routes are never left behind.</li>
+</ul>
+<h2 id="2411-2026-10-11">[2.4.11] - 2026-10-11<a class="headerlink" href="#2411-2026-10-11" title="Permanent link">⚓</a></h2>
+<h3 id="added_2">Added<a class="headerlink" href="#added_2" title="Permanent link">⚓</a></h3>
+<ul>
+<li><strong>AdGuard Home integration.</strong> Optional AdGuard Home DNS filtering service.
+  Enable with <code>ADGUARD_ENABLED=true</code>. TunGuard can download and manage
+  AdGuard Home automatically, generates a basic config (DNS/listen/web UI),
+  and exposes start/stop/status via API/UI. Policy groups gain an "AdGuard
+  DNS filtering" toggle - when enabled, generated client WireGuard configs
+  use AdGuard as the DNS server so clients receive filtered DNS. Defaults
+  follow sensible values (<code>ADGUARD_DNS_LISTEN=10.100.0.1:53</code>) and do not
+  affect existing TRP/domains behavior.</li>
+</ul>
+<h2 id="2410-2026-10-10">[2.4.10] - 2026-10-10<a class="headerlink" href="#2410-2026-10-10" title="Permanent link">⚓</a></h2>
+<h3 id="fixed_2">Fixed<a class="headerlink" href="#fixed_2" title="Permanent link">⚓</a></h3>
+<ul>
+<li><strong>Don't emit SSL vhosts until the certificate exists.</strong> Nginx/Apache writers
+  now only write the <code>443</code>/TLS blocks when the certificate is on disk. Writing
+  <code>ssl_certificate</code> for missing files made <code>nginx -t</code>/<code>apachectl configtest</code>
+  fail, which prevented the whole vhost (including the port-80 ACME challenge
+  proxy) from loading. The port-80 block is always emitted so HTTP-01
+  validation can proceed and the cert is issued first.</li>
+<li><strong>Write nginx config where nginx actually includes it.</strong> The server detects
+  whether <code>/etc/nginx/nginx.conf</code> includes <code>conf.d/</code> or <code>sites-enabled/</code> (Debian
+  layout) and writes to the matching directory, creating symlinks into
+  <code>sites-enabled</code> when needed. Stale configs are cleaned from both locations.</li>
+<li><strong>Filter bogus mesh device IDs.</strong> The mesh control plane now rejects
+  obviously junk device IDs (very long strings containing debug/HTTP headers like
+  <code>version</code>, <code>systemtype</code>, <code>clienttype</code>, <code>user-agent</code>) instead of creating
+  ghost nodes. Bogus device IDs are also filtered from listings and pruned on
+  startup.</li>
+</ul>
+<h2 id="248-2026-10-10">[2.4.8] - 2026-10-10<a class="headerlink" href="#248-2026-10-10" title="Permanent link">⚓</a></h2>
+<h3 id="changed_1">Changed<a class="headerlink" href="#changed_1" title="Permanent link">⚓</a></h3>
+<ul>
+<li><strong>The domain proxy is now on by default.</strong> It no longer requires
+  <code>DOMAIN_ENABLED=true</code> just to see the Domains page — a fresh install shows
+  the feature live. It stays completely dormant until the first mapping is
+  added: no public port is bound and no ACME account call is made until then,
+  so enabling it by default costs nothing on servers that do not use domains.
+  Set <code>DOMAIN_ENABLED=false</code> to turn it off.</li>
+</ul>
+<h2 id="247-2026-10-10">[2.4.7] - 2026-10-10<a class="headerlink" href="#247-2026-10-10" title="Permanent link">⚓</a></h2>
+<h3 id="added_3">Added<a class="headerlink" href="#added_3" title="Permanent link">⚓</a></h3>
+<ul>
+<li><strong>Domain mapping with automatic HTTPS.</strong> A public domain can now be mapped
+  to an existing TRP port mapping or to a service reachable over the
+  WireGuard tunnel, and TunGuard terminates TLS with a Let's Encrypt
+  certificate obtained over HTTP-01. When nginx, Apache, Caddy or Traefik is
+  detected the route is written into that server's config and reloaded;
+  otherwise a built-in reverse proxy listens on ports 80/443. Managed by
+  <code>domain list|add|update|remove</code> in the console, <code>GET /api/domains</code>,
+  <code>POST /api/domain/add|update|remove</code>, and a new <strong>Domains</strong> WebUI page.
+  Enabled with <code>DOMAIN_ENABLED=true</code>; ports are configurable with
+  <code>DOMAIN_HTTP_PORT</code>, <code>DOMAIN_HTTPS_PORT</code> and <code>DOMAIN_CHALLENGE_PORT</code>.</li>
+</ul>
+<h2 id="246-2026-10-09">[2.4.6] - 2026-10-09<a class="headerlink" href="#246-2026-10-09" title="Permanent link">⚓</a></h2>
+<h3 id="added_4">Added<a class="headerlink" href="#added_4" title="Permanent link">⚓</a></h3>
+<ul>
+<li><strong>Built-in <code>ssh</code> client.</strong> The Terminal and SSH gateway prompt can now open
+  sessions to WireGuard peers (by device label or tunnel address) or any host
+  the server can reach — <code>ssh [-p port] [-l user] [-i key] [--password pass]
+  [user@]host[:port] [command]</code>, with key and password auth, interactive PTYs
+  with live resize, one-shot remote commands and remote exit status. <code>Ctrl-]</code>
+  detaches from an interactive session.</li>
+<li><strong>Interactive foreground jobs and terminal sizing.</strong> Foreground jobs can now
+  receive keystrokes from the console, and the server tracks the client's
+  terminal size from WebSocket <code>resize</code> messages and SSH <code>pty-req</code> /
+  <code>window-change</code> requests.</li>
+<li><strong>Full color theme</strong> for CLI output: prompts, status tables, peer/mesh/TRP
+  states, policy rule flags and success/error messages.</li>
+</ul>
+<h2 id="245-2026-10-08">[2.4.5] - 2026-10-08<a class="headerlink" href="#245-2026-10-08" title="Permanent link">⚓</a></h2>
+<h3 id="added_5">Added<a class="headerlink" href="#added_5" title="Permanent link">⚓</a></h3>
+<ul>
+<li><strong>Terminal/SSH console.</strong> The API server now exposes an interactive CLI
+  over an SSH gateway and a browser terminal (<code>/api/ws/console</code>), plus the
+  WebUI pages for both. The console wraps the full dashboard surface —
+  <code>peer</code>, <code>mesh</code>, <code>trp</code>, <code>policy</code>, <code>backup</code>, <code>update</code>, <code>logs</code> — as commands,
+  with a line editor, history, tab completion and <code>confirm</code>-style prompts.
+  System utilities (<code>ping</code>, <code>mtr</code>, <code>ss</code>, <code>tcpdump</code>, <code>curl</code>, <code>dig</code>, <code>nmap</code>,
+  <code>nslookup</code>, <code>tracepath</code>, <code>iperf3</code>) run live as foreground jobs.</li>
+<li><strong>Server-side log viewer.</strong> Log lines are kept in a bounded ring buffer and
+  exposed by <code>GET /api/logs</code> with <code>after</code>, <code>search</code> and <code>limit</code> parameters,
+  the <code>logs</code> console command, and a WebUI page. <code>logs -f</code> tails live and
+  stops on input end or Ctrl-C.</li>
+<li><strong>Console documentation</strong> in <code>commands.md</code> covering every command verb,
+  its sub-verbs and its flags.</li>
+</ul>
+<h3 id="changed_2">Changed<a class="headerlink" href="#changed_2" title="Permanent link">⚓</a></h3>
+<ul>
+<li>The update endpoint restarts the process in place and no longer holds a
+  builder lock across the request.</li>
+</ul>
+<h2 id="244-2026-10-07">[2.4.4] - 2026-10-07<a class="headerlink" href="#244-2026-10-07" title="Permanent link">⚓</a></h2>
+<h3 id="changed_3">Changed<a class="headerlink" href="#changed_3" title="Permanent link">⚓</a></h3>
+<ul>
+<li><strong>The dashboard is now a WinBox-style desktop.</strong> The whole UI was restyled
+  after MikroTik's WinBox 4: a dark theme by default with a light theme
+  beside it (toggle in the top bar), a compact sidebar and top bar, and
+  Font Awesome icons in place of the inline SVGs.</li>
+</ul>
+<h3 id="added_6">Added<a class="headerlink" href="#added_6" title="Permanent link">⚓</a></h3>
+<ul>
+<li><strong>Pages open as floating windows.</strong> On a wide screen the sidebar opens
+  each page — Dashboard, Peers, P2P, TRP, Policy, Settings — as a window on
+  the desktop: drag its title bar to move it, pull any edge or corner to
+  resize, and use the title-bar buttons to maximize, minimize or close.
+  Windows stack by focus, the sidebar highlights the focused one, and each
+  window remembers its size and position. The dashboard opens first, and
+  links inside a window (for example "Add peer") open a window rather than
+  navigating away.</li>
+<li><strong>Narrow screens keep the old behaviour:</strong> below 860px the pages navigate
+  normally as plain pages, and a page opened on its own still shows its own
+  sidebar and top bar. The first-login setup page from 2.4.2 is styled to
+  match.</li>
+</ul>
+<h2 id="242-2026-10-04">[2.4.2] - 2026-10-04<a class="headerlink" href="#242-2026-10-04" title="Permanent link">⚓</a></h2>
+<h3 id="added_7">Added<a class="headerlink" href="#added_7" title="Permanent link">⚓</a></h3>
+<ul>
+<li><strong>Links are now tested, not just punched.</strong> A completed hole punch only means
+  one packet arrived once, so <code>direct</code> stayed set on links that had since broken:
+  a peer that changed network, was remapped, or began dropping what it received
+  kept looking healthy on the dashboard. Each client now sends a small packet to
+  its peer every few seconds and times the echo, so a link reports the round trip
+  it actually measures and shows <strong>no answer</strong> when the peer stops replying. The
+  result rides in bits that older servers ignore and older clients leave unset,
+  so both directions of the upgrade work without a flag day.</li>
+</ul>
+<h3 id="fixed_3">Fixed<a class="headerlink" href="#fixed_3" title="Permanent link">⚓</a></h3>
+<ul>
+<li><strong>Devices in the default group could reach devices in a private group.</strong> The
+  inter-device rule tested the two groups' switches independently, so a device
+  that nobody had moved — which puts it in the permissive default group — could
+  reach into a restricted group whenever both switches were on. A group is a
+  boundary, not a set of extra permissions: device-to-device traffic now requires
+  both devices to resolve to the <em>same</em> group and that group to allow
+  inter-device traffic. The default group reaches only the default group, and a
+  private group only itself, in either direction and with no combination of
+  switches able to undo it.</li>
+</ul>
+<p>Membership alone decides, so moving a device takes effect immediately with no
+  restart, exactly as before.
+- <strong>The automatic P2P mesh ignored the group boundary.</strong> A direct link is built
+  between the two clients and never passes through the server, so the packet
+  filter never saw that traffic: two devices in different policy groups could
+  still find each other through the relay even though their relayed traffic was
+  dropped. The relay no longer offers a cross-group peer's endpoint, the periodic
+  punch sweep skips the pair, and a manual connect is refused with an
+  explanation rather than silently building a link the filter would deny. A
+  device the hub cannot identify keeps the permissive answer, so a deployment
+  that has not used policy groups is unaffected.</p>
+<h3 id="changed_4">Changed<a class="headerlink" href="#changed_4" title="Permanent link">⚓</a></h3>
+<ul>
+<li><strong>The first login is a page, not a popup.</strong> A server still on the shipped
+  <code>admin</code> / <code>tanguard</code> login redirects to <code>login.html</code> instead of covering
+  whichever page was asked for with a modal. It carries the same form as the
+  Settings change-password card, and states the running version and its creator
+  in the footer.</li>
+</ul>
+<h2 id="241-2026-10-04">[2.4.1] - 2026-10-04<a class="headerlink" href="#241-2026-10-04" title="Permanent link">⚓</a></h2>
+<h3 id="fixed_4">Fixed<a class="headerlink" href="#fixed_4" title="Permanent link">⚓</a></h3>
+<ul>
+<li><strong>Tun-client devices were invisible to policy groups, and could not be
+  restricted.</strong> A device that only uses the client has no WireGuard peer, so it
+  was missing from the policy page entirely and, because enforcement resolved a
+  device id through the peer list, no group could deny it anything: it was still
+  allowed to join the mesh and to be the target of a port mapping. The device
+  list now returns both kinds of device, and a client device is grouped by its
+  device id through the new <code>/api/policy/group/assign-device</code> and
+  <code>/api/policy/group/unassign-device</code> endpoints.</li>
+</ul>
+<p>A device that is both a peer and a tun client is still grouped by its public
+  key, and its device id is refused by <code>assign-device</code>, so one device is never
+  in two groups at once.</p>
+<h2 id="240-2026-10-03">[2.4.0] - 2026-10-03<a class="headerlink" href="#240-2026-10-03" title="Permanent link">⚓</a></h2>
+<h3 id="added_8">Added<a class="headerlink" href="#added_8" title="Permanent link">⚓</a></h3>
+<ul>
+<li><strong>Policy groups</strong> (<code>policy.go</code>, <code>policy_filter.go</code>, <code>policy_routes.go</code>): an
+  administrative filter over connections that already exist. A group carries
+  four switches — allow devices in the group to talk to each other, allow P2P
+  automatic mesh features, allow TRP proxy port mapping features, and allow
+  standard WireGuard internet access — and a device is in exactly one group.</li>
+<li><strong>Nothing about a connection changes.</strong> Peers keep the same configuration,
+  stay authenticated and see no error: a denied packet is discarded silently, so
+  a blocked device times out as if the target were unreachable. The tunnel and
+  reaching the server always work, so a misconfigured group can always be fixed.</li>
+<li><strong>The Default Global Group</strong> holds every peer, has all four switches on, and
+  cannot be edited or deleted. A server that has never had a policy group
+  filters nothing, so existing deployments see no change in behaviour. Creating
+  a group is deny-by-default, and moving a device is explicit.</li>
+<li><strong>Enforcement is live.</strong> WireGuard traffic is filtered on a TUN wrapper
+  (<code>Read</code> and <code>Write</code>), P2P punching and relay routing consult the policy on
+  every decision, and TRP checks on creation and per connection. Changing a rule
+  or moving a device takes effect on the next packet, with no restart and no
+  change to the device. IPv4 only; IPv6 and unrecognised traffic pass through.</li>
+<li><strong>Policy Groups dashboard page</strong> (<code>webui/policy.html</code>, <code>webui/policy.js</code>)
+  with rule switches, device assignment, and drop counters, plus a full API
+  under <code>/api/policy/*</code> documented in the README.</li>
+<li><strong>Policy groups are included in backups.</strong> <code>policy_groups.json</code> is written
+  atomically on shutdown, validated on restore, and is added to the backup
+  archive; groups and memberships survive a restore without a restart.</li>
+</ul>
+<h3 id="fixed_5">Fixed<a class="headerlink" href="#fixed_5" title="Permanent link">⚓</a></h3>
+<ul>
+<li><strong>The mesh-only dashboard used to panic on every page load.</strong> In <code>-mesh-only</code>
+  mode there is no <code>WgServer</code>, and <code>/api/status</code> and <code>/api/peers</code> dereferenced
+  it unconditionally, so both returned no response and logged a stack trace.
+  <code>GetStatus</code> and <code>PublicKey</code> are now nil-safe and report an empty device.</li>
+<li><strong>Restoring a backup in mesh-only mode used to panic.</strong> An archive from a full
+  server carries a <code>server_private.key</code>, and the restore path called
+  <code>Configure</code> and <code>PublicKey</code> on the nil server, killing the request with no
+  response. The restore now skips the WireGuard steps when there is no server
+  and still applies peers, policy groups and credentials.</li>
+<li><strong>A policy <code>apply</code> that declared the default group reported a confusing
+  <code>duplicate group id "default"</code></strong> instead of naming the real problem, because
+  the duplicate check ran before the reserved-id check.</li>
+<li><strong>Policy drop counters could over-report.</strong> The TUN <code>Write</code> path decided and
+  then rebuilt the batch, so a denied packet was counted twice and logged twice.
+  It is now a single pass, and an unfiltered batch is handed to the device
+  without being copied.</li>
+<li><strong>The policy page could panic on a hand-edited <code>peers.json</code>.</strong> <code>peers.json</code> is
+  not validated on load, and building the response sliced the first 8 bytes of
+  the public key; a shorter key crashed the handler. It now uses the existing
+  length-safe <code>shortKey</code> helper.</li>
+<li><strong>Deleting a device in P2P left its TRP ports bound.</strong> Removing a node did not
+  touch the reverse-proxy table, so every port that device had mapped stayed in
+  <code>LISTEN</code>. The mapping had become useless — its target node was gone — but
+  nothing in the UI could release it, and the port could not be re-mapped.
+  Removing a node now releases its mappings and frees the ports, and the release
+  is persisted so the mappings do not come back on restart. Previously this
+  behaviour was documented as intentional.</li>
+</ul>
+<h2 id="232-2026-09-29">[2.3.2] - 2026-09-29<a class="headerlink" href="#232-2026-09-29" title="Permanent link">⚓</a></h2>
+<h3 id="fixed_6">Fixed<a class="headerlink" href="#fixed_6" title="Permanent link">⚓</a></h3>
+<ul>
+<li><strong>Removed an unreferenced DDNS client</strong> (<code>ddns.go</code>) and its <code>DDNS_*</code> config
+  options. It was committed to v2.3.0 by accident, was never started by
+  <code>main.go</code>, and had no tests. It contained an untested path that downloads a
+  backup over the network and applies it, which should not ship disabled-but-
+  present. Nothing referenced it, so this changes no behavior.</li>
+</ul>
+<h3 id="added_9">Added<a class="headerlink" href="#added_9" title="Permanent link">⚓</a></h3>
+<ul>
+<li><strong>P2P and TRP API reference in the README</strong> covering every mesh and TRP
+  endpoint, with the authentication and error contract and a runnable
+  end-to-end example. Backed by tests that pin the documented behavior:
+  <code>401</code> without credentials, <code>405</code> on <code>GET</code> of a <code>POST</code>-only route, the <code>400</code>
+  validation errors, <code>503</code> when the control plane is down, and the TRP
+  add/list/remove lifecycle.</li>
+</ul>
+<h2 id="231-2026-09-29">[2.3.1] - 2026-09-29<a class="headerlink" href="#231-2026-09-29" title="Permanent link">⚓</a></h2>
+<h3 id="fixed_7">Fixed<a class="headerlink" href="#fixed_7" title="Permanent link">⚓</a></h3>
+<ul>
+<li><strong>Releases now report their own version.</strong> <code>version</code> was a hardcoded constant,
+  so every build claimed to be <code>2.2.1</code> — including the v2.3.0 release. The
+  update checker compared that string against the real latest tag, so a user who
+  installed the newest release was still told an update was available, and
+  installing it again never resolved it. The value is now stamped at build time
+  with <code>-X main.version</code>, and an untagged local build reports <code>2.3.0-dev</code>
+  instead of a release number.</li>
+</ul>
+<h2 id="230-2026-09-29">[2.3.0] - 2026-09-29<a class="headerlink" href="#230-2026-09-29" title="Permanent link">⚓</a></h2>
+<h3 id="added_10">Added<a class="headerlink" href="#added_10" title="Permanent link">⚓</a></h3>
+<ul>
+<li><strong>P2P mesh.</strong> Nodes that share a PSK discover each other over a rendezvous
+  port and are punched to a direct path, falling back to a relay when NAT
+  prevents it. Control plane on <code>CONTROL_LISTEN</code> (default <code>:7000</code>), rendezvous
+  and relay on <code>RELAY_LISTEN</code> (default <code>:7001</code>).</li>
+<li><strong>TRP port mapping.</strong> The hub listens on a local port and forwards each
+  connection to <code>target_ip:target_port</code> on the target node over its mesh path.
+  An empty <code>bind_port</code> auto-assigns a free port.</li>
+<li><strong><code>-mesh-only</code> mode</strong> (<code>main.go</code>) runs the control plane, TRP and dashboard
+  with WireGuard disabled, so a mesh can be stood up on a host that cannot
+  create a tun device.</li>
+<li><strong>Mesh and TRP dashboard pages</strong> (<code>webui/p2p.html</code>, <code>webui/trp.html</code>) plus
+  <code>MESH_*</code>, <code>CONTROL_LISTEN</code> and <code>RELAY_LISTEN</code> configuration.</li>
+<li><strong>CI workflow for documentation deployment</strong> (<code>.github/workflows/docs.yml</code>).</li>
+</ul>
+<h3 id="fixed_8">Fixed<a class="headerlink" href="#fixed_8" title="Permanent link">⚓</a></h3>
+<ul>
+<li><strong>Mesh control-payload target address was written into a copy.</strong>
+  <code>applyTarget</code> took an <code>[8]byte</code> by value, so every node was told to punch a
+  zero address and no direct path ever completed. It now writes through a
+  pointer, as the other call sites already did.</li>
+<li><strong>Relay advertisements with an unspecified address were unusable.</strong> A node
+  that learned <code>0.0.0.0</code> as its relay endpoint advertised it verbatim, so peers
+  could not reach it. <code>hubAddrFor</code> now substitutes the local address observed
+  on the live path.</li>
+<li><strong>Node persistence could interleave and lose records.</strong> <code>saveNodes</code> wrote
+  <code>nodes.json</code> in place, so concurrent saves could produce a truncated file. It
+  now writes to a unique temporary file and renames into position; covered by
+  <code>TestSaveNodesConcurrent</code>.</li>
+<li><strong>E2E tests raced the server under test.</strong> The client shutdown path could run
+  more than once, and tests reused persistence ports and listeners. Tests now
+  pin an idempotent shutdown and allocate their own ports.</li>
+</ul>
+<h2 id="221-2026-08-18">[2.2.1] - 2026-08-18<a class="headerlink" href="#221-2026-08-18" title="Permanent link">⚓</a></h2>
+<h3 id="fixed_9">Fixed<a class="headerlink" href="#fixed_9" title="Permanent link">⚓</a></h3>
+<ul>
+<li><strong>Peers page "last handshake" time now shows second precision.</strong> The <code>timeAgo</code>
+  display previously dropped seconds for durations between 1–59 minutes (e.g.
+  showing "1m ago" at 97 seconds). It now shows the exact time like "1m37s ago",
+  matching the <code>STALE_97S</code> monitor events.</li>
+</ul>
+<h2 id="220-2026-08-17">[2.2.0] - 2026-08-17<a class="headerlink" href="#220-2026-08-17" title="Permanent link">⚓</a></h2>
+<h3 id="added_11">Added<a class="headerlink" href="#added_11" title="Permanent link">⚓</a></h3>
+<ul>
+<li><strong>TLS/HTTPS support.</strong> Set <code>TLS_CERT_FILE</code> and <code>TLS_KEY_FILE</code> environment
+  variables to serve the API and web dashboard over HTTPS. When unset, the
+  server falls back to plain HTTP.</li>
+</ul>
+<h3 id="changed_5">Changed<a class="headerlink" href="#changed_5" title="Permanent link">⚓</a></h3>
+<ul>
+<li><strong>CPU percent is now sampled in a background goroutine</strong> every 3 seconds
+  instead of blocking the request handler for up to 250 ms on every
+  <code>/api/system</code> call.</li>
+<li><strong>Dashboard status polling is conditional.</strong> The sidebar status interval is
+  only active on non-dashboard pages; the dashboard's own <code>loadDashboard()</code>
+  reads the same cached status directly, eliminating duplicate <code>/api/status</code>
+  requests.</li>
+<li><strong>HTTP server hardened with timeouts:</strong> <code>ReadTimeout: 15s</code>,
+  <code>WriteTimeout: 60s</code>, <code>IdleTimeout: 120s</code>.</li>
+<li><strong>Request body size capped at 1 MB</strong> via <code>limitedDecoder()</code> applied to all
+  JSON-decoded API endpoints.</li>
+<li><strong>Network data size limits:</strong> GitHub API responses capped at 1 MB and update
+  downloads capped at 256 MB via <code>io.LimitReader</code>.</li>
+<li>Version refresh (<code>?refresh=1</code>) is now synchronous — the existing <code>checking</code>
+  guard prevents duplicate GitHub API calls.</li>
+</ul>
+<h3 id="fixed_10">Fixed<a class="headerlink" href="#fixed_10" title="Permanent link">⚓</a></h3>
+<ul>
+<li><strong>WebSocket write race in SSH terminal.</strong> All <code>conn.WriteJSON</code> calls are
+  serialized through a per-connection <code>sync.Mutex</code> (<code>wsWrite</code> helper).</li>
+<li><strong>SSH client leak on reconnect.</strong> <code>startSSHSession</code> now tracks the
+  <code>*ssh.Client</code> in the outer scope and closes the previous client alongside
+  the session and stdin when a new connection is established.</li>
+<li><strong>WebSocket read buffer overflow.</strong> Added <code>conn.SetReadLimit(64 KB)</code> to
+  prevent unbounded memory growth from malicious input.</li>
+<li><strong><code>readFirstLine</code> double conversion.</strong> Fixed redundant <code>string()</code> wrapping
+  of <code>os.ReadFile</code> output in <code>stats.go</code>.</li>
+</ul>
+<h2 id="213-2026-08-17">[2.1.3] - 2026-08-17<a class="headerlink" href="#213-2026-08-17" title="Permanent link">⚓</a></h2>
+<h3 id="changed_6">Changed<a class="headerlink" href="#changed_6" title="Permanent link">⚓</a></h3>
+<ul>
+<li>Clicking the version badge now triggers a live GitHub release check
+  instead of only reading from the background cache.</li>
+</ul>
+<h2 id="212-2026-08-16">[2.1.2] - 2026-08-16<a class="headerlink" href="#212-2026-08-16" title="Permanent link">⚓</a></h2>
+<h3 id="fixed_11">Fixed<a class="headerlink" href="#fixed_11" title="Permanent link">⚓</a></h3>
+<ul>
+<li><strong>Web SSH terminal input dead after login.</strong> The password prompt handler was
+  overwriting <code>term.onData</code> and never restoring it, so shell input after
+  authentication went nowhere.</li>
+</ul>
+<h2 id="211-2026-08-16">[2.1.1] - 2026-08-16<a class="headerlink" href="#211-2026-08-16" title="Permanent link">⚓</a></h2>
+<h3 id="added_12">Added<a class="headerlink" href="#added_12" title="Permanent link">⚓</a></h3>
+<ul>
+<li><strong>Network traffic graph on the dashboard.</strong> The System card now shows a
+  real-time Chart.js line graph tracking RX/TX rates for tun0, wgo, and eth0
+  interfaces, with up to 60 data points (10 minutes at 10-second intervals).</li>
+<li>Network interfaces are now filtered to show only <strong>tun0, wgo, and eth0</strong>
+  instead of every interface on the host.</li>
+<li><strong>In-app update checker.</strong> The topbar shows a version badge that
+  auto-checks GitHub releases every hour in a background goroutine with zero
+  request-path latency. Clicking the badge opens a modal with release notes
+  and a one-click install button that downloads the correct architecture
+  binary, replaces the running executable, and restarts the server.</li>
+</ul>
+<h3 id="fixed_12">Fixed<a class="headerlink" href="#fixed_12" title="Permanent link">⚓</a></h3>
+<ul>
+<li><strong>Dashboard no longer spams "unauthorized" error toasts.</strong> Removed the
+  <code>WWW-Authenticate</code> header from API 401 responses, which was causing the
+  browser to clear its cached Basic Auth credentials on transient failures,
+  creating an auth-loop. <code>fetchAPI</code> now silently returns <code>null</code> on non-200
+  responses; all callers already handle this gracefully.</li>
+<li><strong>SSH direct-tcpip now handles IPv6 addresses correctly.</strong> The connection
+  target is formatted with <code>net.JoinHostPort</code> instead of <code>fmt.Sprintf("%s:%d")</code>,
+  which produced invalid addresses for IPv6 hosts.</li>
+<li><strong>SSH WebSocket reconnect no longer leaks sessions.</strong> Starting a new SSH
+  session via the WebSocket terminal now properly closes the previous session
+  and stdin pipe before creating new ones.</li>
+</ul>
+<h2 id="210-2026-08-16">[2.1.0] - 2026-08-16<a class="headerlink" href="#210-2026-08-16" title="Permanent link">⚓</a></h2>
+<h3 id="added_13">Added<a class="headerlink" href="#added_13" title="Permanent link">⚓</a></h3>
+<ul>
+<li><strong>API key authentication.</strong> Every <code>/api/*</code> endpoint (except <code>/api/health</code>)
+  now requires either the dashboard login (HTTP Basic Auth) or a valid API key
+  sent as the <code>X-API-Key</code> header (or <code>Authorization: Bearer</code>). Previously the
+  API was completely open.</li>
+<li><strong>API key management in the dashboard</strong> (Settings → API Key): view, copy,
+  and regenerate the key. The key is stored in <code>api_key.json</code> inside <code>DATA_DIR</code>
+  (mode 0600) and regenerating immediately invalidates the old one.</li>
+<li>The API key is included in <strong>backup &amp; restore</strong>, so a restored backup also
+  restores the key in use at backup time.</li>
+<li>The PHP helper (<code>tanguard_api.php</code>) now sends the API key via the
+  <code>TUNGARD_API_KEY</code> environment variable or the <code>TunGuardAPI</code> constructor
+  argument.</li>
+</ul>
+<h3 id="changed_7">Changed<a class="headerlink" href="#changed_7" title="Permanent link">⚓</a></h3>
+<ul>
+<li><strong>The SSH gateway now authenticates with the same login as the web
+  dashboard.</strong> Changing the username or password under Settings → Dashboard
+  Login immediately applies to SSH jump-host access too. The <code>SSH_USER</code> and
+  <code>SSH_PASSWORD</code> environment variables are no longer used.</li>
+</ul>
+<h2 id="200-2026-08-14">[2.0.0] - 2026-08-14<a class="headerlink" href="#200-2026-08-14" title="Permanent link">⚓</a></h2>
+<h3 id="added_14">Added<a class="headerlink" href="#added_14" title="Permanent link">⚓</a></h3>
+<ul>
+<li><strong>Completely redesigned web dashboard</strong> with a custom Material Design-style
+  theme. The Bootstrap, AdminLTE, jQuery, and Font Awesome CDN dependencies are
+  gone — the dashboard now works fully offline, styled with a single bundled
+  <code>style.css</code>.</li>
+<li><strong>Live server status panel in the sidebar</strong> showing listen port, subnet, and
+  peer counts (total + online), with a peer-count badge on the Peers nav item.
+  It refreshes automatically every 10 seconds.</li>
+<li><strong>Type-to-confirm peer removal.</strong> Removing a peer now requires typing the
+  device name before the removal button becomes available, preventing
+  accidental deletions.</li>
+<li><strong>XSS hardening</strong> in the dashboard: all user-supplied values (device names,
+  public keys, endpoints) are HTML-escaped before rendering.</li>
+</ul>
+<h3 id="changed_8">Changed<a class="headerlink" href="#changed_8" title="Permanent link">⚓</a></h3>
+<ul>
+<li>Peers are now applied to the WireGuard device <strong>incrementally</strong> via <code>IpcSet</code>
+  instead of a full <code>replace_peers</code> reconfiguration, so peer changes no longer
+  rebind the listening socket.</li>
+<li>Peer add/remove and config generation are serialized on a mutex, and the API
+  now rejects duplicate public keys and already-assigned IPs with clear errors
+  instead of silently overwriting state.</li>
+</ul>
+<h3 id="fixed_13">Fixed<a class="headerlink" href="#fixed_13" title="Permanent link">⚓</a></h3>
+<ul>
+<li>Adding or removing a peer no longer resets the session of every connected
+  device. Existing devices stay connected when a new device joins.</li>
+<li>Duplicate client IPs are now rejected on peer add, and auto-assigned IPs are
+  allocated atomically, so a new device can no longer take over an IP that is
+  already in use by an older device.</li>
+</ul>
+<h2 id="130-2026-08-07">[1.3.0] - 2026-08-07<a class="headerlink" href="#130-2026-08-07" title="Permanent link">⚓</a></h2>
+<h3 id="added_15">Added<a class="headerlink" href="#added_15" title="Permanent link">⚓</a></h3>
+<ul>
+<li><strong>Backup &amp; Restore</strong> from the web dashboard (Settings → Backup &amp; Restore):</li>
+<li><code>GET /api/backup/download</code> returns a <code>.tar.gz</code> of <code>peers.json</code>, <code>server_private.key</code>, <code>web_credentials.json</code>, and <code>ssh_host_key</code>.</li>
+<li><code>POST /api/backup/restore</code> validates the archive, replaces the state files in <code>DATA_DIR</code>, and applies the restored key and peers to the running server without a restart.</li>
+<li>The installer now makes a safety backup of <code>DATA_DIR</code> to <code>/var/backups/</code> before each install.</li>
+</ul>
+<h3 id="changed_9">Changed<a class="headerlink" href="#changed_9" title="Permanent link">⚓</a></h3>
+<ul>
+<li><strong>Updates no longer touch user state.</strong> The installer keeps an existing <code>/etc/systemd/system/tanguard.service</code> byte-for-byte and only replaces the binary, so custom ports, subnet, and credentials survive an update.</li>
+<li>The server private key is never regenerated on a read error — only when it is genuinely missing.</li>
+<li><code>peers.json</code> is never overwritten with an empty file if it failed to load; duplicate peer adds no longer clobber the existing record.</li>
+</ul>
+<h2 id="121-2026-08-04">[1.2.1] - 2026-08-04<a class="headerlink" href="#121-2026-08-04" title="Permanent link">⚓</a></h2>
+<h3 id="fixed_14">Fixed<a class="headerlink" href="#fixed_14" title="Permanent link">⚓</a></h3>
+<ul>
+<li>Peers page no longer shows "No peers connected" when peers exist: <code>loadPeers()</code> referenced a <code>peer-count</code> element that only existed on the dashboard page, causing a TypeError that aborted rendering before the table was populated. The peers page now has its own peer-count badge, and the JS update is null-safe.</li>
+</ul>
+<h2 id="120-2026-08-03">[1.2.0] - 2026-08-03<a class="headerlink" href="#120-2026-08-03" title="Permanent link">⚓</a></h2>
+<h3 id="added_16">Added<a class="headerlink" href="#added_16" title="Permanent link">⚓</a></h3>
+<ul>
+<li>Web dashboard split into separate pages: Dashboard (<code>index.html</code>), Peers (<code>peers.html</code>), and Settings (<code>settings.html</code>).</li>
+<li>QR library bundled into the binary and served locally — no external CDN dependency.</li>
+</ul>
+<h3 id="fixed_15">Fixed<a class="headerlink" href="#fixed_15" title="Permanent link">⚓</a></h3>
+<ul>
+<li>QR code generation in the web dashboard now renders correctly (the QR library was loaded from a non-existent CDN path, and the canvas element was passed to <code>QRCode.toCanvas</code> instead of a real <code>&lt;canvas&gt;</code>).</li>
+</ul>
+<h2 id="110-2026-08-03">[1.1.0] - 2026-08-03<a class="headerlink" href="#110-2026-08-03" title="Permanent link">⚓</a></h2>
+<h3 id="added_17">Added<a class="headerlink" href="#added_17" title="Permanent link">⚓</a></h3>
+<ul>
+<li>Web dashboard credential management:</li>
+<li>Change the dashboard username and password from <strong>Settings → Dashboard Login</strong>.</li>
+<li>First login with the default <code>admin</code> / <code>tanguard</code> credentials now forces you to set a new login before using the dashboard.</li>
+<li>Credentials are stored hashed (bcrypt) in <code>web_credentials.json</code> inside <code>DATA_DIR</code>.</li>
+<li><code>./tanguard --reset</code> restores the default web login (<code>admin</code> / <code>tanguard</code>) if the password is forgotten.</li>
+</ul>
+<h3 id="changed_10">Changed<a class="headerlink" href="#changed_10" title="Permanent link">⚓</a></h3>
+<ul>
+<li>The web dashboard is now <strong>disabled by default</strong>. Enable it explicitly with <code>-web</code> or <code>WEB_ENABLED=true</code>; running <code>tanguard</code> alone only serves the API.</li>
+<li>The dashboard password is no longer printed in the startup logs.</li>
+</ul>
+<h2 id="100-2026-07-01">[1.0.0] - 2026-07-01<a class="headerlink" href="#100-2026-07-01" title="Permanent link">⚓</a></h2>
+<h3 id="added_18">Added<a class="headerlink" href="#added_18" title="Permanent link">⚓</a></h3>
+<ul>
+<li>Userspace WireGuard VPN server (no kernel modules required).</li>
+<li>Web dashboard for managing peers and generating client configs with QR codes.</li>
+<li>SSH gateway / jump host (<code>-ssh</code>).</li>
+<li>Peer persistence via <code>peers.json</code>.</li>
+<li>NAT setup for VPN clients.</li>
+</ul>
+
+
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-circle-arrow-up" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="m16 12-4-4-4 4M12 16V8"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      <p>
+&copy; <a href="https://github.com/TunGuard"><em>TunGuard</em></a><br/>
+<span>This project is licensed under MIT.</span><br/>
+<span>This project is not affiliated, associated, authorized, endorsed by, or in any way officially connected with Jason A. Donenfeld, ZX2C4 or Edge Security.</span><br/>
+<span>"WireGuard" and the "WireGuard" logo are registered trademarks of Jason A. Donenfeld.</span><br/>
+<span><a href="https://tunguard.github.io/latest/privacy/">Privacy Policy</a></span>
+</p>
+
+    </div>
+  
+  
+    Made with
+    <a href="https://zensical.org/" target="_blank" rel="noopener">
+      Zensical
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      
+      
+        
+        
+      <script id="__config" type="application/json">{"annotate":null,"base":"..","features":["navigation.instant","navigation.tabs","navigation.tabs.sticky","navigation.expand","navigation.path","navigation.top","navigation.sections","content.action.edit","content.action.view","content.code.copy","content.code.annotate","toc.follow"],"redirect":null,"search":"../assets/javascripts/workers/search.7d14d953.min.js","tags":null,"translations":{"clipboard.copied":"Copied to clipboard","clipboard.copy":"Copy to clipboard","search.result.more.one":"1 more on this page","search.result.more.other":"# more on this page","search.result.none":"No matching documents","search.result.one":"1 matching document","search.result.other":"# matching documents","search.result.placeholder":"Type to start searching","search.result.term.missing":"Missing","select.version":"Select version"},"version":{"provider":"mike"}}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.8dcc8e9c.min.js"></script>
+      
+    
+  </body>
+</html>
